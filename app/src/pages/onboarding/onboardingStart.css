@@ -253,3 +253,111 @@
   height: 52px;
   font-size: 15px;
 }
+
+/* ===== Onboarding2 (Apple Health verbinden) ===== */
+
+.ob2-top{
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.ob2-title{
+  margin: 0;
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(28px, 7.2vw, 34px);
+}
+
+.ob2-subtitle{
+  margin: 0;
+  color: rgba(144,161,185,0.85);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.ob2-middle{
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ob2-iconCircle{
+  width: 164px;
+  height: 164px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 18px 70px rgba(0,0,0,0.28);
+}
+
+.ob2-icon{
+  font-size: 44px;
+  color: #93C5FD;
+  opacity: 0.9;
+}
+
+.ob2-list{
+  width: 100%;
+  display: grid;
+  gap: 12px;
+  max-width: 320px;
+}
+
+.ob2-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(144,161,185,0.95);
+  font-size: 13px;
+}
+
+.ob2-item--zk{
+  align-items: flex-start;
+}
+
+.ob2-bullet{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+
+  border: 1px solid rgba(59,130,246,0.35);
+  color: #93C5FD;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ob2-bullet--info{
+  border-color: rgba(144,161,185,0.35);
+  color: rgba(144,161,185,0.9);
+}
+
+.ob2-zkTitle{
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.1;
+}
+
+.ob2-zkText{
+  color: rgba(144,161,185,0.85);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.ob2-bottomNote{
+  text-align: center;
+  font-size: 11px;
+  color: rgba(144,161,185,0.75);
+}
+
+.ob2-bottomNote span{
+  color: #93C5FD;
+  font-weight: 600;
+}
+
