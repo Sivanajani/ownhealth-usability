@@ -361,3 +361,149 @@
   font-weight: 600;
 }
 
+
+/* ===== Onboarding 3: Result Card ===== */
+
+.ob3-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 18px;
+  padding: 18px 16px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.ob3-cardTitle {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.ob3-cardText {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0 0 14px 0;
+}
+
+.ob3-cardText strong {
+  color: var(--white);
+}
+
+.ob3-aiBadge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.18);
+  color: #93c5fd;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ob3-footnote {
+  margin: 14px 0 0;
+  color: rgba(144, 161, 185, 0.75);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* ===== Onboarding 4: Form ===== */
+
+.ob4-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ob4-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ob4-label {
+  color: rgba(144, 161, 185, 0.85);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ob4-input,
+.ob4-select {
+  height: 44px;
+  padding: 0 40px 0 14px; /* Platz für Chevron */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(transparent, transparent),
+    rgba(255, 255, 255, 0.04);
+  color: var(--white);
+  font-size: 14px;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2390A1B9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 14px;
+}
+
+.ob4-select:focus {
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* Dropdown Optionen (systembedingt hell, aber lesbar) */
+.ob4-select option {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+
+.ob4-input::placeholder {
+  color: rgba(144, 161, 185, 0.6);
+}
+
+
+.ob4-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ob4-option {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--white);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.ob4-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ob4-option:active {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* Fix native select dropdown readability */
+.ob4-select option {
+  color: #0f172a;       /* dunkle Schrift */
+  background: #ffffff; /* weisser Hintergrund */
+}
+
+/* Active focus option */
+.ob4-option--active {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4);
+}
