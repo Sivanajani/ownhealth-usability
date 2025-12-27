@@ -11,7 +11,7 @@ type Props = {
   onBack?: () => void;
 };
 
-export default function Onboarding0({ onNext, onBack }: Props) {
+export default function Onboarding0({ onNext }: Props) {
   const [focus, setFocus] = useState<FocusKey | null>(null);
   const canContinue = !!focus;
 
@@ -76,12 +76,6 @@ export default function Onboarding0({ onNext, onBack }: Props) {
           >
             Weiter
           </button>
-
-          {onBack && (
-            <button type="button" className="ob0-back" onClick={onBack}>
-              Zurück
-            </button>
-          )}
         </div>
       </div>
     </div>
