@@ -27,8 +27,23 @@
   display: flex;
 }
 
+/* Long Screen: Vignette reduzieren */
+.obL-content::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: radial-gradient(
+    900px 700px at 50% 35%,
+    transparent 55%,
+    rgba(0,0,0,0.18) 100%
+  );
+  z-index: 0;
+}
+
+
 .ob-root::after{
-  /* leichte Vignette */
+  /* leichte Vignette*/ 
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
@@ -92,7 +107,7 @@
   
 }
 
-/* Bottom-Fade unter dem Button wie im Mock */
+/* Bottom-Fade unter dem Button wie im Mock 
 .ob-content::after{
   content:"";
   position:absolute;
@@ -102,7 +117,7 @@
   pointer-events:none;
   background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.55) 100%);
   z-index: 0;
-}
+}*/
 
 
 .ob-button {
@@ -417,8 +432,8 @@
   border: 1px solid rgba(255,255,255,0.10);
   background:
     radial-gradient(900px 300px at 20% -10%, rgba(59,130,246,0.16), transparent 55%),
-    rgba(255,255,255,0.04);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.30);
+    rgba(255,255,255,0.06);
+  
 }
 
 .obL-cardHeader{
@@ -632,7 +647,248 @@
   color: rgba(144,161,185,0.65);
 }
 
+/* ===== OnboardingChronic ===== */
 
+.obC-content{
+  padding-top: calc(env(safe-area-inset-top) + 22px);
+  position: relative;
+  z-index: 1;
+}
+
+.obC-headline{
+  margin: 0;
+  text-align: center;
+  color: rgba(255,255,255,0.95);
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  font-size: clamp(22px, 6.8vw, 30px);
+}
+
+/* Stack & Carousel */
+.obC-middle{
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.obC-stack{
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.obC-carousel{
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.obC-carousel::-webkit-scrollbar{ display:none; }
+
+.obC-slide{
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+}
+
+/* Card */
+.obC-card{
+  width: 100%;
+  border-radius: 26px;
+  padding: 16px 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background:
+    radial-gradient(900px 300px at 20% -10%, rgba(59,130,246,0.14), transparent 55%),
+    rgba(255,255,255,0.04);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.30);
+}
+
+.obC-cardHeader{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 4px 10px 4px;
+}
+
+.obC-iconBox{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(59,130,246,0.10);
+  border: 1px solid rgba(59,130,246,0.22);
+  color: rgba(147,197,253,0.95);
+}
+
+.obC-cardTitle{
+  color: rgba(255,255,255,0.92);
+  font-weight: 850;
+  font-size: 14px;
+  line-height: 1.2;
+  padding-right: 90px;
+}
+
+.obC-badge{
+  position: absolute;
+  right: 0;
+  top: 8px;
+  min-width: 78px;
+  text-align: center;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: rgba(147,197,253,0.95);
+  background: rgba(59,130,246,0.14);
+  border: 1px solid rgba(59,130,246,0.22);
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+
+/* List */
+.obC-list{
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 6px 6px;
+}
+
+.obC-row{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.obC-check{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.22);
+  color: rgba(147,197,253,0.95);
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.obC-rowText{
+  color: rgba(255,255,255,0.88);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.obC-muted{
+  color: rgba(144,161,185,0.86);
+  font-weight: 600;
+}
+
+.obC-sub{
+  margin-top: 2px;
+  font-size: 11px;
+  color: rgba(144,161,185,0.72);
+}
+
+/* Alert */
+.obC-alert{
+  margin-top: 12px;
+  border-radius: 16px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(239,68,68,0.10);
+  border: 1px solid rgba(239,68,68,0.22);
+}
+
+.obC-alertX{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.22);
+  color: rgba(252,165,165,0.95);
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.obC-alertText{
+  color: rgba(255,255,255,0.90);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.obC-alertSub{
+  margin-top: 3px;
+  font-size: 11px;
+  color: rgba(252,165,165,0.85);
+  font-weight: 500;
+}
+
+/* Report box */
+.obC-report{
+  margin-top: 12px;
+  border-radius: 18px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.18);
+}
+
+.obC-reportIcon{
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(16,185,129,0.10);
+  border: 1px solid rgba(16,185,129,0.20);
+  color: rgba(110,231,183,0.95);
+}
+
+.obC-reportText{
+  color: rgba(110,231,183,0.95);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+/* Progress */
+.obC-miniProgress{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* ===== Chronic Screen Spacing Fix ===== */
+
+.obC-top {
+  margin-bottom: 22px; /* 18–26px ist ideal */
+}
+
+.obC-middle {
+  margin-top: 6px;
+}
 
 
 /* ===== Screen 2 Extras (Graph) ===== */
