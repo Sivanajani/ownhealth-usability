@@ -1,66 +1,110 @@
+import { useState } from "react";
 import "./onboardingStart.css";
-import ownLogo from "../../assets/own.logo.png";
-import stats from "../../assets/stats.svg";
-
 
 type Props = {
   onNext?: () => void;
+  onBack?: () => void;
 };
 
-export default function Onboarding2({ onNext }: Props) {
+type WearableKey = "oura" | "applewatch" | "fitbit" | "garmin";
+
+export default function Onboarding2({ onNext, onBack }: Props) {
+  const [selected, setSelected] = useState<WearableKey>("oura");
+
   return (
     <div className="ob-root">
-      <div className="ob-content">
-        <div className="ob-brand">
-          <img className="ob-logo" src={ownLogo} alt="OWN Health" />
-          
-          <h1 className="ob-title">
-            Apple Health
+      <div className="ob-content ob2-content">
+        {/* Top */}
+        <div className="ob-top ob2-top">
+          <div className="ob2-topbar">
+            <div className="ob0-dots" aria-hidden="true">
+              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot" />
+            </div>
+
+            {onBack && (
+              <button className="ob2-topIcon" type="button" onClick={onBack} aria-label="Zurück">
+                ⟲
+              </button>
+            )}
+          </div>
+
+          <h1 className="ob2-title">
+            Welches Wearable
             <br />
-            verbinden
+            nutzt du?
           </h1>
-
-          <p className="ob-subtitle">Für deine erste Sofort-Analyse.</p>
         </div>
 
-        {/* MIDDLE */}
+        {/* Middle */}
         <div className="ob-middle ob2-middle">
-          <div className="ob2-iconCircle" aria-hidden="true">
-            <img className="ob-logo" src={stats} alt="OWN Health" />
+          <div className="ob2-wearables" role="radiogroup" aria-label="Wearable Auswahl">
+            <button
+              type="button"
+              className={`ob2-wearable ${selected === "oura" ? "ob2-wearable--active" : ""}`}
+              onClick={() => setSelected("oura")}
+              aria-checked={selected === "oura"}
+              role="radio"
+            >
+              <span className="ob2-wearableIcon" aria-hidden="true">💍</span>
+            </button>
+
+            <button
+              type="button"
+              className={`ob2-wearable ${selected === "applewatch" ? "ob2-wearable--active" : ""}`}
+              onClick={() => setSelected("applewatch")}
+              aria-checked={selected === "applewatch"}
+              role="radio"
+            >
+              <span className="ob2-wearableIcon" aria-hidden="true">⌚</span>
+            </button>
+
+            <button
+              type="button"
+              className={`ob2-wearable ${selected === "fitbit" ? "ob2-wearable--active" : ""}`}
+              onClick={() => setSelected("fitbit")}
+              aria-checked={selected === "fitbit"}
+              role="radio"
+            >
+              <span className="ob2-wearableIcon" aria-hidden="true">📊</span>
+            </button>
+
+            <button
+              type="button"
+              className={`ob2-wearable ${selected === "garmin" ? "ob2-wearable--active" : ""}`}
+              onClick={() => setSelected("garmin")}
+              aria-checked={selected === "garmin"}
+              role="radio"
+            >
+              <span className="ob2-wearableIcon" aria-hidden="true">⌚</span>
+            </button>
           </div>
 
-          <div className="ob2-list">
-            <div className="ob2-item">
-              <span className="ob2-bullet">✓</span>
-              <span>Sofortige 90-Tage-Analyse</span>
-            </div>
+          <p className="ob2-subtitle">
+            OWN importiert deine Ring-Daten
+            <br />
+            sicher über Apple Health.
+          </p>
 
-            <div className="ob2-item">
-              <span className="ob2-bullet">✓</span>
-              <span>Automatische Synchronisierung</span>
-            </div>
-
-            <div className="ob2-item ob2-item--zk">
-              <span className="ob2-bullet ob2-bullet--info">i</span>
-              <div className="ob2-zk">
-                <div className="ob2-zkTitle">Zero-Knowledge:</div>
-                <div className="ob2-zkText">Wir sehen niemals deine Daten</div>
-              </div>
-            </div>
+          <div className="ob2-appleCard" aria-hidden="true">
+            <div className="ob2-heart">❤️</div>
           </div>
         </div>
 
-        {/* BOTTOM */}
-        <div className="ob-bottom">
+        {/* Bottom */}
+        <div className="ob-bottom ob2-bottom">
           <button className="ob-button" onClick={onNext}>
-            Verbinden
+            Apple Health verbinden
           </button>
 
-          <div className="ob-footnote">20 Sekunden • 🔒 verschlüsselt</div>
+          <div className="ob2-lock">🔒 Sicher verschlüsselt</div>
 
-          <div className="ob2-bottomNote">
+          <button type="button" className="ob2-waitlist">
             Kein Wearable? <span>Schreib dich auf die Warteliste</span>
-          </div>
+          </button>
         </div>
       </div>
     </div>
