@@ -1,6 +1,5 @@
 import "./onboardingStart.css";
 import verbindenImg from "../../assets/own_verbinden.png";
-import ownLogo from "../../assets/own.logo.png";
 
 type Props = {
   onNext?: () => void;
@@ -10,8 +9,7 @@ export default function Onboarding1({ onNext }: Props) {
   return (
     <div className="ob-root">
       <div className="ob-content">
-        <div className="ob-brand">
-          <img className="ob-logo" src={ownLogo} alt="OWN Health" />
+        <div className="ob-brand">          
           
           <h1 className="ob-title">
             Verbindet, was

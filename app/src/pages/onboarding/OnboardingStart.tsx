@@ -1,5 +1,5 @@
 import "./onboardingStart.css";
-import ownLogo from "../../assets/own.logo.png";
+import ownLogo from "../../assets/own.logo.svg";
 
 type Props = {
   onStart?: () => void;
@@ -12,24 +12,24 @@ export default function OnboardingStart({ onStart }: Props) {
         <div className="ob-brand">
           <img className="ob-logo" src={ownLogo} alt="OWN Health" />
 
-          <h1 className="ob-title">
-            YOUR HEALTH
-          </h1>
+          <h1 className="ob-title">YOUR HEALTH</h1>
 
           <p className="ob-subtitle">
-            Alle deine Gesundheitsdaten –
+            Dein intelligentes Gesundheitskonto.
             <br />
-            an einem sicheren Ort,
-            <br/>
-            intelligent verbunden.
-            <br/>
+            Alle Daten sicher an einem Ort.
+            <br />
             <span className="ob-subtitle-strong">In deiner Hand.</span>
           </p>
         </div>
+        
+        <div className="ob-cta">
+          <button className="ob-button" onClick={onStart}>
+            Start
+          </button>
 
-        <button className="ob-button" onClick={onStart}>
-          Start
-        </button>        
+          <p className="ob-hint">Startklar in 60 Sek.</p>
+        </div>
       </div>
     </div>
   );
