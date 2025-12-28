@@ -1,53 +1,116 @@
+// Onboarding3.tsx
+import { useState } from "react";
 import "./onboardingStart.css";
-import ownLogo from "../../assets/own.logo.png";
+import "./onboarding3.css";
+
+import FemaleIcon from "../../assets/woma.svg?react";
+import MaleIcon from "../../assets/man.svg?react";
 
 type Props = {
-  onDone?: () => void;
+  onFinish?: () => void;
 };
 
-export default function Onboarding3({ onDone }: Props) {
+type Sex = "Männlich" | "Weiblich" | "Divers" | null;
+
+export default function Onboarding3({ onFinish }: Props) {
+  const [age, setAge] = useState<string>("");
+  const [sex, setSex] = useState<Sex>(null);
+
+  const canFinish = Number(age) > 0 && sex !== null;
+
   return (
     <div className="ob-root">
-      <div className="ob-content">
-        {/* TOP */}
-        <div className="ob-brand">
-          <img className="ob-logo" src={ownLogo} alt="OWN Health" />
-
-          <h1 className="ob-title">
-            Analyse
-            <br />
-            abgeschlossen
-          </h1>
-        </div>
-
-        {/* CARD */}
-        <div className="ob3-card">
-          <div className="ob3-cardTitle">
-            Muster erkannt:
-            <br />
-            <strong>Stress & Regeneration</strong>
+      <div className="ob-content ob3-content">
+        {/* Top (Dots + Title) */}
+        <div className="ob-top ob3-top">
+          <div className="ob2-topbar">
+            <div className="ob0-dots" aria-hidden="true">
+              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot ob0-dot--active" />
+            </div>
           </div>
 
-          <p className="ob3-cardText">
-            Basierend auf deinen letzten 90 Tagen: Deine Herzfrequenzvariabilität
-            (HRV) sinkt an Tagen mit über 10.000 Schritten im Schnitt um
-            <strong> 15 %</strong> in den darauffolgenden Nächten. Dein Körper
-            braucht nach aktiven Tagen mehr bewusste Erholung als du ihm aktuell gibst.
-          </p>
-
-          <div className="ob3-aiBadge">✨ AI-Insight</div>
+          <div className="ob-brand">
+            <h1 className="ob-title">Fast fertig.</h1>
+            <p className="ob-subtitle">
+              Für den Start brauchen wir zwei Infos,
+              <br />
+              damit OWN dich besser versteht.
+            </p>
+          </div>
         </div>
 
-        {/* FOOTNOTE */}
-        <p className="ob3-footnote">
-          Kombiniert mit deinem nächsten Bluttest sehen wir, ob ein
-          Nährstoffmangel die langsame Regeneration verursacht.
-        </p>
+        {/* Form */}
+        <div className="ob4-form">
+          <div className="ob4-field">
+            <label className="ob4-label">Alter</label>
+            <input
+              className="ob4-input ob3-input"
+              placeholder="z. B. 38"
+              type="number"
+              inputMode="numeric"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+            />
+          </div>
 
-        {/* BUTTON */}
-        <button className="ob-button" onClick={onDone}>
-          Verstanden
-        </button>
+          <div className="ob4-field">
+            <label className="ob4-label">Biologisches Geschlecht</label>
+
+            <div className="ob3-genderGrid" role="group" aria-label="Biologisches Geschlecht">
+              <button
+                type="button"
+                className={`ob3-genderCard ob3-genderCard--stack ${
+                  sex === "Männlich" ? "is-active" : ""
+                }`}
+                onClick={() => setSex("Männlich")}
+              >
+                <MaleIcon className="ob3-genderIcon" aria-hidden="true" />
+                <span className="ob3-genderLabel">Männlich</span>
+              </button>
+
+              <button
+                type="button"
+                className={`ob3-genderCard ob3-genderCard--stack ${
+                  sex === "Weiblich" ? "is-active" : ""
+                }`}
+                onClick={() => setSex("Weiblich")}
+              >
+                <FemaleIcon className="ob3-genderIcon" aria-hidden="true" />
+                <span className="ob3-genderLabel">Weiblich</span>
+              </button>
+
+              <button
+                type="button"
+                className={`ob3-genderCard ob3-genderCard--full ${
+                  sex === "Divers" ? "is-active" : ""
+                }`}
+                onClick={() => setSex("Divers")}
+              >
+                <span className="ob3-genderIconText" aria-hidden="true">
+                  ⚧
+                </span>
+                <span className="ob3-genderLabel">Divers</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="ob-bottom ob2-bottom">
+          <button
+            className={`ob-button ${!canFinish ? "ob3-buttonDisabled" : ""}`}
+            onClick={onFinish}
+            disabled={!canFinish}
+          >
+            Konto starten
+          </button>
+
+          <div className="ob2-lock">🔒 Deine Daten bleiben privat</div>
+        </div>
       </div>
     </div>
   );

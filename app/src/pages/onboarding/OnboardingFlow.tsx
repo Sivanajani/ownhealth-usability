@@ -37,8 +37,8 @@ export default function OnboardingFlow() {
   // ab hier dein bestehender Flow
   if (step === 3) return <Onboarding1 onNext={() => setStep(4)} />;
   if (step === 4) return <Onboarding2 onNext={() => setStep(5)} />;
-  if (step === 5) return <Onboarding3 onDone={() => setStep(6)} />;
-  if (step === 6) return <Onboarding4 onFinish={() => setStep(7)} />;
+  if (step === 5) return <Onboarding3 onFinish={() => setStep(6)} />;
+  if (step === 6) return <Onboarding4 onDone={() => setStep(7)} />;
 
   return null;
 }
