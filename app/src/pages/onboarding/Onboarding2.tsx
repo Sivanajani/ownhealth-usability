@@ -1,15 +1,34 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./onboardingStart.css";
+
+import ouraPng from "../../assets/Oura2.png";
+import whoopPng from "../../assets/whoop2.png";
+import appleWatchPng from "../../assets/apple-watch-logo.png";
+import appleHealthPng from "../../assets/apple.png";
 
 type Props = {
   onNext?: () => void;
   onBack?: () => void;
 };
 
-type WearableKey = "oura" | "applewatch" | "fitbit" | "garmin";
+type WearableKey = "oura" | "whoop" | "applewatch" | "more";
 
 export default function Onboarding2({ onNext, onBack }: Props) {
   const [selected, setSelected] = useState<WearableKey>("oura");
+
+  const info = useMemo(() => {
+    const map: Record<
+      WearableKey,
+      { label: string; noun: string }
+    > = {
+      oura: { label: "Ring-Daten", noun: "Ring" },
+      whoop: { label: "WHOOP-Daten", noun: "WHOOP" },
+      applewatch: { label: "Apple Watch Daten", noun: "Apple Watch" },
+      more: { label: "Daten", noun: "Wearable" },
+    };
+
+    return map[selected];
+  }, [selected]);
 
   return (
     <div className="ob-root">
@@ -26,7 +45,12 @@ export default function Onboarding2({ onNext, onBack }: Props) {
             </div>
 
             {onBack && (
-              <button className="ob2-topIcon" type="button" onClick={onBack} aria-label="Zurück">
+              <button
+                className="ob2-topIcon"
+                type="button"
+                onClick={onBack}
+                aria-label="Zurück"
+              >
                 ⟲
               </button>
             )}
@@ -37,6 +61,10 @@ export default function Onboarding2({ onNext, onBack }: Props) {
             <br />
             nutzt du?
           </h1>
+
+          <p className="ob-subtitle">
+            Wichtig für deine personalisierten Insights.
+          </p>
         </div>
 
         {/* Middle */}
@@ -44,54 +72,61 @@ export default function Onboarding2({ onNext, onBack }: Props) {
           <div className="ob2-wearables" role="radiogroup" aria-label="Wearable Auswahl">
             <button
               type="button"
-              className={`ob2-wearable ${selected === "oura" ? "ob2-wearable--active" : ""}`}
+              className={`ob2-wearableTile ${selected === "oura" ? "ob2-wearableTile--active" : ""}`}
               onClick={() => setSelected("oura")}
               aria-checked={selected === "oura"}
               role="radio"
             >
-              <span className="ob2-wearableIcon" aria-hidden="true">💍</span>
+              <img className="ob2-logo" src={ouraPng} alt="Oura Ring" />
             </button>
 
             <button
               type="button"
-              className={`ob2-wearable ${selected === "applewatch" ? "ob2-wearable--active" : ""}`}
+              className={`ob2-wearableTile ${selected === "whoop" ? "ob2-wearableTile--active" : ""}`}
+              onClick={() => setSelected("whoop")}
+              aria-checked={selected === "whoop"}
+              role="radio"
+            >
+              <img className="ob2-logo" src={whoopPng} alt="Whoop" />
+            </button>
+
+            <button
+              type="button"
+              className={`ob2-wearableTile ${selected === "applewatch" ? "ob2-wearableTile--active" : ""}`}
               onClick={() => setSelected("applewatch")}
               aria-checked={selected === "applewatch"}
               role="radio"
             >
-              <span className="ob2-wearableIcon" aria-hidden="true">⌚</span>
+              <img className="ob2-logo ob2-logo--wide" src={appleWatchPng} alt="Apple Watch" />
             </button>
 
             <button
               type="button"
-              className={`ob2-wearable ${selected === "fitbit" ? "ob2-wearable--active" : ""}`}
-              onClick={() => setSelected("fitbit")}
-              aria-checked={selected === "fitbit"}
+              className={`ob2-wearableTile ${selected === "more" ? "ob2-wearableTile--active" : ""}`}
+              onClick={() => setSelected("more")}
+              aria-checked={selected === "more"}
               role="radio"
             >
-              <span className="ob2-wearableIcon" aria-hidden="true">📊</span>
-            </button>
-
-            <button
-              type="button"
-              className={`ob2-wearable ${selected === "garmin" ? "ob2-wearable--active" : ""}`}
-              onClick={() => setSelected("garmin")}
-              aria-checked={selected === "garmin"}
-              role="radio"
-            >
-              <span className="ob2-wearableIcon" aria-hidden="true">⌚</span>
+              <div className="ob2-more">
+                <div className="ob2-morePlus">+</div>
+                <div className="ob2-moreText">Mehr</div>
+              </div>
             </button>
           </div>
 
-          <p className="ob2-subtitle">
-            OWN importiert deine Ring-Daten
+          <p className="ob-subtitle">
+            OWN importiert deine{" "}
+            <span className="ob2-highlight">{info.label}</span>
             <br />
             sicher über Apple Health.
           </p>
 
-          <div className="ob2-appleCard" aria-hidden="true">
-            <div className="ob2-heart">❤️</div>
-          </div>
+          {/* Apple Health Logo */}
+          <img
+            className="ob2-appleLogoStandalone"
+            src={appleHealthPng}
+            alt="Apple Health"
+          />
         </div>
 
         {/* Bottom */}

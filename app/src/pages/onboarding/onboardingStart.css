@@ -975,6 +975,7 @@
   display:flex;
   flex-direction: column;
   align-items:center;
+  text-align:center;
   gap: 6px;
 }
 
@@ -996,6 +997,8 @@
   line-height: 1.2;
   text-align:center;
   color: rgba(144,161,185,0.78);
+  white-space: pre-line;
+  margin-top: 8px;
 }
 
 /* positions */
@@ -1033,8 +1036,6 @@
   background: rgba(147,197,253,0.25);
   box-shadow: 0 0 12px rgba(59,130,246,0.25);
 }
-
-
 
 /* connection lines */
 .ob1-lines{
@@ -1100,8 +1101,9 @@
 .ob2-middle{
   align-items: center;
   justify-content: flex-start;
-  padding-top: 10px;
+  padding-top: 18px;
   gap: 14px;
+  flex-direction: column;
 }
 
 .ob2-wearables{
@@ -1144,18 +1146,6 @@
   line-height: 1.45;
 }
 
-/* Apple Health Card */
-.ob2-appleCard{
-  width: 78px;
-  height: 78px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.92);
-  display:grid;
-  place-items:center;
-  box-shadow: 0 20px 70px rgba(0,0,0,0.35);
-  margin-top: 10px;
-}
-
 .ob2-heart{
   font-size: 28px;
 }
@@ -1183,6 +1173,32 @@
   font-weight: 700;
 }
 
+.ob2-highlight{
+  color: rgba(255,255,255,0.90);
+  font-weight: 700;
+}
+
+
+/* ===== Apple Health Standalone Logo (Mock-like) ===== */
+
+@keyframes ahFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.ob2-appleLogoStandalone{
+  animation: ahFloat 6s ease-in-out infinite;
+  width: 150px;                 
+  height: auto;
+  object-fit: contain;
+
+  margin-top: 34px;            
+  margin-bottom: 6px;
+
+  filter:
+    drop-shadow(0 18px 60px rgba(59, 130, 246, 0.35));    
+  opacity: 0.95;
+}
 
 
 /* ===== Screen 2 Extras (Graph) ===== */
@@ -1217,12 +1233,6 @@
   font-size: clamp(18px, 4.8vw, 26px);
 }
 
-.ob1-node{
-  position:absolute;
-  width: clamp(74px, 18vw, 92px);
-  text-align:center;
-}
-
 .ob1-nodeCard{
   width: clamp(52px, 13vw, 64px);
   height: clamp(52px, 13vw, 64px);
@@ -1240,104 +1250,12 @@
   font-size: clamp(18px, 4.6vw, 22px);
 }
 
-.ob1-nodeLabel{
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.2;
-  white-space: pre-line;
-}
-
-/* 8 positions */
-.ob1-node-0{ left:50%; top:8%; transform:translateX(-50%); }
-.ob1-node-1{ right:8%; top:23%; }
-.ob1-node-2{ right:4%; top:52%; transform:translateY(-50%); }
-.ob1-node-3{ right:16%; bottom:10%; }
-.ob1-node-4{ left:50%; bottom:2%; transform:translateX(-50%); }
-.ob1-node-5{ left:16%; bottom:10%; }
-.ob1-node-6{ left:4%; top:52%; transform:translateY(-50%); }
-.ob1-node-7{ left:8%; top:23%; }
-
-/* 8 line rotations */
-.ob1-line-0{ transform:translate(-50%,-100%) rotate(0deg); }
-.ob1-line-1{ transform:translate(-50%,-100%) rotate(45deg); }
-.ob1-line-2{ transform:translate(-50%,-100%) rotate(90deg); }
-.ob1-line-3{ transform:translate(-50%,-100%) rotate(135deg); }
-.ob1-line-4{ transform:translate(-50%,-100%) rotate(180deg); }
-.ob1-line-5{ transform:translate(-50%,-100%) rotate(225deg); }
-.ob1-line-6{ transform:translate(-50%,-100%) rotate(270deg); }
-.ob1-line-7{ transform:translate(-50%,-100%) rotate(315deg); }
-
-.ob1-footnote{
-  margin-top: 10px;
-  text-align:center;
-  color: rgba(144,161,185,0.75);
-  font-size: 11px;
-}
-
-/* ===== Screen 2: Graphic (Image) ===== */
-
-.ob-graphicWrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.ob-graphic {
-  width: 100%;
-  max-width: 360px;
-  height: auto;
-  max-height: 42vh;
-
-  object-fit: contain;
-  display: block;
-  filter: none;
-}
-
-/* Footnote unter Button */
-.ob-footnote {
-  margin-top: 10px;
-  text-align: center;
-  color: rgba(144, 161, 185, 0.75);
-  font-size: 11px;
-}
-
-.ob-button--compact {
-  height: 52px;
-  font-size: 15px;
-}
-
-
-
 /* ===== Onboarding2 (Apple Health verbinden) ===== */
 
 .ob2-top{
   align-items: center;
   text-align: center;
   gap: 14px;
-}
-
-.ob2-title{
-  margin: 0;
-  color: var(--white);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-  font-size: clamp(28px, 7.2vw, 34px);
-}
-
-.ob2-subtitle{
-  margin: 0;
-  color: rgba(144,161,185,0.85);
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-.ob2-middle{
-  flex-direction: column;
-  gap: 18px;
 }
 
 .ob2-iconCircle{
@@ -1417,6 +1335,95 @@
   color: #93C5FD;
   font-weight: 600;
 }
+
+
+/* Subtext unter Titel */
+.ob2-titleHint{
+  margin: 10px 0 0;
+  text-align: center;
+  color: rgba(144,161,185,0.70);
+  font-size: 12px;
+}
+
+/* Tiles statt Emoji-Buttons */
+.ob2-wearables{
+  display:flex;
+  gap: 12px;
+  justify-content:center;
+  margin-top: 8px;
+}
+
+/* Neue Tile-Klasse */
+.ob2-wearableTile{
+  width: 68px;
+  height: 68px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.ob2-wearableTile:hover{ transform: translateY(-1px); }
+
+.ob2-wearableTile--active{
+  border-color: rgba(59,130,246,0.65);
+  background: rgba(59,130,246,0.14);
+  box-shadow:
+    0 18px 60px rgba(59,130,246,0.30),
+    0 0 0 4px rgba(59,130,246,0.14);
+}
+
+/* PNG Logos in Tiles */
+.ob2-logo{
+  max-width: 50px;
+  max-height: auto;
+  object-fit: contain;
+  opacity: 0.95;
+}
+
+/* Mehr Tile (+ Mehr) */
+.ob2-more{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 2px;
+}
+
+.ob2-morePlus{
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 4px;
+
+  color: rgba(255,255,255,0.90);
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1;
+
+  transform: translateY(-1px);
+  letter-spacing: -0.02em;
+}
+
+
+.ob2-moreText{
+  font-size: 14px;
+  color: rgba(144,161,185,0.78);
+  font-weight: 700;
+}
+
+
 
 
 /* ===== Onboarding 3: Result Card ===== */
