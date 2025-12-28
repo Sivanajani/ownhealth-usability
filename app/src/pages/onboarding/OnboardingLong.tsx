@@ -268,6 +268,9 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
           <button className="ob-button" onClick={onNext}>
             Diese Insights will ich
           </button>
+          <button type="button" className="ob2-waitlist"  onClick={onBack}>
+            Zurück
+          </button>  
         </div>
       </div>
     </div>

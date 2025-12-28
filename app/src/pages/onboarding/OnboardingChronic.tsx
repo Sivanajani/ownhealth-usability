@@ -302,6 +302,10 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
         <div className="ob-bottom obC-bottom">
           <button className="ob-button" onClick={onNext}>
             Diese Klarheit will ich
+          </button>
+          
+          <button type="button" className="ob2-waitlist"  onClick={onBack}>
+            Zurück
           </button>          
         </div>
       </div>

@@ -15,7 +15,7 @@ $colors:
         rgba(16,185,129);
 
 .menu-container {
-  /* responsive Größen */
+  /* responsive Grössen */
   --radius: clamp(120px, 22vw, 170px);
   --box: clamp(54px, 10vw, 65px);
   --hub: clamp(78px, 14vw, 90px);
@@ -75,7 +75,7 @@ $colors:
   align-items: center;
   justify-content: flex-start;
   opacity: 0;
-  animation: flyOut 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: flyOut 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 
   &::before {
     content: "";

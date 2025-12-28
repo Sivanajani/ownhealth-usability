@@ -11,11 +11,11 @@ type StepKey = "sync" | "secure" | "focus";
 export default function Onboarding4({ onContinue }: Props) {
   const timeline = useMemo(
     () => ({
-      step1: 6500,
-      step2: 11000,
-      step3: 15500,
-      done: 18500,
-      total: 20000,
+      step1: 2000,
+      step2: 4500,
+      step3: 5000,
+      done: 6000,
+      total: 10000,
     }),
     []
   );
