@@ -100,7 +100,7 @@ export default function Onboarding3({ onFinish }: Props) {
         </div>
 
         {/* Bottom */}
-        <div className="ob-bottom ob2-bottom">
+        <div className="ob-cta">
           <button
             className={`ob-button ${!canFinish ? "ob3-buttonDisabled" : ""}`}
             onClick={onFinish}

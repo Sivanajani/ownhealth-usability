@@ -20,7 +20,7 @@ export default function Onboarding0({ onNext }: Props) {
       <div className="ob-content">
         {/* Top */}
         <div className="ob-top ob0-top">
-          {/* ✅ Dots bleiben */}
+          {/* Dots bleiben */}
           <div className="ob0-dots" aria-hidden="true">
             <span className="ob0-dot ob0-dot--active" />
             <span className="ob0-dot" />
@@ -29,7 +29,7 @@ export default function Onboarding0({ onNext }: Props) {
             <span className="ob0-dot" />
           </div>
 
-          <h1 className="ob0-title">Was ist dein primärer Fokus?</h1>
+          <h1 className="ob-title">Was ist dein primärer Fokus?</h1>
         </div>
 
         {/* Middle */}
@@ -39,15 +39,14 @@ export default function Onboarding0({ onNext }: Props) {
             className={`ob0-card ${focus === "longevity" ? "ob0-card--active" : ""}`}
             onClick={() => setFocus("longevity")}
           >
-            {/* ✅ Emoji raus, SVG rein */}
+            {/* Emoji raus, SVG rein */}
             <div className="ob0-iconBox" aria-hidden="true">
               <img className="ob0-iconSvg" src={boltSvg} alt="" />
             </div>
 
-            <div className="ob0-cardTitle">Performance &amp; Optimierung</div>
+            <div className="ob0-cardTitle">Meine Biologie optimieren</div>
             <div className="ob0-cardText">
-              Ich will meine Gesundheit selbst steuern und datenbasiert wissen,
-              was in meinem Körper wirklich wirkt.
+              Ich will datenbasiert wissen, was in meinem Körper wirklich wirkt, um meine Leistung zu steigern und gesund zu altern.
             </div>
           </button>
 
@@ -60,9 +59,9 @@ export default function Onboarding0({ onNext }: Props) {
               <img className="ob0-iconSvg" src={shieldSvg} alt="" />
             </div>
 
-            <div className="ob0-cardTitle">Ursachen &amp; Klarheit</div>
+            <div className="ob0-cardTitle">Meine Symptome verstehen</div>
             <div className="ob0-cardText">
-              Ich will mein Gesundheitspuzzle lösen und die Kontrolle zurückgewinnen.
+              Ich will mein Gesundheitspuzzle lösen und die Kontrolle über meine Gesundheit zurückgewinnen.
             </div>
           </button>
         </div>

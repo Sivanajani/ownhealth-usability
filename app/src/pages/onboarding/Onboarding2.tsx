@@ -56,7 +56,7 @@ export default function Onboarding2({ onNext, onBack }: Props) {
             )}
           </div>
 
-          <h1 className="ob2-title">
+          <h1 className="ob-title">
             Welches Wearable
             <br />
             nutzt du?
