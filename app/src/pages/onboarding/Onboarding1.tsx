@@ -1,4 +1,16 @@
 import "./onboardingStart.css";
+import "./CircularMenu.scss";
+import WatchIcon from "../../assets/smartwatch.svg?react";
+import DrugIcon from "../../assets/pills.svg?react";
+import DocuIcon from "../../assets/document.svg?react";
+import FoodIcon from "../../assets/restaurant.svg?react";
+import BloodIcon from "../../assets/medical.svg?react";
+import BrainIcon from "../../assets/brain.svg?react";
+import DoctorIcon from "../../assets/stethoscope.svg?react";
+import AppIcon from "../../assets/smartphone-call.svg?react";
+
+
+import ownLogo from "../../assets/own.logo.svg";
 
 type Props = {
   onNext?: () => void;
@@ -6,8 +18,19 @@ type Props = {
 };
 
 export default function Onboarding1({ onNext, onBack }: Props) {
-  return (
-    <div className="ob-root">
+    const menuItems = [
+      { label: "Wearables", Icon: WatchIcon },
+      { label: "Medikation", Icon: DrugIcon },
+      { label: "Dokumente", Icon: DocuIcon },
+      { label: "Ernährung", Icon: FoodIcon },
+      { label: "Bluttests", Icon: BloodIcon },
+      { label: "Mentale\nGesundheit", Icon: BrainIcon },
+      { label: "Hausarzt", Icon: DoctorIcon },
+      { label: "Apps", Icon: AppIcon },
+    ];
+
+    return (
+        <div className="ob-root">
       <div className="ob-content ob1-content">
         {/* Top */}
         <div className="ob-top ob1-top">
@@ -32,13 +55,13 @@ export default function Onboarding1({ onNext, onBack }: Props) {
             )}
           </div>
 
-          <h1 className="ob1-title">
+          <h1 className="ob-title">
             Wir führen deine
             <br />
             Daten zusammen
           </h1>
 
-          <p className="ob1-subtitle">
+          <p className="ob-subtitle">
             OWN vereint alle Gesundheitsdaten
             <br />
             zu einem Gesamtbild.
@@ -46,75 +69,32 @@ export default function Onboarding1({ onNext, onBack }: Props) {
         </div>
 
         {/* Middle */}
-        <div className="ob-middle ob1-middle">
-          <div className="ob1-orbit">
-            {/* Center */}
-            <div className="ob1-center">
-              <span className="ob1-centerText">OWN</span>
-            </div>
+          <div className="ob-middle ob1-middle">
+              <div className="menu-container">
+                  <div className="center-hub">
+                      <img className="own-center-logo" src={ownLogo} alt="OWN" />
+                  </div>
 
-            {/* Nodes */}
-            <div className="ob1-node ob1-node--apps">
-              <div className="ob1-nodeIcon">📱</div>
-              <div className="ob1-nodeLabel">Apps</div>
-            </div>
-
-            <div className="ob1-node ob1-node--wearables">
-              <div className="ob1-nodeIcon">⌚</div>
-              <div className="ob1-nodeLabel">Wearables</div>
-            </div>
-
-            <div className="ob1-node ob1-node--meds">
-              <div className="ob1-nodeIcon">💊</div>
-              <div className="ob1-nodeLabel">Medikation</div>
-            </div>
-
-            <div className="ob1-node ob1-node--docs">
-              <div className="ob1-nodeIcon">📄</div>
-              <div className="ob1-nodeLabel">Dokumente</div>
-            </div>
-
-            <div className="ob1-node ob1-node--food">
-              <div className="ob1-nodeIcon">🍎</div>
-              <div className="ob1-nodeLabel">Ernährung</div>
-            </div>
-
-            <div className="ob1-node ob1-node--labs">
-              <div className="ob1-nodeIcon">🧪</div>
-              <div className="ob1-nodeLabel">Bluttests</div>
-            </div>
-
-            <div className="ob1-node ob1-node--mind">
-              <div className="ob1-nodeIcon">🧠</div>
-              <div className="ob1-nodeLabel">Mentale Gesundheit</div>
-            </div>
-
-            <div className="ob1-node ob1-node--doc">
-              <div className="ob1-nodeIcon">🩺</div>
-              <div className="ob1-nodeLabel">Hausarzt</div>
-            </div>
-
-            {/* Lines */}
-            <div className="ob1-lines" aria-hidden="true">
-              <span className="ob1-line ob1-line--apps" />
-              <span className="ob1-line ob1-line--wearables" />
-              <span className="ob1-line ob1-line--meds" />
-              <span className="ob1-line ob1-line--docs" />
-              <span className="ob1-line ob1-line--food" />
-              <span className="ob1-line ob1-line--labs" />
-              <span className="ob1-line ob1-line--mind" />
-              <span className="ob1-line ob1-line--doc" />
-            </div>
+                  <div className="circle-wrapper">
+                      {menuItems.map((item, index) => (
+                          <div key={index} className="menu-item">
+                              <div className="menu-box">
+                                  <item.Icon className="menu-icon" aria-hidden="true" />
+                              </div>
+                              <span className="menu-label">{item.label}</span>
+                          </div>
+                      ))}
+                  </div>
+              </div>
           </div>
-        </div>
 
         {/* Bottom */}
-        <div className="ob-bottom ob1-bottom">
+        <div className="ob-bottom ob2-bottom">
           <button className="ob-button" onClick={onNext}>
             Zusammenführung starten
           </button>
 
-          <div className="ob1-footnote">30 Sekunden • 🔒 DSGVO-konform</div>
+          <div className="ob2-waitlist">30 Sekunden • 🔒 DSGVO-konform</div>
         </div>
       </div>
     </div>

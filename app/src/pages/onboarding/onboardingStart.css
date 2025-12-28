@@ -67,6 +67,7 @@
 
   position: relative;
   z-index: 1; /* über der Vignette */
+  overflow: hidden;
 }
 
 .ob-brand {
@@ -894,6 +895,7 @@
 
 .ob1-content{
   padding-top: calc(env(safe-area-inset-top) + 22px);
+  overflow: hidden;
 }
 
 .ob1-topbar{
@@ -1059,6 +1061,7 @@
   font-size: 12px;
   color: rgba(144,161,185,0.68);
 }
+
 
 
 /* ===== Onboarding2 (Wearable) ===== */
