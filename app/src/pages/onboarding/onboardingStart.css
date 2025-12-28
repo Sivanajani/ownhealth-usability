@@ -1173,12 +1173,6 @@
   font-weight: 700;
 }
 
-.ob2-highlight{
-  color: rgba(255,255,255,0.90);
-  font-weight: 700;
-}
-
-
 /* ===== Apple Health Standalone Logo (Mock-like) ===== */
 
 @keyframes ahFloat {

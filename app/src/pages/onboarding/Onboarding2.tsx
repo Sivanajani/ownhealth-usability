@@ -116,10 +116,11 @@ export default function Onboarding2({ onNext, onBack }: Props) {
 
           <p className="ob-subtitle">
             OWN importiert deine{" "}
-            <span className="ob2-highlight">{info.label}</span>
-            <br />
+            <span className="ob-subtitle-strong">{info.label}</span>
+            {selected === "applewatch" ? " " : <br />}
             sicher über Apple Health.
           </p>
+
 
           {/* Apple Health Logo */}
           <img
