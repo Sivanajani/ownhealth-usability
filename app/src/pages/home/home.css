@@ -1,0 +1,239 @@
+/* home.css */
+
+/* Hintergrund näher am Mock */
+.home-bg{
+  background:
+    radial-gradient(900px 700px at 40% -10%, rgba(88,146,198,0.55) 0%, rgba(14,39,70,0.0) 60%),
+    radial-gradient(1200px 900px at 50% 0%, rgba(32,76,118,0.55) 0%, rgba(9,22,40,0.92) 55%, rgba(7,14,28,1) 100%);
+}
+
+.home-safe{
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+  padding: 18px 16px 0;
+}
+
+/* Header */
+.home-header{
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 6px;
+}
+
+.home-left{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.home-time{
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.home-leftRow{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.home-logoMark{
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+}
+
+.home-logoImg{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  opacity: 0.95;
+}
+
+/* optional wenn SVG als component */
+.home-logoSvg{
+  width: 28px;
+  height: 28px;
+  opacity: 0.95;
+}
+
+.home-secure{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  color: rgba(70, 227, 160, 0.95);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.home-lock{ transform: translateY(-0.5px); }
+
+.home-right{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+/* Ring + Gear wie im Mock (rounded squares) */
+.home-ring{
+  min-width: 52px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 14px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.90);
+  font-size: 13px;
+}
+
+.home-gear{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+}
+
+/* Chat-Block: sitzt unten, mit grossem Radius + Glow */
+.home-chatWrap{
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 18px;
+  border-radius: 34px;
+
+  /* wichtig: kein “Kasten-Rand”, eher weich */
+  background: rgba(255,255,255,0.04);
+
+  /* Glow + weicher Schatten wie Mock */
+  box-shadow:
+    0 26px 70px rgba(0,0,0,0.50),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+
+  backdrop-filter: blur(12px);
+
+  /* Abstand zur BottomNav */
+  margin-bottom: 16px;
+}
+
+
+.home-chatCard{
+  padding: 16px;
+  border-radius: 28px;
+
+  background: rgba(8, 12, 22, 0.42);
+
+  /* nur ein ganz feiner Rand, kein “double frame” */
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: none;
+}
+
+/* Quick questions: stärker pill-like, weniger “box” */
+.quickQ{
+  width: 100%;
+  padding: 16px 16px;
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  color: rgba(255,255,255,0.92);
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.quickQ + .quickQ{ margin-top: 12px; }
+
+/* Input Row */
+.home-inputRow{
+  margin-top: 14px;
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.home-leftTools{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roundTool{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: rgba(255,255,255,0.9);
+}
+
+.home-input{
+  flex: 1;
+  height: 54px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.025);
+  color: rgba(255,255,255,0.92);
+  padding: 0 16px;
+  outline: none;
+}
+
+.home-input::placeholder{ color: rgba(255,255,255,0.35); }
+
+.sendBtn{
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Bottom Nav fix unten und “clean” wie Mock */
+.bottomNav{
+  height: 78px;
+  display:flex;
+  align-items:center;
+  justify-content: space-around;
+
+  border-top: 1px solid rgba(255,255,255,0.10);
+  background: rgba(6, 10, 20, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.navItem{
+  background: transparent;
+  border: 0;
+  color: rgba(255,255,255,0.55);
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.navIcon{ font-size: 18px; }
+
+.navItem--active{
+  color: rgba(70, 140, 255, 0.95);
+}

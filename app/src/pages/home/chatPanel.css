@@ -1,0 +1,89 @@
+.chatP{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chatP-empty{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chatP-quick{
+  width: 100%;
+  padding: 16px;
+  border-radius: 20px;
+  text-align: left;
+
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.92);
+  font-size: 15px;
+}
+
+.chatP-list{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 320px; /* damit du scrollen kannst wie Chat */
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.chatP-row{
+  display:flex;
+}
+
+.chatP-row.is-user{
+  justify-content: flex-end;
+}
+
+.chatP-row.is-assistant{
+  justify-content: flex-start;
+}
+
+.chatP-bubble{
+  max-width: 82%;
+  padding: 12px 14px;
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.92);
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.chatP-row.is-user .chatP-bubble{
+  background: rgba(80, 140, 255, 0.18);
+  border-color: rgba(80, 140, 255, 0.28);
+}
+
+.chatP-inputRow{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+}
+
+.chatP-input{
+  flex:1;
+  height: 54px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  color: rgba(255,255,255,0.92);
+  padding: 0 16px;
+  outline: none;
+}
+
+.chatP-input::placeholder{ color: rgba(255,255,255,0.35); }
+
+.chatP-send{
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+}

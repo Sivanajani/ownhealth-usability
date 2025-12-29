@@ -1,0 +1,54 @@
+/* appShell.css */
+:root{
+  --bg-top: #2f567a;
+  --bg-bottom: #0b172a;
+
+  --card: rgba(12, 18, 32, 0.55);
+  --card-strong: rgba(10, 14, 26, 0.75);
+  --stroke: rgba(255,255,255,0.10);
+
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.60);
+  --accent: #2bd48f;
+
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+
+  --shadow-soft: 0 18px 50px rgba(0,0,0,0.35);
+  --shadow-card: inset 0 0 0 1px rgba(255,255,255,0.06);
+  --blur: 10px;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text);
+  background: radial-gradient(1200px 900px at 35% -20%, var(--bg-top) 0%, var(--bg-bottom) 55%, #071223 100%);
+}
+
+.oh-screen{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.oh-safe{
+  padding: 22px 18px 18px;
+}
+
+.icon-btn{
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,0.04);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: var(--text);
+}
+
+.icon-btn:active{ transform: scale(0.98); }

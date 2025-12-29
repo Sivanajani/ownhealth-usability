@@ -1,0 +1,165 @@
+.settings-bg{
+  background:
+    radial-gradient(900px 700px at 45% -10%, rgba(88,146,198,0.55) 0%, rgba(14,39,70,0.0) 60%),
+    radial-gradient(1200px 900px at 50% 0%, rgba(32,76,118,0.55) 0%, rgba(9,22,40,0.92) 55%, rgba(7,14,28,1) 100%);
+}
+
+.settings-safe{
+  min-height: 100vh;
+  padding: 18px 16px 18px;
+}
+
+.settings-topTime{
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.92;
+  margin-bottom: 14px;
+}
+
+/* Profile */
+.profileCard{
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.40);
+  margin-bottom: 18px;
+}
+
+.profileName{
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+}
+
+.profileMeta{
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+}
+
+.profileLink{
+  margin-top: 10px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: rgba(80, 150, 255, 0.95);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Mode */
+.settings-sectionTitle{
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  margin: 0 0 10px;
+}
+
+.modeRow{
+  display:flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.modeBtn{
+  flex: 1;
+  height: 54px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.88);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.modeBtn--active{
+  background: rgba(90, 150, 255, 0.35);
+  border-color: rgba(120, 180, 255, 0.50);
+  box-shadow: 0 16px 35px rgba(0,0,0,0.35);
+}
+
+.modeIcon{
+  opacity: 0.9;
+}
+
+/* List Items */
+.settings-list{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settingsItem{
+  width: 100%;
+  border-radius: 20px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  color: rgba(255,255,255,0.92);
+  text-align:left;
+}
+
+.itemIcon{
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  flex: 0 0 auto;
+}
+
+.itemText{
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTitle{
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.itemSub{
+  margin-top: 3px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.60);
+}
+
+.itemChevron{
+  opacity: 0.55;
+  font-size: 18px;
+}
+
+/* Icon color variants */
+.itemIcon--blue{ background: rgba(70, 140, 255, 0.18); border-color: rgba(70,140,255,0.25); }
+.itemIcon--green{ background: rgba(70, 227, 160, 0.14); border-color: rgba(70,227,160,0.22); }
+.itemIcon--gray{ background: rgba(255,255,255,0.06); }
+.itemIcon--purple{ background: rgba(160, 110, 255, 0.14); border-color: rgba(160,110,255,0.22); }
+.itemIcon--red{ background: rgba(255, 80, 80, 0.14); border-color: rgba(255,80,80,0.22); }
+
+.settingsItem--danger .itemTitle{
+  color: rgba(255, 140, 140, 0.95);
+}
+
+/* optional back button */
+.settingsBack{
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.9);
+}
