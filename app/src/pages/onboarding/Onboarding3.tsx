@@ -15,8 +15,10 @@ type Sex = "Männlich" | "Weiblich" | "Divers" | null;
 export default function Onboarding3({ onFinish }: Props) {
   const [age, setAge] = useState<string>("");
   const [sex, setSex] = useState<Sex>(null);
+  const [name, setName] = useState<string>("");
 
-  const canFinish = Number(age) > 0 && sex !== null;
+
+  const canFinish = name.trim().length > 0 && Number(age) > 0 && sex !== null;
 
   return (
     <div className="ob-root">
@@ -45,6 +47,21 @@ export default function Onboarding3({ onFinish }: Props) {
 
         {/* Form */}
         <div className="ob4-form">
+
+          <div className="ob4-field">
+            <label className="ob4-label">Wie dürfen wir dich nennen?</label>
+            <input
+            className="ob4-input ob3-input"
+            placeholder="Max"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+
+
+
           <div className="ob4-field">
             <label className="ob4-label">Alter</label>
             <input
