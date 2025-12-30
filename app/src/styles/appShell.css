@@ -52,3 +52,64 @@ body{
 }
 
 .icon-btn:active{ transform: scale(0.98); }
+
+/* =========================
+   Bottom Nav (global + fixed)
+========================= */
+.bottomNav{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+
+  height: 78px;
+  display:flex;
+  align-items:center;
+  justify-content: space-around;
+
+  border-top: 1px solid rgba(255,255,255,0.10);
+  background: rgba(6, 10, 20, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.navItem{
+  background: transparent;
+  border: 0;
+  color: rgba(255,255,255,0.55);
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.navIcon{
+  font-size: 18px;
+}
+
+.navItem--active{
+  color: rgba(70, 140, 255, 0.95);
+}
+
+.navSvg{
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: 0.92;
+}
+
+.navSvg *{
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.underfolder-title{
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}

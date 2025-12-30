@@ -15,9 +15,20 @@ import UploadIcon from "../../assets/upload.svg?react";
 
 type Props = {
   onBackToChat?: () => void;
+
+  onOpenWearables?: () => void;
+  onOpenDocuments?: () => void;
+  onOpenMedication?: () => void;
+  onOpenNutrition?: () => void;
 };
 
-export default function Folder({ onBackToChat }: Props) {
+export default function Folder({
+  onBackToChat,
+  onOpenWearables,
+  onOpenDocuments,
+  onOpenMedication,
+  onOpenNutrition,
+}: Props) {
   return (
     <div className="oh-screen folder-bg">
       <div className="oh-safe folder-safe">
@@ -63,11 +74,19 @@ export default function Folder({ onBackToChat }: Props) {
             <span>Arzt-Summary erstellen</span>
           </button>
 
-          <div className="folder-sectionLabel folder-sectionLabel--spaced">MEINE DATEN</div>
+          <div className="folder-sectionLabel folder-sectionLabel--spaced">
+            MEINE DATEN
+          </div>
 
           <div className="folder-grid">
             {/* Wearables */}
-            <div className="dataCard dataCard--teal">
+            <div
+              className="dataCard dataCard--teal"
+              role="button"
+              tabIndex={0}
+              onClick={onOpenWearables}
+              onKeyDown={(e) => e.key === "Enter" && onOpenWearables?.()}
+            >
               <div className="dataTop">
                 <div className="dataIcon" aria-hidden="true">
                   <SmartwatchIcon />
@@ -86,7 +105,13 @@ export default function Folder({ onBackToChat }: Props) {
             </div>
 
             {/* Dokumente */}
-            <div className="dataCard dataCard--indigo">
+            <div
+              className="dataCard dataCard--indigo"
+              role="button"
+              tabIndex={0}
+              onClick={onOpenDocuments}
+              onKeyDown={(e) => e.key === "Enter" && onOpenDocuments?.()}
+            >
               <div className="dataTop">
                 <div className="dataIcon" aria-hidden="true">
                   <DocumentIcon />
@@ -97,7 +122,10 @@ export default function Folder({ onBackToChat }: Props) {
               <div className="dataTitle">Dokumente</div>
               <div className="dataSub">12 Dateien</div>
 
-              <div className="dataActions">
+              <div
+                className="dataActions"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button className="pillBtn" aria-label="Kamera">
                   <CameraIcon />
                 </button>
@@ -108,7 +136,13 @@ export default function Folder({ onBackToChat }: Props) {
             </div>
 
             {/* Medikation */}
-            <div className="dataCard dataCard--purple">
+            <div
+              className="dataCard dataCard--purple"
+              role="button"
+              tabIndex={0}
+              onClick={onOpenMedication}
+              onKeyDown={(e) => e.key === "Enter" && onOpenMedication?.()}
+            >
               <div className="dataTop">
                 <div className="dataIcon" aria-hidden="true">
                   <PillsIcon />
@@ -121,13 +155,23 @@ export default function Folder({ onBackToChat }: Props) {
               <div className="dataMeta">B12 ✓</div>
               <div className="dataMeta">Zink</div>
 
-              <button className="dataFooterBtn" aria-label="Scannen">
+              <button
+                className="dataFooterBtn"
+                aria-label="Scannen"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <CameraIcon />
               </button>
             </div>
 
             {/* Nutrition */}
-            <div className="dataCard dataCard--amber">
+            <div
+              className="dataCard dataCard--amber"
+              role="button"
+              tabIndex={0}
+              onClick={onOpenNutrition}
+              onKeyDown={(e) => e.key === "Enter" && onOpenNutrition?.()}
+            >
               <div className="dataTop">
                 <div className="dataIcon" aria-hidden="true">
                   <RestaurantIcon />
@@ -139,7 +183,11 @@ export default function Folder({ onBackToChat }: Props) {
               <div className="dataSub">Heute: 1,850 kcal</div>
               <div className="dataMeta">• 2 Mahlzeiten</div>
 
-              <button className="dataFooterBtn" aria-label="Scannen">
+              <button
+                className="dataFooterBtn"
+                aria-label="Scannen"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <CameraIcon />
               </button>
             </div>

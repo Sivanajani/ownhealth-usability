@@ -1,0 +1,298 @@
+/* wearables.css */
+.wear-bg{
+  background:
+    radial-gradient(900px 700px at 50% -10%, rgba(120,170,255,0.45) 0%, rgba(14,39,70,0.0) 60%),
+    linear-gradient(180deg, rgba(15,55,92,1) 0%, rgba(8,18,36,1) 55%, rgba(7,14,28,1) 100%);
+}
+
+.wear-safe{
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+  padding: 18px 16px 0;
+}
+
+/* Header */
+.wear-header{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 6px 0 10px;
+}
+
+.wear-back{
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255, 255, 255, 0);
+  color: rgba(255,255,255,0.92);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 22px;
+}
+
+.wear-spacer{ width: 40px; }
+
+/* Scroll content (Register bleibt fix) */
+.wear-content{
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  scrollbar-width: none;
+}
+.wear-content::-webkit-scrollbar{ display:none; }
+
+/* Cards base */
+.wear-heroCard,
+.wear-kpi,
+.wear-suggestCard,
+.wear-deviceCard{
+  background: rgba(10,14,26,0.32);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+
+/* Hero */
+.wear-heroCard{ padding: 14px; }
+.wear-heroKicker{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  color: rgba(70,227,160,0.95);
+  margin-bottom: 10px;
+}
+.wear-heart{ opacity: 0.9; }
+
+.wear-heroNav{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.wear-miniBtn{
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.75);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 18px;
+}
+
+.wear-metricValue{
+  display:flex;
+  align-items: baseline;
+  gap: 6px;
+  justify-content:center;
+}
+.wear-metricNum{
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(70,227,160,0.95);
+}
+.wear-metricUnit{
+  font-size: 14px;
+  color: rgba(70,227,160,0.85);
+}
+
+.wear-pill{
+  margin: 8px auto 0;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(70,227,160,0.12);
+  border: 1px solid rgba(70,227,160,0.20);
+  color: rgba(70,227,160,0.95);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.wear-subMetrics{
+  display:flex;
+  justify-content:center;
+  gap: 16px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+}
+
+.wear-bar{
+  display:flex;
+  gap: 6px;
+  margin-top: 12px;
+  height: 4px;
+}
+.wear-barSeg{
+  display:block;
+  flex: 1;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+}
+.wear-barSeg--g1{ background: rgba(70,227,160,0.95); flex: 5; }
+.wear-barSeg--g2{ background: rgba(70,227,160,0.65); flex: 3; }
+.wear-barSeg--o{ background: rgba(255,160,80,0.95); flex: 1; }
+
+/* Grid */
+.wear-grid{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.wear-kpi{
+  padding: 12px;
+  border-radius: 16px;
+}
+.wear-kpiTop{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.wear-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.35);
+}
+.wear-dot--teal{ background: rgba(70,227,160,0.95); }
+.wear-dot--mint{ background: rgba(120,255,220,0.95); }
+.wear-dot--amber{ background: rgba(255,190,120,0.95); }
+
+.wear-kpiLabel{
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+}
+
+.wear-kpiValue{
+  font-size: 18px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.92);
+}
+.wear-kpiMeta{
+  margin-top: 4px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+}
+
+.wear-kpi--teal{ border-color: rgba(70,227,160,0.18); }
+.wear-kpi--mint{ border-color: rgba(120,255,220,0.16); }
+.wear-kpi--amber{ border-color: rgba(255,190,120,0.16); }
+
+/* Für dich */
+.wear-sectionLabel{
+  margin: 14px 0 8px;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  color: rgba(255,255,255,0.55);
+}
+
+.wear-suggestions{ display:flex; flex-direction: column; gap: 10px; }
+
+.wear-suggestCard{
+  padding: 12px 14px;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  position: relative;
+}
+.wear-suggestTitle{
+  font-weight: 700;
+  font-size: 13px;
+  color: rgb(238, 234, 234);
+}
+.wear-suggestMeta{
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.60);
+}
+.wear-suggestArrow{
+  margin-left: auto;
+  opacity: 0.55;
+  font-size: 18px;
+}
+
+.wear-link{
+  margin-top: 2px;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.60);
+  font-size: 12px;
+  text-align: left;
+  padding: 2px 2px;
+}
+
+/* Device */
+.wear-deviceCard{
+  margin-top: 14px;
+  padding: 12px 14px;
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.wear-deviceIcon{
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(140,160,255,0.18);
+  border: 1px solid rgba(140,160,255,0.22);
+}
+
+.wear-deviceTitle{
+  font-weight: 800;
+  font-size: 13px;
+}
+.wear-deviceMeta{
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.60);
+}
+
+.wear-deviceStatus{
+  margin-left: auto;
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(70,227,160,0.95);
+}
+.wear-onlineDot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(70,227,160,0.95);
+}
+
+/* Add wearable */
+.wear-addBtn{
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(70,227,160,0.10);
+  border: 1px solid rgba(70,227,160,0.18);
+  color: rgba(70,227,160,0.95);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  font-weight: 700;
+}
+.wear-plus{ font-size: 18px; }

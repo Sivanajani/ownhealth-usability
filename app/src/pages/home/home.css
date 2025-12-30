@@ -126,9 +126,8 @@
   backdrop-filter: blur(12px);
 
   /* Abstand zur BottomNav */
-  margin-bottom: 16px;
+  margin-bottom: calc(78px + env(safe-area-inset-bottom) + 12px);
 }
-
 
 .home-chatCard{
   padding: 16px;
@@ -210,33 +209,6 @@
 }
 
 /* Bottom Nav fix unten und “clean” wie Mock */
-.bottomNav{
-  height: 78px;
-  display:flex;
-  align-items:center;
-  justify-content: space-around;
-
-  border-top: 1px solid rgba(255,255,255,0.10);
-  background: rgba(6, 10, 20, 0.55);
-  backdrop-filter: blur(10px);
-}
-
-.navItem{
-  background: transparent;
-  border: 0;
-  color: rgba(255,255,255,0.55);
-  display:flex;
-  flex-direction: column;
-  align-items:center;
-  gap: 6px;
-  font-size: 12px;
-}
-
-.navIcon{ font-size: 18px; }
-
-.navItem--active{
-  color: rgba(70, 140, 255, 0.95);
-}
 
 /* Greeting centered */
 .home-greeting{
@@ -287,14 +259,6 @@
   height: 18px;
   display: block;
   opacity: 0.9;
-}
-
-/* Bottom nav icons */
-.navSvg{
-  width: 18px;
-  height: 18px;
-  display: block;
-  opacity: 0.92;
 }
 
 /* Make svg use currentColor if needed */

@@ -1,0 +1,219 @@
+/* documents.css */
+.docs-bg{
+  background: radial-gradient(1200px 900px at 35% -20%, var(--bg-top) 0%, var(--bg-bottom) 55%, #071223 100%);
+}
+
+/* wichtig: Platz unten fürs FIXED bottomNav (dein "Register") */
+.docs-safe{
+  padding-top: 18px;
+  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+}
+
+/* Header */
+.docs-header{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.docs-back{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  color: rgba(150, 200, 255, 0.95);
+  font-size: 14px;
+  padding: 6px 2px;
+}
+
+.docs-backArrow{
+  font-size: 18px;
+  line-height: 1;
+  margin-top: -1px;
+}
+
+.docs-headerSpacer{
+  width: 64px;
+}
+
+/* Search */
+.docs-search{
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  padding: 0 12px;
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.docs-searchSvg{
+  width: 16px;
+  height: 16px;
+  opacity: 0.70;
+  flex: 0 0 auto;
+}
+
+.docs-searchSvg *{
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.docs-searchInput{
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.docs-searchInput::placeholder{
+  color: rgba(255,255,255,0.55);
+}
+
+/* Section label */
+.docs-sectionLabel{
+  margin-top: 16px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.45);
+}
+
+/* List */
+.docs-list{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.docs-card{
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(12, 18, 32, 0.40);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  padding: 14px 14px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.docs-card:active{ transform: scale(0.995); }
+
+.docs-cardLeft{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.docs-iconWrap{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.05);
+  flex: 0 0 auto;
+}
+
+.docs-iconSvg{
+  width: 20px;
+  height: 20px;
+  opacity: 0.95;
+}
+
+.docs-iconSvg *{
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.docs-cardText{
+  display:flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.docs-cardTitle{
+  font-size: 14px;
+  font-weight: 650;
+  color: rgba(255,255,255,0.92);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docs-cardMeta{
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docs-dot{ opacity: 0.45; }
+
+.docs-chevron{
+  font-size: 20px;
+  color: rgba(255,255,255,0.35);
+  margin-left: 10px;
+}
+
+/* Tone borders */
+.docs-card--red{ border-color: rgba(239,68,68,0.35); }
+.docs-card--blue{ border-color: rgba(59,130,246,0.35); }
+.docs-card--purple{ border-color: rgba(139,92,246,0.35); }
+.docs-card--amber{ border-color: rgba(245,158,11,0.35); }
+.docs-card--green{ border-color: rgba(16,185,129,0.35); }
+
+.docs-iconWrap--red{ color: rgba(239,68,68,0.95); }
+.docs-iconWrap--blue{ color: rgba(59,130,246,0.95); }
+.docs-iconWrap--purple{ color: rgba(139,92,246,0.95); }
+.docs-iconWrap--amber{ color: rgba(245,158,11,0.95); }
+.docs-iconWrap--green{ color: rgba(16,185,129,0.95); }
+
+/* Add button */
+.docs-addBtn{
+  width: 100%;
+  margin-top: 16px;
+  height: 56px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.80);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  font-size: 14px;
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.docs-addPlus{
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.10);
+  line-height: 1;
+}
