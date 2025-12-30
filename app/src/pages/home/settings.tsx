@@ -2,10 +2,11 @@ import "../../styles/appShell.css";
 import "./settings.css";
 
 type Props = {
-  onBack?: () => void; // optional falls du zurück willst
+  userName: string;
+  onBack?: () => void;
 };
 
-export default function Settings({ onBack }: Props) {
+export default function Settings({ userName, onBack }: Props) {
   return (
     <div className="oh-screen settings-bg">
       <div className="oh-safe settings-safe">
@@ -13,7 +14,9 @@ export default function Settings({ onBack }: Props) {
 
         {/* Profile Card */}
         <section className="profileCard">
-          <div className="profileName">SIMON</div>
+          <div className="profileName">
+            {userName || "Profilname"}
+          </div>
           <div className="profileMeta">Profil-Vollständigkeit: 64%</div>
           <button className="profileLink">[vervollständigen]</button>
         </section>
@@ -56,7 +59,7 @@ export default function Settings({ onBack }: Props) {
             <div className="itemIcon itemIcon--gray">⚙</div>
             <div className="itemText">
               <div className="itemTitle">Einstellungen</div>
-              <div className="itemSub"> </div>
+              <div className="itemSub"></div>
             </div>
             <div className="itemChevron">›</div>
           </button>
@@ -65,7 +68,7 @@ export default function Settings({ onBack }: Props) {
             <div className="itemIcon itemIcon--purple">?</div>
             <div className="itemText">
               <div className="itemTitle">Hilfe + Support</div>
-              <div className="itemSub"> </div>
+              <div className="itemSub"></div>
             </div>
             <div className="itemChevron">›</div>
           </button>
@@ -74,17 +77,17 @@ export default function Settings({ onBack }: Props) {
             <div className="itemIcon itemIcon--red">↪</div>
             <div className="itemText">
               <div className="itemTitle">Abmelden</div>
-              <div className="itemSub"> </div>
+              <div className="itemSub"></div>
             </div>
             <div className="itemChevron">›</div>
           </button>
         </div>
 
-        {onBack ? (
+        {onBack && (
           <button className="settingsBack" onClick={onBack}>
             Zurück
           </button>
-        ) : null}
+        )}
       </div>
     </div>
   );

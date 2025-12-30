@@ -4,10 +4,15 @@ import HomeFlow from "./pages/home/HomeFlow";
 
 export default function App() {
   const [isOnboarded, setIsOnboarded] = useState(false);
+  const [userName, setUserName] = useState<string>("");
 
   return isOnboarded ? (
-    <HomeFlow />
+    <HomeFlow userName={userName} />
   ) : (
-    <OnboardingFlow onFinish={() => setIsOnboarded(true)} />
+    <OnboardingFlow
+      onFinish={() => setIsOnboarded(true)}
+      userName={userName}
+      setUserName={setUserName}
+    />
   );
 }

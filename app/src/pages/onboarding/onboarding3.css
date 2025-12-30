@@ -120,3 +120,50 @@
   font-size: 12px;
   color: rgba(144,161,185,0.75);
 }
+
+/* Green badge like mock */
+.ob3-badge{
+  margin: 14px auto 0;
+  width: 100%;
+  max-width: 340px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(16,185,129,0.22);
+  background:
+    radial-gradient(700px 220px at 30% 0%, rgba(16,185,129,0.16), transparent 60%),
+    rgba(10, 22, 30, 0.35);
+
+  box-shadow:
+    0 18px 60px rgba(0,0,0,0.22),
+    0 0 0 1px rgba(255,255,255,0.04) inset;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ob3-badgeIcon{
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+  border: 1px solid rgba(16,185,129,0.25);
+  background: rgba(16,185,129,0.08);
+
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ob3-badgeText{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: rgba(255,255,255,0.88);
+}

@@ -237,3 +237,68 @@
 .navItem--active{
   color: rgba(70, 140, 255, 0.95);
 }
+
+/* Greeting centered */
+.home-greeting{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  margin-bottom: 16px;
+  padding: 0 18px;
+}
+
+.home-greetingInner{
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+}
+
+.home-greetingTitle{
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.25;
+  margin-top: 30px;
+}
+
+.home-greetingName{
+  color: rgba(96,165,250,0.95);
+}
+
+.home-greetingSub{
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 1.4;
+  color: rgba(144,161,185,0.78);
+}
+
+/* Header icons */
+.home-lockSvg{
+  width: 16px;
+  height: 16px;
+  display: block;
+  opacity: 0.9;
+}
+
+.home-gearSvg{
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: 0.9;
+}
+
+/* Bottom nav icons */
+.navSvg{
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: 0.92;
+}
+
+/* Make svg use currentColor if needed */
+.home-lockSvg *, .home-gearSvg *, .navSvg *{
+  fill: currentColor;
+  stroke: currentColor;
+}

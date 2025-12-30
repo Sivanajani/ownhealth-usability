@@ -5,17 +5,25 @@ import "./onboarding3.css";
 
 import FemaleIcon from "../../assets/woma.svg?react";
 import MaleIcon from "../../assets/man.svg?react";
+import ShieldIcon from "../../assets/schild.svg?react";
 
 type Props = {
   onFinish?: () => void;
+  name: string;
+  onNameChange: (v: string) => void;
 };
+
 
 type Sex = "Männlich" | "Weiblich" | "Divers" | null;
 
-export default function Onboarding3({ onFinish }: Props) {
+export default function Onboarding3({
+  onFinish,
+  name,
+  onNameChange,
+}: Props) {
+
   const [age, setAge] = useState<string>("");
   const [sex, setSex] = useState<Sex>(null);
-  const [name, setName] = useState<string>("");
 
 
   const canFinish = name.trim().length > 0 && Number(age) > 0 && sex !== null;
@@ -38,7 +46,7 @@ export default function Onboarding3({ onFinish }: Props) {
           <div className="ob-brand">
             <h1 className="ob-title">Fast fertig.</h1>
             <p className="ob-subtitle">
-              Für den Start brauchen wir zwei Infos,
+              Für den Start brauchen wir drei Infos,
               <br />
               damit OWN dich besser versteht.
             </p>
@@ -51,16 +59,19 @@ export default function Onboarding3({ onFinish }: Props) {
           <div className="ob4-field">
             <label className="ob4-label">Wie dürfen wir dich nennen?</label>
             <input
-            className="ob4-input ob3-input"
-            placeholder="Max"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+              className="ob4-input ob3-input"
+              placeholder="Vorname oder Pseudonym"
+              type="text"
+              value={name}
+              onChange={(e) => onNameChange(e.target.value)}
+            />
+          <div className="ob3-badge" role="note" aria-label="Hinweis">
+            <span className="ob3-badgeIcon" aria-hidden="true">
+              <ShieldIcon className="ob3-badgeSvg" />
+            </span>
+            <span className="ob3-badgeText">OWN funktioniert komplett anonym.</span>
+          </div>
         </div>
-
-
-
 
           <div className="ob4-field">
             <label className="ob4-label">Alter</label>

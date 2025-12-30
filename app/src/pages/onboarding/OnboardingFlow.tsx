@@ -13,9 +13,12 @@ type FocusKey = "longevity" | "chronic";
 
 type Props = {
   onFinish?: () => void;
+  userName: string;
+  setUserName: (v: string) => void;
 };
 
-export default function OnboardingFlow({ onFinish }: Props) {
+
+export default function OnboardingFlow({ onFinish, userName, setUserName }: Props) {
   const [step, setStep] = useState(0);
   const [focus, setFocus] = useState<FocusKey | null>(null);
 
@@ -40,7 +43,15 @@ export default function OnboardingFlow({ onFinish }: Props) {
 
   if (step === 3) return <Onboarding1 onNext={() => setStep(4)} />;
   if (step === 4) return <Onboarding2 onNext={() => setStep(5)} />;
-  if (step === 5) return <Onboarding3 onFinish={() => setStep(6)} />;
+  if (step === 5)
+    return (
+    <Onboarding3
+      name={userName}
+      onNameChange={setUserName}
+      onFinish={() => setStep(6)}
+    />
+  );
+
   if (step === 6) return <Onboarding4 onContinue={() => onFinish?.()} />;
 
   return null;

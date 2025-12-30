@@ -5,13 +5,27 @@ import Settings from "./settings";
 
 type HomeStep = "chat" | "folder" | "settings";
 
-export default function HomeFlow() {
+type Props = {
+  userName: string;
+};
+
+export default function HomeFlow({ userName }: Props) {
   const [step, setStep] = useState<HomeStep>("chat");
 
-  // Screens
-  if (step === "chat") return <Home onOpenFolder={() => setStep("folder")} onOpenSettings={() => setStep("settings")} />;
-  if (step === "folder") return <Folder onBackToChat={() => setStep("chat")} />;
-    if (step === "settings") return <Settings onBack={() => setStep("chat")} />;
+  if (step === "chat")
+    return (
+      <Home
+        userName={userName}
+        onOpenFolder={() => setStep("folder")}
+        onOpenSettings={() => setStep("settings")}
+      />
+    );
+
+  if (step === "folder")
+    return <Folder onBackToChat={() => setStep("chat")} />;
+
+  if (step === "settings")
+    return <Settings userName={userName} onBack={() => setStep("chat")} />;
 
   return null;
 }

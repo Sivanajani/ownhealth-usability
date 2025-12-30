@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./onboardingStart.css";
+import "./onboarding0.css";
 
 import boltSvg from "../../assets/blitz.svg";
-import shieldSvg from "../../assets/schild.svg";
+import shieldSvg from "../../assets/puzzle.svg";
 
 type FocusKey = "longevity" | "chronic";
 
@@ -16,11 +17,10 @@ export default function Onboarding0({ onNext }: Props) {
   const canContinue = !!focus;
 
   return (
-    <div className="ob-root">
-      <div className="ob-content">
+    <div className="ob-root ob0-root">
+      <div className="ob-content ob0-content">
         {/* Top */}
         <div className="ob-top ob0-top">
-          {/* Dots bleiben */}
           <div className="ob0-dots" aria-hidden="true">
             <span className="ob0-dot ob0-dot--active" />
             <span className="ob0-dot" />
@@ -29,7 +29,7 @@ export default function Onboarding0({ onNext }: Props) {
             <span className="ob0-dot" />
           </div>
 
-          <h1 className="ob-title">Was ist dein primärer Fokus?</h1>
+          <h1 className="ob-title ob0-title">Was ist dein primärer Fokus?</h1>
         </div>
 
         {/* Middle */}
@@ -39,7 +39,6 @@ export default function Onboarding0({ onNext }: Props) {
             className={`ob0-card ${focus === "longevity" ? "ob0-card--active" : ""}`}
             onClick={() => setFocus("longevity")}
           >
-            {/* Emoji raus, SVG rein */}
             <div className="ob0-iconBox" aria-hidden="true">
               <img className="ob0-iconSvg" src={boltSvg} alt="" />
             </div>
