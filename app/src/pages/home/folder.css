@@ -1,9 +1,24 @@
+/* =========================
+   Background
+========================= */
 .folder-bg{
   background:
-    radial-gradient(900px 700px at 45% -10%, rgba(88,146,198,0.55) 0%, rgba(14,39,70,0.0) 60%),
-    radial-gradient(1200px 900px at 50% 0%, rgba(32,76,118,0.55) 0%, rgba(9,22,40,0.92) 55%, rgba(7,14,28,1) 100%);
+    radial-gradient(
+      900px 700px at 50% -10%,
+      rgba(120,170,255,0.45) 0%,
+      rgba(14,39,70,0.0) 60%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(15,55,92,1) 0%,
+      rgba(8,18,36,1) 55%,
+      rgba(7,14,28,1) 100%
+    );
 }
 
+/* =========================
+   Layout
+========================= */
 .folder-safe{
   flex: 1;
   display:flex;
@@ -16,12 +31,6 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 12px;
-}
-
-.folder-time{
-  font-size: 15px;
-  font-weight: 600;
-  opacity: 0.92;
 }
 
 .folder-titleBlock{
@@ -42,36 +51,43 @@
   display:flex;
   align-items:center;
   gap: 8px;
-  color: rgba(120, 170, 255, 0.90);
+  color: rgba(140,180,255,0.9);
   font-size: 13px;
-  opacity: 0.95;
 }
 
 .folder-content{
   flex: 1;
-  overflow: auto;
-  padding-bottom: 12px;
+  overflow: hidden;   
 }
 
+
+/* =========================
+   Section Labels
+========================= */
 .folder-sectionLabel{
   font-size: 12px;
   letter-spacing: 1.2px;
   color: rgba(255,255,255,0.55);
-  margin: 14px 0 10px;
+  margin: 12px 0 8px;
 }
 
 .folder-sectionLabel--spaced{
-  margin-top: 18px;
+  margin-top: 12px;
 }
 
+/* =========================
+   Insight Cards
+========================= */
 .insightCard{
   display:flex;
   align-items:center;
   gap: 12px;
-  padding: 14px 14px;
+  padding: 13px 14px;
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(10,14,26,0.45);
+  background: rgba(10,14,26,0.32);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 18px 40px rgba(0,0,0,0.35);
   margin-bottom: 10px;
 }
@@ -84,8 +100,8 @@
   align-items:center;
   justify-content:center;
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
-  opacity: 0.95;
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.92);
 }
 
 .insightTitle{
@@ -100,28 +116,31 @@
 }
 
 .insightCard--good{
-  border-color: rgba(70, 227, 160, 0.25);
+  border-color: rgba(70,227,160,0.35);
 }
 
 .insightCard--good .insightMeta{
-  color: rgba(70, 227, 160, 0.95);
+  color: rgba(70,227,160,0.95);
 }
 
 .insightCard--warn{
-  border-color: rgba(255, 160, 80, 0.25);
+  border-color: rgba(255,160,80,0.35);
 }
 
 .insightCard--warn .insightMeta{
-  color: rgba(255, 160, 80, 0.95);
+  color: rgba(255,160,80,0.95);
 }
 
+/* =========================
+   Summary Button
+========================= */
 .summaryBtn{
   width: 100%;
   margin-top: 6px;
   padding: 12px 14px;
   border-radius: 18px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
   color: rgba(255,255,255,0.92);
   display:flex;
   align-items:center;
@@ -129,24 +148,57 @@
   gap: 10px;
 }
 
-.summaryIcon{ opacity: 0.9; }
+.summaryIcon{
+  width: 18px;
+  height: 18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
 
+/* =========================
+   Grid / Data Cards
+========================= */
 .folder-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  align-content: start;
 }
 
 .dataCard{
   border-radius: 22px;
-  padding: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(10,14,26,0.45);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
-  min-height: 168px;
+  padding: 14px 14px 12px;
+  min-height: 190px;
   display:flex;
   flex-direction: column;
+  background: rgba(10,14,26,0.32);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+  justify-content: space-between;
 }
+
+/* =========================
+   ICON COLORS (pro Card)
+========================= */
+.dataCard--teal .dataIcon{
+  color: rgba(70,227,160,0.95);
+}
+
+.dataCard--indigo .dataIcon{
+  color: rgba(140,160,255,0.95);
+}
+
+.dataCard--purple .dataIcon{
+  color: rgba(215,150,255,0.95);
+}
+
+.dataCard--amber .dataIcon{
+  color: rgba(255,190,120,0.95);
+}
+
 
 .dataTop{
   display:flex;
@@ -162,13 +214,14 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(17, 17, 17, 0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .chev{
-  opacity: 0.6;
   font-size: 18px;
+  opacity: 0.6;
 }
 
 .dataTitle{
@@ -188,7 +241,7 @@
 }
 
 .dataStrong{
-  color: rgba(70, 227, 160, 0.95);
+  color: rgba(70,227,160,0.95);
   font-weight: 700;
   font-size: 12px;
 }
@@ -199,6 +252,9 @@
   color: rgba(255,255,255,0.70);
 }
 
+/* =========================
+   Actions
+========================= */
 .dataActions{
   margin-top: auto;
   display:flex;
@@ -210,36 +266,73 @@
   width: 46px;
   height: 28px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: rgba(255,255,255,0.92);
 }
 
 .dataFooterBtn{
   margin-top: auto;
   height: 34px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
   display:flex;
   align-items:center;
   justify-content:center;
-  opacity: 0.95;
 }
 
-/* Farbvarianten (sanft) */
+/* =========================
+   Color Variants
+========================= */
 .dataCard--teal{
-  background: linear-gradient(180deg, rgba(30,120,110,0.22), rgba(10,14,26,0.45));
+  background: linear-gradient(
+    180deg,
+    rgba(40,140,120,0.22),
+    rgba(10,14,26,0.32)
+  );
 }
 
 .dataCard--indigo{
-  background: linear-gradient(180deg, rgba(90,80,170,0.22), rgba(10,14,26,0.45));
+  background: linear-gradient(
+    180deg,
+    rgba(100,110,190,0.22),
+    rgba(10,14,26,0.32)
+  );
 }
 
 .dataCard--purple{
-  background: linear-gradient(180deg, rgba(150,70,180,0.18), rgba(10,14,26,0.45));
+  background: linear-gradient(
+    180deg,
+    rgba(170,100,200,0.20),
+    rgba(10,14,26,0.32)
+  );
 }
 
 .dataCard--amber{
-  background: linear-gradient(180deg, rgba(180,110,60,0.18), rgba(10,14,26,0.45));
+  background: linear-gradient(
+    180deg,
+    rgba(200,140,80,0.20),
+    rgba(10,14,26,0.32)
+  );
+}
+
+/* =========================
+   SVG NORMALIZATION (SEHR WICHTIG)
+========================= */
+.insightIcon svg,
+.dataIcon svg,
+.summaryIcon svg,
+.pillBtn svg,
+.dataFooterBtn svg{
+  width: 18px;
+  height: 18px;
+  display:block;
+  color: currentColor;
+  fill: currentColor !important;
+  stroke: currentColor !important;
 }

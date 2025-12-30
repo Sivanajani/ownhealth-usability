@@ -10,7 +10,7 @@ function uid() {
 
 function fakeAssistantReply(userText: string) {
   if (userText.toLowerCase().includes("schlaf")) {
-    return "Ich kann dir dabei helfen. Magst du mir sagen, wann du ins Bett gehst, wann du aufstehst und ob du nachts oft wach wirst?";
+    return "Deine letzte Blutuntersuchung zeigt einen niedrigen Eisen- und B12-Spiegel. In Kombination mit 5 kurzen Nächten und geringer Aktivität ist Müdigkeit zu erwarten. Ich werde B12 zu deinem Plan hinzufügen.";
   }
   if (userText.toLowerCase().includes("müde")) {
     return "Müdigkeit kann viele Ursachen haben. Hast du in den letzten Tagen Stress, wenig Tageslicht oder späte Mahlzeiten gehabt?";
