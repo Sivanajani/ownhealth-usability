@@ -1,6 +1,15 @@
 import { useMemo, useRef, useState } from "react";
 import "./onboardingStart.css";
-import "./onboardingChronic.css";
+import "./onboardingLong.css";
+
+import LabIcon from "../../assets/medical.svg?react";
+import ChartIcon from "../../assets/chart.svg?react";
+import PlanIcon from "../../assets/plan.svg?react";
+import FileIcon from "../../assets/file.svg?react";
+import LightningIcon from "../../assets/blitz.svg?react";
+
+type IconKey = "lab" | "chart" | "plan";
+type Accent = "blue" | "green" | "purple";
 
 type Props = {
   onNext?: () => void;
@@ -9,19 +18,43 @@ type Props = {
 
 type Slide = {
   id: string;
-  topHeadline: React.ReactNode;   
-  cardTitle: React.ReactNode;     
+  topHeadline: React.ReactNode;
+  accent: Accent;
+  iconKey: IconKey;
+  iconTheme: "clock" | "pill" | "moon" | "lab" | "chart" | "plan";
   badge?: string;
-  icon: string;
-  body: React.ReactNode;
+  title: React.ReactNode;
+
+  list: {
+    items: Array<{
+      label: string;
+      value?: string;
+      source?: string;
+    }>;
+  };
+
+  alert: {
+    title: string;
+    hint?: string;
+  };
+
+  bottom: {
+    label: string;
+    value: string;
+    hint?: string;
+    iconKey?: "file" | "lightning";
+    prefix?: React.ReactNode;
+  };
 };
 
 export default function OnboardingChronic({ onNext, onBack }: Props) {
   const slides: Slide[] = useMemo(
     () => [
       {
-        id: "causes",
-        icon: "🩺",
+        id: "certainty",
+        accent: "blue",
+        iconKey: "lab",
+        iconTheme: "lab",
         badge: "VORSCHAU",
         topHeadline: (
           <>
@@ -30,76 +63,37 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
             endlich Gewissheit:
           </>
         ),
-        cardTitle: (
+        title: (
           <>
             Deine Symptome haben
             <br />
             messbare Ursachen
           </>
         ),
-        body: (
-          <>
-            <div className="obC-list">
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  <strong>Erschöpfung:</strong>{" "}
-                  <span className="obC-muted">Ferritin nur 15 ng/ml</span>
-                  <div className="obC-sub">(sollte über 50 sein)</div>
-                </span>
-              </div>
-
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  <strong>Schwindel:</strong>{" "}
-                  <span className="obC-muted">B12 bei 190 pg/ml</span>
-                  <div className="obC-sub">(sollte über 400 sein)</div>
-                </span>
-              </div>
-
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  <strong>Herzrasen:</strong>{" "}
-                  <span className="obC-muted">TSH schwankt stark</span>
-                  <div className="obC-sub">zwischen 2.1 und 5.8</div>
-                </span>
-              </div>
-
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  <strong>Verdauung:</strong>{" "}
-                  <span className="obC-muted">Entzündungsmarker</span>
-                  <div className="obC-sub">CRP erhöht auf 8.2</div>
-                </span>
-              </div>
-            </div>
-
-            <div className="obC-alert">
-              <span className="obC-alertX">✕</span>
-              <div className="obC-alertText">
-                <strong>„Alles nur Stress“</strong> – widerlegt.
-                <div className="obC-alertSub">
-                  Deine Werte zeigen die wahren Ursachen.
-                </div>
-              </div>
-            </div>
-
-            <div className="obC-report">
-              <div className="obC-reportIcon" aria-hidden="true">
-                📄
-              </div>
-              <div className="obC-reportText">Arzt-Report soeben erstellt</div>
-            </div>
-          </>
-        ),
+        list: {
+          items: [
+            { label: "Erschöpfung:", value: "Ferritin nur 15 ng/ml", source: "Quelle: Laborwert & Wearable" },
+            { label: "Schwindel:", value: "B12 bei 190 pg/ml", source: "Quelle: Arztbrief & Medikation" },
+            { label: "Herzrasen:", value: "TSH schwankt stark", source: "Quelle: Bluttest & Wearable" },
+            { label: "Verdauung:", value: "Entzündungsmarker", source: "Quelle: Laborwert & Ernährung" },
+          ],
+        },
+        alert: {
+          title: "„Alles nur Stress“ – widerlegt.",
+          hint: "Deine Werte zeigen die wahren Ursachen.",
+        },
+        bottom: {
+          label: "ARZT-REPORT",
+          value: "soeben erstellt",
+          iconKey: "file",
+        },
       },
 
       {
-        id: "plan",
-        icon: "🧭",
+        id: "story",
+        accent: "green",
+        iconKey: "chart",
+        iconTheme: "chart",
         badge: "VORSCHAU",
         topHeadline: (
           <>
@@ -108,126 +102,74 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
             endlich deine Geschichte:
           </>
         ),
-        cardTitle: (
+        title: (
           <>
             Dein Gesundheitsverlauf
             <br />
             macht plötzlich Sinn
           </>
         ),
-        body: (
-          <>
-            <div className="obC-list">
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  2021: <span className="obC-muted">Antibiotika wegen Blasenentzündung</span>
-                </span>
-              </div>
-
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  2022: <span className="obC-muted">Erste Verdauungsprobleme</span>
-                </span>
-              </div>
-
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  2023: <span className="obC-muted">Müdigkeit beginnt schleichend</span>
-                </span>
-              </div>
-
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  2024: <span className="obC-muted">Schilddrüsenwerte auffällig</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="obC-alert obC-alert--soft">
-              <span className="obC-alertText">
-                Erkanntes Muster: Antibiotika → Darmflora gestört → Nährstoffaufnahme → Erschöpfung
-              </span>
-            </div>
-
-            <div className="obC-report obC-report--blue">
-              <div className="obC-reportIcon" aria-hidden="true">
-                📌
-              </div>
-              <div className="obC-reportText">Komplette Historie für Arzt erstellt</div>
-            </div>
-          </>
-        ),
+        list: {
+          items: [
+            { label: "2021:", value: "Antibiotika wegen Blasenentzündung", source: "Quelle: Laborwert & Wearable" },
+            { label: "2022:", value: "Erste Verdauungsprobleme", source: "Quelle: Ernährung & Apps" },
+            { label: "2023:", value: "Müdigkeit beginnt schleichend", source: "Quelle: Mentale Gesundheit & Wearable" },
+            { label: "2024:", value: "Schilddrüsenwerte auffällig", source: "Quelle: Bluttest & Hausarzt" },
+          ],
+        },
+        alert: {
+          title: "Erkanntes Muster:",
+          hint: "Antibiotika → Darmflora gestört → Nährstoffaufnahme → Erschöpfung",
+        },
+        bottom: {
+          label: "HISTORIE",
+          value: "für Arzt erstellt",
+          iconKey: "file",
+        },
       },
 
       {
-        id: "relief",
-        icon: "🧠",
+        id: "control",
+        accent: "purple",
+        iconKey: "plan",
+        iconTheme: "plan",
         badge: "VORSCHAU",
         topHeadline: (
           <>
-            Stell dir vor, du weißt
+            Stell dir vor, du hast
             <br />
-            endlich was du tun kannst:
+            die Kontrolle zurück:
           </>
         ),
-        cardTitle: (
-          <>
-            Deine Kontrolle
-            <br />
-            zurück
-          </>
-        ),
-        body: (
-          <>
-            <div className="obC-list">
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  Morgens: <span className="obC-muted">Eisen auf nüchternen Magen</span>
-                  <div className="obC-sub">+37% weniger Erschöpfung nach 3 Wochen</div>
-                </span>
-              </div>
-
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  Mittags: <span className="obC-muted">B12 sublingual</span>
-                  <div className="obC-sub">→ Schwindel lässt nach</div>
-                </span>
-              </div>
-
-              <div className="obC-row">
-                <span className="obC-check">✓</span>
-                <span className="obC-rowText">
-                  Abends: <span className="obC-muted">Magnesium vor dem Schlaf</span>
-                  <div className="obC-sub">→ Durchschlafen statt 4x aufwachen</div>
-                </span>
-              </div>
-            </div>
-
-            <div className="obC-danger">
-              <span className="obC-dangerX">✕</span>
-              <span className="obC-dangerText">
-                Vorsicht: Kaffee blockiert Eisenaufnahme. 2 Stunden Abstand halten.
-              </span>
-            </div>
-
-            <div className="obC-quick">
-              <div className="obC-quickLabel">QUICK WIN</div>
-              <div className="obC-quickValue">
-                Diese 3 Schritte zeigen bei 73% erste Erfolge in 14 Tagen
-              </div>
-            </div>
-          </>
-        ),
+        title: "Dein präziser Fahrplan",
+        list: {
+          items: [
+            { label: "Morgens:", value: "Eisen auf nüchternen Magen", source: "Ziel: Ferritin-Speicher füllen" },
+            { label: "Mittags:", value: "B12 sublingual", source: "Ziel: Nervensystem stabilisieren" },
+            { label: "Abends:", value: "Magnesium vor dem Schlaf", source: "Ziel: Regeneration & HRV-Steigerung" },
+          ],
+        },
+        alert: {
+          title: "Vorsicht: Kaffee blockiert Eisenaufnahme.",
+          hint: "≥ 2 Stunden Abstand halten",
+        },
+        bottom: {
+          label: "PROGNOSE",
+          value: "Energie-Anstieg",
+          hint: "Messbar mehr Energie in 14 Tagen.",
+          iconKey: "lightning",
+          prefix: <span style={{ fontWeight: 900 }}>Prognose:</span>,
+        },
       },
     ],
     []
   );
+
+  const Icon = ({ k }: { k: IconKey }) => {
+    if (k === "lab") return <LabIcon className="obLon-svg" />;
+    if (k === "chart") return <ChartIcon className="obLon-svg" />;
+    return <PlanIcon className="obLon-svg" />;
+  };
 
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -246,67 +188,108 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
 
   return (
     <div className="ob-root">
-      <div className="ob-content obC-content">
+      <div className="ob-content obLon-root">
+        {/* TOP*/}
+        <div className="ob-top ob0-top">
+          <div className="ob0-dots" aria-hidden="true">
+            <span className="ob0-dot ob0-dot--active" />
+            <span className="ob0-dot ob0-dot--active" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+          </div>
 
-        {/* Top */}
-        <div className="ob-top ob0-top">          
-            <div className="ob0-dots" aria-hidden="true">
-              <span className="ob0-dot ob0-dot--active" />
-              <span className="ob0-dot ob0-dot--active" />
-              <span className="ob0-dot" />
-              <span className="ob0-dot" />
-              <span className="ob0-dot" />
-            </div>          
-
-          {/* Headline wie Mock, pro Slide wechselnd, im gleichen Style wie deine anderen Screens */}
-          <h1 className="ob-title">{activeSlide.topHeadline}</h1>
+          <h1 className="obLon-headline">{activeSlide.topHeadline}</h1>
         </div>
 
-        {/* Middle */}
-        <div className="ob-middle obC-middle">
-          <div className="obC-stack">
-            <div className="obC-carousel" ref={trackRef} onScroll={onScroll}>
-              {slides.map((s) => (
-                <section className="obC-slide" key={s.id} aria-label="Chronic Preview Slide">
-                  <div className="obC-card">
-                    <div className="obC-cardHeader">
-                      <div className="obC-iconBox" aria-hidden="true">
-                        {s.icon}
-                      </div>
+        <div className="obLon-mid">
+          <div className="obLon-carousel" ref={trackRef} onScroll={onScroll}>
+            {slides.map((s) => (
+              <section className="obLon-slide" key={s.id} aria-label="Chronic Preview Slide">
+                <div className={`obLon-card obLon-card--${s.accent}`}>
+                  {s.badge && (
+                    <div className={`obLon-topBadge obLon-topBadge--${s.accent}`}>
+                      {s.badge}
+                    </div>
+                  )}
 
-                      <div className="obC-headerText">
-                        <div className="obC-cardTitle">{s.cardTitle}</div>
-                        {s.badge && <span className="obC-badge">{s.badge}</span>}
-                      </div>
+                  <div className="obLon-cardHeader">
+                    <div className={`obLon-iconWrap obLon-iconWrap--${s.iconTheme}`}>
+                      <Icon k={s.iconKey} />
                     </div>
 
-                    <div className="obC-body">{s.body}</div>
+                    <div className="obLon-cardTitle">{s.title}</div>
                   </div>
-                </section>
-              ))}
-            </div>
 
-            {/* Dots unter der Card */}
-            <div className="obC-miniProgress" aria-hidden="true">
-              {slides.map((_, i) => (
-                <span
-                  key={i}
-                  className={`obL-miniDot ${i === activeIndex ? "obL-miniDot--active" : ""}`}
-                />
-              ))}
-            </div>
+                  {/* LIST */}
+                  <div className="obLon-panel obLon-panel--list">
+                    <div className="obLon-list">
+                      {s.list.items.map((it, idx) => (
+                        <div className="obLon-row" key={idx}>
+                          <span className={`obLon-check obLon-check--${s.accent}`}>✓</span>
+
+                          <div className="obLon-rowText">
+                            <div className="obLon-rowLine">
+                              <span className="obLon-rowLabel">{it.label}</span>
+                              {it.value && <span className="obLon-rowValue">{it.value}</span>}
+                            </div>
+                            {it.source && <div className="obLon-rowSource">{it.source}</div>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* ALERT */}
+                  <div className="obLon-panel obLon-panel--alert">
+                    <span className="obLon-x">✕</span>
+                    <div>
+                      <div className="obLon-alertTitle">{s.alert.title}</div>
+                      {s.alert.hint && <div className="obLon-alertHint">{s.alert.hint}</div>}
+                    </div>
+                  </div>
+
+                  {/* BOTTOM */}
+                  <div className={`obLon-panel obLon-panel--bottom obLon-panel--bottom-${s.accent}`}>
+                    <div className="obLon-bottomIcon" aria-hidden="true">
+                      {s.bottom.iconKey === "lightning" ? (
+                        <LightningIcon className="obLon-svg" />
+                      ) : (
+                        <FileIcon className="obLon-svg" />
+                      )}
+                    </div>
+
+                    <div className="obLon-bottomText">
+                      <div className="obLon2-bottomLabel">{s.bottom.label}</div>
+                      <div className="obLon2-bottomValue">
+                        {s.bottom.prefix} {s.bottom.value}
+                      </div>
+                      {s.bottom.hint && <div className="obLon2-bottomHint">{s.bottom.hint}</div>}
+                    </div>
+                  </div>
+                </div>
+              </section>
+            ))}
+          </div>
+
+          {/* BOTTOM = Slide Dots (nur fürs Swipen) */}
+          <div className="obLon-mini" aria-hidden="true">
+            {slides.map((_, i) => (
+              <span
+                key={i}
+                className={`obLon-miniDot ${i === activeIndex ? "obLon-miniDot--active" : ""}`}
+              />
+            ))}
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="ob-bottom obC-bottom">
-          <button className="ob-button" onClick={onNext}>
+        <div className="obLon-bottom">
+          <button className="obLon-cta" onClick={onNext}>
             Diese Klarheit will ich
           </button>
-          
-          <button type="button" className="ob2-waitlist"  onClick={onBack}>
+          <button className="obLon-back" onClick={onBack}>
             Zurück
-          </button>          
+          </button>
         </div>
       </div>
     </div>
