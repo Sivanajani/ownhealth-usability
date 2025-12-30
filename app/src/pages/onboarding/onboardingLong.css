@@ -1,184 +1,261 @@
-/* Onboarding Long / Longevity Preview */
-
-.obL-content{
-  justify-content: flex-start; /* nicht space-between */
+.obLon-root{
+  justify-content: flex-start;
   gap: 18px;
 }
 
-/* Top */
-.obL-top{
-  margin-top: 6px;
-}
-
-.obL-topbar{
+/* Top (Dots + Headline) */
+.obLon-top{
+  padding-top: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  gap: 14px;
+  text-align:center;
 }
 
-.obL-topIcon{
-  width: 34px;
-  height: 34px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.9);
-  cursor: pointer;
+.obLon-dots{
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.obL-headline{
-  margin: 14px 0 0;
-  font-size: 22px;
+.obLon-dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(144,161,185,0.32);
+}
+
+.obLon-dot--active{
+  width: 18px;
+  background: rgba(59,130,246,0.90);
+}
+
+.obLon-headline{
+  margin: 0;
+  text-align: center;
+  font-size: 24px;
   font-weight: 900;
   letter-spacing: -0.02em;
   color: rgba(255,255,255,0.96);
+  line-height: 1.15;
 }
 
 /* Middle */
-.obL-middle{
+.obLon-mid{
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  margin-top: 35px;
+  margin-top: 6px;
 }
 
-/* Carousel: snap + full width slides */
-.obL-carousel{
+.obLon-carousel{
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
 
-  gap: 14px;
-  padding: 2px 2px 10px;
+  width: 100%;
+  padding: 0;
+  gap: 0;
 }
+.obLon-carousel::-webkit-scrollbar{ display: none; }
 
-.obL-carousel::-webkit-scrollbar{ display: none; }
-
-.obL-slide{
+.obLon-slide{
   flex: 0 0 100%;
-  scroll-snap-align: center;
-}
-
-/* Card */
-.obL-card{
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background:
-    radial-gradient(700px 280px at 30% 0%, rgba(255,255,255,0.06), transparent 55%),
-    rgba(255,255,255,0.04);
-  box-shadow: 0 18px 60px rgba(0,0,0,0.22);
-  padding: 14px;
-}
-
-.obL-cardHeader{
+  scroll-snap-align: start;
   display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  margin-bottom: 10px;
+  justify-content: center;
 }
 
-.obL-icon{
-  width: 38px;
-  height: 38px;
-  border-radius: 14px;
+/* Card (outer) */
+.obLon-card{
+  position: relative; 
+  isolation: isolate;  
+  width: 100%;
+  max-width: 360px;
+  border-radius: 28px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  /*box-shadow:
+    0 18px 50px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.10);*/
+  background:
+    radial-gradient(900px 320px at 20% -12%, rgba(59,130,246,0.18), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.obLon-card--green{
+  border-color: rgba(16,185,129,0.22);
+}
+
+.obLon-card--blue{
+  border-color: rgba(59,130,246,0.22);
+}
+
+.obLon-card--purple{
+  border-color: rgba(168,85,247,0.22);
+}
+
+/* Card header */
+.obLon-cardHeader{
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  column-gap: 12px;
+  align-items: center;
+  padding-top: 16px; 
+  margin-bottom: 12px;
+}
+
+.obLon-icon{
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
   display: grid;
   place-items: center;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.10);
-  color: rgba(147,197,253,0.95);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(16, 185, 129, 0.164);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
   font-size: 18px;
 }
 
-.obL-headerText{
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.obLon-icon--green{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 0 0 1px rgba(16,185,129,0.10);
 }
 
-.obL-cardTitle{
+.obLon-icon--blue{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 0 0 1px rgba(59,130,246,0.10);
+}
+
+.obLon-icon--purple{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 0 0 1px rgba(168,85,247,0.10);
+}
+
+.obLon-iconWrap{
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+}
+
+/* SVG generell */
+.obLon-svg{
+  width: 22px;
+  height: 22px;
+  display: block;
+  fill: currentColor;
+}
+
+/* Theme: Pille (grüner BG, grüne Iconfarbe) */
+.obLon-iconWrap--pill{
+  background: rgba(11, 128, 89, 0.404);
+  border-color: rgba(16, 185, 129, 0.507);
+}
+.obLon-iconWrap--pill .obLon-svg{
+  color: rgba(16,185,129,0.95);
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* Theme: Uhr (schwarzer BG, blaue/violette Iconfarbe wie Mock) */
+.obLon-iconWrap--clock{
+  background: hsla(219, 47%, 10%, 0.856);
+  border-color: rgba(59, 131, 246, 0.76);
+}
+.obLon-iconWrap--clock .obLon-svg{
+  color: rgba(96,165,250,0.95);
+}
+
+/* Theme: Mond (schwarzer BG, violette Iconfarbe) */
+.obLon-iconWrap--moon{
+  background: hsla(219, 47%, 10%, 0.856);
+  border-color: #a955f7b9;
+}
+.obLon-iconWrap--moon .obLon-svg{
+  color: rgba(216,180,254,0.95);
+  fill: none;
+  stroke: currentColor;
+}
+
+
+.obLon-headerText{ flex: 1; }
+
+.obLon-cardTitle{
   font-size: 15px;
   font-weight: 900;
   color: rgba(255,255,255,0.95);
-  line-height: 1.2;
+  line-height: 1.25;
+  margin: 0;
 }
 
-.obL-badge{
-  width: fit-content;
+
+.obLon-badge{
+  position: absolute;
+  top: 0;
+  right: 0;
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.12em;
   padding: 4px 8px;
   border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+
+.obLon-badge--green{
+  color: rgba(16,185,129,0.95);
+  background: rgba(16,185,129,0.14);
+  border-color: rgba(16,185,129,0.22);
+}
+
+.obLon-badge--blue{
   color: rgba(147,197,253,0.95);
   background: rgba(59,130,246,0.14);
-  border: 1px solid rgba(59,130,246,0.22);
+  border-color: rgba(59,130,246,0.22);
 }
 
-/* Body blocks */
-.obL-body{
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.obLon-badge--purple{
+  color: rgba(216,180,254,0.95);
+  background: rgba(168,85,247,0.14);
+  border-color: rgba(168,85,247,0.22);
 }
 
-.obL-list{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* Panels (3 inner boxes) */
+.obLon-panel{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 12px;
+  box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.06);
+  margin-top: 10px;
 }
 
-.obL-row{
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
+.obLon-panel--list{
+  background: rgba(0,0,0,0.14);
 }
 
-.obL-check{
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-  font-weight: 900;
-  color: rgba(34,197,94,0.95);
-  background: rgba(34,197,94,0.10);
-  border: 1px solid rgba(34,197,94,0.18);
-  flex: 0 0 18px;
-  margin-top: 1px;
-}
-
-.obL-rowText{
-  font-size: 13px;
-  font-weight: 800;
-  color: rgba(255,255,255,0.92);
-  line-height: 1.25;
-}
-
-.obL-muted{
-  font-weight: 700;
-  color: rgba(144,161,185,0.75);
-  margin-left: 6px;
-}
-
-/* Red block */
-.obL-danger{
+.obLon-panel--alert{
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  padding: 10px 12px;
-  border-radius: 14px;
   background: rgba(239,68,68,0.10);
-  border: 1px solid rgba(239,68,68,0.18);
+  border-color: rgba(239,68,68,0.22);
 }
 
-.obL-danger--soft{
-  background: rgba(239,68,68,0.08);
-}
-
-.obL-dangerX{
+.obLon-x{
   width: 18px;
   height: 18px;
   border-radius: 999px;
@@ -187,94 +264,246 @@
   font-size: 12px;
   font-weight: 900;
   color: rgba(239,68,68,0.95);
-  background: rgba(239,68,68,0.12);
-  border: 1px solid rgba(239,68,68,0.18);
+  background: rgba(239,68,68,0.14);
+  border: 1px solid rgba(239,68,68,0.22);
   flex: 0 0 18px;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
-.obL-dangerText{
+.obLon-alertTitle{
+  font-size: 13px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+}
+
+.obLon-alertHint{
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(239,68,68,0.55);
+}
+
+/* List items */
+.obLon-list{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.obLon-row{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.obLon-check{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 900;
+  flex: 0 0 18px;
+  margin-top: 2px;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+}
+
+.obLon-check--green{
+  color: rgba(34,197,94,0.95);
+  background: rgba(34,197,94,0.12);
+  border-color: rgba(34,197,94,0.22);
+}
+
+.obLon-check--blue{
+  color: rgba(96,165,250,0.95);
+  background: rgba(59,130,246,0.14);
+  border-color: rgba(59,130,246,0.22);
+}
+
+.obLon-check--purple{
+  color: rgba(216,180,254,0.95);
+  background: rgba(168,85,247,0.14);
+  border-color: rgba(168,85,247,0.22);
+}
+
+.obLon-rowText{ flex: 1; }
+
+.obLon-rowLine{
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.obLon-rowLabel{
+  font-size: 13px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+}
+
+.obLon-rowLabel--strong{
+  color: rgba(255,255,255,0.95);
+}
+
+.obLon-rowValue{
   font-size: 13px;
   font-weight: 800;
-  color: rgba(255,255,255,0.90);
-  line-height: 1.25;
+  color: rgba(144,161,185,0.82);
 }
 
-/* KPI / Savings */
-.obL-kpi{
-  padding: 12px;
-  border-radius: 14px;
-  background: rgba(16,185,129,0.10);
-  border: 1px solid rgba(16,185,129,0.18);
+.obLon-rowSource{
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(144,161,185,0.58);
+}
+
+/* Bottom panel (Savings / Quick Win) */
+.obLon-panel--bottom{
   text-align: center;
 }
 
-.obL-kpiLabel{
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(144,161,185,0.75);
-  margin-bottom: 6px;
+.obLon-panel--bottom-green{
+  background: rgba(16,185,129,0.10);
+  border-color: rgba(16,185,129,0.18);
 }
 
-.obL-kpiValue{
-  font-size: 18px;
+.obLon-panel--bottom-blue{
+  background: rgba(16,185,129,0.10);
+  border-color: rgba(16,185,129,0.18);
+}
+
+.obLon-panel--bottom-purple{
+  background: rgba(16,185,129,0.10);
+  border-color: rgba(16,185,129,0.18);
+}
+
+.obLon-bottomLabel{
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(144,161,185,0.70);
+  margin-bottom: 6px;
   font-weight: 900;
+}
+
+.obLon-bottomValue{
+  font-size: 22px;
+  font-weight: 950;
   color: rgba(16,185,129,0.95);
+  letter-spacing: -0.01em;
 }
 
-/* Quick win block (blue/green-ish) */
-.obL-quick{
-  padding: 12px;
-  border-radius: 14px;
-  background: rgba(59,130,246,0.12);
-  border: 1px solid rgba(59,130,246,0.20);
+.obLon-bottomHint{
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(144,161,185,0.72);
 }
 
-.obL-quickLabel{
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(147,197,253,0.85);
-  margin-bottom: 6px;
-  font-weight: 900;
-}
-
-.obL-quickValue{
-  font-size: 13px;
-  font-weight: 850;
-  color: rgba(255,255,255,0.92);
-  line-height: 1.25;
-}
-
-/* Mini dots under carousel */
-.obL-miniProgress{
+/* Mini nav */
+.obLon-mini{
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-top: 10px;
 }
 
-.obL-miniDot{
+.obLon-miniDot{
   width: 6px;
   height: 6px;
   border-radius: 999px;
+  border: none;
   background: rgba(144,161,185,0.35);
+  padding: 0;
+  cursor: pointer;
 }
 
-.obL-miniDot--active{
+.obLon-miniDot--active{
   width: 18px;
-  background: rgba(59,130,246,0.85);
+  background: rgba(59,130,246,0.90);
 }
 
-/* Bottom */
-.obL-bottom{
-  margin-top: 8px;
+/* Bottom CTA */
+.obLon-bottom{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
-.obL-lock{
-  text-align: center;
+.obLon-cta{
+  width: 100%;
+  max-width: 360px;
+  height: 54px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 15px;
+  color: rgba(255,255,255,0.98);
+  background: rgba(59,130,246,0.92);
+  box-shadow: 0 18px 45px rgba(59,130,246,0.22);
+}
+
+.obLon-back{
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   font-size: 12px;
+  font-weight: 800;
   color: rgba(144,161,185,0.75);
 }
+
+.obLon-cardWrap{
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+}
+
+.obLon-topBadge{
+  position: absolute;
+  top: 8px;
+  right: 14px;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  padding: 3px 7px;
+  border-radius: 999px;
+  border: 1px solid;
+
+  opacity: 0.85;
+  pointer-events: none; 
+}
+
+
+/* Farbvarianten */
+.obLon-topBadge--green{
+  color: rgba(16,185,129,0.95);
+  background: rgba(16,185,129,0.12);
+  border-color: rgba(16,185,129,0.22);
+}
+
+.obLon-topBadge--blue{
+  color: rgba(96,165,250,0.95);
+  background: rgba(59,130,246,0.12);
+  border-color: rgba(59,130,246,0.22);
+}
+
+.obLon-topBadge--purple{
+  color: rgba(216,180,254,0.95);
+  background: rgba(168,85,247,0.12);
+  border-color: rgba(168,85,247,0.22);
+}
+
+
