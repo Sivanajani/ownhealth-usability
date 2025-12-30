@@ -1,7 +1,9 @@
+// settings.tsx
+import { useState } from "react";
 import "../../styles/appShell.css";
 import "./settings.css";
 
-// Icons importieren
+// Icons
 import UserIcon from "../../assets/user.svg?react";
 import HeartbeatIcon from "../../assets/heartbeat.svg?react";
 import ChatIcon from "../../assets/chat.svg?react";
@@ -15,90 +17,103 @@ type Props = {
   onBack?: () => void;
 };
 
+type Mode = "basic" | "sport";
+
 export default function Settings({ userName, onBack }: Props) {
+  const [mode, setMode] = useState<Mode>("sport");
+
   return (
     <div className="oh-screen settings-bg">
-      <div className="oh-safe settings-safe">
-        <div className="settings-topTime">9:41</div>
+      <div className="oh-safe settings-safe">                
 
         {/* Profile Card */}
         <section className="profileCard">
-          <h1 className="profileName">{userName || "SIMON"}</h1>
+          <h1 className="profileName">{(userName?.trim() || "SIMON").toUpperCase()}</h1>
           <div className="profileMeta">Profil-Vollständigkeit: 64%</div>
-          <button className="profileLink">[vervollständigen]</button>
+          <button className="profileLink" type="button">[vervollständigen]</button>
         </section>
 
-        {/* Mode Selection */}
+        {/* Mode */}
         <div className="settings-sectionTitle">Mode</div>
-        <div className="modeRow">
-          <button className="modeBtn">
-            <UserIcon className="modeIcon" />
+        <div className="modeRow" role="tablist" aria-label="Mode">
+          <button
+            type="button"
+            className={`modeBtn ${mode === "basic" ? "modeBtn--active" : ""}`}
+            onClick={() => setMode("basic")}
+            aria-selected={mode === "basic"}
+          >
+            <UserIcon className="modeIcon" aria-hidden="true" />
             <span>Basic</span>
           </button>
 
-          <button className="modeBtn modeBtn--active">
-            <HeartbeatIcon className="modeIcon" />
+          <button
+            type="button"
+            className={`modeBtn ${mode === "sport" ? "modeBtn--active" : ""}`}
+            onClick={() => setMode("sport")}
+            aria-selected={mode === "sport"}
+          >
+            <HeartbeatIcon className="modeIcon" aria-hidden="true" />
             <span>Sport</span>
           </button>
         </div>
 
-        {/* Settings List */}
+        {/* List */}
         <div className="settings-list">
-          <button className="settingsItem">
-            <div className="itemIcon itemIcon--blue">
-              <ChatIcon />
+          <button className="settingsItem" type="button">
+            <div className="itemIcon itemIcon--blue" aria-hidden="true">
+              <ChatIcon className="itemSvg" />
             </div>
             <div className="itemText">
               <div className="itemTitle">Chatverläufe</div>
               <div className="itemSub">12 Gespräche</div>
             </div>
-            <div className="itemChevron">›</div>
+            <div className="itemChevron" aria-hidden="true">›</div>
           </button>
 
-          <button className="settingsItem">
-            <div className="itemIcon itemIcon--green">
-              <SchildIcon />
+          <button className="settingsItem" type="button">
+            <div className="itemIcon itemIcon--green" aria-hidden="true">
+              <SchildIcon className="itemSvg" />
             </div>
             <div className="itemText">
               <div className="itemTitle">Datenschutz + Sicherheit</div>
               <div className="itemSub">Verschlüsselung, Export</div>
             </div>
-            <div className="itemChevron">›</div>
+            <div className="itemChevron" aria-hidden="true">›</div>
           </button>
 
-          <button className="settingsItem">
-            <div className="itemIcon itemIcon--gray">
-              <SettingIcon />
+          <button className="settingsItem" type="button">
+            <div className="itemIcon itemIcon--gray" aria-hidden="true">
+              <SettingIcon className="itemSvg" />
             </div>
             <div className="itemText">
               <div className="itemTitle">Einstellungen</div>
             </div>
-            <div className="itemChevron">›</div>
+            <div className="itemChevron" aria-hidden="true">›</div>
           </button>
 
-          <button className="settingsItem">
-            <div className="itemIcon itemIcon--purple">
-              <QuestionIcon />
+          <button className="settingsItem" type="button">
+            <div className="itemIcon itemIcon--purple" aria-hidden="true">
+              <QuestionIcon className="itemSvg" />
             </div>
             <div className="itemText">
               <div className="itemTitle">Hilfe + Support</div>
             </div>
-            <div className="itemChevron">›</div>
+            <div className="itemChevron" aria-hidden="true">›</div>
           </button>
 
-          <button className="settingsItem settingsItem--danger">
-            <div className="itemIcon itemIcon--red">
-              <LogoutIcon />
+          <button className="settingsItem settingsItem--danger" type="button">
+            <div className="itemIcon itemIcon--red" aria-hidden="true">
+              <LogoutIcon className="itemSvg" />
             </div>
             <div className="itemText">
               <div className="itemTitle">Abmelden</div>
             </div>
-            <div className="itemChevron">›</div>
+            <div className="itemChevron" aria-hidden="true">›</div>
           </button>
         </div>
 
         {onBack && (
-          <button className="settingsBack" onClick={onBack}>
+          <button className="settingsBack" onClick={onBack} type="button">
             Zurück
           </button>
         )}

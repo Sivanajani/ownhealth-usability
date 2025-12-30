@@ -1,3 +1,5 @@
+/* settings.css */
+
 .settings-bg{
   background:
     radial-gradient(900px 700px at 45% -10%, rgba(88,146,198,0.55) 0%, rgba(14,39,70,0.0) 60%),
@@ -6,31 +8,32 @@
 
 .settings-safe{
   min-height: 100vh;
-  padding: 18px 16px 18px;
+  padding: 18px 16px 26px;
 }
 
 .settings-topTime{
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 650;
   opacity: 0.92;
   margin-bottom: 14px;
 }
 
-/* Profile */
+/* ===== Profile Card (wie Bild 1) ===== */
 .profileCard{
   padding: 18px;
   border-radius: 22px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 22px 60px rgba(0,0,0,0.40);
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.085);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.34);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   margin-bottom: 18px;
 }
 
-.profileName {
+.profileName{
   font-size: 32px;
   font-weight: 900;
-  text-transform: uppercase; /* Laut Bild 1 */
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   margin: 0;
 }
 
@@ -47,14 +50,14 @@
   padding: 0;
   color: rgba(80, 150, 255, 0.95);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 650;
 }
 
-/* Mode */
+/* ===== Mode ===== */
 .settings-sectionTitle{
   font-size: 14px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.85);
+  font-weight: 750;
+  color: rgba(255,255,255,0.88);
   margin: 0 0 10px;
 }
 
@@ -66,8 +69,8 @@
 
 .modeBtn{
   flex: 1;
-  height: 54px;
-  border-radius: 16px;
+  height: 56px;
+  border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(255,255,255,0.06);
   color: rgba(255,255,255,0.88);
@@ -76,23 +79,31 @@
   align-items:center;
   justify-content:center;
   gap: 10px;
-  font-weight: 700;
+
+  font-weight: 750;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease;
 }
 
-.modeBtn--active {
-  background: linear-gradient(135deg, #6a96cf 0%, #87a9e3 100%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 25px rgba(106, 150, 207, 0.4);
-  color: #ffffff;
+.modeBtn:active{ transform: scale(0.985); }
+
+.modeBtn--active{
+  background: linear-gradient(135deg, rgba(88,146,198,0.95) 0%, rgba(140,180,245,0.92) 100%);
+  border-color: rgba(255,255,255,0.28);
+  box-shadow: 0 12px 28px rgba(88,146,198,0.36);
+  color: rgba(255,255,255,0.97);
 }
 
-.modeIcon {
+.modeIcon{
   width: 18px;
   height: 18px;
-  stroke-width: 2;
+  opacity: 0.95;
+}
+.modeIcon *{
+  fill: currentColor;
+  stroke: currentColor;
 }
 
-/* List Items */
+/* ===== List Items (wie Bild 1: ruhiger, runder, klare Icon-Kachel) ===== */
 .settings-list{
   display:flex;
   flex-direction: column;
@@ -101,38 +112,55 @@
 
 .settingsItem{
   width: 100%;
-  border-radius: 20px;
+  border-radius: 22px;
   padding: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.045);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.32);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   display:flex;
   align-items:center;
   gap: 12px;
   color: rgba(255,255,255,0.92);
   text-align:left;
-  transition: transform 0.1s;
+  transition: transform 0.1s ease, border-color 0.1s ease, background 0.1s ease;
 }
 
-.settingsItem:active {
-  transform: scale(0.98);
+.settingsItem:active{
+  transform: scale(0.985);
 }
 
 .itemIcon{
-  width: 50px;
-  height: 50px;
-  border-radius: 16px;
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
   display:flex;
   align-items:center;
   justify-content:center;
+
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(255,255,255,0.05);
   flex: 0 0 auto;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
 }
+
+.itemSvg{
+  width: 22px;
+  height: 22px;
+  opacity: 0.95;
+}
+.itemSvg *{
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* Icon color variants */
+.itemIcon--blue{ background: rgba(70,140,255,0.16); border-color: rgba(70,140,255,0.22); color: rgba(150,195,255,0.95); }
+.itemIcon--green{ background: rgba(70,227,160,0.14); border-color: rgba(70,227,160,0.20); color: rgba(120,245,190,0.95); }
+.itemIcon--gray{ background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.10); color: rgba(220,230,245,0.90); }
+.itemIcon--purple{ background: rgba(160,110,255,0.14); border-color: rgba(160,110,255,0.20); color: rgba(205,170,255,0.95); }
+.itemIcon--red{ background: rgba(255, 80, 80, 0.12); border-color: rgba(255,80,80,0.18); color: rgba(255,160,160,0.95); }
 
 .itemText{
   flex: 1;
@@ -141,7 +169,7 @@
 
 .itemTitle{
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 850;
 }
 
 .itemSub{
@@ -152,27 +180,24 @@
 
 .itemChevron{
   opacity: 0.55;
-  font-size: 18px;
+  font-size: 20px;
+  padding-left: 4px;
 }
-
-/* Icon color variants */
-.itemIcon--blue{ background: rgba(70, 140, 255, 0.18); border-color: rgba(70,140,255,0.25); }
-.itemIcon--green{ background: rgba(70, 227, 160, 0.14); border-color: rgba(70,227,160,0.22); }
-.itemIcon--gray{ background: rgba(255,255,255,0.06); }
-.itemIcon--purple{ background: rgba(160, 110, 255, 0.14); border-color: rgba(160,110,255,0.22); }
-.itemIcon--red{ background: rgba(255, 80, 80, 0.14); border-color: rgba(255,80,80,0.22); }
 
 .settingsItem--danger .itemTitle{
-  color: rgba(255, 140, 140, 0.95);
+  color: rgba(255, 150, 150, 0.95);
 }
 
-/* optional back button */
+/* ===== Back Button (wie Bild 1) ===== */
 .settingsBack{
   margin-top: 16px;
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 18px;
+  height: 52px;
+  border-radius: 22px;
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.045);
+  color: rgba(255,255,255,0.92);
+  font-weight: 650;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
