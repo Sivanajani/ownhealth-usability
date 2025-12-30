@@ -1,0 +1,396 @@
+/* nutrition.css */
+.nut-bg{
+  background: radial-gradient(1200px 900px at 35% -20%, var(--bg-top) 0%, var(--bg-bottom) 55%, #071223 100%);
+}
+
+.nut-safe{
+  padding-top: 18px;
+  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+}
+
+.nut-header{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.nut-spacer{ width: 44px; }
+
+/* Hero */
+.nut-hero{
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid rgba(245,158,11,0.20);
+  background: rgba(12, 18, 32, 0.42);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  margin-bottom: 14px;
+}
+
+.nut-heroTop{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.nut-heroKicker{
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.55);
+}
+.nut-heroDate{
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+}
+
+.nut-kcalRow{
+  display:flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.nut-kcalMain{
+  font-size: 34px;
+  font-weight: 850;
+  letter-spacing: 0.2px;
+}
+.nut-kcalSub{
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+}
+
+.nut-progress{
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  margin: 10px 0 12px;
+  overflow:hidden;
+}
+.nut-progressFill{
+  display: block;          
+  height: 100%;            
+  border-radius: 999px;
+  background: rgba(245,158,11,0.90);
+}
+
+
+/* Macros */
+.nut-macros{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.nut-macroTop{
+  display:flex;
+  align-items:center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.nut-macroValue{
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.nut-ico{
+  width: 14px;
+  height: 14px;
+  opacity: 0.95;
+}
+.nut-ico *{ fill: currentColor; stroke: currentColor; }
+.nut-ico--amber{ color: rgba(245,158,11,0.95); }
+.nut-ico--mint{ color: rgba(43,212,143,0.95); }
+
+.nut-macroBar{
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.14);
+  overflow:hidden;
+}
+.nut-macroFill{
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+}
+.nut-macroFill--amber{ background: rgba(245,158,11,0.90); }
+.nut-macroFill--mint{ background: rgba(43,212,143,0.90); }
+
+.nut-macroPct{
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
+}
+.nut-macroPct--amber{ color: rgba(245,158,11,0.95); }
+.nut-macroPct--mint{ color: rgba(43,212,143,0.95); }
+
+/* Sections */
+.nut-sectionLabel{
+  margin: 10px 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.45);
+}
+
+/* Meals */
+.nut-meals{ display:flex; flex-direction: column; gap: 12px; }
+
+.nut-mealCard{
+  width: 100%;
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(12, 18, 32, 0.40);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  text-align:left;
+}
+
+.nut-mealIcon{
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  flex: 0 0 auto;
+}
+
+.nut-mealSvg{
+  width: 18px;
+  height: 18px;
+}
+.nut-mealSvg *{ fill: currentColor; stroke: currentColor; }
+
+.nut-mealText{ min-width: 0; }
+.nut-mealTitle{
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgb(241, 240, 240);
+}
+.nut-mealMeta{
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+
+.nut-mealCard--blue{ border-color: rgba(59,130,246,0.25); }
+.nut-mealCard--red{ border-color: rgba(239,68,68,0.25); }
+.nut-mealCard--amber{ border-color: rgba(245,158,11,0.25); }
+
+.nut-mealIcon--blue{ color: rgba(59,130,246,0.95); }
+.nut-mealIcon--red{ color: rgba(239,68,68,0.95); }
+.nut-mealIcon--amber{ color: rgba(245,158,11,0.95); }
+
+/* Tips */
+.nut-tips{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.nut-tipCard{
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(12, 18, 32, 0.40);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.nut-tipCard--green{
+  border-color: rgba(43,212,143,0.20);
+  background: rgba(43,212,143,0.10);
+}
+
+.nut-tipTop{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.nut-tipTitle{ font-size: 13px; font-weight: 700; }
+.nut-tipMeta{ font-size: 12px; color: rgba(255,255,255,0.55); }
+.nut-tipMeta--amber{ color: rgba(245,158,11,0.95); }
+.nut-tipMeta--mint{ color: rgba(43,212,143,0.95); }
+
+.nut-tipSvg{ width: 16px; height: 16px; }
+.nut-tipSvg *{ fill: currentColor; stroke: currentColor; }
+.nut-tipSvg--amber{ color: rgba(245,158,11,0.95); }
+
+.nut-check{
+  width: 18px;
+  height: 18px;
+  border-radius: 7px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(43,212,143,0.18);
+  border: 1px solid rgba(43,212,143,0.25);
+  color: rgba(43,212,143,0.95);
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* Wirkung */
+.nut-effectCard{
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(12, 18, 32, 0.40);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.nut-effectRow{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.nut-effectTitle{
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+}
+
+.nut-spark{
+  display:flex;
+  gap: 4px;
+  align-items: flex-end;
+}
+.nut-spark span{
+  width: 6px;
+  display: block;
+  border-radius: 5px;
+  background: rgba(43,212,143,0.85);
+}
+.nut-spark span:nth-child(1){ height: 8px; opacity: 0.45; }
+.nut-spark span:nth-child(2){ height: 12px; opacity: 0.65; }
+.nut-spark span:nth-child(3){ height: 16px; opacity: 0.85; }
+.nut-spark span:nth-child(4){ height: 18px; opacity: 1; }
+
+.nut-effectMeta{
+  margin-top: 10px;
+  display:flex;
+  gap: 18px;
+  font-size: 12px;
+  color: rgba(43,212,143,0.95);
+}
+.nut-positive{ display:inline-flex; gap: 6px; }
+
+/* Verlauf */
+.nut-historyBtn{
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(12, 18, 32, 0.40);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  text-align:left;
+}
+
+.nut-historyTitle{ font-size: 14px; font-weight: 700; color: rgba(238, 231, 231, 0.993) }
+.nut-historyMeta{ margin-top: 4px; font-size: 12px; color: rgba(255,255,255,0.55); }
+
+.nut-historySvg{ width: 18px; height: 18px; opacity: 0.85; }
+.nut-historySvg *{ fill: currentColor; stroke: currentColor; }
+
+.nut-historyChevron{
+  font-size: 22px;
+  line-height: 1;
+  color: rgba(255,255,255,0.45);
+  margin-left: 12px;
+}
+
+.nut-historyBtn:active .nut-historyChevron{
+  transform: translateX(1px);
+}
+
+
+/* Primary */
+.nut-primaryBtn{
+  width: 100%;
+  margin-top: 16px;
+  height: 54px;
+  border-radius: 16px;
+  border: 1px solid rgba(70,140,255,0.25);
+  background: rgba(70,140,255,0.85);
+  color: rgba(255,255,255,0.95);
+  font-size: 14px;
+  font-weight: 650;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+}
+
+/* ===== Force BottomNav to look exactly like AppShell (fix nutrition overrides) ===== */
+/* === HARD FIX for iOS/blur compositing: make BottomNav render like Medication === */
+.bottomNav{
+  background: rgba(6, 10, 20, 0.82) !important; /* stärker, damit es nicht durchsichtig wirkt */
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+
+  /* isolate to its own layer */
+  isolation: isolate;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* optional: wenn immer noch glow/bleed kommt */
+.bottomNav::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(6, 10, 20, 0.82);
+  z-index:-1;
+}
+
+
+.navItem{
+  background: transparent;
+  border: 0;
+  color: rgba(255,255,255,0.55);
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 6px;
+  font-size: 12px;
+
+  opacity: 1;
+}
+
+.navItem--active{
+  color: rgba(70, 140, 255, 0.95);
+}
+
+.navSvg{
+  width: 18px;
+  height: 18px;
+  display:block;
+  opacity: 0.92;
+}
+
+.navSvg *{
+  fill: currentColor;
+  stroke: currentColor;
+}

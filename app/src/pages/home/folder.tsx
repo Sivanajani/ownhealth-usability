@@ -179,7 +179,7 @@ export default function Folder({
                 <div className="chev" aria-hidden="true">›</div>
               </div>
 
-              <div className="dataTitle">Nutrition</div>
+              <div className="dataTitle">Ernährung</div>
               <div className="dataSub">Heute: 1,850 kcal</div>
               <div className="dataMeta">• 2 Mahlzeiten</div>
 

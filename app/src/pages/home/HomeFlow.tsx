@@ -4,8 +4,8 @@ import Folder from "./folder";
 import Settings from "./settings";
 import Wearables from "./wearables";
 import Documents from "./documents";
-//import Medication from "./medication";
-//import Nutrition from "./nutrition";
+import Medication from "./medikation";
+import Nutrition from "./nutrition";
 
 type HomeStep =
   | "chat"
@@ -61,12 +61,25 @@ export default function HomeFlow({ userName }: Props) {
     />
   );
 
+  if (step === "medication")
+  return (
+    <Medication
+      onBack={() => setStep("folder")}
+      onBackToChat={() => setStep("chat")}
+      onBackToFolder={() => setStep("folder")}
+    />
+  );
 
-  /*if (step === "medication")
-    return <Medication onBack={() => setStep("folder")} />;
 
   if (step === "nutrition")
-    return <Nutrition onBack={() => setStep("folder")} />;*/
+    return (
+      <Nutrition
+        onBack={() => setStep("folder")}
+        onBackToChat={() => setStep("chat")}
+        onBackToFolder={() => setStep("folder")}
+      />
+    );
+
 
   if (step === "settings")
     return <Settings userName={userName} onBack={() => setStep("chat")} />;

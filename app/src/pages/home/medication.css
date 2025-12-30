@@ -1,0 +1,628 @@
+/* medication.css */
+.med-bg{
+  background: radial-gradient(1200px 900px at 35% -20%, var(--bg-top) 0%, var(--bg-bottom) 55%, #071223 100%);
+}
+
+.med-safe{
+  padding-top: 18px;
+  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+}
+
+.med-header{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.med-spacer{ width: 44px; }
+
+/* Alert */
+.med-alert{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+
+  border-radius: 16px;
+  padding: 12px 14px;
+
+  border: 1px solid rgba(245,158,11,0.25);
+  background: rgba(245,158,11,0.10);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  margin-bottom: 14px;
+}
+
+.med-alertIcon{
+  width: 30px;
+  height: 30px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(245,158,11,0.15);
+  border: 1px solid rgba(245,158,11,0.20);
+  color: rgba(245,158,11,0.95);
+  flex: 0 0 auto;
+}
+
+.med-alertSvg{ width: 16px; height: 16px; }
+.med-alertSvg *{ fill: currentColor; stroke: currentColor; }
+
+.med-alertText{ flex: 1; min-width: 0; }
+.med-alertTitle{ font-size: 13px; font-weight: 650; }
+.med-alertMeta{ font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+
+.med-alertBadge{
+  width: 26px;
+  height: 26px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(245,158,11,0.22);
+  background: rgba(245,158,11,0.10);
+  color: rgba(245,158,11,0.95);
+}
+
+/* Section labels */
+.med-sectionLabel{
+  margin: 10px 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.45);
+}
+
+/* Cards */
+.med-stack{ display:flex; flex-direction: column; gap: 12px; }
+
+.med-card{
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(12, 18, 32, 0.40);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  position: relative;
+}
+
+.med-left{ display:flex; align-items:flex-start; gap: 12px; min-width: 0; }
+
+.med-check{
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: rgba(255,255,255,0.85);
+  flex: 0 0 auto;
+}
+
+.med-check--on{
+  border-color: rgba(43,212,143,0.35);
+  background: rgba(43,212,143,0.16);
+  color: rgba(43,212,143,0.95);
+  font-weight: 800;
+}
+
+.med-main{ 
+  min-width: 0; 
+  flex: 1;
+}
+
+.med-titleRow {
+  display: flex;
+  align-items: center; 
+  gap: 8px;            
+  width: 100%;
+}
+
+.med-title {
+  flex: 0 1 auto;      
+  font-size: 15px;     
+  font-weight: 700;
+}
+
+.med-rightCol {
+  margin-left: auto;
+  flex: 0 0 auto;
+  z-index: 2;
+}
+
+
+.med-days{
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  flex: 0 0 auto;
+}
+
+.med-days--amber{ color: rgba(245,158,11,0.95); }
+.med-days--mint{ color: rgba(43,212,143,0.95); }
+
+.med-subRow{
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.60);
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.med-sub{ display:inline-flex; align-items:center; gap: 6px; }
+.med-dot{ opacity: 0.45; }
+
+.med-inlineSvg{
+  width: 14px;
+  height: 14px;
+  opacity: 0.85; 
+}
+.med-inlineSvg *{ fill: currentColor; stroke: currentColor; }
+
+.med-inlineSvg--pink{ color: rgba(236,72,153,0.95); }
+.med-inlineSvg--amber{ color: rgba(245,158,11,0.95); }
+
+.med-timePill {
+  height: 22px;        
+  padding: 0 8px;
+  border-radius: 20px; 
+  background: rgba(43, 212, 143, 0.1); 
+  border: 1px solid rgba(43, 212, 143, 0.2);
+  color: #2bd48f;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Die Uhrzeit-Pille als Badge positionieren */
+.med-timeBadge {
+  position: absolute;
+  right: 70px; /* Abstand von rechts, damit es vor den "Tagen" steht */
+  top: 50%;
+  transform: translateY(-50%); /* Perfekt vertikal zentrieren */
+  
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: rgba(43, 212, 143, 0.12);
+  border: 1px solid rgba(43, 212, 143, 0.2);
+  color: #2bd48f;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Note */
+.med-note{
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: rgba(245,158,11,0.95);
+  display:flex;
+  align-items:center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.med-noteItem{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  color: rgba(245,158,11,0.95);
+}
+
+.med-noteDot{ opacity: 0.65; }
+
+/* Entwicklung */
+.med-devCard{
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid rgba(236,72,153,0.20);
+  background: rgba(12, 18, 32, 0.40);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.med-devTop{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.med-devTitle{ font-size: 13px; font-weight: 650; }
+.med-devBoost{
+  font-size: 12px;
+  color: rgba(43,212,143,0.95);
+  display:flex;
+  align-items:center;
+  gap: 6px;
+}
+
+.med-bars{
+  display:flex;
+  align-items:flex-end;     
+  gap: 8px;                 
+  margin: 10px 0 14px;
+}
+
+.med-bar{
+  flex: 1;
+  background: rgba(43,212,143,0.18);
+  border: 1px solid rgba(43,212,143,0.10);
+}
+
+.med-statValue--purple{
+  color: rgba(167,139,250,0.95);
+}
+
+
+.med-bar--hi{
+  background: rgba(43,212,143,0.55);
+  border-color: rgba(43,212,143,0.28);
+  box-shadow: 0 8px 18px rgba(43,212,143,0.12);
+}
+
+.med-stats{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.med-statValue{
+  font-size: 22px;
+  font-weight: 800;
+  color: rgba(43,212,143,0.95);
+  line-height: 1.0;
+}
+
+.med-statLabel{
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+
+.med-detailsBtn{
+  width: 100%;
+  margin-top: 10px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.75);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+}
+
+.med-detailsArrow{ opacity: 0.6; }
+
+/* Primary button bottom */
+.med-primaryBtn{
+  width: 100%;
+  margin-top: 80px;
+  height: 54px;
+  border-radius: 16px;
+  border: 1px solid rgba(70,140,255,0.25);
+  background: rgba(70,140,255,0.85);
+  color: rgba(255,255,255,0.95);
+  font-size: 14px;
+  font-weight: 650;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 7px;
+}
+
+.med-primaryPlus{
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.22);
+  line-height: 1;
+}
+
+.med-daysWrap{
+  display:flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.05;
+}
+
+.med-daysUnit {
+  font-size: 12px;
+  text-transform: capitalize; 
+  opacity: 0.6;
+}
+
+.med-round{
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex: 0 0 auto;
+}
+
+.med-roundSvg{
+  width: 18px;
+  height: 18px;
+  opacity: 0.85;
+}
+.med-roundSvg *{ fill: currentColor; stroke: currentColor; }
+
+/* ===== Cards: Grid wie im Mock ===== */
+
+.med-card{
+  border-radius: 18px;
+  padding: 14px 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(12,18,32,0.35));
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+
+  display: grid;
+  grid-template-columns: 44px 1fr auto auto; /* icon | text | time | days */
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 6px;
+}
+
+.med-card--noTime{
+  grid-template-columns: 44px 1fr auto; /* icon | text | days */
+}
+
+.med-iconCell{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.med-content{
+  min-width: 0;
+}
+
+.med-title{
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.15;
+}
+
+.med-subRow{
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.60);
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.med-metaGroup{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.med-metaIcon{
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
+}
+.med-metaIcon *{ fill: currentColor; stroke: currentColor; }
+
+.med-timeCell{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.med-timePill{
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: rgba(43,212,143,0.14);
+  border: 1px solid rgba(43,212,143,0.22);
+  color: rgba(43,212,143,0.95);
+  font-size: 12px;
+  font-weight: 700;
+  display:flex;
+  align-items:center;
+}
+
+.med-daysWrap{
+  justify-self: end;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.05;
+}
+
+.med-days{
+  font-size: 22px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.med-daysUnit{
+  font-size: 12px;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+/* Notes wie im Mock: ohne Trennlinie, inline */
+.med-note--inline{
+  margin-top: 8px;
+  padding-top: 0;
+  border-top: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  flex-wrap: nowrap;          
+  white-space: nowrap;
+}
+
+.med-noteItem{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.med-noteItem--pink{ color: rgba(236,72,153,0.95); }
+.med-noteItem--amber{ color: rgba(245,158,11,0.95); }
+
+/* Entfernen: alte absolute Badge-Variante */
+.med-timeBadge{ display:none; }
+
+/* zweite Sub-Zeile etwas ruhiger */
+.med-subRow--secondary{
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ===== ENTWICKLUNG Card: wie Mock ===== */
+
+.med-devCard{
+  border-radius: 18px;
+  padding: 14px;
+
+  border: 1px solid rgba(236,72,153,0.22);
+  background: radial-gradient(120% 140% at 15% 0%,
+    rgba(255,255,255,0.08) 0%,
+    rgba(12,18,32,0.42) 55%,
+    rgba(12,18,32,0.34) 100%);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.med-devHeader{
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  margin-bottom: 10px;
+}
+
+.med-devHeadLeft{
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.med-devTitle{
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+}
+
+.med-devBoostLine{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 650;
+  color: rgba(43,212,143,0.95);
+}
+
+.med-devBolt{
+  width: 14px;
+  height: 14px;
+  opacity: 0.95;
+}
+.med-devBolt *{ fill: currentColor; stroke: currentColor; }
+
+/* Bars: kompakt, runde Ecken, kleine gaps */
+.med-bars{
+  display:flex;
+  align-items:flex-end;
+  gap: 6px;
+  margin: 12px 0 14px;
+}
+
+.med-bar{
+  flex: 1;
+  border-radius: 6px;
+  background: rgba(43,212,143,0.22);
+  border: none;
+}
+
+.med-bar--hi{
+  background: rgba(43,212,143,0.85);
+  box-shadow: 0 10px 22px rgba(43,212,143,0.16);
+}
+
+/* Stats: klare Farben wie Mock */
+.med-stats{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.med-statValue{
+  font-size: 22px;
+  font-weight: 850;
+  line-height: 1.0;
+}
+
+.med-statValue--green{ color: rgba(43,212,143,0.95); }
+.med-statValue--purple{ color: rgba(167,139,250,0.95); }
+.med-statValue--white{ color: rgba(255,255,255,0.92); }
+
+.med-statLabel{
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+
+/* Stats: links / mitte / rechts wie im Mock */
+.med-stat{
+  display: flex;
+  flex-direction: column;
+}
+
+.med-stat--left{
+  align-items: flex-start;
+  text-align: left;
+}
+
+.med-stat--center{
+  align-items: center;
+  text-align: center;
+}
+
+.med-stat--right{
+  align-items: flex-end;
+  text-align: right;
+}

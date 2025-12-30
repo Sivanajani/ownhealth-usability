@@ -1,6 +1,15 @@
 import "../../styles/appShell.css";
 import "./settings.css";
 
+// Icons importieren
+import UserIcon from "../../assets/user.svg?react";
+import HeartbeatIcon from "../../assets/heartbeat.svg?react";
+import ChatIcon from "../../assets/chat.svg?react";
+import SchildIcon from "../../assets/schild.svg?react";
+import SettingIcon from "../../assets/setting.svg?react";
+import QuestionIcon from "../../assets/question.svg?react";
+import LogoutIcon from "../../assets/logout.svg?react";
+
 type Props = {
   userName: string;
   onBack?: () => void;
@@ -14,31 +23,31 @@ export default function Settings({ userName, onBack }: Props) {
 
         {/* Profile Card */}
         <section className="profileCard">
-          <div className="profileName">
-            {userName || "Profilname"}
-          </div>
+          <h1 className="profileName">{userName || "SIMON"}</h1>
           <div className="profileMeta">Profil-Vollständigkeit: 64%</div>
           <button className="profileLink">[vervollständigen]</button>
         </section>
 
-        {/* Mode */}
+        {/* Mode Selection */}
         <div className="settings-sectionTitle">Mode</div>
         <div className="modeRow">
           <button className="modeBtn">
-            <span className="modeIcon">👤</span>
+            <UserIcon className="modeIcon" />
             <span>Basic</span>
           </button>
 
           <button className="modeBtn modeBtn--active">
-            <span className="modeIcon">〽</span>
+            <HeartbeatIcon className="modeIcon" />
             <span>Sport</span>
           </button>
         </div>
 
-        {/* List */}
+        {/* Settings List */}
         <div className="settings-list">
           <button className="settingsItem">
-            <div className="itemIcon itemIcon--blue">💬</div>
+            <div className="itemIcon itemIcon--blue">
+              <ChatIcon />
+            </div>
             <div className="itemText">
               <div className="itemTitle">Chatverläufe</div>
               <div className="itemSub">12 Gespräche</div>
@@ -47,7 +56,9 @@ export default function Settings({ userName, onBack }: Props) {
           </button>
 
           <button className="settingsItem">
-            <div className="itemIcon itemIcon--green">🛡</div>
+            <div className="itemIcon itemIcon--green">
+              <SchildIcon />
+            </div>
             <div className="itemText">
               <div className="itemTitle">Datenschutz + Sicherheit</div>
               <div className="itemSub">Verschlüsselung, Export</div>
@@ -56,28 +67,31 @@ export default function Settings({ userName, onBack }: Props) {
           </button>
 
           <button className="settingsItem">
-            <div className="itemIcon itemIcon--gray">⚙</div>
+            <div className="itemIcon itemIcon--gray">
+              <SettingIcon />
+            </div>
             <div className="itemText">
               <div className="itemTitle">Einstellungen</div>
-              <div className="itemSub"></div>
             </div>
             <div className="itemChevron">›</div>
           </button>
 
           <button className="settingsItem">
-            <div className="itemIcon itemIcon--purple">?</div>
+            <div className="itemIcon itemIcon--purple">
+              <QuestionIcon />
+            </div>
             <div className="itemText">
               <div className="itemTitle">Hilfe + Support</div>
-              <div className="itemSub"></div>
             </div>
             <div className="itemChevron">›</div>
           </button>
 
           <button className="settingsItem settingsItem--danger">
-            <div className="itemIcon itemIcon--red">↪</div>
+            <div className="itemIcon itemIcon--red">
+              <LogoutIcon />
+            </div>
             <div className="itemText">
               <div className="itemTitle">Abmelden</div>
-              <div className="itemSub"></div>
             </div>
             <div className="itemChevron">›</div>
           </button>
