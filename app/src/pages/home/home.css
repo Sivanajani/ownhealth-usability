@@ -85,11 +85,13 @@
 }
 
 /* Ring + Gear wie im Mock (rounded squares) */
-.home-ring{
-  min-width: 52px;
-  height: 44px;
-  padding: 0 10px;
-  border-radius: 14px;
+.home-ringBtn{
+  all: unset;
+  cursor: pointer;
+
+  width: 54px;              /* nimm deine bisherigen Maße */
+  height: 54px;
+  border-radius: 999px;
 
   display:flex;
   align-items:center;
@@ -97,9 +99,27 @@
 
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.10);
-  color: rgba(255,255,255,0.90);
-  font-size: 13px;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
 }
+
+.home-ringText{
+  font-weight: 800;
+  font-size: 13px;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.2px;
+}
+
+.home-ringBtn:active{
+  transform: scale(0.98);
+}
+
+.home-ringBtn:focus-visible{
+  outline: 2px solid rgba(80,150,255,0.65);
+  outline-offset: 3px;
+}
+
 
 .home-gear{
   width: 44px;

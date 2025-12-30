@@ -6,6 +6,8 @@ import Wearables from "./wearables";
 import Documents from "./documents";
 import Medication from "./medikation";
 import Nutrition from "./nutrition";
+import Profile from "./profile";
+import Registration1 from "../registration/registration1";
 
 type HomeStep =
   | "chat"
@@ -14,7 +16,9 @@ type HomeStep =
   | "wearables"
   | "documents"
   | "medication"
-  | "nutrition";
+  | "nutrition"
+  | "profile"
+  | "registration1";
 
 type Props = {
   userName: string;
@@ -29,6 +33,7 @@ export default function HomeFlow({ userName }: Props) {
         userName={userName}
         onOpenFolder={() => setStep("folder")}
         onOpenSettings={() => setStep("settings")}
+        onOpenProfile={() => setStep("profile")}
       />
     );
 
@@ -84,5 +89,20 @@ export default function HomeFlow({ userName }: Props) {
   if (step === "settings")
     return <Settings userName={userName} onBack={() => setStep("chat")} />;
 
+  if (step === "profile")
+    return (
+      <Profile
+        onBack={() => setStep("chat")}
+        onSecureNow={() => setStep("registration1")}   
+      />
+    );
+
+    if (step === "registration1")
+      return (
+        <Registration1
+          onBack={() => setStep("profile")}
+        />
+    );
+  
   return null;
 }

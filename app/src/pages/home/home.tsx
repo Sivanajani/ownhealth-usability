@@ -14,9 +14,10 @@ type Props = {
   userName: string;
   onOpenFolder?: () => void;
   onOpenSettings?: () => void;
+  onOpenProfile?: () => void;
 };
 
-export default function Home({ userName, onOpenFolder, onOpenSettings }: Props) {
+export default function Home({ userName, onOpenFolder, onOpenSettings, onOpenProfile }: Props) {
   const displayName = userName?.trim() ? userName.trim() : "da";
 
   return (
@@ -39,7 +40,15 @@ export default function Home({ userName, onOpenFolder, onOpenSettings }: Props) 
           </div>
 
           <div className="home-right">
-            <div className="home-ring">64%</div>
+            <button
+              className="home-ringBtn"
+              type="button"
+              onClick={onOpenProfile}
+              aria-label="Profil öffnen"
+            >
+              <span className="home-ringText">64%</span>
+            </button>
+                      
 
             <button
               className="icon-btn home-gear"
