@@ -14,7 +14,19 @@ type Props = {
 
 export default function Onboarding0({ onNext }: Props) {
   const [focus, setFocus] = useState<FocusKey | null>(null);
-  const canContinue = !!focus;
+  const [isLeaving, setIsLeaving] = useState(false);
+
+  const handleSelect = (selected: FocusKey) => {
+    if (isLeaving) return;
+
+    setIsLeaving(true);
+    setFocus(selected);
+
+    // kleiner Delay = weniger "sprunghaft", Active-State kurz sichtbar
+    window.setTimeout(() => {
+      onNext?.(selected);
+    }, 220);
+  };
 
   return (
     <div className="ob-root ob0-root">
@@ -36,8 +48,9 @@ export default function Onboarding0({ onNext }: Props) {
         <div className="ob-middle ob0-middle">
           <button
             type="button"
+            disabled={isLeaving}
             className={`ob0-card ${focus === "longevity" ? "ob0-card--active" : ""}`}
-            onClick={() => setFocus("longevity")}
+            onClick={() => handleSelect("longevity")}
           >
             <div className="ob0-iconBox" aria-hidden="true">
               <img className="ob0-iconSvg" src={boltSvg} alt="" />
@@ -45,14 +58,16 @@ export default function Onboarding0({ onNext }: Props) {
 
             <div className="ob0-cardTitle">Meine Biologie optimieren</div>
             <div className="ob0-cardText">
-              Ich will datenbasiert wissen, was in meinem Körper wirklich wirkt, um meine Leistung zu steigern und gesund zu altern.
+              Ich will datenbasiert wissen, was in meinem Körper wirklich wirkt,
+              um meine Leistung zu steigern und gesund zu altern.
             </div>
           </button>
 
           <button
             type="button"
+            disabled={isLeaving}
             className={`ob0-card ${focus === "chronic" ? "ob0-card--active" : ""}`}
-            onClick={() => setFocus("chronic")}
+            onClick={() => handleSelect("chronic")}
           >
             <div className="ob0-iconBox" aria-hidden="true">
               <img className="ob0-iconSvg" src={shieldSvg} alt="" />
@@ -60,19 +75,9 @@ export default function Onboarding0({ onNext }: Props) {
 
             <div className="ob0-cardTitle">Meine Symptome verstehen</div>
             <div className="ob0-cardText">
-              Ich will mein Gesundheitspuzzle lösen und die Kontrolle über meine Gesundheit zurückgewinnen.
+              Ich will mein Gesundheitspuzzle lösen und die Kontrolle über meine
+              Gesundheit zurückgewinnen.
             </div>
-          </button>
-        </div>
-
-        {/* Bottom */}
-        <div className="ob-bottom ob0-bottom">
-          <button
-            className={`ob-button ${!canContinue ? "ob0-buttonDisabled" : ""}`}
-            disabled={!canContinue}
-            onClick={() => focus && onNext?.(focus)}
-          >
-            Weiter
           </button>
         </div>
       </div>

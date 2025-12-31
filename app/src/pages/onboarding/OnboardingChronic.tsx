@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import "./onboardingStart.css";
 import "./onboardingLong.css";
 
@@ -39,7 +39,7 @@ type Slide = {
   };
 
   bottom: {
-    label: string;
+    label?: string; 
     value: string;
     hint?: string;
     iconKey?: "file" | "lightning";
@@ -72,10 +72,10 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
         ),
         list: {
           items: [
-            { label: "Erschöpfung:", value: "Ferritin nur 15 ng/ml", source: "Quelle: Laborwert & Wearable" },
-            { label: "Schwindel:", value: "B12 bei 190 pg/ml", source: "Quelle: Arztbrief & Medikation" },
-            { label: "Herzrasen:", value: "TSH schwankt stark", source: "Quelle: Bluttest & Wearable" },
-            { label: "Verdauung:", value: "Entzündungsmarker", source: "Quelle: Laborwert & Ernährung" },
+            { label: "Erschöpfung:", value: "Ferritin nur 15 ng/ml", source: "[Wearable + Schlaf-App]" },
+            { label: "Schwindel:", value: "B12 bei 190 pg/ml", source: "[Arztbrief + Medikation]" },
+            { label: "Herzrasen:", value: "TSH schwankt stark", source: "[Bluttest + Wearable]" },
+            { label: "Verdauung:", value: "Entzündungsmarker", source: "[Laborwert + Ernährung]" },
           ],
         },
         alert: {
@@ -83,8 +83,7 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
           hint: "Deine Werte zeigen die wahren Ursachen.",
         },
         bottom: {
-          label: "ARZT-REPORT",
-          value: "soeben erstellt",
+          value: "Arzt Report soeben erstellt",
           iconKey: "file",
         },
       },
@@ -111,10 +110,10 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
         ),
         list: {
           items: [
-            { label: "2021:", value: "Antibiotika wegen Blasenentzündung", source: "Quelle: Laborwert & Wearable" },
-            { label: "2022:", value: "Erste Verdauungsprobleme", source: "Quelle: Ernährung & Apps" },
-            { label: "2023:", value: "Müdigkeit beginnt schleichend", source: "Quelle: Mentale Gesundheit & Wearable" },
-            { label: "2024:", value: "Schilddrüsenwerte auffällig", source: "Quelle: Bluttest & Hausarzt" },
+            { label: "2021: Antibiotika wegen Blasenentzündung", source: "[Medikationsliste + Arztbrief]" },
+            { label: "2022: Erste Verdauungsprobleme", source: "[Symptome-App + Stuhltest]" },
+            { label: "2023: Müdigkeit beginnt schleichend", source: "[Wearable HRV + Schlaf-App]" },
+            { label: "2024: Schilddrüsenwerte auffällig", source: "[Bluttest + Hausarzt]" },
           ],
         },
         alert: {
@@ -122,8 +121,7 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
           hint: "Antibiotika → Darmflora gestört → Nährstoffaufnahme → Erschöpfung",
         },
         bottom: {
-          label: "HISTORIE",
-          value: "für Arzt erstellt",
+          value: "Komplette Historie für Arzt erstellt",
           iconKey: "file",
         },
       },
@@ -144,21 +142,32 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
         title: "Dein präziser Fahrplan",
         list: {
           items: [
-            { label: "Morgens:", value: "Eisen auf nüchternen Magen", source: "Ziel: Ferritin-Speicher füllen" },
-            { label: "Mittags:", value: "B12 sublingual", source: "Ziel: Nervensystem stabilisieren" },
-            { label: "Abends:", value: "Magnesium vor dem Schlaf", source: "Ziel: Regeneration & HRV-Steigerung" },
+            {
+              label: "Morgens: Eisen auf nüchternen Magen",
+              value: "Ziel: Ferritin-Speicher füllen",
+              source: "[Bluttest + Ernährung]",
+            },
+            {
+              label: "Mittags: B12 sublingual",
+              value: "Ziel: Nervensystem stabilisieren",
+              source: "[Medikation + Arztbrief]",
+            },
+            {
+              label: "Abends: Magnesium vor dem Schlaf",
+              value: "Ziel: Regeneration & HRV-Steigerung",
+              source: "[Wearable + Mentale Gesundheit]",
+            },
           ],
         },
         alert: {
           title: "Vorsicht: Kaffee blockiert Eisenaufnahme.",
-          hint: "≥ 2 Stunden Abstand halten",
+          hint: "2 Stunden Abstand halten",
         },
         bottom: {
-          label: "PROGNOSE",
-          value: "Energie-Anstieg",
-          hint: "Messbar mehr Energie in 14 Tagen.",
+          label: "Prognose: Energie-Anstieg",
+          value: "Messbar mehr Energie in 14 Tagen.",
+          hint: "73% Wahrscheinlichkeit (basierend auf 8.420 ähnlichen Profilen)",
           iconKey: "lightning",
-          prefix: <span style={{ fontWeight: 900 }}>Prognose:</span>,
         },
       },
     ],
@@ -171,25 +180,54 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
     return <PlanIcon className="obLon-svg" />;
   };
 
-  const trackRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);  
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   const [activeIndex, setActiveIndex] = useState(0);
+  const [wrapH, setWrapH] = useState<number | null>(null);
+
+  const measureActive = () => {
+    const node = cardRefs.current[activeIndex];
+    if (!node) return;
+    setWrapH(node.offsetHeight);
+  };
 
   const onScroll = () => {
     const el = trackRef.current;
     if (!el) return;
-    const w = el.clientWidth;
-    if (!w) return;
+    const w = el.clientWidth || 1;
     const idx = Math.round(el.scrollLeft / w);
     const clamped = Math.max(0, Math.min(slides.length - 1, idx));
     if (clamped !== activeIndex) setActiveIndex(clamped);
   };
+
+  // optional: Dots klickbar machen
+  const goTo = (idx: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollTo({ left: idx * el.clientWidth, behavior: "smooth" });
+  };
+
+  
+  useLayoutEffect(() => {
+    measureActive();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeIndex]);
+
+
+  useEffect(() => {
+    const onResize = () => measureActive();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeIndex]);
 
   const activeSlide = slides[activeIndex];
 
   return (
     <div className="ob-root">
       <div className="ob-content obLon-root">
-        {/* TOP*/}
+        {/* TOP */}
         <div className="ob-top ob0-top">
           <div className="ob0-dots" aria-hidden="true">
             <span className="ob0-dot ob0-dot--active" />
@@ -202,82 +240,92 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
           <h1 className="obLon-headline">{activeSlide.topHeadline}</h1>
         </div>
 
-        <div className="obLon-mid">
-          <div className="obLon-carousel" ref={trackRef} onScroll={onScroll}>
-            {slides.map((s) => (
-              <section className="obLon-slide" key={s.id} aria-label="Chronic Preview Slide">
-                <div className={`obLon-card obLon-card--${s.accent}`}>
-                  {s.badge && (
-                    <div className={`obLon-topBadge obLon-topBadge--${s.accent}`}>
-                      {s.badge}
-                    </div>
-                  )}
+        <div className="obLon-mid">          
+          <div className="obLon-carouselWrap" style={wrapH ? { height: wrapH } : undefined}>
+            <div className="obLon-carousel" ref={trackRef} onScroll={onScroll}>
+              {slides.map((s, i) => (
+                <section className="obLon-slide" key={s.id} aria-label="Chronic Preview Slide">
+                  <div
+                    ref={(el) => {
+                      cardRefs.current[i] = el;
+                    }}
+                    className={`obLon-card obLon-card--${s.accent}`}
+                  >
+                    {s.badge && (
+                      <div className={`obLon-topBadge obLon-topBadge--${s.accent}`}>{s.badge}</div>
+                    )}
 
-                  <div className="obLon-cardHeader">
-                    <div className={`obLon-iconWrap obLon-iconWrap--${s.iconTheme}`}>
-                      <Icon k={s.iconKey} />
-                    </div>
-
-                    <div className="obLon-cardTitle">{s.title}</div>
-                  </div>
-
-                  {/* LIST */}
-                  <div className="obLon-panel obLon-panel--list">
-                    <div className="obLon-list">
-                      {s.list.items.map((it, idx) => (
-                        <div className="obLon-row" key={idx}>
-                          <span className={`obLon-check obLon-check--${s.accent}`}>✓</span>
-
-                          <div className="obLon-rowText">
-                            <div className="obLon-rowLine">
-                              <span className="obLon-rowLabel">{it.label}</span>
-                              {it.value && <span className="obLon-rowValue">{it.value}</span>}
-                            </div>
-                            {it.source && <div className="obLon-rowSource">{it.source}</div>}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* ALERT */}
-                  <div className="obLon-panel obLon-panel--alert">
-                    <span className="obLon-x">✕</span>
-                    <div>
-                      <div className="obLon-alertTitle">{s.alert.title}</div>
-                      {s.alert.hint && <div className="obLon-alertHint">{s.alert.hint}</div>}
-                    </div>
-                  </div>
-
-                  {/* BOTTOM */}
-                  <div className={`obLon-panel obLon-panel--bottom obLon-panel--bottom-${s.accent}`}>
-                    <div className="obLon-bottomIcon" aria-hidden="true">
-                      {s.bottom.iconKey === "lightning" ? (
-                        <LightningIcon className="obLon-svg" />
-                      ) : (
-                        <FileIcon className="obLon-svg" />
-                      )}
-                    </div>
-
-                    <div className="obLon-bottomText">
-                      <div className="obLon2-bottomLabel">{s.bottom.label}</div>
-                      <div className="obLon2-bottomValue">
-                        {s.bottom.prefix} {s.bottom.value}
+                    <div className="obLon-cardHeader">
+                      <div className={`obLon-iconWrap obLon-iconWrap--${s.iconTheme}`}>
+                        <Icon k={s.iconKey} />
                       </div>
-                      {s.bottom.hint && <div className="obLon2-bottomHint">{s.bottom.hint}</div>}
+
+                      <div className="obLon-cardTitle">{s.title}</div>
+                    </div>
+
+                    {/* LIST */}
+                    <div className="obLon-panel obLon-panel--list">
+                      <div className="obLon-list">
+                        {s.list.items.map((it, idx) => (
+                          <div className="obLon-row" key={idx}>
+                            <span className={`obLon-check obLon-check--${s.accent}`}>✓</span>
+
+                            <div className="obLon-rowText">
+                              <div className="obLon-rowLine">
+                                <span className="obLon-rowLabel">{it.label}</span>
+                                {it.value && <span className="obLon-rowValue">{it.value}</span>}
+                              </div>
+                              {it.source && <div className="obLon-rowSource">{it.source}</div>}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* ALERT */}
+                    <div className="obLon-panel obLon-panel--alert">
+                      <span className="obLon-x">✕</span>
+                      <div>
+                        <div className="obLon-alertTitle">{s.alert.title}</div>
+                        {s.alert.hint && <div className="obLon-alertHint">{s.alert.hint}</div>}
+                      </div>
+                    </div>
+
+                    {/* BOTTOM */}
+                    <div className={`obLon-panel obLon-panel--bottom obLon-panel--bottom-${s.accent}`}>
+                      <div className="obLon-bottomIcon" aria-hidden="true">
+                        {s.bottom.iconKey === "lightning" ? (
+                          <LightningIcon className="obLon-svg" />
+                        ) : (
+                          <FileIcon className="obLon-svg" />
+                        )}
+                      </div>
+
+                      <div className="obLon-bottomText">                
+                        {s.bottom.label && <div className="obLon2-bottomLabel">{s.bottom.label}</div>}
+
+                        <div className="obLon2-bottomValue">
+                          {s.bottom.prefix} {s.bottom.value}
+                        </div>
+
+                        {s.bottom.hint && <div className="obLon2-bottomHint">{s.bottom.hint}</div>}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
-            ))}
+                </section>
+              ))}
+            </div>
           </div>
 
-          {/* BOTTOM = Slide Dots (nur fürs Swipen) */}
+          {/* Dots */}
           <div className="obLon-mini" aria-hidden="true">
             {slides.map((_, i) => (
-              <span
+              <button
                 key={i}
+                type="button"
                 className={`obLon-miniDot ${i === activeIndex ? "obLon-miniDot--active" : ""}`}
+                onClick={() => goTo(i)}
+                aria-label={`Slide ${i + 1}`}
               />
             ))}
           </div>

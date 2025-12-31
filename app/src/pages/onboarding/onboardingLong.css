@@ -195,7 +195,7 @@
 .obLon-headerText{ flex: 1; }
 
 .obLon-cardTitle{
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 900;
   color: rgba(255,255,255,0.95);
   line-height: 1.25;
@@ -271,9 +271,9 @@
 }
 
 .obLon-alertTitle{
-  font-size: 13px;
-  font-weight: 900;
+  font-size: 16px;
   color: rgba(255,255,255,0.92);
+  padding-bottom: 6px;
 }
 
 .obLon-alertHint{
@@ -292,7 +292,7 @@
 
 .obLon-row{
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: flex-start;
 }
 
@@ -340,8 +340,8 @@
 }
 
 .obLon-rowLabel{
-  font-size: 13px;
-  font-weight: 900;
+  font-size: 16px;
+  font-weight: 400;
   color: rgba(255,255,255,0.92);
 }
 
@@ -350,14 +350,14 @@
 }
 
 .obLon-rowValue{
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
   color: rgba(144,161,185,0.82);
 }
 
 .obLon-rowSource{
   margin-top: 3px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: rgba(144,161,185,0.58);
 }
@@ -383,35 +383,42 @@
 }
 
 .obLon-bottomLabel{
-  font-size: 10px;              
-  font-weight: 900;
+  font-size: 14px;              
   letter-spacing: 0.18em;
   text-transform: uppercase;
   opacity: 0.9;
   margin: 0;
+  color: rgba(23, 230, 161, 0.815);
 }
 
 .obLon-bottomValue{
-  font-size: 18px;
-  font-weight: 900;
-  color: rgba(16,185,129,0.95);
+  font-size: 16px;
+  text-align: center;
+  color: rgba(241, 241, 241, 0.95);
   letter-spacing: -0.01em;
   margin: 0;
 }
 
 .obLon2-bottomValue{
-  font-size: 15px;
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 400;
   color: rgba(255,255,255,0.92);
   margin: 0;
   line-height: 1.2;
+  padding-bottom: 4px;
+  padding-top: 4px;
 }
 
 .obLon-bottomHint{
-  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 800;
+  color: rgba(23, 230, 161, 0.815);
+}
+
+.obLon-bottomHint2{
   font-size: 12px;
   font-weight: 800;
-  color: rgba(144,161,185,0.72);
+  color: rgba(238, 240, 243, 0.72);
 }
 
 /* Mini nav */
@@ -573,21 +580,18 @@
 }
 
 .obLon2-bottomLabel{
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(144,161,185,0.70);
+  font-size: 16px;
+  color:  rgba(16,185,129,0.95); 
   font-weight: 900;
   margin: 0;
 }
 
-
-
 .obLon2-bottomHint{
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
-  color: rgba(144,161,185,0.70);
+  color: rgba(16,185,129,0.95); 
   margin: 0;
+  margin-top: 6px;
 }
 
 /* Farbvarianten vom Mock */
@@ -616,4 +620,18 @@
 .obLon-panel--bottom-purple .obLon-bottomIcon{
   border-color: rgba(168,85,247,0.22);
   background: rgba(168,85,247,0.10);
+}
+
+
+.obLon-carouselWrap{
+  width: 100%;
+  transition: height 220ms ease;
+}
+
+.obLon-slide{
+  align-items: flex-start;
+}
+
+.obLon-card{
+  height: auto;
 }

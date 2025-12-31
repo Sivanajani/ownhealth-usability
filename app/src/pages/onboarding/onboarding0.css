@@ -1,8 +1,6 @@
 /* Layout */
 .ob0-content{
   justify-content: flex-start;
-  gap: 18px;
-  padding-top: 10px;
 }
 
 /* Titel: kleiner, ruhiger wie Bild 1 */
@@ -22,10 +20,11 @@
 .ob0-middle{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 18px;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-top: 60px;
+  gap: 25px;
   width: 100%;
-  margin-top: 6px;
 }
 
 .ob0-card{
