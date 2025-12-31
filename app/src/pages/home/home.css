@@ -286,3 +286,167 @@
   fill: currentColor;
   stroke: currentColor;
 }
+
+/* =========================
+   Insight Card (Home)
+========================= */
+.home-insight{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  margin-bottom: 10px;
+  padding: 0 18px;
+}
+
+.home-insightCard{
+  max-width: 420px;
+  width: 100%;
+  border-radius: 26px;
+  padding: 14px 14px 12px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 26px 70px rgba(0,0,0,0.40),
+    0 0 0 1px rgba(255,255,255,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.home-insightTop{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.home-insightTag{
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(180,205,255,0.92);
+}
+
+.home-insightHello{
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.92);
+}
+
+.home-insightBody{
+  border-radius: 18px;
+  padding: 12px 12px;
+  background: rgba(8, 12, 22, 0.30);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.home-insightLabel{
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  color: rgba(144,161,185,0.78);
+  margin-bottom: 8px;
+}
+
+.home-insightMetricMain{
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.3;
+}
+
+.home-insightAccent{
+  color: rgba(96,165,250,0.95);
+}
+
+.home-insightMuted{
+  color: rgba(144,161,185,0.70);
+  font-weight: 600;
+}
+
+.home-insightBullets{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-bullet{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(255,255,255,0.80);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.home-bulletIcon{
+  width: 22px;
+  height: 22px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  transform: translateY(-1px);
+}
+
+.home-insightNote{
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.72);
+}
+
+.home-insightBtn{
+  margin-top: 12px;
+  width: 100%;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  font-weight: 700;
+}
+
+.home-insightBtn:active{
+  transform: scale(0.99);
+}
+
+/* kleine farbliche Nuance pro Modus */
+.home-insightCard.is-longevity .home-insightAccent{ color: rgba(96,165,250,0.95); }
+.home-insightCard.is-chronic .home-insightAccent{ color: rgba(70,227,160,0.95); }
+
+.home-insightCard.is-chronic .home-insightTag{
+  color: rgba(140,240,205,0.92);
+}
+
+/* =========================
+   Username Highlight
+========================= */
+.home-insightName{
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  padding-left: 2px;
+}
+
+/* Fokus-abhängige Farbe */
+.home-insightCard.is-longevity .home-insightName{
+  color: rgba(125, 174, 235, 0.95);   /* Blue */
+  text-shadow: 0 0 18px rgba(96,165,250,0.25);
+}
+
+.home-insightCard.is-chronic .home-insightName{
+  color: rgba(70,227,160,0.95);   /* Green */
+  text-shadow: 0 0 18px rgba(70,227,160,0.22);
+}

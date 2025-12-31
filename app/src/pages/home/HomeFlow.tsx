@@ -8,6 +8,7 @@ import Medication from "./medikation";
 import Nutrition from "./nutrition";
 import Profile from "./profile";
 import Registration1 from "../registration/registration1";
+import type { FocusKey } from "../../App";
 
 type HomeStep =
   | "chat"
@@ -22,15 +23,17 @@ type HomeStep =
 
 type Props = {
   userName: string;
+  focus: FocusKey;
 };
 
-export default function HomeFlow({ userName }: Props) {
+export default function HomeFlow({ userName, focus }: Props) {
   const [step, setStep] = useState<HomeStep>("chat");
 
   if (step === "chat")
     return (
       <Home
         userName={userName}
+        focus={focus}
         onOpenFolder={() => setStep("folder")}
         onOpenSettings={() => setStep("settings")}
         onOpenProfile={() => setStep("profile")}
@@ -49,32 +52,31 @@ export default function HomeFlow({ userName }: Props) {
     );
 
   if (step === "wearables")
-  return (
-    <Wearables
-      onBack={() => setStep("folder")}
-      onBackToChat={() => setStep("chat")}
-      onBackToFolder={() => setStep("folder")}
-    />
-  );
+    return (
+      <Wearables
+        onBack={() => setStep("folder")}
+        onBackToChat={() => setStep("chat")}
+        onBackToFolder={() => setStep("folder")}
+      />
+    );
 
   if (step === "documents")
-  return (
-    <Documents
-      onBack={() => setStep("folder")}
-      onBackToChat={() => setStep("chat")}
-      onBackToFolder={() => setStep("folder")}
-    />
-  );
+    return (
+      <Documents
+        onBack={() => setStep("folder")}
+        onBackToChat={() => setStep("chat")}
+        onBackToFolder={() => setStep("folder")}
+      />
+    );
 
   if (step === "medication")
-  return (
-    <Medication
-      onBack={() => setStep("folder")}
-      onBackToChat={() => setStep("chat")}
-      onBackToFolder={() => setStep("folder")}
-    />
-  );
-
+    return (
+      <Medication
+        onBack={() => setStep("folder")}
+        onBackToChat={() => setStep("chat")}
+        onBackToFolder={() => setStep("folder")}
+      />
+    );
 
   if (step === "nutrition")
     return (
@@ -85,24 +87,18 @@ export default function HomeFlow({ userName }: Props) {
       />
     );
 
-
-  if (step === "settings")
-    return <Settings userName={userName} onBack={() => setStep("chat")} />;
+  if (step === "settings") return <Settings userName={userName} onBack={() => setStep("chat")} />;
 
   if (step === "profile")
     return (
       <Profile
         onBack={() => setStep("chat")}
-        onSecureNow={() => setStep("registration1")}   
+        onSecureNow={() => setStep("registration1")}
       />
     );
 
-    if (step === "registration1")
-      return (
-        <Registration1
-          onBack={() => setStep("profile")}
-        />
-    );
-  
+  if (step === "registration1")
+    return <Registration1 onBack={() => setStep("profile")} />;
+
   return null;
 }
