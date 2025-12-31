@@ -132,8 +132,7 @@ export default function ChatPanel() {
               </button>
             </div>
           )}
-
-          {/* Kamera → öffnet echte Kamera auf Mobile */}
+          
           <input
             ref={cameraRef}
             type="file"

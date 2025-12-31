@@ -54,7 +54,7 @@
   align-items:center;
   gap: 8px;
   color: rgba(140,180,255,0.9);
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .folder-content{
@@ -70,7 +70,7 @@
    Section Labels
 ========================= */
 .folder-sectionLabel{
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 1.2px;
   color: rgba(255,255,255,0.55);
   margin: 12px 0 8px;
@@ -111,12 +111,12 @@
 
 .insightTitle{
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .insightMeta{
   margin-top: 2px;
-  font-size: 13px;
+  font-size: 16px;
   color: rgba(255,255,255,0.70);
 }
 
@@ -151,6 +151,7 @@
   align-items:center;
   justify-content:center;
   gap: 10px;
+  font-size: 18px;
 }
 
 .summaryIcon{
@@ -181,28 +182,30 @@
   border: 1px solid rgba(255,255,255,0.10);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 18px 45px rgba(0,0,0,0.35);
   justify-content: space-between;
 }
 
 
 /* =========================
-   ICON COLORS (pro Card)
+   ICON COLORS (pro Card) 
 ========================= */
-.dataCard--teal .dataIcon{
-  color: rgba(70,227,160,0.95);
+.dataCard--teal .dataIcon{   /* Wearables -> violett */
+  color: rgba(137, 90, 246, 0.95);
 }
 
-.dataCard--indigo .dataIcon{
-  color: rgba(140,160,255,0.95);
+.dataCard--indigo .dataIcon{ /* Dokumente -> cyan */
+  color: rgba(6, 181, 212, 0.95);
 }
 
-.dataCard--purple .dataIcon{
-  color: rgba(215,150,255,0.95);
+.dataCard--purple .dataIcon{ /* Medikation -> pink */
+  color: rgba(236, 72, 154, 0.95);
 }
 
-.dataCard--amber .dataIcon{
-  color: rgba(255,190,120,0.95);
+.dataCard--amber .dataIcon{  /* Ernährung -> amber */
+  color: rgba(234, 179, 8, 0.95);
 }
 
 
@@ -220,7 +223,7 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  background: rgba(17, 17, 17, 0.06);
+  background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.10);
   color: rgba(255, 255, 255, 0.92);
 }
@@ -232,12 +235,12 @@
 
 .dataTitle{
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .dataSub{
   margin-top: 2px;
-  font-size: 12px;
+  font-size: 14px;
   color: rgba(255,255,255,0.60);
 }
 
@@ -249,12 +252,12 @@
 .dataStrong{
   color: rgba(70,227,160,0.95);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .dataMeta{
   margin-top: 2px;
-  font-size: 12px;
+  font-size: 14px;
   color: rgba(255,255,255,0.70);
 }
 
@@ -295,37 +298,44 @@
 /* =========================
    Color Variants
 ========================= */
+
+/* Wearables – soft violet */
 .dataCard--teal{
   background: linear-gradient(
     180deg,
-    rgba(40,140,120,0.22),
-    rgba(10,14,26,0.32)
+    rgba(137, 90, 246, 0.42) 0%,
+    rgba(137, 90, 246, 0.14) 100%
   );
 }
 
+/* Dokumente – soft cyan */
 .dataCard--indigo{
   background: linear-gradient(
     180deg,
-    rgba(100,110,190,0.22),
-    rgba(10,14,26,0.32)
+    rgba(6, 181, 212, 0.38) 0%,
+    rgba(6, 181, 212, 0.12) 100%
   );
 }
 
+/* Medikation – soft pink */
 .dataCard--purple{
   background: linear-gradient(
     180deg,
-    rgba(170,100,200,0.20),
-    rgba(10,14,26,0.32)
+    rgba(236, 72, 154, 0.38) 0%,
+    rgba(236, 72, 154, 0.12) 100%
   );
 }
 
+/* Ernährung – soft amber */
 .dataCard--amber{
   background: linear-gradient(
     180deg,
-    rgba(200,140,80,0.20),
-    rgba(10,14,26,0.32)
+    rgba(234, 179, 8, 0.32) 0%,
+    rgba(234, 179, 8, 0.10) 100%
   );
 }
+
+
 
 /* =========================
    SVG NORMALIZATION (SEHR WICHTIG)
@@ -341,4 +351,211 @@
   color: currentColor;
   fill: currentColor !important;
   stroke: currentColor !important;
+}
+
+/* =========================
+   Responsive Scaling (DROP-IN)
+   -> Cards & Typo werden kleiner auf kleinen Screens
+========================= */
+
+/* 1) Allgemeine Abstände/Typo über clamp */
+.folder-safe{
+  padding: clamp(12px, 3.5vw, 18px) clamp(12px, 3.5vw, 16px) 0;
+}
+
+.folder-title{
+  font-size: clamp(20px, 5.5vw, 26px);
+}
+
+.folder-sub{
+  font-size: clamp(12px, 3.6vw, 16px);
+}
+
+.folder-sectionLabel{
+  font-size: clamp(11px, 3.2vw, 14px);
+}
+
+/* 2) Insight Cards kleiner */
+.insightCard{
+  padding: clamp(10px, 2.8vw, 13px) clamp(10px, 2.8vw, 14px);
+  border-radius: clamp(14px, 4vw, 18px);
+  gap: clamp(10px, 2.8vw, 12px);
+}
+
+.insightIcon{
+  width: clamp(28px, 8vw, 34px);
+  height: clamp(28px, 8vw, 34px);
+  border-radius: clamp(10px, 3vw, 12px);
+}
+
+.insightTitle{
+  font-size: clamp(14px, 4vw, 18px);
+}
+
+.insightMeta{
+  font-size: clamp(12px, 3.6vw, 16px);
+}
+
+/* 3) Summary Button kleiner */
+.summaryBtn{
+  padding: clamp(10px, 3vw, 12px) clamp(10px, 3vw, 14px);
+  border-radius: clamp(14px, 4vw, 18px);
+  font-size: clamp(14px, 4vw, 18px);
+}
+
+/* 4) Grid + Cards responsiv */
+.folder-grid{
+  gap: clamp(8px, 2.8vw, 12px);
+}
+
+/* WICHTIG: min-height flexibel machen (statt fix 190px) */
+.dataCard{
+  min-height: auto;
+  padding: clamp(12px, 3.2vw, 14px);
+  border-radius: clamp(16px, 4.6vw, 22px);
+}
+
+/* Inhalte etwas kleiner */
+.dataIcon{
+  width: clamp(28px, 8vw, 34px);
+  height: clamp(28px, 8vw, 34px);
+  border-radius: clamp(12px, 3.8vw, 14px);
+}
+
+.dataTitle{ font-size: clamp(13px, 3.8vw, 16px); }
+.dataSub{ font-size: clamp(11px, 3.4vw, 14px); }
+.dataStrong{ font-size: clamp(11px, 3.4vw, 14px); }
+.dataMeta{ font-size: clamp(11px, 3.4vw, 14px); }
+
+.chev{ font-size: clamp(16px, 4.5vw, 18px); }
+
+/* Buttons kleiner */
+.pillBtn{
+  width: clamp(40px, 12vw, 46px);
+  height: clamp(26px, 8vw, 28px);
+}
+
+.dataFooterBtn{
+  height: clamp(30px, 9vw, 34px);
+}
+
+/* SVGs skalieren mit */
+.insightIcon svg,
+.dataIcon svg,
+.summaryIcon svg,
+.pillBtn svg,
+.dataFooterBtn svg{
+  width: clamp(16px, 4.8vw, 18px);
+  height: clamp(16px, 4.8vw, 18px);
+}
+
+/* 5) Super kleine Screens: 1 Spalte */
+@media (max-width: 360px){
+  .folder-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================
+   Responsive Scaling (DROP-IN)
+   -> Cards & Typo werden kleiner auf kleinen Screens
+========================= */
+
+/* 1) Allgemeine Abstände/Typo über clamp */
+.folder-safe{
+  padding: clamp(12px, 3.5vw, 18px) clamp(12px, 3.5vw, 16px) 0;
+}
+
+.folder-title{
+  font-size: clamp(20px, 5.5vw, 26px);
+}
+
+.folder-sub{
+  font-size: clamp(12px, 3.6vw, 16px);
+}
+
+.folder-sectionLabel{
+  font-size: clamp(11px, 3.2vw, 14px);
+}
+
+/* 2) Insight Cards kleiner */
+.insightCard{
+  padding: clamp(10px, 2.8vw, 13px) clamp(10px, 2.8vw, 14px);
+  border-radius: clamp(14px, 4vw, 18px);
+  gap: clamp(10px, 2.8vw, 12px);
+}
+
+.insightIcon{
+  width: clamp(28px, 8vw, 34px);
+  height: clamp(28px, 8vw, 34px);
+  border-radius: clamp(10px, 3vw, 12px);
+}
+
+.insightTitle{
+  font-size: clamp(14px, 4vw, 18px);
+}
+
+.insightMeta{
+  font-size: clamp(12px, 3.6vw, 16px);
+}
+
+/* 3) Summary Button kleiner */
+.summaryBtn{
+  padding: clamp(10px, 3vw, 12px) clamp(10px, 3vw, 14px);
+  border-radius: clamp(14px, 4vw, 18px);
+  font-size: clamp(14px, 4vw, 18px);
+}
+
+/* 4) Grid + Cards responsiv */
+.folder-grid{
+  gap: clamp(8px, 2.8vw, 12px);
+}
+
+/* WICHTIG: min-height flexibel machen (statt fix 190px) */
+.dataCard{
+  min-height: auto;
+  padding: clamp(12px, 3.2vw, 14px);
+  border-radius: clamp(16px, 4.6vw, 22px);
+}
+
+/* Inhalte etwas kleiner */
+.dataIcon{
+  width: clamp(28px, 8vw, 34px);
+  height: clamp(28px, 8vw, 34px);
+  border-radius: clamp(12px, 3.8vw, 14px);
+}
+
+.dataTitle{ font-size: clamp(13px, 3.8vw, 16px); }
+.dataSub{ font-size: clamp(11px, 3.4vw, 14px); }
+.dataStrong{ font-size: clamp(11px, 3.4vw, 14px); }
+.dataMeta{ font-size: clamp(11px, 3.4vw, 14px); }
+
+.chev{ font-size: clamp(16px, 4.5vw, 18px); }
+
+/* Buttons kleiner */
+.pillBtn{
+  width: clamp(40px, 12vw, 46px);
+  height: clamp(26px, 8vw, 28px);
+}
+
+.dataFooterBtn{
+  height: clamp(30px, 9vw, 34px);
+}
+
+/* SVGs skalieren mit */
+.insightIcon svg,
+.dataIcon svg,
+.summaryIcon svg,
+.pillBtn svg,
+.dataFooterBtn svg{
+  width: clamp(16px, 4.8vw, 18px);
+  height: clamp(16px, 4.8vw, 18px);
+}
+
+/* 5) Super kleine Screens: 1 Spalte */
+@media (max-width: 360px){
+  .folder-grid{
+    grid-template-columns: 1fr;
+  }
 }
