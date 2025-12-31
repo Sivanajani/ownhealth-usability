@@ -8,14 +8,28 @@ type Props = {
 
 type StepKey = "sync" | "secure" | "focus";
 
+// für den wechselnden Status-Text oben
+type Phase =
+  | "syncing"
+  | "syncActive"
+  | "encrypting"
+  | "encrypted"
+  | "focus"
+  | "done";
+
 export default function Onboarding4({ onContinue }: Props) {
+  // ca. 15 Sekunden gesamt
   const timeline = useMemo(
     () => ({
-      step1: 2000,
-      step2: 4500,
-      step3: 5000,
-      done: 6000,
-      total: 10000,
+      // Texte/Phasen
+      syncing: 800,        // "Daten werden synchronisiert…"
+      syncActive: 4200,    // "Sync ist aktiv"
+      encrypting: 6800,    // "Daten werden sicher verschlüsselt…"
+      encrypted: 9800,     // "Sicher verschlüsselt"
+      focus: 12400,        // "Fokus auf Performance & Optimierung"
+      done: 14800,         // Spinner fertig + Check
+      autoGo: 15300,       // automatisch weiter
+      total: 15300,
     }),
     []
   );
@@ -25,23 +39,66 @@ export default function Onboarding4({ onContinue }: Props) {
     secure: false,
     focus: false,
   });
+
+  const [phase, setPhase] = useState<Phase>("syncing");
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    const t1 = window.setTimeout(() => setChecked((s) => ({ ...s, sync: true })), timeline.step1);
-    const t2 = window.setTimeout(() => setChecked((s) => ({ ...s, secure: true })), timeline.step2);
-    const t3 = window.setTimeout(() => setChecked((s) => ({ ...s, focus: true })), timeline.step3);
-    const td = window.setTimeout(() => setIsDone(true), timeline.done);
+    const timers: number[] = [];
 
-    return () => {
-      window.clearTimeout(t1);
-      window.clearTimeout(t2);
-      window.clearTimeout(t3);
-      window.clearTimeout(td);
-    };
-  }, [timeline]);
+    // Startphase
+    timers.push(
+      window.setTimeout(() => setPhase("syncing"), timeline.syncing)
+    );
 
-  const canContinue = isDone;
+    // Sync aktiv + check
+    timers.push(
+      window.setTimeout(() => {
+        setPhase("syncActive");
+        setChecked((s) => ({ ...s, sync: true }));
+      }, timeline.syncActive)
+    );
+
+    // Verschlüsselung läuft
+    timers.push(
+      window.setTimeout(() => setPhase("encrypting"), timeline.encrypting)
+    );
+
+    // Sicher verschlüsselt + check
+    timers.push(
+      window.setTimeout(() => {
+        setPhase("encrypted");
+        setChecked((s) => ({ ...s, secure: true }));
+      }, timeline.encrypted)
+    );
+
+    // Fokus + check
+    timers.push(
+      window.setTimeout(() => {
+        setPhase("focus");
+        setChecked((s) => ({ ...s, focus: true }));
+      }, timeline.focus)
+    );
+
+    // Done (Spinner -> Check)
+    timers.push(
+      window.setTimeout(() => {
+        setPhase("done");
+        setIsDone(true);
+      }, timeline.done)
+    );
+
+    // automatisch weiter
+    timers.push(
+      window.setTimeout(() => {
+        onContinue?.();
+      }, timeline.autoGo)
+    );
+
+    return () => timers.forEach((t) => window.clearTimeout(t));
+  }, [timeline, onContinue]);
+
+  const statusText = getStatusText(phase);
 
   return (
     <div className="ob-root">
@@ -55,6 +112,7 @@ export default function Onboarding4({ onContinue }: Props) {
             </div>
           </div>
 
+          {/* Headline bleibt ruhig, nur Subline wechselt */}
           {isDone ? (
             <>
               <h1 className="ob-title">Du bist startklar.</h1>
@@ -63,39 +121,87 @@ export default function Onboarding4({ onContinue }: Props) {
           ) : (
             <>
               <h1 className="ob-title">Wir richten dein Gesundheitskonto ein.</h1>
-              <p className="ob-subtitle">
-                Das dauert nur einen Moment – gleich hast du
-                <br />
-                deine ersten personalisierten Insights.
-              </p>
+              <p className="ob-subtitle">{statusText}</p>
             </>
           )}
         </div>
 
         {/* Card */}
         <div className="obdone-card">
-          <Row icon="⟳" iconClass="is-blue" label="Daten-Sync aktiv" checked={checked.sync} />
-          <Row icon="🔒" iconClass="is-blue" label="Sicher verschlüsselt" checked={checked.secure} />
-          <Row icon="⚡" iconClass="is-yellow" label={"Fokus: Performance &\nOptimierung"} checked={checked.focus} />
+          <Row
+            icon="⟳"
+            iconClass="is-blue"
+            label={checked.sync ? "Sync ist aktiv" : "Daten werden synchronisiert…"}
+            checked={checked.sync}
+          />
+          <Row
+            icon="🔒"
+            iconClass="is-blue"
+            label={checked.secure ? "Sicher verschlüsselt" : "Daten werden sicher verschlüsselt…"}
+            checked={checked.secure}
+          />
+          <Row
+            icon="⚡"
+            iconClass="is-yellow"
+            label={"Fokus: Performance &\nOptimierung"}
+            checked={checked.focus}
+          />
         </div>
 
-        {/* Bottom */}
-        <div className="ob-cta">
-          <button
-            className={`ob-button ${!canContinue ? "obdone-buttonDisabled" : ""}`}
-            disabled={!canContinue}
-            onClick={onContinue}
-          >
-            Weiter zum Konto
-          </button>
-
-          <p className="ob-hint"></p>
-
-          {!isDone && <p className="ob-hint">Bitte warte kurz…</p>}
-        </div>
+        {/* Bottom: kein Button mehr */}
+        {!isDone && <p className="ob-hint">Bitte warte kurz…</p>}
       </div>
     </div>
   );
+}
+
+function getStatusText(phase: Phase): React.ReactNode {
+  switch (phase) {
+    case "syncing":
+      return (
+        <>
+          Daten werden synchronisiert…
+          <br />
+          Bitte kurz warten.
+        </>
+      );
+    case "syncActive":
+      return (
+        <>
+          Sync ist aktiv.
+          <br />
+          Wir prüfen deine Datenquellen.
+        </>
+      );
+    case "encrypting":
+      return (
+        <>
+          Daten werden sicher verschlüsselt…
+          <br />
+          Das dauert nur einen Moment.
+        </>
+      );
+    case "encrypted":
+      return (
+        <>
+          Sicher verschlüsselt.
+          <br />
+          Wir bereiten deine Insights vor.
+        </>
+      );
+    case "focus":
+      return (
+        <>
+          Fokus auf Performance & Optimierung.
+          <br />
+          Gleich geht’s weiter.
+        </>
+      );
+    case "done":
+      return null;
+    default:
+      return null;
+  }
 }
 
 function Row({
@@ -115,7 +221,9 @@ function Row({
         <span>{icon}</span>
       </div>
 
-      <div className="obdone-label">{label}</div>
+      <div className="obdone-label" style={{ whiteSpace: "pre-line" }}>
+        {label}
+      </div>
 
       <div className={`obdone-status ${checked ? "is-checked" : ""}`} aria-hidden="true">
         <span className="obdone-tick">✓</span>

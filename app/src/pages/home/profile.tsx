@@ -28,16 +28,16 @@ type Section = {
 };
 
 const SECTIONS: Section[] = [
-  { key: "base", title: "Basis", percent: 100, count: "5/5", badge: undefined, icon: <ChartIcon />, accent: "teal" },
-  { key: "medical", title: "Medizinisch", percent: 71, count: "5/7", badge: { text: "Wichtig", tone: "important" }, icon: <MedicalIcon />, accent: "amber" },
-  { key: "life", title: "Lifestyle &\nGewohnheit", percent: 40, count: "6/15", badge: { text: "Empfohlen", tone: "recommended" }, icon: <HeartIcon />, accent: "blue" },
-  { key: "mental", title: "Mental & Sozial", percent: 25, count: "2/8", badge: { text: "Empfohlen", tone: "recommended" }, icon: <BrainIcon />, accent: "purple" },
+  { key: "base", title: "Basis", percent: 60, count: "5/5", badge: undefined, icon: <ChartIcon />, accent: "teal" },
+  { key: "medical", title: "Medizinisch", percent: 20, count: "5/7", badge: { text: "Wichtig", tone: "important" }, icon: <MedicalIcon />, accent: "amber" },
+  { key: "life", title: "Lifestyle &\nGewohnheit", percent: 10, count: "6/15", badge: { text: "Empfohlen", tone: "recommended" }, icon: <HeartIcon />, accent: "blue" },
+  { key: "mental", title: "Mental & Sozial", percent: 5, count: "2/8", badge: { text: "Empfohlen", tone: "recommended" }, icon: <BrainIcon />, accent: "purple" },
   { key: "women", title: "Frauenspezifisch", percent: 0, count: "0/5", badge: { text: "Optional", tone: "optional" }, icon: <WomenIcon />, accent: "pink" },
   { key: "extended", title: "Erweiterte Daten", percent: 0, count: "0/6", badge: { text: "Optional", tone: "optional" }, icon: <DbIcon />, accent: "gray" },
 ];
 
 export default function Profile({ onBack, onSecureNow }: Props) {
-  const overall = 64;
+  const overall = 26;
 
   return (
     <div className="oh-screen prof-bg">

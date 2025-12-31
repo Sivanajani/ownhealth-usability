@@ -29,7 +29,7 @@ export default function Settings({ userName, onBack }: Props) {
         {/* Profile Card */}
         <section className="profileCard">
           <h1 className="profileName">{(userName?.trim() || "SIMON").toUpperCase()}</h1>
-          <div className="profileMeta">Profil-Vollständigkeit: 64%</div>
+          <div className="profileMeta">Profil-Vollständigkeit: 26%</div>
           <button className="profileLink" type="button">[vervollständigen]</button>
         </section>
 

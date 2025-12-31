@@ -46,7 +46,7 @@ export default function Home({ userName, onOpenFolder, onOpenSettings, onOpenPro
               onClick={onOpenProfile}
               aria-label="Profil öffnen"
             >
-              <span className="home-ringText">64%</span>
+              <span className="home-ringText">26%</span>
             </button>
                       
 
