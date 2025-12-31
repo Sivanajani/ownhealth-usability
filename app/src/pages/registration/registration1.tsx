@@ -10,7 +10,6 @@ import SettingIcon from "../../assets/setting.svg?react";
 type Props = {
   onBack?: () => void;
   onSecure?: () => void;
-  onSkip?: () => void;
 };
 
 type Item = {
@@ -26,19 +25,14 @@ const ITEMS: Item[] = [
   { icon: <SettingIcon />, text: "Eingestellt auf: Ursachen & Klarheit.", tone: "purple" },
 ];
 
-export default function Registration1({ onBack, onSecure, onSkip }: Props) {
+export default function Registration1({ onBack, onSecure }: Props) {
   return (
     <div className="oh-screen reg-bg">
       <div className="oh-safe reg-safe">        
 
         <section className="reg-card">
           <div className="reg-head">
-            <h1 className="reg-title">Profil bereit.</h1>
-            {onBack && (
-              <button className="reg-back" type="button" onClick={onBack}>
-                ‹
-              </button>
-            )}
+            <h1 className="reg-title">Profil bereit</h1>
           </div>
 
           <div className="reg-list">
@@ -70,7 +64,11 @@ export default function Registration1({ onBack, onSecure, onSkip }: Props) {
               </span>
             </div>
 
-            <button className="reg-skip" type="button" onClick={onSkip}>
+            <button
+              className="reg-skip"
+              type="button"
+              onClick={onBack}
+            >
               Vorerst ohne Sicherung weiter
               <span className="reg-skipSub">(Daten werden gelöscht)</span>
             </button>
