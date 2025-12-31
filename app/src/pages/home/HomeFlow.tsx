@@ -7,7 +7,7 @@ import Documents from "./documents";
 import Medication from "./medikation";
 import Nutrition from "./nutrition";
 import Profile from "./profile";
-import Registration1 from "../registration/registration1";
+import RegisterFlow from "../registration/registerFlow";
 import type { FocusKey } from "../../App";
 
 type HomeStep =
@@ -19,7 +19,7 @@ type HomeStep =
   | "medication"
   | "nutrition"
   | "profile"
-  | "registration1";
+  | "registerflow";
 
 type Props = {
   userName: string;
@@ -93,12 +93,12 @@ export default function HomeFlow({ userName, focus }: Props) {
     return (
       <Profile
         onBack={() => setStep("chat")}
-        onSecureNow={() => setStep("registration1")}
+        onSecureNow={() => setStep("registerflow")}
       />
     );
 
-  if (step === "registration1")
-    return <Registration1 onBack={() => setStep("profile")} />;
+  if (step === "registerflow")
+    return <RegisterFlow onDone={() => setStep("profile")} />;
 
   return null;
 }

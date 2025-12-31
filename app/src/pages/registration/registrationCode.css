@@ -1,0 +1,79 @@
+.reg-titleCenter{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.reg-codeBoxes{
+  margin: 20px auto 14px;
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  max-width: 340px;
+}
+
+.reg-codeBox{
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.reg-codeBox.is-filled{
+  border-color: rgba(59,130,246,.55);
+  background: rgba(59,130,246,.10);
+}
+
+.reg-codeHiddenInput{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  height: 1px;
+  width: 1px;
+}
+
+.reg-codeHint{
+  text-align:center;
+  color: rgba(255,255,255,.6);
+  font-size: 12px;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.reg-codePhone{
+  color: rgba(255,255,255,.85);
+  font-weight: 650;
+}
+
+.reg-codeError{
+  text-align:center;
+  color: rgba(248,113,113,.95);
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.reg-codeFooter{
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+.reg-codeFooterTitle{
+  color: rgba(255,255,255,.55);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.reg-linkInline{
+  border: 0;
+  background: transparent;
+  color: rgba(59,130,246,.95);
+  font-size: 12px;
+  font-weight: 700;
+}

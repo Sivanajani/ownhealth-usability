@@ -9,7 +9,7 @@ import SettingIcon from "../../assets/setting.svg?react";
 
 type Props = {
   onBack?: () => void;
-  onSecure?: () => void;
+  onNext?: () => void;
 };
 
 type Item = {
@@ -25,7 +25,7 @@ const ITEMS: Item[] = [
   { icon: <SettingIcon />, text: "Eingestellt auf: Ursachen & Klarheit.", tone: "purple" },
 ];
 
-export default function Registration1({ onBack, onSecure }: Props) {
+export default function Registration1({ onBack, onNext }: Props) {
   return (
     <div className="oh-screen reg-bg">
       <div className="oh-safe reg-safe">        
@@ -52,7 +52,7 @@ export default function Registration1({ onBack, onSecure }: Props) {
               Erstelle jetzt dein Konto, damit nichts verloren geht.
             </div>
 
-            <button className="reg-primary" type="button" onClick={onSecure}>
+            <button className="reg-primary" type="button" onClick={onNext}>
               Konto kostenlos sichern
             </button>
 
