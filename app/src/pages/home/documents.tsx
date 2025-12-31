@@ -1,4 +1,3 @@
-// Documents.tsx  (BottomNav 1:1 wie Wearables + klickbar)
 import { useMemo, useState } from "react";
 import "../../styles/appShell.css";
 import "./documents.css";
@@ -9,6 +8,9 @@ import CtScanIcon from "../../assets/ct-scan.svg?react";
 import PillsIcon from "../../assets/pills.svg?react";
 import InjectionIcon from "../../assets/injection.svg?react";
 import SearchIcon from "../../assets/loop.svg?react";
+
+import ChatIcon from "../../assets/chat.svg?react";
+import FolderIcon from "../../assets/folder.svg?react";
 
 type Props = {
   onBack?: () => void;
@@ -108,26 +110,20 @@ export default function Documents({ onBack, onOpenCategory, onBackToChat, onBack
 
       {/* Bottom Nav exakt wie Wearables (Emoji, active state, klickbar) */}
       <nav className="bottomNav">
-        <button
-          className="navItem"
-          type="button"
-          onClick={onBackToChat}
-          disabled={!onBackToChat}
-        >
-          <span className="navIcon" aria-hidden="true">💬</span>
+        <button className="navItem" onClick={onBackToChat} disabled={!onBackToChat} type="button">
+          <span className="navIcon" aria-hidden="true">
+            <ChatIcon className="navSvg" />
+          </span>
           <span>Chat</span>
         </button>
 
-        <button
-          className="navItem navItem--active"
-          type="button"
-          onClick={onBackToFolder}
-          disabled={!onBackToFolder}
-        >
-          <span className="navIcon" aria-hidden="true">📁</span>
+        <button className="navItem navItem--active" type="button" onClick={onBackToFolder} disabled={!onBackToFolder} >
+          <span className="navIcon" aria-hidden="true">
+            <FolderIcon className="navSvg" />
+          </span>
           <span>Ordner</span>
         </button>
-      </nav>
+      </nav>        
     </div>
   );
 }

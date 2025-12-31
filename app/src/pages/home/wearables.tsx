@@ -1,6 +1,8 @@
 // wearables.tsx
 import "../../styles/appShell.css";
 import "./wearables.css";
+import ChatIcon from "../../assets/chat.svg?react";
+import FolderIcon from "../../assets/folder.svg?react";
 
 type Props = {
   onBack?: () => void;
@@ -159,26 +161,20 @@ export default function Wearables({ onBack, onBackToChat, onBackToFolder }: Prop
 
       {/* Register (fix) */}
       <nav className="bottomNav">
-        <button
-        className="navItem"
-        type="button"
-        onClick={onBackToChat}
-        disabled={!onBackToChat}
-        >
-            <span className="navIcon" aria-hidden="true">💬</span>
-            <span>Chat</span>
+        <button className="navItem" onClick={onBackToChat} disabled={!onBackToChat} type="button">
+          <span className="navIcon" aria-hidden="true">
+            <ChatIcon className="navSvg" />
+          </span>
+          <span>Chat</span>
         </button>
 
-        <button
-        className="navItem navItem--active"
-        type="button"
-        onClick={onBackToFolder}
-        disabled={!onBackToFolder}
-        >
-            <span className="navIcon" aria-hidden="true">📁</span>
-            <span>Ordner</span>
+        <button className="navItem navItem--active" type="button" onClick={onBackToFolder} disabled={!onBackToFolder} >
+          <span className="navIcon" aria-hidden="true">
+            <FolderIcon className="navSvg" />
+          </span>
+          <span>Ordner</span>
         </button>
-        </nav>
+      </nav>     
     </div>
   );
 }

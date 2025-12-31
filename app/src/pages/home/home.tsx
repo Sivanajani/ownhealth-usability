@@ -4,7 +4,6 @@ import ChatPanel from "./ChatPanel";
 
 import logo from "../../assets/O_Logo.svg";
 
-// Icons (bitte Pfade/Dateinamen anpassen)
 import ChatIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 import SettingsIcon from "../../assets/setting.svg?react";

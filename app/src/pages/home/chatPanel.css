@@ -87,3 +87,81 @@
   background: rgba(255,255,255,0.06);
   color: rgba(255,255,255,0.92);
 }
+
+/* Attach (+) */
+.chatP-attachWrap{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.chatP-attachBtn{
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.90);
+  font-size: 22px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.chatP-attachBtn.is-open{
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.16);
+}
+
+.chatP-attachMenu{
+  position: absolute;
+  left: 0;
+  bottom: 52px;
+  min-width: 190px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10, 18, 34, 0.95);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+}
+
+.chatP-attachItem{
+  width: 100%;
+  text-align: left;
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+}
+
+.chatP-attachItem:active{
+  transform: translateY(1px);
+}
+
+.chatP-attachIcon{
+  width: 18px;
+  height: 18px;
+  opacity: 0.9;
+}
+
+.chatP-attachItem{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+}
+

@@ -13,6 +13,9 @@ import RestaurantIcon from "../../assets/restaurant.svg?react";
 import CameraIcon from "../../assets/camera.svg?react";
 import UploadIcon from "../../assets/upload.svg?react";
 
+import ChatIcon from "../../assets/chat.svg?react";
+import FolderIcon from "../../assets/folder.svg?react";
+
 type Props = {
   onBackToChat?: () => void;
 
@@ -197,15 +200,20 @@ export default function Folder({
 
       {/* Bottom Nav */}
       <nav className="bottomNav">
-        <button className="navItem" onClick={onBackToChat}>
-          <span className="navIcon">💬</span>
+        <button className="navItem" onClick={onBackToChat} type="button">
+          <span className="navIcon" aria-hidden="true">
+            <ChatIcon className="navSvg" />
+          </span>
           <span>Chat</span>
         </button>
-        <button className="navItem navItem--active">
-          <span className="navIcon">📁</span>
+
+        <button className="navItem navItem--active" >
+          <span className="navIcon" aria-hidden="true">
+            <FolderIcon className="navSvg" />
+          </span>
           <span>Ordner</span>
         </button>
-      </nav>
+      </nav>      
     </div>
   );
 }

@@ -8,6 +8,9 @@ import BlitzIcon from "../../assets/blitz.svg?react";
 import TrendIcon from "../../assets/trend.svg?react";
 import RoundIcon from "../../assets/round.svg?react";
 import Meat from "../../assets/meat.svg?react";
+import ChatIcon from "../../assets/chat.svg?react";
+import FolderIcon from "../../assets/folder.svg?react";
+
 
 type Props = {
   onBack?: () => void;
@@ -187,16 +190,20 @@ export default function Medication({ onBack, onBackToChat, onBackToFolder }: Pro
 
       {/* BottomNav bleibt so wie bei dir */}
       <nav className="bottomNav">
-        <button className="navItem" type="button" onClick={onBackToChat} disabled={!onBackToChat}>
-          <span className="navIcon" aria-hidden="true">💬</span>
+        <button className="navItem" onClick={onBackToChat} disabled={!onBackToChat} type="button">
+          <span className="navIcon" aria-hidden="true">
+            <ChatIcon className="navSvg" />
+          </span>
           <span>Chat</span>
         </button>
 
-        <button className="navItem navItem--active" type="button" onClick={onBackToFolder} disabled={!onBackToFolder}>
-          <span className="navIcon" aria-hidden="true">📁</span>
+        <button className="navItem navItem--active" type="button" onClick={onBackToFolder} disabled={!onBackToFolder} >
+          <span className="navIcon" aria-hidden="true">
+            <FolderIcon className="navSvg" />
+          </span>
           <span>Ordner</span>
         </button>
-      </nav>
+      </nav>   
     </div>
   );
 }
