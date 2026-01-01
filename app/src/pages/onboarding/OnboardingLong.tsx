@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState, useEffect, useLayoutEffect } from "react";
 import "./onboardingStart.css";
 import "./onboardingLong.css";
 
@@ -72,7 +72,7 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
         ),
         list: {
           items: [
-            { label: "Vitamin D:", value: "Zielwert erreicht", source: "[Bluttest + Arztbericht (Nov.)]", strong: true },
+            { label: "Vitamin D:", value: "Zielwert erreicht", source: "[Bluttest + Arztbericht Nov.]", strong: true },
             { label: "Omega-3:", value: "-23% Entzündung", source: "[Bluttest + Ernährungsdaten]", strong: true },            
             { label: "Magnesium:", value: "+18% HRV", source: "[Wearable + Schlaf-App]", strong: true },            
             { label: "Kreatin:", value: "+15% Kraftvolumen", source: "[Trainingsdaten + Bio-Impedanz]", strong: true },
@@ -116,7 +116,7 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
             { label: "Herzgesundheit:", value: "Top 20% für dein Alter", source: "[Wearable + Arztbrief]" },
             { label: "Stoffwechsel:", value: "Optimal", source: "[Bluttest November]" },
             { label: "Entzündung:", value: "Niedrig", source: "[Bluttest + Ernährung]" },
-            { label: "Regeneration:", value: "Sehr gut", source: "[Wearable (90 Tage)]" },
+            { label: "Regeneration:", value: "Sehr gut", source: "[Wearable 90 Tage]" },
           ],
         },
         alert: {
@@ -171,12 +171,34 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
   );
 
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [wrapH, setWrapH] = useState<number | null>(null);
+  
+  const measureActive = () => {
+    const node = cardRefs.current[active];
+    if (!node) return;
+    setWrapH(node.offsetHeight);
+  };
+
   const [active, setActive] = useState(0);
 
   useEffect(() => {
     const el = trackRef.current;
     if (el) el.scrollLeft = 0;
   }, []);
+
+  useLayoutEffect(() => {
+    measureActive();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
+
+  useEffect(() => {
+    const onResize = () => measureActive();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
+
 
   const onScroll = () => {
     const el = trackRef.current;
@@ -219,78 +241,115 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
 
 
         {/* Middle */}
+        {/* Middle */}
         <div className="obLon-mid">
-          <div className="obLon-carousel" ref={trackRef} onScroll={onScroll}>
-            {slides.map((slide) => (
-              <section className="obLon-slide" key={slide.id} aria-label="Longevity Preview">
-                <div className={`obLon-card obLon-card--${slide.accent}`}>
-                  {/* kleiner Badge oben rechts */}
-                  {slide.badge && (
-                    <div className={`obLon-topBadge obLon-topBadge--${slide.accent}`}>
-                      {slide.badge}
-                    </div>
-                  )}
-
-                  {/* Header (Icon + Title auf gleicher Höhe) */}
-                  <div className="obLon-cardHeader">
-                    <div className={`obLon-iconWrap obLon-iconWrap--${slide.iconTheme}`}>
-                      <Icon k={slide.iconKey} />
-                    </div>
-
-                    <div className="obLon-cardTitle">{slide.title}</div>
-                  </div>
-
-                  {/* Panel 1: List */}
-                  <div className="obLon-panel obLon-panel--list">
-                    <div className="obLon-list">
-                      {slide.list.items.map((it, idx) => (
-                        <div className="obLon-row" key={idx}>
-                          <span className={`obLon-check obLon-check--${slide.accent}`}>✓</span>
-
-                          <div className="obLon-rowText">
-                            <div className="obLon-rowLine">
-                              <span className={`obLon-rowLabel ${it.strong ? "obLon-rowLabel--strong" : ""}`}>
-                                {it.label}
-                              </span>
-                              {it.value && <span className="obLon-rowValue">{it.value}</span>}
-                            </div>
-                            <div className="obLon-rowSource">{it.source}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Panel 2: Alert */}
-                  <div className="obLon-panel obLon-panel--alert">
-                    <span className="obLon-x">✕</span>
-                    <div>
-                      <div className="obLon-alertTitle">{slide.alert.title}</div>
-                      {slide.alert.hint && <div className="obLon-alertHint">{slide.alert.hint}</div>}
-                    </div>
-                  </div>
-
-                  {/* Panel 3: Bottom (CENTERED wie Mock) */}
+          <div
+            className="obLon-carouselWrap"
+            style={wrapH ? { height: wrapH } : undefined}
+          >
+            <div
+              className="obLon-carousel"
+              ref={trackRef}
+              onScroll={onScroll}
+            >
+              {slides.map((slide, i) => (
+                <section
+                  className="obLon-slide"
+                  key={slide.id}
+                  aria-label="Longevity Preview"
+                >
                   <div
-                    className={[
-                      "obLon-panel",
-                      "obLon-panel--bottom",
-                      "obLon-panel--bottomCentered",
-                      `obLon-panel--bottom-${slide.accent}`,
-                    ].join(" ")}
+                    ref={(el) => {
+                      cardRefs.current[i] = el;
+                    }}
+                    className={`obLon-card obLon-card--${slide.accent}`}
                   >
-                    <div className="obLon-bottomLabel">{slide.bottom.label}</div>
-                    <div className={`obLon-bottomValue obLon-bottomValue--${slide.accent}`}>
-                      {slide.bottom.value}
+                    {/* Badge */}
+                    {slide.badge && (
+                      <div className={`obLon-topBadge obLon-topBadge--${slide.accent}`}>
+                        {slide.badge}
+                      </div>
+                    )}
+
+                    {/* Header */}
+                    <div className="obLon-cardHeader">
+                      <div className={`obLon-iconWrap obLon-iconWrap--${slide.iconTheme}`}>
+                        <Icon k={slide.iconKey} />
+                      </div>
+
+                      <div className="obLon-cardTitle">{slide.title}</div>
                     </div>
-                    {slide.bottom.hint && <div className="obLon-bottomHint">{slide.bottom.hint}</div>}
-                    {slide.bottom.hint2 && <div className="obLon-bottomHint2">{slide.bottom.hint2}</div>}
+
+                    {/* Panel 1: List */}
+                    <div className="obLon-panel obLon-panel--list">
+                      <div className="obLon-list">
+                        {slide.list.items.map((it, idx) => (
+                          <div className="obLon-row" key={idx}>
+                            <span className={`obLon-check obLon-check--${slide.accent}`}>✓</span>
+
+                            <div className="obLon-rowText">
+                              <div className="obLon-rowLine">
+                                <span
+                                  className={`obLon-rowLabel ${
+                                    it.strong ? "obLon-rowLabel--strong" : ""
+                                  }`}
+                                >
+                                  {it.label}
+                                </span>
+                                {it.value && (
+                                  <span className="obLon-rowValue">{it.value}</span>
+                                )}
+                              </div>
+                              <div className="obLon-rowSource">{it.source}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Panel 2: Alert */}
+                    <div className="obLon-panel obLon-panel--alert">
+                      <span className="obLon-x">✕</span>
+                      <div>
+                        <div className="obLon-alertTitle">{slide.alert.title}</div>
+                        {slide.alert.hint && (
+                          <div className="obLon-alertHint">{slide.alert.hint}</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Panel 3: Bottom */}
+                    <div
+                      className={[
+                        "obLon-panel",
+                        "obLon-panel--bottom",
+                        slide.bottom.variant === "centered"
+                          ? "obLon-panel--bottomCentered"
+                          : "obLon-panel--bottomLeft",
+                        `obLon-panel--bottom-${slide.accent}`,
+                      ].join(" ")}
+                    >
+                      <div className="obLon-bottomLabel">{slide.bottom.label}</div>
+
+                      <div className={`obLon-bottomValue obLon-bottomValue--${slide.accent}`}>
+                        {slide.bottom.value}
+                      </div>
+
+                      {slide.bottom.hint && (
+                        <div className="obLon-bottomHint">{slide.bottom.hint}</div>
+                      )}
+
+                      {slide.bottom.hint2 && (
+                        <div className="obLon-bottomHint2">{slide.bottom.hint2}</div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </section>
-            ))}
+                </section>
+              ))}
+            </div>
           </div>
 
+          {/* Mini dots */}
           <div className="obLon-mini" aria-hidden="true">
             {slides.map((_, i) => (
               <button
@@ -303,6 +362,7 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
             ))}
           </div>
         </div>
+
 
         {/* Bottom */}
         <div className="obLon-bottom">

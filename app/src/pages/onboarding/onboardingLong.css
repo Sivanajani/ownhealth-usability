@@ -92,6 +92,7 @@
     linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
   backdrop-filter: blur(8px);
   overflow: hidden;
+  height: auto;
 }
 
 .obLon-card--green{
@@ -421,8 +422,7 @@
 }
 
 .obLon-bottomHint2{
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 10px;
   color: rgba(238, 240, 243, 0.72);
 }
 
@@ -637,6 +637,3 @@
   align-items: flex-start;
 }
 
-.obLon-card{
-  height: auto;
-}
