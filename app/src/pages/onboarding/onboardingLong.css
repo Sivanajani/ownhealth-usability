@@ -41,6 +41,11 @@
   line-height: 1.15;
 }
 
+.obLon-titleHighlight {
+  color: rgba(16,185,129,0.95); 
+}
+
+
 /* Middle */
 .obLon-mid{
   flex-direction: column;

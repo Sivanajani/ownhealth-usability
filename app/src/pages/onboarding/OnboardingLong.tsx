@@ -1,14 +1,14 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import "./onboardingStart.css";
 import "./onboardingLong.css";
-import LabIcon from "../../assets/medical.svg?react";
-import ChartIcon from "../../assets/chart.svg?react";
-import PlanIcon from "../../assets/plan.svg?react";
-import FileIcon from "../../assets/file.svg?react";
-import LightningIcon from "../../assets/blitz.svg?react";
 
-type IconKey = "lab" | "chart" | "plan";
-type Accent = "blue" | "green" | "purple";
+import PillIcon from "../../assets/pills.svg?react";
+import ClockIcon from "../../assets/clock.svg?react";
+import MoonIcon from "../../assets/moon.svg?react";
+
+type IconKey = "pill" | "clock" | "moon";
+type IconTheme = "pill" | "clock" | "moon";
+type Accent = "green" | "blue" | "purple";
 
 type Props = {
   onNext?: () => void;
@@ -17,18 +17,19 @@ type Props = {
 
 type Slide = {
   id: string;
-  topHeadline: React.ReactNode;
+  headline: React.ReactNode;
   accent: Accent;
   iconKey: IconKey;
-  iconTheme: "clock" | "pill" | "moon" | "lab" | "chart" | "plan";
+  iconTheme: IconTheme;
   badge?: string;
   title: React.ReactNode;
 
   list: {
     items: Array<{
       label: string;
-      value?: string;
-      source?: string;
+      value: string;
+      source: string;
+      strong?: boolean;
     }>;
   };
 
@@ -38,11 +39,11 @@ type Slide = {
   };
 
   bottom: {
-    label?: string; 
+    variant: "centered"; 
+    label: string;
     value: string;
     hint?: string;
-    iconKey?: "file" | "lightning";
-    prefix?: React.ReactNode;
+    hint2?: string;
   };
 };
 
@@ -50,55 +51,16 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
   const slides: Slide[] = useMemo(
     () => [
       {
-        id: "bioage",
-        accent: "blue",
-        iconKey: "lab",
-        iconTheme: "lab",
-        badge: "VORSCHAU",
-        topHeadline: (
-          <>
-            Stell dir vor, du kennst
-            <br />
-            dein Bio-Alter:
-          </>
-        ),
-        title: (
-          <>
-            Dein Bio-Alter: 34 statt 38
-            <br />
-            Dein Potenzial: 31
-          </>
-        ),
-        list: {
-          items: [
-            { label: "Herzgesundheit:", value: "Top 20% für dein Alter", source: "[Wearable + Arztbrief]" },
-            { label: "Stoffwechsel:", value: "Optimal", source: "[Bluttest November]" },
-            { label: "Entzündung:", value: "Niedrig", source: "[Bluttest + Ernährung]" },
-            { label: "Regeneration:", value: "Sehr gut", source: "[Wearable (90 Tage)]" },
-          ],
-        },
-        alert: {
-          title: "Achtung: B12-Mangel",
-          hint: "Kann Zell-Alterung beschleunigen.",
-        },
-        bottom: {
-          label: "QUICK WIN",
-          value: "B12 auffüllen = Bio-Alter 31",
-          hint: "Erste Verbesserungen in 4–6 Wochen",
-          iconKey: "lightning",
-        },
-      },
-      {
         id: "supplements",
         accent: "green",
-        iconKey: "chart",
-        iconTheme: "chart",
+        iconKey: "pill",
+        iconTheme: "pill",
         badge: "VORSCHAU",
-        topHeadline: (
+        headline: (
           <>
-            Stell dir vor, du weisst
+            Stell dir vor, du wüsstest
             <br />
-            was wirklich wirkt:
+            genau, was wirkt.
           </>
         ),
         title: (
@@ -110,81 +72,111 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
         ),
         list: {
           items: [
-            { label: "Vitamin D:", value: "Zielwert erreicht", source: "[Labor + Arztbrief (Nov.)]" },
-            { label: "Omega-3:", value: "-23% Entzündung", source: "[Bluttest + Ernährung]" },
-            { label: "Magnesium:", value: "+18% HRV", source: "[Wearable + Schlaf-App]" },
-            { label: "Kreatin:", value: "+15% Kraftvolumen", source: "[Training + Bio-Impedanz]" },
+            { label: "Vitamin D:", value: "Zielwert erreicht", source: "[Bluttest + Arztbericht (Nov.)]", strong: true },
+            { label: "Omega-3:", value: "-23% Entzündung", source: "[Bluttest + Ernährungsdaten]", strong: true },            
+            { label: "Magnesium:", value: "+18% HRV", source: "[Wearable + Schlaf-App]", strong: true },            
+            { label: "Kreatin:", value: "+15% Kraftvolumen", source: "[Trainingsdaten + Bio-Impedanz]", strong: true },
           ],
         },
         alert: {
           title: "8 ohne messbaren Effekt",
-          hint: "Manche sind erst langfristig messbar.",
+          hint: "Hinweis: Manche Supplements sind erst langfristig messbar.",
         },
         bottom: {
-          label: "EINSPARPOTENZIAL",
+          variant: "centered",
+          label: "Einsparpotenzial",
           value: "130€/Monat",
-          iconKey: "file",
         },
       },
+
       {
-        id: "sleep",
-        accent: "purple",
-        iconKey: "plan",
-        iconTheme: "moon",
+        id: "bioage",
+        accent: "blue",
+        iconKey: "clock",
+        iconTheme: "clock",
         badge: "VORSCHAU",
-        topHeadline: (
+        headline: (
           <>
-            Stell dir vor, du findest
+            Stell dir vor, du wärst
             <br />
-            die Ursache:
+            biologisch jünger:
           </>
         ),
         title: (
           <>
-            Dein Schlaf ist 60%
+            Dein Bio-Alter: 34 statt 38
             <br />
-            schlechter als er sein könnte
+            <span className="obLon-titleHighlight">
+            Dein Potenzial: 31
+            </span>
           </>
         ),
+        list: {
+          items: [
+            { label: "Herzgesundheit:", value: "Top 20% für dein Alter", source: "[Wearable + Arztbrief]" },
+            { label: "Stoffwechsel:", value: "Optimal", source: "[Bluttest November]" },
+            { label: "Entzündung:", value: "Niedrig", source: "[Bluttest + Ernährung]" },
+            { label: "Regeneration:", value: "Sehr gut", source: "[Wearable (90 Tage)]" },
+          ],
+        },
+        alert: {
+          title: "Achtung: B12-Mangel beschleunigt Zell-Alterung",
+          hint: "Quelle: Bluttest (sink seit Januar)",
+        },
+        bottom: {
+          variant: "centered",
+          label: "QUICK WIN",
+          value: "B12 auffüllen = Bio-Alter 31",
+          hint: "Erste Verbesserungen in 4–6 Wochen",
+          hint2: "Quelle: 847 ähnliche Profile",
+        },
+      },
+
+      {
+        id: "energy",
+        accent: "purple",
+        iconKey: "moon",
+        iconTheme: "moon",
+        badge: "VORSCHAU",
+        headline: (
+          <>
+            Stell dir vor, du wachst
+            <br />
+            jeden Morgen mit mehr Energie auf
+          </>
+        ),
+        title: "Dein Schlaf ist 60 % unter deinem Potenzial",
         list: {
           items: [
             { label: "Tiefschlaf:", value: "Nur 40min", source: "[Wearable + Schlaf-App]" },
             { label: "Ursache gefunden:", value: "Magnesiummangel", source: "[Bluttest + Supplement-Tracking]" },
             { label: "Verstärkt durch:", value: "Spätes Abendessen", source: "[Ernährungs-App + Wearable HRV]" },
-            { label: "Stress abends:", value: "Zu hoch", source: "[HRV + mentale Gesundheit]" },
+            { label: "Stress abends zu hoch", value: "", source: "[HRV + Mentale Gesundheits App]" },
           ],
         },
         alert: {
-          title: "Die Kombi killt den Schlaf:",
-          hint: "Kaffee 16 Uhr + Magnesium fehlt + spätes Essen",
+          title: "Schlafkiller: Kaffee 16 Uhr + Magnesium-Mangel",
+          hint: "Quelle: Alle Daten der letzten 30 Tage",
         },
         bottom: {
+          variant: "centered",
           label: "QUICK WIN",
-          value: "Magnesium 400mg vor dem Schlafen",
+          value: "Magnesium 40 mg abends",
           hint: "+20–30 Min Tiefschlaf möglich",
-          iconKey: "lightning",
+          hint2: "Quelle: 3 von 4 Usern sehen Verbesserung",
         },
       },
     ],
     []
   );
 
-  const Icon = ({ k }: { k: IconKey }) => {
-    if (k === "lab") return <LabIcon className="obLon-svg" />;
-    if (k === "chart") return <ChartIcon className="obLon-svg" />;
-    return <PlanIcon className="obLon-svg" />;
-  };
-
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [wrapH, setWrapH] = useState<number | null>(null);
+  const [active, setActive] = useState(0);
 
-  const measureActive = () => {
-    const node = cardRefs.current[activeIndex];
-    if (!node) return;
-    setWrapH(node.offsetHeight);
-  };
+  useEffect(() => {
+    const el = trackRef.current;
+    if (el) el.scrollLeft = 0;
+  }, []);
 
   const onScroll = () => {
     const el = trackRef.current;
@@ -192,7 +184,7 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
     const w = el.clientWidth || 1;
     const idx = Math.round(el.scrollLeft / w);
     const clamped = Math.max(0, Math.min(slides.length - 1, idx));
-    if (clamped !== activeIndex) setActiveIndex(clamped);
+    if (clamped !== active) setActive(clamped);
   };
 
   const goTo = (idx: number) => {
@@ -201,26 +193,18 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
     el.scrollTo({ left: idx * el.clientWidth, behavior: "smooth" });
   };
 
+  const s = slides[active];
 
-  useLayoutEffect(() => {
-    measureActive();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeIndex]);
-
-
-  useEffect(() => {
-    const onResize = () => measureActive();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeIndex]);
-
-  const activeSlide = slides[activeIndex];
+  const Icon = ({ k }: { k: IconKey }) => {
+    if (k === "pill") return <PillIcon className="obLon-svg" />;
+    if (k === "clock") return <ClockIcon className="obLon-svg" />;
+    return <MoonIcon className="obLon-svg" />;
+  };
 
   return (
     <div className="ob-root">
       <div className="ob-content obLon-root">
-        {/* TOP */}
+        {/* Top */}        
         <div className="ob-top ob0-top">
           <div className="ob0-dots" aria-hidden="true">
             <span className="ob0-dot ob0-dot--active" />
@@ -230,103 +214,102 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
             <span className="ob0-dot" />
           </div>
 
-          <h1 className="obLon-headline">{activeSlide.topHeadline}</h1>
+          <h1 className="obLon-headline">{s.headline}</h1>
         </div>
 
-        <div className="obLon-mid">          
-          <div className="obLon-carouselWrap" style={wrapH ? { height: wrapH } : undefined}>
-            <div className="obLon-carousel" ref={trackRef} onScroll={onScroll}>
-              {slides.map((s, i) => (
-                <section className="obLon-slide" key={s.id} aria-label="Longevity Preview Slide">
-                  <div
-                    ref={(el) => {
-                      cardRefs.current[i] = el;
-                    }}
-                    className={`obLon-card obLon-card--${s.accent}`}
-                  >
-                    {s.badge && (
-                      <div className={`obLon-topBadge obLon-topBadge--${s.accent}`}>{s.badge}</div>
-                    )}
 
-                    <div className="obLon-cardHeader">
-                      <div className={`obLon-iconWrap obLon-iconWrap--${s.iconTheme}`}>
-                        <Icon k={s.iconKey} />
-                      </div>
+        {/* Middle */}
+        <div className="obLon-mid">
+          <div className="obLon-carousel" ref={trackRef} onScroll={onScroll}>
+            {slides.map((slide) => (
+              <section className="obLon-slide" key={slide.id} aria-label="Longevity Preview">
+                <div className={`obLon-card obLon-card--${slide.accent}`}>
+                  {/* kleiner Badge oben rechts */}
+                  {slide.badge && (
+                    <div className={`obLon-topBadge obLon-topBadge--${slide.accent}`}>
+                      {slide.badge}
+                    </div>
+                  )}
 
-                      <div className="obLon-cardTitle">{s.title}</div>
+                  {/* Header (Icon + Title auf gleicher Höhe) */}
+                  <div className="obLon-cardHeader">
+                    <div className={`obLon-iconWrap obLon-iconWrap--${slide.iconTheme}`}>
+                      <Icon k={slide.iconKey} />
                     </div>
 
-                    {/* LIST */}
-                    <div className="obLon-panel obLon-panel--list">
-                      <div className="obLon-list">
-                        {s.list.items.map((it, idx) => (
-                          <div className="obLon-row" key={idx}>
-                            <span className={`obLon-check obLon-check--${s.accent}`}>✓</span>
+                    <div className="obLon-cardTitle">{slide.title}</div>
+                  </div>
 
-                            <div className="obLon-rowText">
-                              <div className="obLon-rowLine">
-                                <span className="obLon-rowLabel">{it.label}</span>
-                                {it.value && <span className="obLon-rowValue">{it.value}</span>}
-                              </div>
-                              {it.source && <div className="obLon-rowSource">{it.source}</div>}
+                  {/* Panel 1: List */}
+                  <div className="obLon-panel obLon-panel--list">
+                    <div className="obLon-list">
+                      {slide.list.items.map((it, idx) => (
+                        <div className="obLon-row" key={idx}>
+                          <span className={`obLon-check obLon-check--${slide.accent}`}>✓</span>
+
+                          <div className="obLon-rowText">
+                            <div className="obLon-rowLine">
+                              <span className={`obLon-rowLabel ${it.strong ? "obLon-rowLabel--strong" : ""}`}>
+                                {it.label}
+                              </span>
+                              {it.value && <span className="obLon-rowValue">{it.value}</span>}
                             </div>
+                            <div className="obLon-rowSource">{it.source}</div>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* ALERT */}
-                    <div className="obLon-panel obLon-panel--alert">
-                      <span className="obLon-x">✕</span>
-                      <div>
-                        <div className="obLon-alertTitle">{s.alert.title}</div>
-                        {s.alert.hint && <div className="obLon-alertHint">{s.alert.hint}</div>}
-                      </div>
-                    </div>
-
-                    {/* BOTTOM */}
-                    <div className={`obLon-panel obLon-panel--bottom obLon-panel--bottom-${s.accent}`}>
-                      <div className="obLon-bottomIcon" aria-hidden="true">
-                        {s.bottom.iconKey === "lightning" ? (
-                          <LightningIcon className="obLon-svg" />
-                        ) : (
-                          <FileIcon className="obLon-svg" />
-                        )}
-                      </div>
-
-                      <div className="obLon-bottomText">                        
-                        {s.bottom.label && <div className="obLon2-bottomLabel">{s.bottom.label}</div>}
-                        <div className="obLon2-bottomValue">
-                          {s.bottom.prefix} {s.bottom.value}
                         </div>
-                        {s.bottom.hint && <div className="obLon2-bottomHint">{s.bottom.hint}</div>}
-                      </div>
+                      ))}
                     </div>
                   </div>
-                </section>
-              ))}
-            </div>
+
+                  {/* Panel 2: Alert */}
+                  <div className="obLon-panel obLon-panel--alert">
+                    <span className="obLon-x">✕</span>
+                    <div>
+                      <div className="obLon-alertTitle">{slide.alert.title}</div>
+                      {slide.alert.hint && <div className="obLon-alertHint">{slide.alert.hint}</div>}
+                    </div>
+                  </div>
+
+                  {/* Panel 3: Bottom (CENTERED wie Mock) */}
+                  <div
+                    className={[
+                      "obLon-panel",
+                      "obLon-panel--bottom",
+                      "obLon-panel--bottomCentered",
+                      `obLon-panel--bottom-${slide.accent}`,
+                    ].join(" ")}
+                  >
+                    <div className="obLon-bottomLabel">{slide.bottom.label}</div>
+                    <div className={`obLon-bottomValue obLon-bottomValue--${slide.accent}`}>
+                      {slide.bottom.value}
+                    </div>
+                    {slide.bottom.hint && <div className="obLon-bottomHint">{slide.bottom.hint}</div>}
+                    {slide.bottom.hint2 && <div className="obLon-bottomHint2">{slide.bottom.hint2}</div>}
+                  </div>
+                </div>
+              </section>
+            ))}
           </div>
 
-          {/* Swipe dots */}
           <div className="obLon-mini" aria-hidden="true">
             {slides.map((_, i) => (
               <button
                 key={i}
                 type="button"
-                className={`obLon-miniDot ${i === activeIndex ? "obLon-miniDot--active" : ""}`}
+                className={`obLon-miniDot ${i === active ? "obLon-miniDot--active" : ""}`}
                 onClick={() => goTo(i)}
-                aria-label={`Slide ${i + 1}`}
+                aria-label={`Go to slide ${i + 1}`}
               />
             ))}
           </div>
         </div>
 
+        {/* Bottom */}
         <div className="obLon-bottom">
           <button className="obLon-cta" onClick={onNext}>
-            Weiter
+            Diese Insights will ich
           </button>
-          <button className="obLon-back" onClick={onBack}>
+          <button type="button" className="obLon-back" onClick={onBack}>
             Zurück
           </button>
         </div>
