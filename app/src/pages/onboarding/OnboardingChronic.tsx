@@ -83,7 +83,7 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
           hint: "Deine Werte zeigen die wahren Ursachen.",
         },
         bottom: {
-          value: "Arzt Report soeben erstellt",
+          value: "Arzt Report erstellt",
           iconKey: "file",
         },
       },
@@ -121,7 +121,7 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
           hint: "Antibiotika → Darmflora gestört → Nährstoffaufnahme → Erschöpfung",
         },
         bottom: {
-          value: "Komplette Historie für Arzt erstellt",
+          value: "Historie für Arzt erstellt",
           iconKey: "file",
         },
       },
@@ -154,7 +154,7 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
             },
             {
               label: "Abends: Magnesium vor dem Schlaf",
-              value: "Ziel: Regeneration & HRV-Steigerung",
+              value: "Ziel: HRV-Steigerung",
               source: "[Wearable + Mentale Gesundheit]",
             },
           ],
@@ -166,7 +166,7 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
         bottom: {
           label: "Prognose: Energie-Anstieg",
           value: "Messbar mehr Energie in 14 Tagen.",
-          hint: "73% Wahrscheinlichkeit (basierend auf 8.420 ähnlichen Profilen)",
+          hint: "",
           iconKey: "lightning",
         },
       },
