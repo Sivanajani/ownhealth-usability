@@ -142,7 +142,7 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
           <>
             Stell dir vor, du wachst
             <br />
-            jeden Morgen mit mehr Energie auf
+            jeden Morgen erholt auf
           </>
         ),
         title: "Dein Schlaf ist 60 % unter deinem Potenzial",
@@ -155,7 +155,7 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
           ],
         },
         alert: {
-          title: "Schlafkiller: Kaffee 16 Uhr + Magnesium-Mangel",
+          title: "Schlafkiller: Später Kaffee & Essen + Magnesium-Mangel",
           hint: "Quelle: Alle Daten der letzten 30 Tage",
         },
         bottom: {
