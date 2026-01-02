@@ -1,4 +1,3 @@
-// src/pages/registration/RegisterFlow.tsx
 import { useState } from "react";
 
 import Registration1 from "./registration1";
@@ -11,28 +10,30 @@ import RegistrationFaceId from "./RegistrationFaceId";
 type RegisterStep = "r1" | "privacy" | "phone" | "code" | "ownid" | "faceid";
 
 type Props = {
-  onBackToProfile?: () => void;   // damit HomeFlow wieder zurück kann
-  onDone?: () => void;           // optional: wenn fertig, zurück wohin du willst
+  onBackToProfile?: () => void;
+  onDone?: () => void;
 };
 
 export default function RegisterFlow({ onBackToProfile, onDone }: Props) {
   const [step, setStep] = useState<RegisterStep>("r1");
   const [phone, setPhone] = useState<string>("");
 
-  // 1) dein bestehender Screen (Registration1) -> weiter zu privacy
   if (step === "r1")
     return (
       <Registration1
         onBack={onBackToProfile}
-        onNext={() => setStep("privacy")}   // WICHTIG: Registration1 braucht onNext (siehe unten)
+        onNext={() => setStep("privacy")}
       />
     );
 
-  // 2) Privacy -> weiter zu phone
   if (step === "privacy")
-    return <RegistrationPrivacy onCreate={() => setStep("phone")} />;
+    return (
+      <RegistrationPrivacy
+        onBack={() => setStep("r1")}
+        onCreate={() => setStep("phone")}
+      />
+    );
 
-  // 3) Phone -> weiter zu code (phone merken)
   if (step === "phone")
     return (
       <RegistrationPhone
@@ -44,7 +45,6 @@ export default function RegisterFlow({ onBackToProfile, onDone }: Props) {
       />
     );
 
-  // 4) Code (Prototyp: 123456) -> weiter zu ownid
   if (step === "code")
     return (
       <RegistrationCode
@@ -57,7 +57,6 @@ export default function RegisterFlow({ onBackToProfile, onDone }: Props) {
       />
     );
 
-  // 5) Own ID -> weiter zu faceid
   if (step === "ownid")
     return (
       <RegistrationOwnId
@@ -66,7 +65,6 @@ export default function RegisterFlow({ onBackToProfile, onDone }: Props) {
       />
     );
 
-  // 6) FaceID -> done (oder skip)
   if (step === "faceid")
     return (
       <RegistrationFaceId

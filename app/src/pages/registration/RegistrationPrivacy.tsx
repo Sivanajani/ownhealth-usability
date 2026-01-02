@@ -1,65 +1,75 @@
-import "./registrationPrivacy.css";
+import "../../styles/appShell.css";
+import "./RegistrationPrivacy.css";
 
 import ShieldIcon from "../../assets/schild.svg?react";
 import CheckIcon from "../../assets/check.svg?react";
 
 type Props = {
   onCreate?: () => void;
+  onBack?: () => void;
 };
 
 export default function RegistrationPrivacy({ onCreate }: Props) {
   return (
-    <div className="oh-screen reg-bg">
-      <div className="oh-safe reg-safe reg-privacy">        
-        <h1 className="reg-title">
-          Dein <br /> Gesundheitskonto. <br /> Maximal privat.
+    <div className="rp-screen">
+      <div className="rp-safe">        
+
+        <h1 className="rp-title">
+          Dein Gesundheitskonto.
+          <br />
+          Maximal privat.
         </h1>
 
-        <div className="reg-card">
-          <div className="reg-cardIcon">
-            <ShieldIcon />
+        <section className="rp-card">
+          <div className="rp-cardInner">
+            <div className="rp-shield">
+              <ShieldIcon />
+            </div>
+
+            <div className="rp-cardTitle">Nur DU hast Zugriff</div>
+            <div className="rp-cardSub">
+              Nicht wir. Nicht deine Firma.
+              <br />
+              Nicht deine Krankenkasse. Kein Big Tech.
+            </div>
           </div>
+        </section>
 
-          <div className="reg-cardTitle">Nur DU hast Zugriff</div>
-          <div className="reg-cardSub">
-            Nicht wir. Nicht deine Firma. <br />
-            Nicht deine Krankenkasse. Kein Big Tech.
-          </div>
-        </div>
+        <h2 className="rp-sectionTitle">Wie funktioniert das?</h2>
 
-        <div className="reg-sectionTitle">Wie funktioniert das?</div>
-
-        <ul className="reg-bullets">
-          <li>
-            <span className="reg-bulletIcon">
+        <ul className="rp-list">
+          <li className="rp-item">
+            <span className="rp-dot">
               <CheckIcon />
             </span>
-            <div>
-              <div className="reg-bulletMain">Keine E-Mail-Adresse</div>
-              <div className="reg-bulletSub">Wir wissen nicht, wer du bist.</div>
+            <div className="rp-itemText">
+              <div className="rp-itemTitle">Keine E-Mail-Adresse</div>
+              <div className="rp-itemSub">→ Wir wissen nicht wer du bist</div>
             </div>
           </li>
-          <li>
-            <span className="reg-bulletIcon">
+
+          <li className="rp-item">
+            <span className="rp-dot">
               <CheckIcon />
             </span>
-            <div>
-              <div className="reg-bulletMain">Anonyme OWN ID</div>
-              <div className="reg-bulletSub">Wie eine Kontonummer.</div>
+            <div className="rp-itemText">
+              <div className="rp-itemTitle">Anonyme OWN ID</div>
+              <div className="rp-itemSub">→ Wie eine Kontonummer</div>
             </div>
           </li>
-          <li>
-            <span className="reg-bulletIcon">
+
+          <li className="rp-item">
+            <span className="rp-dot">
               <CheckIcon />
             </span>
-            <div>
-              <div className="reg-bulletMain">Verschlüsselt auf deinem Gerät</div>
-              <div className="reg-bulletSub">Wir haben keinen Zugriff.</div>
+            <div className="rp-itemText">
+              <div className="rp-itemTitle">Verschlüsselt auf deinem Gerät</div>
+              <div className="rp-itemSub">→ Wir haben keinen Zugriff</div>
             </div>
           </li>
         </ul>
 
-        <button className="reg-primaryBtn" onClick={onCreate}>
+        <button className="rp-btn" type="button" onClick={onCreate}>
           Konto erstellen
         </button>
       </div>

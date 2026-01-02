@@ -1,34 +1,78 @@
-.reg-titleCenter{
-  text-align: center;
-  margin-top: 10px;
+.rc-screen{
+  min-height: 100dvh;
+  background: radial-gradient(1200px 900px at 35% -20%,
+    var(--bg-top) 0%,
+    var(--bg-bottom) 55%,
+    #071223 100%);
 }
 
-.reg-codeBoxes{
-  margin: 20px auto 14px;
-  display:grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-  max-width: 340px;
+.rc-safe{
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+  min-height: 100dvh;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.reg-codeBox{
-  height: 52px;
-  border-radius: 14px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.12);
-  display:grid;
-  place-items:center;
-  color:#fff;
-  font-size: 18px;
+/* Back chevron */
+.rc-back{
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.9);
+  font-size: 28px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.rc-title{
+  margin-top: 74px;
+  color: rgba(255,255,255,.92);
   font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+}
+/* Code boxes */
+.rc-boxRow{
+  margin-top: 26px;
+  display: flex;
+  gap: 10px;
 }
 
-.reg-codeBox.is-filled{
-  border-color: rgba(59,130,246,.55);
-  background: rgba(59,130,246,.10);
+.rc-box{
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,.92);
+  font-weight: 900;
+  font-size: 16px;
 }
 
-.reg-codeHiddenInput{
+.rc-box--filled{
+  border-color: rgba(59,130,246,.45);
+  box-shadow:
+    0 0 0 3px rgba(59,130,246,.15),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+/* Hidden input that still receives OTP autofill */
+.rc-hiddenInput{
   position: absolute;
   opacity: 0;
   pointer-events: none;
@@ -36,44 +80,42 @@
   width: 1px;
 }
 
-.reg-codeHint{
-  text-align:center;
-  color: rgba(255,255,255,.6);
-  font-size: 12px;
-  line-height: 1.35;
-  margin-bottom: 10px;
+/* Info text */
+.rc-info{
+  margin-top: 26px;
+  text-align: center;
+  color: rgba(255,255,255,.55);
+  font-size: 16px;
+  line-height: 1.25;
 }
 
-.reg-codePhone{
-  color: rgba(255,255,255,.85);
-  font-weight: 650;
+.rc-infoTop{ margin-bottom: 2px; }
+
+.rc-infoPhone{
+  color: rgba(255,255,255,.45);
 }
 
-.reg-codeError{
-  text-align:center;
-  color: rgba(248,113,113,.95);
-  font-size: 12px;
-  margin: 8px 0 0;
-}
-
-.reg-codeFooter{
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: calc(18px + env(safe-area-inset-bottom));
+/* Bottom resend */
+.rc-bottom{
+  margin-top: auto;
+  padding-top: 24px;
+  padding-bottom: 10px;
   text-align: center;
 }
 
-.reg-codeFooterTitle{
-  color: rgba(255,255,255,.55);
-  font-size: 12px;
+.rc-miss{
+  color: rgba(255,255,255,.45);
+  font-size: 124x;
   margin-bottom: 6px;
 }
 
-.reg-linkInline{
+.rc-resend{
   border: 0;
   background: transparent;
-  color: rgba(59,130,246,.95);
-  font-size: 12px;
-  font-weight: 700;
+  color: rgba(59,130,246,.92);
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
 }
+
+.rc-resend:active{ transform: translateY(1px); }

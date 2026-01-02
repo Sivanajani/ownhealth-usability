@@ -111,7 +111,13 @@ export default function HomeFlow({ userName, age, focus, hasSeenHomeInsight, onS
     );
 
   if (step === "registerflow")
-    return <RegisterFlow onDone={() => setStep("profile")} />;
+    return (
+      <RegisterFlow
+        onBackToProfile={() => setStep("profile")}
+        onDone={() => setStep("profile")}
+      />
+    );
+
 
   return null;
 }

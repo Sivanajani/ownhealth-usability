@@ -1,103 +1,213 @@
-.reg-topRow{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  margin-bottom: 8px;
+.rp2-screen{
+  min-height: 100dvh;
+  background: radial-gradient(1200px 900px at 35% -20%,
+    var(--bg-top) 0%,
+    var(--bg-bottom) 55%,
+    #071223 100%);
 }
 
-.reg-backBtn{
-  width: 34px;
-  height: 34px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.9);
-  font-size: 22px;
-  line-height: 0;
+.rp2-safe{
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 28px 18px calc(18px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
 }
 
-.reg-lead{
+/* Title */
+.rp2-title{
+  margin: 10px 0 10px;
+  color: #fff;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  font-size: 34px;
+  text-align: center;
+}
+
+/* Description */
+.rp2-sub{
+  margin: 0 0 18px;
   color: rgba(255,255,255,.65);
-  margin: 0 0 14px;
   font-size: 13px;
   line-height: 1.35;
+  text-align: center;
 }
 
-.reg-inputCard{
-  border-radius: 18px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
-  padding: 14px;
-  margin-bottom: 16px;
-  backdrop-filter: blur(10px);
+/* Input */
+.rp2-field{
+  margin-top: 6px;
 }
 
-.reg-label{
-  display:block;
-  color: rgba(255,255,255,.6);
-  font-size: 12px;
-  margin-bottom: 8px;
-}
-
-.reg-inputRow{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(0,0,0,.18);
-  padding: 12px 12px;
-}
-
-.reg-input{
+.rp2-input{
   width: 100%;
-  background: transparent;
-  border: 0;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  padding: 0 14px;
   outline: none;
-  color: #fff;
-  font-size: 14px;
+  font-size: 13px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
 }
 
-.reg-input::placeholder{
+.rp2-input::placeholder{
   color: rgba(255,255,255,.35);
 }
 
-.reg-inputIcon svg{
-  width: 18px;
-  height: 18px;
-  opacity: .9;
+/* Focus ring like iOS */
+.rp2-input:focus{
+  border-color: rgba(59,130,246,.55);
+  box-shadow:
+    0 0 0 3px rgba(59,130,246,.22),
+    inset 0 1px 0 rgba(255,255,255,.05);
 }
 
-.reg-inlineOk{
-  display:flex;
-  align-items:center;
+/* Note row */
+.rp2-note{
+  display: flex;
+  align-items: center;
   gap: 8px;
   margin-top: 10px;
   color: rgba(255,255,255,.55);
   font-size: 12px;
 }
 
-.reg-inlineOkIcon{
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  display:grid;
-  place-items:center;
-  background: rgba(34,197,94,.14);
-  border: 1px solid rgba(34,197,94,.25);
-}
-.reg-inlineOkIcon svg{ width: 12px; height: 12px; }
-
-.reg-primaryBtn:disabled{
-  opacity: .45;
-  box-shadow: none;
+.rp2-noteIcon{
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  opacity: .85;
 }
 
-.reg-linkBtn{
+.rp2-noteIcon svg{
+  width: 14px;
+  height: 14px;
+}
+
+.rp2-noteIcon svg *{
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* Push CTA to bottom like mock */
+.rp2-spacer{
+  flex: 1;
+}
+
+/* Main button */
+.rp2-btn{
+  margin-top: 80px;
   width: 100%;
+  height: 58px;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent), var(--btn);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow:
+    0 22px 60px rgba(59, 130, 246, 0.35),
+    0 10px 22px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+
+.rp2-btn:active{ transform: translateY(1px); }
+
+/* Disabled state */
+.rp2-btn--disabled{
+  opacity: .45;
+  filter: grayscale(0.3);
+  box-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.rp2-btn--disabled:active{
+  transform: none;
+}
+
+/* Why button */
+.rp2-why{
   margin-top: 10px;
-  border: 0;
+  width: 100%;
   background: transparent;
-  color: rgba(255,255,255,.6);
+  border: 0;
+  color: rgba(255,255,255,.60);
   font-size: 12px;
+  display: inline-flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.rp2-bulb{ filter: grayscale(0.2); }
+
+/* Row: prefix + number */
+.rp2-phoneRow{
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 10px;
+  margin-top: 6px;
+  align-items: center;
+}
+
+/* Prefix pill */
+.rp2-prefix{
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.rp2-flag{ 
+  font-size: 16px;
+}
+
+.rp2-select{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rp2-dial{
+  color: rgba(255,255,255,.88);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+
+.rp2-caret{
+  margin-left: auto;
+  color: rgba(255,255,255,.45);
+  font-size: 12px;
+}
+
+/* Number input uses your existing style */
+.rp2-input--number{
+  height: 44px;
+}
+
+/* Focus ring: when any child focused */
+.rp2-phoneRow:focus-within .rp2-prefix,
+.rp2-phoneRow:focus-within .rp2-input{
+  border-color: rgba(59,130,246,.55);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.22);
 }
