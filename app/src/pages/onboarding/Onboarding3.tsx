@@ -11,6 +11,8 @@ type Props = {
   onFinish?: () => void;
   name: string;
   onNameChange: (v: string) => void;
+  age: number | null;                     
+  onAgeChange: (v: number | null) => void;
 };
 
 
@@ -20,13 +22,12 @@ export default function Onboarding3({
   onFinish,
   name,
   onNameChange,
+  age,
+  onAgeChange,
 }: Props) {
-
-  const [age, setAge] = useState<string>("");
+  
   const [sex, setSex] = useState<Sex>(null);
-
-
-  const canFinish = name.trim().length > 0 && Number(age) > 0 && sex !== null;
+  const canFinish = name.trim().length > 0 && (age ?? 0) > 0 && sex !== null;
 
   return (
     <div className="ob-root">
@@ -80,8 +81,11 @@ export default function Onboarding3({
               placeholder="z. B. 38"
               type="number"
               inputMode="numeric"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
+              value={age ?? ""}
+              onChange={(e) => {
+                const v = e.target.value;
+                onAgeChange(v === "" ? null : Number(v));
+              }}
             />
           </div>
 

@@ -15,10 +15,12 @@ type Props = {
   onFinish?: () => void;
   userName: string;
   setUserName: (v: string) => void;
+  age: number | null;                
+  setAge: (v: number | null) => void;
   onFocus?: (f: FocusKey) => void; 
 };
 
-export default function OnboardingFlow({ onFinish, userName, setUserName, onFocus }: Props) {
+export default function OnboardingFlow({ onFinish, userName, age, setAge, setUserName, onFocus }: Props) {
   const [step, setStep] = useState(0);
   const [focus, setFocus] = useState<FocusKey | null>(null);
 
@@ -61,6 +63,8 @@ export default function OnboardingFlow({ onFinish, userName, setUserName, onFocu
       <Onboarding3
         name={userName}
         onNameChange={setUserName}
+        age={age}
+        onAgeChange={setAge}
         onFinish={() => setStep(6)}
       />
     );

@@ -11,16 +11,20 @@ import SchildIcon from "../../assets/schild.svg?react";
 import SettingIcon from "../../assets/setting.svg?react";
 import QuestionIcon from "../../assets/question.svg?react";
 import LogoutIcon from "../../assets/logout.svg?react";
+import type { FocusKey } from "../onboarding/OnboardingFlow";
 
 type Props = {
   userName: string;
+  focus: FocusKey;
   onBack?: () => void;
 };
 
 type Mode = "basic" | "sport";
 
-export default function Settings({ userName, onBack }: Props) {
-  const [mode, setMode] = useState<Mode>("sport");
+export default function Settings({ userName, focus, onBack }: Props) {
+  const [mode, setMode] = useState<Mode>(
+    focus === "longevity" ? "sport" : "basic"
+  );
 
   return (
     <div className="oh-screen settings-bg">

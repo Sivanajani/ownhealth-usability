@@ -23,17 +23,23 @@ type HomeStep =
 
 type Props = {
   userName: string;
+  age: number | null;
   focus: FocusKey;
+  hasSeenHomeInsight: boolean;         
+  onSeenHomeInsight: () => void; 
 };
 
-export default function HomeFlow({ userName, focus }: Props) {
+export default function HomeFlow({ userName, age, focus, hasSeenHomeInsight, onSeenHomeInsight  }: Props) {
   const [step, setStep] = useState<HomeStep>("chat");
 
   if (step === "chat")
     return (
       <Home
         userName={userName}
+        age={age}
         focus={focus}
+        hasSeenHomeInsight={hasSeenHomeInsight}
+        onSeenHomeInsight={onSeenHomeInsight}
         onOpenFolder={() => setStep("folder")}
         onOpenSettings={() => setStep("settings")}
         onOpenProfile={() => setStep("profile")}
@@ -86,9 +92,16 @@ export default function HomeFlow({ userName, focus }: Props) {
         onBackToFolder={() => setStep("folder")}
       />
     );
-
-  if (step === "settings") return <Settings userName={userName} onBack={() => setStep("chat")} />;
-
+  
+  if (step === "settings")
+    return (
+      <Settings
+        userName={userName}
+        focus={focus}          
+        onBack={() => setStep("chat")}
+      />
+    );
+   
   if (step === "profile")
     return (
       <Profile
