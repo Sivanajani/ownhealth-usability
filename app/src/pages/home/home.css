@@ -323,7 +323,7 @@
 }
 
 .home-insightTag{
-  display: inline-flex;
+  display: none;
   align-self: flex-start;
   padding: 6px 10px;
   border-radius: 999px;
@@ -447,6 +447,6 @@
 }
 
 .home-insightCard.is-chronic .home-insightName{
-  color: rgba(70,227,160,0.95);   /* Green */
+  color: rgba(70,227,160,0.95);
   text-shadow: 0 0 18px rgba(70,227,160,0.22);
 }

@@ -105,7 +105,7 @@ export default function Home({ userName, focus, onOpenFolder, onOpenSettings, on
                   </div>
                 </div>
 
-                <button className="home-insightBtn" type="button">
+                <button className="home-insightBtn" type="button" onClick={onOpenFolder}>
                   Hebel für Bio-Alter 32 anzeigen
                 </button>
               </>
@@ -126,7 +126,7 @@ export default function Home({ userName, focus, onOpenFolder, onOpenSettings, on
                   </div>
                 </div>
 
-                <button className="home-insightBtn" type="button">
+                <button className="home-insightBtn" type="button" onClick={onOpenFolder}>
                   Mehr Zusammenhänge entdecken
                 </button>
               </>
