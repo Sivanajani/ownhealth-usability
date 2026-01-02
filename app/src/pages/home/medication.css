@@ -626,3 +626,15 @@
   align-items: flex-end;
   text-align: right;
 }
+
+.med-timePill--done{
+  background: rgba(43,212,143,0.14);
+  border: 1px solid rgba(43,212,143,0.22);
+  color: rgba(43,212,143,0.95);
+}
+
+.med-timePill--todo{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.70);
+}

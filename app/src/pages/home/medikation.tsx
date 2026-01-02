@@ -19,6 +19,7 @@ type Props = {
 };
 
 export default function Medication({ onBack, onBackToChat, onBackToFolder }: Props) {
+  const b12Taken = true; // test: true = grün, false = grau
   return (
     <div className="oh-screen med-bg">
       <div className="oh-safe med-safe">
@@ -76,10 +77,11 @@ export default function Medication({ onBack, onBackToChat, onBackToFolder }: Pro
 
             {/* Zeit-Pill (eigene Spalte wie im Mock) */}
             <div className="med-timeCell">
-              <div className="med-timePill">
-                <span>09:15</span>
+              <div className={`med-timePill ${b12Taken ? "med-timePill--done" : "med-timePill--todo"}`}>
+                <span>{b12Taken ? "09:15" : "07:00–10:00"}</span>
               </div>
             </div>
+
 
             {/* Tage (eigene Spalte ganz rechts) */}
             <div className="med-daysWrap">
