@@ -120,7 +120,7 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
           ],
         },
         alert: {
-          title: "Achtung: B12-Mangel beschleunigt Zell-Alterung",
+          title: "B12-Mangel beschleunigt Zell-Alterung",
           hint: "Quelle: Bluttest (sink seit Januar)",
         },
         bottom: {
