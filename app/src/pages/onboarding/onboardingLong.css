@@ -637,3 +637,31 @@
   align-items: flex-start;
 }
 
+
+/* LIST Panel: Accent-Farben (nur der große Kasten) */
+.obLon-panel--list-green{
+  background: linear-gradient(
+    180deg,
+    rgba(16,185,129,0.14),
+    rgba(16,185,129,0.08)
+  );
+  border-color: rgba(16,185,129,0.22);
+}
+
+.obLon-panel--list-blue{
+  background: linear-gradient(
+    180deg,
+    rgba(59,130,246,0.14),
+    rgba(59,130,246,0.08)
+  );
+  border-color: rgba(59,130,246,0.22);
+}
+
+.obLon-panel--list-purple{
+  background: linear-gradient(
+    180deg,
+    rgba(168,85,247,0.14),
+    rgba(168,85,247,0.08)
+  );
+  border-color: rgba(168,85,247,0.22);
+}

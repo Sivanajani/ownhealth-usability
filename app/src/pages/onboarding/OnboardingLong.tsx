@@ -280,8 +280,8 @@ export default function OnboardingLong({ onNext, onBack }: Props) {
                       <div className="obLon-cardTitle">{slide.title}</div>
                     </div>
 
-                    {/* Panel 1: List */}
-                    <div className="obLon-panel obLon-panel--list">
+                    {/* Panel 1: List */}                    
+                    <div className={`obLon-panel obLon-panel--list obLon-panel--list-${slide.accent}`}>                  
                       <div className="obLon-list">
                         {slide.list.items.map((it, idx) => (
                           <div className="obLon-row" key={idx}>

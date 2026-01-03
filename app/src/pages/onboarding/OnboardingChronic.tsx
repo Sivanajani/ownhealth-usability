@@ -264,7 +264,7 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
                     </div>
 
                     {/* LIST */}
-                    <div className="obLon-panel obLon-panel--list">
+                    <div className={`obLon-panel obLon-panel--list obLon-panel--list-${s.accent}`}>
                       <div className="obLon-list">
                         {s.list.items.map((it, idx) => (
                           <div className="obLon-row" key={idx}>
