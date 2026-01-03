@@ -99,6 +99,7 @@ export default function HomeFlow({ userName, age, focus, hasSeenHomeInsight, onS
         userName={userName}
         focus={focus}          
         onBack={() => setStep("chat")}
+        onOpenProfile={() => setStep("profile")}
       />
     );
    

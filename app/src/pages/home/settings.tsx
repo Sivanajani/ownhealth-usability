@@ -17,11 +17,12 @@ type Props = {
   userName: string;
   focus: FocusKey;
   onBack?: () => void;
+  onOpenProfile?: () => void;
 };
 
 type Mode = "basic" | "sport";
 
-export default function Settings({ userName, focus, onBack }: Props) {
+export default function Settings({ userName, focus, onBack, onOpenProfile }: Props) {
   const [mode, setMode] = useState<Mode>(
     focus === "longevity" ? "sport" : "basic"
   );
@@ -34,7 +35,13 @@ export default function Settings({ userName, focus, onBack }: Props) {
         <section className="profileCard">
           <h1 className="profileName">{(userName?.trim() || "SIMON").toUpperCase()}</h1>
           <div className="profileMeta">Profil-Vollständigkeit: 26%</div>
-          <button className="profileLink" type="button">[vervollständigen]</button>
+          <button 
+            className="profileLink"            
+            type="button"
+            onClick={onOpenProfile}
+            >
+              [vervollständigen]
+          </button>
         </section>
 
         {/* Mode */}
