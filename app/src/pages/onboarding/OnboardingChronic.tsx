@@ -4,7 +4,7 @@ import "./onboardingLong.css";
 
 import LabIcon from "../../assets/medical.svg?react";
 import ChartIcon from "../../assets/chart.svg?react";
-import PlanIcon from "../../assets/plan.svg?react";
+import PlanIcon from "../../assets/people.svg?react";
 import FileIcon from "../../assets/file.svg?react";
 import LightningIcon from "../../assets/blitz.svg?react";
 
@@ -134,38 +134,38 @@ export default function OnboardingChronic({ onNext, onBack }: Props) {
         badge: "VORSCHAU",
         topHeadline: (
           <>
-            Stell dir vor, du hast
+            Stell dir vor, du nutzt das
             <br />
-            die Kontrolle zurück:
+            Wissen von Tausenden:
           </>
         ),
-        title: "Dein präziser Fahrplan",
+        title: "Gemeinsame Muster, klare Richtung",
         list: {
           items: [
             {
-              label: "Morgens: Eisen auf nüchternen Magen",
-              value: "Ziel: Ferritin-Speicher füllen",
-              source: "[Bluttest + Ernährung]",
+              label: "8420 anonyme Vergleichsfälle",
+              value: "Identischer HRV-Abfall & Ferritin-Mangel in unserer Datebank gefunden.",
+              source: "",
             },
             {
-              label: "Mittags: B12 sublingual",
-              value: "Ziel: Nervensystem stabilisieren",
-              source: "[Medikation + Arztbrief]",
+              label: "Erfolgs-Pfad",
+              value: "94% erreichten messbare Besserung durch gezielten Darm-Aufbau.",
+              source: "",
             },
             {
-              label: "Abends: Magnesium vor dem Schlaf",
-              value: "Ziel: HRV-Steigerung",
-              source: "[Wearable + Mentale Gesundheit]",
+              label: "Präzise Warnung",
+              value: "Dein Muster zeigt eine Sensibilität auf Kaffe nach 14 Uhr.",
+              source: "",
             },
           ],
         },
         alert: {
-          title: "Vorsicht: Kaffee blockiert Eisenaufnahme.",
-          hint: "2 Stunden Abstand halten",
+          title: "Kein medizinisches Rätsel mehr.",
+          hint: "Dein Muster ist in unserer geschützten Datenbank bekannt.",
         },
         bottom: {
-          label: "Prognose: Energie-Anstieg",
-          value: "Messbar mehr Energie in 14 Tagen.",
+          label: "Netzwerk-Prognose",
+          value: "80% Chance auf Besserung innerhalb von 21 Tagen.",
           hint: "",
           iconKey: "lightning",
         },

@@ -28,6 +28,8 @@ export default function ChatPanel() {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const cameraRef = useRef<HTMLInputElement | null>(null);
 
+  const hasText = input.trim().length > 0;
+
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -70,12 +72,12 @@ export default function ChatPanel() {
       ]);
     }, 450);
   };
-  
+
   const onPickFiles = (files: FileList | null) => {
     if (!files || files.length === 0) return;
 
     const file = files[0];
-    setAttachOpen(false);    
+    setAttachOpen(false);
     send(`📎 ${file.type.startsWith("image/") ? "Foto aufgenommen" : "Datei hochgeladen"}: ${file.name}`);
   };
 
@@ -92,7 +94,10 @@ export default function ChatPanel() {
       ) : (
         <div className="chatP-list">
           {messages.map((m) => (
-            <div key={m.id} className={`chatP-row ${m.role === "user" ? "is-user" : "is-assistant"}`}>
+            <div
+              key={m.id}
+              className={`chatP-row ${m.role === "user" ? "is-user" : "is-assistant"}`}
+            >
               <div className="chatP-bubble">{m.text}</div>
             </div>
           ))}
@@ -101,12 +106,12 @@ export default function ChatPanel() {
       )}
 
       {/* INPUT */}
-      <div className="chatP-inputRow">
+      <div className="chatP-inputBar">
         {/* + Button */}
         <div className="chatP-attachWrap">
           <button
             type="button"
-            className={`chatP-attachBtn ${attachOpen ? "is-open" : ""}`}
+            className={`chatP-plus ${attachOpen ? "is-open" : ""}`}
             onClick={() => setAttachOpen((s) => !s)}
             aria-label="Anhang"
           >
@@ -115,24 +120,18 @@ export default function ChatPanel() {
 
           {attachOpen && (
             <div className="chatP-attachMenu">
-              <button
-                className="chatP-attachItem"
-                onClick={() => cameraRef.current?.click()}
-              >
+              <button className="chatP-attachItem" onClick={() => cameraRef.current?.click()}>
                 <CameraIcon className="chatP-attachIcon" />
                 Foto aufnehmen
               </button>
 
-              <button
-                className="chatP-attachItem"
-                onClick={() => fileRef.current?.click()}
-              >
+              <button className="chatP-attachItem" onClick={() => fileRef.current?.click()}>
                 <DocsIcon className="chatP-attachIcon" />
                 Dokument hochladen
               </button>
             </div>
           )}
-          
+
           <input
             ref={cameraRef}
             type="file"
@@ -142,7 +141,6 @@ export default function ChatPanel() {
             onChange={(e) => onPickFiles(e.target.files)}
           />
 
-          {/* Dateien */}
           <input
             ref={fileRef}
             type="file"
@@ -152,14 +150,22 @@ export default function ChatPanel() {
         </div>
 
         <input
-          className="chatP-input"
+          className="chatP-input2"
           placeholder="Stelle eine Frage..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send(input)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && hasText) send(input);
+          }}
         />
 
-        <button className="chatP-send" onClick={() => send(input)} aria-label="Send">
+        {/* Send erscheint erst bei Text — aber Platz bleibt reserviert */}
+        <button
+          className={`chatP-send2 ${hasText ? "" : "is-hidden"}`}
+          onClick={() => send(input)}
+          aria-label="Send"
+          disabled={!hasText}
+        >
           ↑
         </button>
       </div>
