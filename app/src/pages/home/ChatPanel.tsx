@@ -6,18 +6,42 @@ import CameraIcon from "../../assets/camera.svg?react";
 import DocsIcon from "../../assets/document.svg?react";
 
 type Role = "user" | "assistant";
-type Msg = { id: string; role: Role; text: string; ts: number };
+type Msg = { 
+  id: string;
+  role: Role;
+  text: string;
+  ts: number;
+  sources?: string[];
+}
+  
 
 function uid() {
   return Math.random().toString(16).slice(2) + Date.now().toString(16);
 }
 
-function fakeAssistantReply(userText: string) {
+function fakeAssistantReply(userText: string): { text: string; sources: string[] } {
+  const baseSources = ["Blut Test", "Apple Health"];
+
   if (userText.toLowerCase().includes("schlaf")) {
-    return "Deine letzte Blutuntersuchung zeigt einen niedrigen Eisen- und B12-Spiegel. In Kombination mit kurzer Schlafdauer ist Müdigkeit zu erwarten.";
+    return {
+      text: "Deine letzte Blutuntersuchung zeigt einen niedrigen Eisen- und B12-Spiegel. In Kombination mit kurzer Schlafdauer ist Müdigkeit zu erwarten. Ich werde B12 zu deinem Plan hinzufügen.",
+      sources: baseSources,
+    };
   }
-  return "Verstanden. Welche Daten oder Symptome sind für dich gerade am wichtigsten?";
+
+  return {
+    text: "Verstanden. Welche Daten oder Symptome sind für dich gerade am wichtigsten?",
+    sources: baseSources,
+  };
 }
+
+function formatTime(ts: number) {
+  const d = new Date(ts);
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mm = String(d.getMinutes()).padStart(2, "0");
+  return `Heute, ${hh}:${mm}`;
+}
+
 
 export default function ChatPanel() {
   const [input, setInput] = useState("");
@@ -66,9 +90,16 @@ export default function ChatPanel() {
     setInput("");
 
     setTimeout(() => {
+      const reply = fakeAssistantReply(trimmed);
       setMessages((prev) => [
         ...prev,
-        { id: uid(), role: "assistant", text: fakeAssistantReply(trimmed), ts: Date.now() },
+        {
+          id: uid(),
+          role: "assistant",
+          text: reply.text,
+          sources: reply.sources,
+          ts: Date.now(),
+        },
       ]);
     }, 450);
   };
@@ -98,8 +129,24 @@ export default function ChatPanel() {
               key={m.id}
               className={`chatP-row ${m.role === "user" ? "is-user" : "is-assistant"}`}
             >
-              <div className="chatP-bubble">{m.text}</div>
-            </div>
+              <div className="chatP-msg">
+                <div className="chatP-bubble">
+                  <div className="chatP-text">{m.text}</div>
+
+                  {m.role === "assistant" && m.sources?.length ? (
+                    <div className="chatP-sources">
+                      {m.sources.map((s, i) => (
+                        <span key={`${m.id}-s-${i}`} className="chatP-source">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>                
+                <div className="chatP-timeUnder">{formatTime(m.ts)}</div>
+              </div>
+          </div>
+
           ))}
           <div ref={endRef} />
         </div>

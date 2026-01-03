@@ -249,3 +249,56 @@
   opacity: 0;
   pointer-events: none;
 }
+
+.chatP-text{
+  white-space: pre-wrap;
+}
+
+.chatP-meta{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chatP-sources{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(170,190,220,0.75);
+}
+
+.chatP-source::before{
+  content: "• ";
+  color: rgba(120,140,170,0.8);
+}
+
+.chatP-time{
+  font-size: 12px;
+  color: rgba(170,190,220,0.45);
+}
+
+.chatP-timeOnly{
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(170,190,220,0.45);
+}
+
+.chatP-msg{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chatP-row.is-user .chatP-msg{
+  align-items: flex-end;
+}
+
+.chatP-timeUnder{
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(170,190,220,0.45);
+}
+
