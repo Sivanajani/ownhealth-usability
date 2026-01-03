@@ -102,7 +102,7 @@ export default function RegistrationOwnId({ onContinue }: Props) {
               </div>
 
               <ul className="oi-modalList">
-                <li><span className="oi-check"><CheckIcon /></span> Keine Werbung</li>
+                <li><span className="oi-check"><CheckIcon /></span> Dein Schlüssel zum Konto</li>
                 <li><span className="oi-check"><CheckIcon /></span> Alles bleibt anonymisiert</li>
                 <li><span className="oi-check"><CheckIcon /></span> Maximal verschlüsselt</li>
               </ul>
