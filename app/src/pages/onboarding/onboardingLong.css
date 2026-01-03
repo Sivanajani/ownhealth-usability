@@ -5,11 +5,9 @@
 
 /* Top (Dots + Headline) */
 .obLon-top{
-  padding-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
   text-align:center;
 }
 
@@ -63,8 +61,6 @@
   scroll-behavior: smooth;
 
   width: 100%;
-  padding: 0;
-  gap: 0;
 }
 .obLon-carousel::-webkit-scrollbar{ display: none; }
 
@@ -82,7 +78,7 @@
   width: 100%;
   max-width: 360px;
   border-radius: 28px;
-  padding: 18px;
+  padding: 10px;
   border: 1px solid rgba(255,255,255,0.10);
   /*box-shadow:
     0 18px 50px rgba(0,0,0,0.28),
@@ -115,7 +111,6 @@
   column-gap: 12px;
   align-items: center;
   padding-top: 16px; 
-  margin-bottom: 12px;
 }
 
 .obLon-icon{
@@ -244,7 +239,7 @@
 .obLon-panel{
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.10);
-  padding: 12px;
+  padding: 5px;
   box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.06);
   margin-top: 10px;
 }
@@ -279,7 +274,6 @@
 .obLon-alertTitle{
   font-size: 16px;
   color: rgba(255,255,255,0.92);
-  padding-bottom: 6px;
 }
 
 .obLon-alertHint{
@@ -393,26 +387,23 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   opacity: 0.9;
-  margin: 0;
   color: rgba(23, 230, 161, 0.815);
 }
 
 .obLon-bottomValue{
   font-size: 16px;
   text-align: center;
-  color: rgba(241, 241, 241, 0.95);
   letter-spacing: -0.01em;
-  margin: 0;
+  line-height: 0.5;   
+  margin: 0;           
 }
+
 
 .obLon2-bottomValue{
   font-size: 16px;
   font-weight: 400;
   color: rgba(255,255,255,0.92);
-  margin: 0;
   line-height: 1.2;
-  padding-bottom: 4px;
-  padding-top: 4px;
 }
 
 .obLon-bottomHint{
@@ -514,9 +505,11 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 6px;
-  padding: 14px 16px;
+
+  gap: 1px;              
+  padding: 10px 12px;    
 }
+
 
 /* Farbvarianten */
 .obLon-topBadge--green{
@@ -561,7 +554,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px;
   text-align: left;
 }
 
@@ -596,7 +588,7 @@
   font-weight: 800;
   color: rgba(16,185,129,0.95); 
   margin: 0;
-  margin-top: 6px;
+  margin-top: 0;
 }
 
 /* Farbvarianten vom Mock */
@@ -664,4 +656,11 @@
     rgba(168,85,247,0.08)
   );
   border-color: rgba(168,85,247,0.22);
+}
+
+.obLon-bottomLabel,
+.obLon-bottomValue,
+.obLon-bottomHint,
+.obLon-bottomHint2{
+  margin: 0;
 }
