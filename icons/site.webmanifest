@@ -1,24 +1,21 @@
 {
   "name": "Own Health",
-  "short_name": "Own",
-  "description": "Dein Gesundheitskonto. Maximal privat.",
-  "start_url": "../",
-  "scope": "../",
-  "display": "standalone",
-  "background_color": "#071223",
-  "theme_color": "#071223",
+  "short_name": "Own Health",
   "icons": [
     {
-      "src": "./web-app-manifest-192x192.png",
+      "src": "/icons/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable"
     },
     {
-      "src": "./web-app-manifest-512x512.png",
+      "src": "/icons/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable"
     }
-  ]
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
 }

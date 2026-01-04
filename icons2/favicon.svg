@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="131" height="131"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="131" height="131"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="131" height="131"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="131" height="131"><svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 131" width="131" height="131">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="131" height="131"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="131" height="131"><svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131 131" width="131" height="131">
 	<style>
 		.s0 { fill: #071223ff } 
 	</style>
@@ -6,7 +6,5 @@
 	<path class="s0" d="m106.77 120.47h-15.71v-28.64h28.64v15.71h-12.93z"></path>
 	<path class="s0" d="m106.77 107.93h-28.64v-15.71h12.93v-13.34h15.71z"></path>
 </svg></svg><style>@media (prefers-color-scheme: light) { :root { filter: contrast(1) brightness(0.1); } }
-@media (prefers-color-scheme: dark) { :root { filter: none; } }
-</style></svg></svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
 @media (prefers-color-scheme: dark) { :root { filter: none; } }
 </style></svg>
