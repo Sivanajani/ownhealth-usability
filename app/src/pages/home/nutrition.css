@@ -394,3 +394,40 @@
   fill: currentColor;
   stroke: currentColor;
 }
+
+/* Mahlzeiten Header: Label links, Button rechts */
+.nut-sectionHead{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 10px 0 10px;
+}
+
+/* Label soll hier keinen Extra-Margin haben (weil Head den Margin übernimmt) */
+.nut-sectionHead .nut-sectionLabel{
+  margin: 0;
+}
+
+/* Kleiner "Add"-Button wie im Mock */
+.nut-addMealBtn{
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+
+  font-size: 12px;
+  font-weight: 650;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: none;
+}
+
+.nut-addMealBtn:active{
+  transform: translateY(1px);
+}

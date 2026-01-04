@@ -92,8 +92,16 @@ export default function Nutrition({ onBack, onBackToChat, onBackToFolder }: Prop
           </div>
         </section>
 
-        {/* Meals */}
-        <div className="nut-sectionLabel">MAHLZEITEN (3)</div>
+        {/* Meals header row */}
+        <div className="nut-sectionHead">
+          <div className="nut-sectionLabel">MAHLZEITEN (3)</div>
+
+          <button className="nut-addMealBtn" type="button">
+            <span aria-hidden="true">+</span>
+            Mahlzeit hinzufügen
+          </button>
+        </div>
+
 
         <section className="nut-meals">
           <button className="nut-mealCard nut-mealCard--blue" type="button">
@@ -176,12 +184,6 @@ export default function Nutrition({ onBack, onBackToChat, onBackToFolder }: Prop
         </div>
 
         <span className="nut-historyChevron" aria-hidden="true">›</span>
-        </button>
-
-
-        {/* Primary */}
-        <button className="nut-primaryBtn" type="button">
-          + Mahlzeit hinzufügen
         </button>
       </div>
 
