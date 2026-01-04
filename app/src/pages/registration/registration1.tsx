@@ -47,7 +47,7 @@ export default function Registration1({ onBack, onNext }: Props) {
           </div>
 
           <div className="reg-cta">
-            <div className="reg-ctaTitle">Sichere deine Daten.</div>
+            <div className="reg-ctaTitle">Sichere deine Daten</div>
             <div className="reg-ctaSub">
               Erstelle jetzt dein Konto, damit nichts verloren geht.
             </div>
@@ -69,8 +69,8 @@ export default function Registration1({ onBack, onNext }: Props) {
               type="button"
               onClick={onBack}
             >
-              Vorerst ohne Sicherung weiter
-              <span className="reg-skipSub">(Daten werden gelöscht)</span>
+              Als Gast fortfahren
+              <span className="reg-skipSub">(Daten werden nicht gesichert)</span>
             </button>
           </div>
         </section>

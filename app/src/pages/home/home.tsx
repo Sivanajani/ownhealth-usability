@@ -67,6 +67,7 @@ export default function Home({ userName, age, focus, hasSeenHomeInsight, onSeenH
         </header>
 
         {/* INSIGHT statt Greeting */}
+        {/* INSIGHT statt Greeting */}
         {!hasSeenHomeInsight ? (
           <section className="home-insight">
             <div className={`home-insightCard ${focus === "longevity" ? "is-longevity" : "is-chronic"}`}>
@@ -90,9 +91,7 @@ export default function Home({ userName, age, focus, hasSeenHomeInsight, onSeenH
                     <div className="home-insightMetric">
                       <div className="home-insightMetricMain">
                         Dein Herz ist biologisch{" "}
-                        <span className="home-insightAccent">
-                          {bioAge ?? 34}
-                        </span>{" "}
+                        <span className="home-insightAccent">{bioAge ?? 34}</span>{" "}
                         <span className="home-insightMuted">
                           {age ? `(statt ${age})` : "(statt 38)"}
                         </span>
@@ -153,19 +152,8 @@ export default function Home({ userName, age, focus, hasSeenHomeInsight, onSeenH
               )}
             </div>
           </section>
-        ) : (
-          <section className="home-greeting">
-            <div className="home-insightHello">
-              Schön, dass du da bist
-              {displayName !== "da" && (
-                <>
-                  , <span className="home-insightName">{displayName}</span>
-                </>
-              )}
-              .
-            </div>
-          </section>
-        )}
+        ) : null}
+
       
 
         <div className="home-chatWrap">

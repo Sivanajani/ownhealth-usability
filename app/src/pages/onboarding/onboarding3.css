@@ -15,13 +15,13 @@
 .ob3-genderGrid{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
 .ob3-genderCard{
   height: 78px;
 
-  border-radius: 18px;
+  border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.10);
   background: radial-gradient(600px 240px at 30% 0%, rgba(255,255,255,0.06), transparent 55%), rgba(255,255,255,0.04);
 
@@ -46,7 +46,7 @@
 
 /* wie Mock: Icon oben, Text unten */
 .ob3-genderCard--stack{
-  height: 150px;
+  height: 100px;
   flex-direction: column;  
 }
 

@@ -47,9 +47,7 @@ export default function Onboarding3({
           <div className="ob-brand">
             <h1 className="ob-title">Fast fertig.</h1>
             <p className="ob-subtitle">
-              Für den Start brauchen wir drei Infos,
-              <br />
-              damit OWN dich besser versteht.
+              Für den Start brauchen wir drei Infos.                      
             </p>
           </div>
         </div>
