@@ -6,5 +6,5 @@
 	<path class="s0" d="m106.77 120.47h-15.71v-28.64h28.64v15.71h-12.93z"></path>
 	<path class="s0" d="m106.77 107.93h-28.64v-15.71h12.93v-13.34h15.71z"></path>
 </svg></svg><style>@media (prefers-color-scheme: light) { :root { filter: contrast(1) brightness(0.1); } }
-@media (prefers-color-scheme: dark) { :root { filter: contrast(1) brightness(1); } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
 </style></svg>
