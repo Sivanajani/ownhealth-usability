@@ -19,7 +19,7 @@ type Props = {
 };
 
 export default function Medication({ onBack, onBackToChat, onBackToFolder }: Props) {
-  const b12Taken = true; // test: true = grün, false = grau
+  const b12Taken = true; 
   return (
     <div className="oh-screen med-bg">
       <div className="oh-safe med-safe">
@@ -42,10 +42,6 @@ export default function Medication({ onBack, onBackToChat, onBackToFolder }: Pro
           <div className="med-alertText">
             <div className="med-alertTitle">Zink behindert B12</div>
             <div className="med-alertMeta">2h zeitversetzt</div>
-          </div>
-
-          <div className="med-alertBadge" aria-hidden="true">
-            <WarningIcon className="med-alertSvg" />
           </div>
         </section>
 
@@ -82,12 +78,13 @@ export default function Medication({ onBack, onBackToChat, onBackToFolder }: Pro
               </div>
             </div>
 
-
-            {/* Tage (eigene Spalte ganz rechts) */}
+            
+            {/* Tage (eigene Spalte ganz rechts) 
             <div className="med-daysWrap">
               <div className="med-days med-days--amber">15</div>
               <div className="med-daysUnit">Tage</div>
             </div>
+            */}
           </div>
 
 
@@ -125,11 +122,12 @@ export default function Medication({ onBack, onBackToChat, onBackToFolder }: Pro
               </div>
             </div>
 
-            {/* Tage ganz rechts */}
+            {/* Tage ganz rechts 
             <div className="med-daysWrap">
               <div className="med-days med-days--mint">68</div>
               <div className="med-daysUnit">Tage</div>
             </div>
+            */}
           </div>
 
         </section>
@@ -189,8 +187,7 @@ export default function Medication({ onBack, onBackToChat, onBackToFolder }: Pro
           + Präparat hinzufügen
         </button>
       </div>
-
-      {/* BottomNav bleibt so wie bei dir */}
+      
       <nav className="bottomNav">
         <button className="navItem" onClick={onBackToChat} disabled={!onBackToChat} type="button">
           <span className="navIcon" aria-hidden="true">
