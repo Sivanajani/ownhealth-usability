@@ -93,6 +93,23 @@
   color: rgba(255,255,255,0.97);
 }
 
+.modeBtn--sport.modeBtn--active{
+  background: linear-gradient(
+    135deg,
+    rgba(212, 133, 43, 0.95) 0%,
+    rgba(212, 235, 90, 0.92) 100%
+  );
+  border-color: rgba(120,245,190,0.45);
+  box-shadow: 0 12px 28px rgba(43,212,143,0.45);
+  color: rgba(255,255,255,0.98);
+}
+
+.modeBtn--sport.modeBtn--active .modeIcon{
+  transform: scale(1.08);
+}
+
+
+
 .modeIcon{
   width: 18px;
   height: 18px;

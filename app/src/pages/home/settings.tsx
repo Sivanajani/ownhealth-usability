@@ -59,10 +59,10 @@ export default function Settings({ userName, focus, onBack, onOpenProfile }: Pro
 
           <button
             type="button"
-            className={`modeBtn ${mode === "sport" ? "modeBtn--active" : ""}`}
+            className={`modeBtn modeBtn--sport ${mode === "sport" ? "modeBtn--active" : ""}`}
             onClick={() => setMode("sport")}
-            aria-selected={mode === "sport"}
           >
+
             <HeartbeatIcon className="modeIcon" aria-hidden="true" />
             <span>Sport</span>
           </button>
