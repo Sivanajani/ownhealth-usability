@@ -4,7 +4,7 @@ import "./registration1.css";
 import CheckIcon from "../../assets/check.svg?react";  
 import LockIcon from "../../assets/lock.svg?react";
 import UserIcon from "../../assets/user.svg?react";
-import HeartbeatIcon from "../../assets/heartbeat.svg?react";
+import WatchIcon from "../../assets/smartwatch.svg?react";
 import SettingIcon from "../../assets/setting.svg?react";
 
 type Props = {
@@ -19,10 +19,10 @@ type Item = {
 };
 
 const ITEMS: Item[] = [
-  { icon: <CheckIcon />, text: "Schlaf-Muster erkannt.", tone: "green" },
-  { icon: <HeartbeatIcon />, text: "3.420 Daten aus Apple Health geladen.", tone: "blue" },
-  { icon: <UserIcon />, text: "Alter & Geschlecht hinterlegt.", tone: "gray" },
-  { icon: <SettingIcon />, text: "Eingestellt auf: Ursachen & Klarheit.", tone: "purple" },
+  { icon: <CheckIcon />, text: "Schlaf-Muster erkannt", tone: "green" },
+  { icon: <WatchIcon />, text: "3.420 Wearable-Daten erfolgreich integriert", tone: "blue" },
+  { icon: <UserIcon />, text: "Alter & Geschlecht hinterlegt", tone: "gray" },
+  { icon: <SettingIcon />, text: "Dokumente & Blutbilder bereit zur Auswertung", tone: "purple" },
 ];
 
 export default function Registration1({ onBack, onNext }: Props) {
@@ -53,7 +53,7 @@ export default function Registration1({ onBack, onNext }: Props) {
             </div>
 
             <button className="reg-primary" type="button" onClick={onNext}>
-              Konto kostenlos sichern
+              Konto kostenlos aktivieren
             </button>
 
             <div className="reg-meta">

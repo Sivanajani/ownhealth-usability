@@ -102,6 +102,27 @@
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(var(--blur));
   -webkit-backdrop-filter: blur(var(--blur));
+  position: relative;
+}
+
+.home-ringBtn::after{
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba(212, 195, 43, 0.45),
+    transparent 70%
+  );
+  opacity: 0;
+  animation: ringHalo 1.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ringHalo{
+  0%, 100%{ opacity: 0; }
+  50%{ opacity: 1; }
 }
 
 .home-ringText{
