@@ -158,7 +158,7 @@ export default function Home({ userName, age, focus, hasSeenHomeInsight, onSeenH
 
         <div className="home-chatWrap">
           <div className="home-chatCard">
-            <ChatPanel />
+            <ChatPanel onGoToProfile={onOpenProfile} />
           </div>
         </div>
       </div>

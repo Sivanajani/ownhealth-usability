@@ -6,32 +6,64 @@ import CameraIcon from "../../assets/camera.svg?react";
 import DocsIcon from "../../assets/document.svg?react";
 
 type Role = "user" | "assistant";
-type Msg = { 
+
+type Action = {
+  label: string;
+  kind: "go_profile";
+};
+
+type Msg = {
   id: string;
   role: Role;
   text: string;
   ts: number;
   sources?: string[];
-}
-  
+  action?: Action;
+};
+
+type Props = {
+  onGoToProfile?: () => void;
+};
 
 function uid() {
   return Math.random().toString(16).slice(2) + Date.now().toString(16);
 }
 
-function fakeAssistantReply(userText: string): { text: string; sources: string[] } {
-  const baseSources = ["Blut Test", "Apple Health"];
+function fakeAssistantReply(userText: string): { text: string; sources: string[]; action?: Action } {
+  const t = userText.toLowerCase();
 
-  if (userText.toLowerCase().includes("schlaf")) {
+  // 1) Müdigkeit trotz Schlaf
+  if (t.includes("schlaf") || t.includes("müde") || t.includes("muede")) {
     return {
-      text: "Deine letzte Blutuntersuchung zeigt einen niedrigen Eisen- und B12-Spiegel. In Kombination mit kurzer Schlafdauer ist Müdigkeit zu erwarten. Ich werde B12 zu deinem Plan hinzufügen.",
-      sources: baseSources,
+      text:
+        "Deine letzte Blutuntersuchung zeigt einen niedrigen Eisen- und B12-Spiegel. In Kombination mit kurzer Schlafdauer ist Müdigkeit zu erwarten. Ich werde B12 zu deinem Plan hinzufügen.",
+      sources: ["Blut Test", "Apple Health"],
     };
   }
 
+  // 2) Supplement Routine check
+  if (t.includes("supplement") || t.includes("routine") || t.includes("supplements")) {
+    return {
+      text:
+        "Ich hab’s gecheckt: In Apple Health sehe ich regelmässigere Schlaf-/Energie-Schwankungen, und in deiner Medikationsliste fehlt aktuell ein klarer Einnahme-Plan. Vorschlag: B12 morgens (konstant), Eisen getrennt von Kaffee/Milchprodukten und nicht zusammen mit Calcium/Magnesium, und ein fixer Wochenrhythmus (z. B. Mo–So gleiche Zeiten).",
+      sources: ["Apple Health", "Medikationsliste"],
+    };
+  }
+
+  // 3) 100% Power / was bedeutet 26%
+  if (t.includes("100") || t.includes("power") || t.includes("26%")) {
+    return {
+      text:
+        "Die 26% sind dein aktueller Daten- und Profil-Score: Momentan ist nur Apple Health verbunden. Wenn du dein Profil ausfüllst und Dokumente/Infos ergänzt, kann ich deine Empfehlungen genauer personalisieren und dir konkrete Schritte geben.",
+      sources: ["Apple Health", "Profilstatus"],
+      action: { label: "Gehe zu Profil", kind: "go_profile" },
+    };
+  }
+
+  // Default
   return {
     text: "Verstanden. Welche Daten oder Symptome sind für dich gerade am wichtigsten?",
-    sources: baseSources,
+    sources: ["Apple Health"],
   };
 }
 
@@ -42,8 +74,7 @@ function formatTime(ts: number) {
   return `Heute, ${hh}:${mm}`;
 }
 
-
-export default function ChatPanel() {
+export default function ChatPanel({ onGoToProfile }: Props) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Msg[]>([]);
   const [attachOpen, setAttachOpen] = useState(false);
@@ -73,8 +104,8 @@ export default function ChatPanel() {
   const quickQuestions = useMemo(
     () => [
       "Warum bin ich trotz 8h Schlaf müde?",
-      "Wie verbessere ich meinen Schlaf?",
       "Check meine Supplement-Routine",
+      "Wie erreiche ich 100 % Power?",
     ],
     []
   );
@@ -98,6 +129,7 @@ export default function ChatPanel() {
           role: "assistant",
           text: reply.text,
           sources: reply.sources,
+          action: reply.action,
           ts: Date.now(),
         },
       ]);
@@ -110,6 +142,10 @@ export default function ChatPanel() {
     const file = files[0];
     setAttachOpen(false);
     send(`📎 ${file.type.startsWith("image/") ? "Foto aufgenommen" : "Datei hochgeladen"}: ${file.name}`);
+  };
+
+  const handleAction = (a: Action) => {
+    if (a.kind === "go_profile") onGoToProfile?.();
   };
 
   return (
@@ -133,6 +169,17 @@ export default function ChatPanel() {
                 <div className="chatP-bubble">
                   <div className="chatP-text">{m.text}</div>
 
+                  {/* Action Button (nur Assistant) */}
+                  {m.role === "assistant" && m.action ? (
+                    <button
+                      type="button"
+                      className="chatP-actionBtn"
+                      onClick={() => handleAction(m.action!)}
+                    >
+                      {m.action.label}
+                    </button>
+                  ) : null}
+
                   {m.role === "assistant" && m.sources?.length ? (
                     <div className="chatP-sources">
                       {m.sources.map((s, i) => (
@@ -142,11 +189,11 @@ export default function ChatPanel() {
                       ))}
                     </div>
                   ) : null}
-                </div>                
+                </div>
+
                 <div className="chatP-timeUnder">{formatTime(m.ts)}</div>
               </div>
-          </div>
-
+            </div>
           ))}
           <div ref={endRef} />
         </div>
@@ -206,7 +253,6 @@ export default function ChatPanel() {
           }}
         />
 
-        {/* Send erscheint erst bei Text — aber Platz bleibt reserviert */}
         <button
           className={`chatP-send2 ${hasText ? "" : "is-hidden"}`}
           onClick={() => send(input)}

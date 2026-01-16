@@ -302,3 +302,17 @@
   color: rgba(170,190,220,0.45);
 }
 
+.chatP-actionBtn{
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-weight: 600;
+}
+
+.chatP-actionBtn:active{
+  transform: translateY(1px);
+}
