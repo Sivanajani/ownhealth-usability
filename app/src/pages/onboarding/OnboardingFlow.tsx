@@ -6,8 +6,11 @@ import Onboarding2 from "./Onboarding2";
 import Onboarding3 from "./Onboarding3";
 import Onboarding4 from "./Onboarding4";
 import Onboarding5 from "./Onboarding5";
-import Onboarding6 from "./Onboarding6"; 
-import Onboarding7 from "./Onboarding7"; 
+import Onboarding6 from "./Onboarding6";
+import Onboarding7 from "./Onboarding7";
+import Onboarding8 from "./Onboarding8";
+import Onboarding9 from "./Onboarding9"; 
+import Onboarding10 from "./Onboarding10"; // ✅ NEU: Onboarding10 importieren
 import type { FocusKey } from "../../types/focus";
 
 type Props = {
@@ -68,47 +71,63 @@ export default function OnboardingFlow({
         initialQuestion={firstQuestion}
         onContinue={(q) => {
           setFirstQuestion(q);
-          setStep(7); // weiter zu Apple Health verbinden
+          setStep(7);
         }}
         onSkip={() => {
           setFirstQuestion("");
-          setStep(7); // auch bei Skip weiter
+          setStep(7);
         }}
       />
     );
 
-  // Step 7: Apple Health verbinden (dein Onboarding6)
+  // Step 7: Apple Health verbinden (Onboarding6)
   if (step === 7)
     return (
       <Onboarding6
-        onConnect={() => {
-          // nach erfolgreichem Connect -> Bluttest Screen
-          setStep(8);
-        }}
-        onLater={() => {
-          // auch bei "später" -> Bluttest Screen
-          setStep(8);
-        }}
+        onConnect={() => setStep(8)}
+        onLater={() => setStep(8)}
       />
     );
 
-  // Step 8: Bluttest scannen (dein Onboarding7)
+  // Step 8: Bluttest scannen (Onboarding7) -> danach Step 9
   if (step === 8)
     return (
       <Onboarding7
         onBack={() => setStep(7)}
-        onTakePhoto={() => {
-          // TODO: später Kamera-Flow
-          onFinish?.();
-        }}
-        onUploadPdf={() => {
-          // TODO: später Upload-Flow
-          onFinish?.();
-        }}
-        onSkip={() => {
-          // ohne Bluttest weiter
-          onFinish?.();
-        }}
+        onTakePhoto={() => setStep(9)}
+        onUploadPdf={() => setStep(9)}
+        onSkip={() => setStep(9)}
+      />
+    );
+
+  // Step 9: Medikamente Screen (Onboarding8) -> danach Step 10 (Onboarding9)
+  if (step === 9)
+    return (
+      <Onboarding8
+        onBack={() => setStep(8)}
+        onTakePhoto={() => setStep(10)} 
+        onSkip={() => setStep(10)} 
+      />
+    );
+
+  // Step 10: Onboarding9 (Name/Age/Geschlecht Screen) -> Step 11 (Onboarding10)
+  if (step === 10)
+    return (
+      <Onboarding9
+        name={userName}
+        onNameChange={setUserName}
+        age={age}
+        onAgeChange={setAge}
+        onBack={() => setStep(9)}
+        onFinish={() => setStep(11)} // GEÄNDERT: zu Step 11 (Onboarding10)
+      />
+    );
+
+  // Step 11: Onboarding10 (Lade-Animation) -> dann onFinish
+  if (step === 11)
+    return (
+      <Onboarding10
+        onContinue={() => onFinish?.()} // Nach Animation direkt zum Finish
       />
     );
 

@@ -15,9 +15,7 @@ export default function App() {
 
   return isOnboarded ? (
     <HomeFlow
-      userName={userName}
-      age={age}
-      focus={focusKey}
+      userName={userName}            
       hasSeenHomeInsight={hasSeenHomeInsight}
       onSeenHomeInsight={() => setHasSeenHomeInsight(true)}
     />

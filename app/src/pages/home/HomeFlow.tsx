@@ -8,7 +8,6 @@ import Medication from "./medikation";
 import Nutrition from "./nutrition";
 import Profile from "./profile";
 import RegisterFlow from "../registration/registerFlow";
-import type { FocusKey } from "../../types/focus";
 
 type HomeStep =
   | "chat"
@@ -23,16 +22,12 @@ type HomeStep =
 
 type Props = {
   userName: string;
-  age: number | null;
-  focus: FocusKey;
   hasSeenHomeInsight: boolean;
   onSeenHomeInsight: () => void;
 };
 
 export default function HomeFlow({
   userName,
-  age,
-  focus,
   hasSeenHomeInsight,
   onSeenHomeInsight,
 }: Props) {
@@ -40,10 +35,7 @@ export default function HomeFlow({
 
   if (step === "chat")
     return (
-      <Home
-        userName={userName}
-        age={age}
-        focus={focus}
+      <Home        
         hasSeenHomeInsight={hasSeenHomeInsight}
         onSeenHomeInsight={onSeenHomeInsight}
         onOpenFolder={() => setStep("folder")}
@@ -103,17 +95,26 @@ export default function HomeFlow({
     return (
       <Settings
         userName={userName}
-        focus={focus}
         onBack={() => setStep("chat")}
         onOpenProfile={() => setStep("profile")}
       />
     );
 
   if (step === "profile")
-    return <Profile onBack={() => setStep("chat")} onSecureNow={() => setStep("registerflow")} />;
+    return (
+      <Profile
+        onBack={() => setStep("chat")}
+        onSecureNow={() => setStep("registerflow")}
+      />
+    );
 
   if (step === "registerflow")
-    return <RegisterFlow onBackToProfile={() => setStep("profile")} onDone={() => setStep("profile")} />;
+    return (
+      <RegisterFlow
+        onBackToProfile={() => setStep("profile")}
+        onDone={() => setStep("profile")}
+      />
+    );
 
   return null;
 }

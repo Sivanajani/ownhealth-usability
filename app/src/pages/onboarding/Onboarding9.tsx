@@ -8,6 +8,7 @@ import ShieldIcon from "../../assets/schild.svg?react";
 
 type Props = {
   onFinish?: () => void;
+  onBack?: () => void;
   name: string;
   onNameChange: (v: string) => void;
   age: number | null;                     
@@ -31,6 +32,7 @@ export default function Onboarding9({
   return (
     <div className="ob-root">
       <div className="ob-content ob3-content">
+        
         {/* Top (Dots + Title) */}
         <div className="ob-top ob3-top">
           <div className="ob2-topbar">

@@ -15,7 +15,7 @@ import type { FocusKey } from "../../types/focus";
 
 type Props = {
   userName: string;
-  focus: FocusKey;
+  focus?: FocusKey | null;
   onBack?: () => void;
   onOpenProfile?: () => void;
 };

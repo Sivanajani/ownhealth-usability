@@ -1,0 +1,496 @@
+/* home.css */
+
+/* Hintergrund näher am Mock */
+.home-bg{
+  background:
+    radial-gradient(900px 700px at 40% -10%, rgba(88,146,198,0.55) 0%, rgba(14,39,70,0.0) 60%),
+    radial-gradient(1200px 900px at 50% 0%, rgba(32,76,118,0.55) 0%, rgba(9,22,40,0.92) 55%, rgba(7,14,28,1) 100%);
+}
+
+.home-safe{
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+  padding: 18px 16px 0;
+}
+
+/* Header */
+.home-header{
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 6px;
+}
+
+.home-left{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.home-time{
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.home-leftRow{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.home-logoMark{
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+}
+
+.home-logoImg{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  opacity: 0.95;
+}
+
+/* optional wenn SVG als component */
+.home-logoSvg{
+  width: 28px;
+  height: 28px;
+  opacity: 0.95;
+}
+
+.home-secure{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  color: rgba(70, 227, 160, 0.95);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.home-lock{ transform: translateY(-0.5px); }
+
+.home-right{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+/* Ring + Gear wie im Mock (rounded squares) */
+.home-ringBtn{
+  all: unset;
+  cursor: pointer;
+
+  width: 54px;              /* nimm deine bisherigen Maße */
+  height: 54px;
+  border-radius: 999px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  position: relative;
+}
+
+.home-ringBtn::after{
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba(212, 195, 43, 0.45),
+    transparent 70%
+  );
+  opacity: 0;
+  animation: ringHalo 1.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ringHalo{
+  0%, 100%{ opacity: 0; }
+  50%{ opacity: 1; }
+}
+
+.home-ringText{
+  font-weight: 800;
+  font-size: 13px;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.2px;
+  display: inline-block;
+  animation: ringPulse 1.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes ringPulse{
+  0%, 100%{
+    transform: scale(1);
+    opacity: 0.92;
+    filter: drop-shadow(0 0 0 rgba(96,165,250,0));
+  }
+  50%{
+    transform: scale(1.12);
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(96,165,250,0.45));
+  }
+}
+
+/* Respektiert "Reduce Motion" */
+@media (prefers-reduced-motion: reduce){
+  .home-ringText{
+    animation: none;
+  }
+}
+
+.home-ringBtn:active{
+  transform: scale(0.98);
+}
+
+.home-ringBtn:focus-visible{
+  outline: 2px solid rgba(80,150,255,0.65);
+  outline-offset: 3px;
+}
+
+
+.home-gear{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+}
+
+/* Chat-Block: sitzt unten, mit grossem Radius + Glow */
+.home-chatWrap{
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 18px;
+  border-radius: 34px;
+
+  /* wichtig: kein “Kasten-Rand”, eher weich */
+  background: rgba(255,255,255,0.04);
+
+  /* Glow + weicher Schatten wie Mock */
+  box-shadow:
+    0 26px 70px rgba(0,0,0,0.50),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+
+  backdrop-filter: blur(12px);
+
+  /* Abstand zur BottomNav */
+  margin-bottom: calc(78px + env(safe-area-inset-bottom) + 12px);
+}
+
+.home-chatCard{
+  padding: 16px;
+  border-radius: 28px;
+
+  background: rgba(8, 12, 22, 0.42);
+
+  /* nur ein ganz feiner Rand, kein “double frame” */
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: none;
+}
+
+/* Quick questions: stärker pill-like, weniger “box” */
+.quickQ{
+  width: 100%;
+  padding: 16px 16px;
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  color: rgba(255,255,255,0.92);
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.quickQ + .quickQ{ margin-top: 12px; }
+
+/* Input Row */
+.home-inputRow{
+  margin-top: 14px;
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.home-leftTools{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roundTool{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: rgba(255,255,255,0.9);
+}
+
+.home-input{
+  flex: 1;
+  height: 54px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.025);
+  color: rgba(255,255,255,0.92);
+  padding: 0 16px;
+  outline: none;
+}
+
+.home-input::placeholder{ color: rgba(255,255,255,0.35); }
+
+.sendBtn{
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Bottom Nav fix unten und “clean” wie Mock */
+
+/* Greeting centered */
+.home-greeting{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  margin-bottom: 16px;
+  padding: 0 18px;
+}
+
+.home-greetingInner{
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+}
+
+.home-greetingTitle{
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.25;
+  margin-top: 30px;
+}
+
+.home-greetingName{
+  color: rgba(96,165,250,0.95);
+}
+
+.home-greetingSub{
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 1.4;
+  color: rgba(144,161,185,0.78);
+}
+
+/* Header icons */
+.home-lockSvg{
+  width: 16px;
+  height: 16px;
+  display: block;
+  opacity: 0.9;
+}
+
+.home-gearSvg{
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: 0.9;
+}
+
+/* Make svg use currentColor if needed */
+.home-lockSvg *, .home-gearSvg *, .navSvg *{
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* =========================
+   Insight Card (Home)
+========================= */
+.home-insight{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  margin-bottom: 10px;
+  padding: 0 18px;
+}
+
+.home-insightCard{
+  max-width: 420px;
+  width: 100%;
+  border-radius: 26px;
+  padding: 14px 14px 12px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 26px 70px rgba(0,0,0,0.40),
+    0 0 0 1px rgba(255,255,255,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.home-insightTop{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.home-insightTag{
+  display: none;
+  align-self: flex-start;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(180,205,255,0.92);
+}
+
+.home-insightHello{
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.92);
+}
+
+.home-insightBody{
+  border-radius: 18px;
+  padding: 12px 12px;
+  background: rgba(8, 12, 22, 0.30);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.home-insightLabel{
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  color: rgba(144,161,185,0.78);
+  margin-bottom: 8px;
+}
+
+.home-insightMetricMain{
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.3;
+}
+
+.home-insightAccent{
+  color: rgba(96,165,250,0.95);
+}
+
+.home-insightMuted{
+  color: rgba(144,161,185,0.70);
+  font-weight: 600;
+}
+
+.home-insightBullets{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-bullet{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(255,255,255,0.80);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.home-bulletIcon{
+  width: 22px;
+  height: 22px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  transform: translateY(-1px);
+}
+
+.home-insightNote{
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.72);
+}
+
+.home-insightBtn{
+  margin-top: 12px;
+  width: 100%;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  font-weight: 700;
+}
+
+.home-insightBtn:active{
+  transform: scale(0.99);
+}
+
+/* kleine farbliche Nuance pro Modus */
+.home-insightCard.is-longevity .home-insightAccent{ color: rgba(96,165,250,0.95); }
+.home-insightCard.is-chronic .home-insightAccent{ color: rgba(70,227,160,0.95); }
+
+.home-insightCard.is-chronic .home-insightTag{
+  color: rgba(140,240,205,0.92);
+}
+
+/* =========================
+   Username Highlight
+========================= */
+.home-insightName{
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  padding-left: 2px;
+}
+
+/* Fokus-abhängige Farbe */
+.home-insightCard.is-longevity .home-insightName{
+  color: rgba(125, 174, 235, 0.95);   /* Blue */
+  text-shadow: 0 0 18px rgba(96,165,250,0.25);
+}
+
+.home-insightCard.is-chronic .home-insightName{
+  color: rgba(70,227,160,0.95);
+  text-shadow: 0 0 18px rgba(70,227,160,0.22);
+}
