@@ -1,0 +1,437 @@
+/* Onboarding 5 - Gesundheitsfrage */
+
+.ob5-content {
+  padding-top: 24px !important;
+  padding-bottom: 20px !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* HEADER */
+.ob5-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.ob5-title {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 850;
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 0 0 8px 0;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.ob5-subtitle {
+  color: rgba(144, 161, 185, 0.9);
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+  text-align: center;
+}
+
+/* MIDDLE CONTENT */
+.ob5-middle {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* FORM */
+.ob5-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* INPUT WRAPPER */
+.ob5-input-wrapper {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px;
+  transition: all 0.2s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.ob5-input-focused {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+.ob5-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  min-height: 80px;
+}
+
+.ob5-textarea::placeholder {
+  color: rgba(144, 161, 185, 0.6);
+  font-weight: 500;
+}
+
+.ob5-input-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ob5-char-count {
+  color: rgba(144, 161, 185, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* EXAMPLES */
+.ob5-examples {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.25);
+}
+
+.ob5-examples-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0 0 16px 0;
+  text-align: left;
+}
+
+/* 2x2 GRID LAYOUT */
+.ob5-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.ob5-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  min-height: 120px;
+}
+
+.ob5-grid-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.ob5-grid-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* KRÄFTIGE SCHWARZE ICONS (nicht blau!) */
+.ob5-grid-icon {
+  width: 24px;
+  height: 24px;
+  /* Kräftiges schwarz mit leichter Transparenz */
+  color: rgba(255, 255, 255, 0.95);
+  filter: brightness(1.2) contrast(1.2);
+}
+
+/* Optional: Unterschiedliche Farben für die Icons */
+.ob5-grid-icon-wrapper:nth-child(1) .ob5-grid-icon {
+  /* Pills Icon - weiß/kräftig */
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ob5-grid-icon-wrapper:nth-child(2) .ob5-grid-icon {
+  /* Blood Icon - weiß/kräftig */
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ob5-grid-icon-wrapper:nth-child(3) .ob5-grid-icon {
+  /* Food Icon - weiß/kräftig */
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ob5-grid-icon-wrapper:nth-child(4) .ob5-grid-icon {
+  /* Blitz Icon - hellblau */
+  color: rgba(147, 197, 253, 0.95);
+}
+
+.ob5-grid-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.3;
+  margin: 0;
+  text-align: center;
+}
+
+/* DIVIDER */
+.ob5-divider {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.1) 20%, 
+    rgba(255, 255, 255, 0.1) 80%, 
+    transparent 100%);
+  margin: 8px 0;
+}
+
+/* CTA */
+.ob5-cta {
+  margin-top: auto;
+  text-align: center;
+}
+
+.ob5-button {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 100%),
+    #007AFF !important;
+  border: none !important;
+  box-shadow:
+    0 22px 60px rgba(0, 122, 255, 0.35),
+    0 10px 22px rgba(0, 0, 0, 0.35) !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  letter-spacing: -0.01em !important;
+  transition: all 0.2s ease !important;
+  padding: 16px 24px !important;
+  line-height: 1.3 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ob5-button:hover:not(:disabled) {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.08) 100%),
+    #007AFF !important;
+  transform: translateY(-1px);
+  box-shadow:
+    0 26px 70px rgba(0, 122, 255, 0.45),
+    0 12px 26px rgba(0, 0, 0, 0.4) !important;
+}
+
+.ob5-button:active:not(:disabled) {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.02) 100%),
+    #0056CC !important;
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 0 0 6px rgba(0, 122, 255, 0.25),
+    0 18px 50px rgba(0, 122, 255, 0.5) !important;
+}
+
+.ob5-button-disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  filter: saturate(0.8) !important;
+}
+
+.ob5-button-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Blitz Icon für den Button - HELLBLAU */
+.ob5-blitz-icon {
+  width: 20px;
+  height: 20px;
+  color: rgba(147, 197, 253, 1); /* Hellblau */
+}
+
+.ob5-hint {
+  color: rgba(144, 161, 185, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  margin: 10px 0 0 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* BOTTOM */
+.ob5-bottom {
+  margin-top: 16px;
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ob5-skip {
+  background: transparent;
+  border: none;
+  color: rgba(144, 161, 185, 0.8);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.ob5-skip:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ob5-input-wrapper,
+.ob5-examples,
+.ob5-cta {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.ob5-grid-item {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.ob5-grid-item:nth-child(1) { animation-delay: 0.1s; }
+.ob5-grid-item:nth-child(2) { animation-delay: 0.15s; }
+.ob5-grid-item:nth-child(3) { animation-delay: 0.2s; }
+.ob5-grid-item:nth-child(4) { animation-delay: 0.25s; }
+
+/* RESPONSIVE */
+@media (max-width: 380px) {
+  .ob5-content {
+    padding-top: 20px !important;
+    padding-bottom: 16px !important;
+  }
+  
+  .ob5-title {
+    font-size: 22px;
+  }
+  
+  .ob5-subtitle {
+    font-size: 15px;
+  }
+  
+  .ob5-input-wrapper {
+    padding: 14px;
+  }
+  
+  .ob5-textarea {
+    font-size: 15px;
+  }
+  
+  .ob5-examples {
+    padding: 16px;
+  }
+  
+  .ob5-examples-title {
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+  
+  .ob5-grid {
+    gap: 12px;
+  }
+  
+  .ob5-grid-item {
+    padding: 12px 8px;
+    min-height: 110px;
+  }
+  
+  .ob5-grid-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 8px;
+  }
+  
+  .ob5-grid-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .ob5-grid-text {
+    font-size: 13px;
+  }
+  
+  .ob5-button {
+    font-size: 15px !important;
+    padding: 14px 20px !important;
+    gap: 8px;
+  }
+  
+  .ob5-hint {
+    font-size: 11px;
+  }
+  
+  .ob5-skip {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 400px) {
+  .ob5-title {
+    font-size: 28px;
+  }
+  
+  .ob5-examples {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* FIX FOR TEXT OVERFLOW */
+.ob5-title,
+.ob5-grid-text,
+.ob5-button {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* ICON STÄRKE/INTENSITÄT ERHÖHEN */
+.ob5-grid-icon {
+  /* Mehr Kontrast und Sättigung für kräftigere Icons */
+  filter: brightness(1.3) contrast(1.3) saturate(1.5);
+}
