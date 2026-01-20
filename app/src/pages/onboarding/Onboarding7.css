@@ -1,0 +1,670 @@
+/* Onboarding 7 - Bluttest Scan */
+
+.ob7-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-top: 32px !important;
+  padding-bottom: 24px !important;
+  position: relative;
+}
+
+/* Back Button */
+.ob7-back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  z-index: 10;
+}
+
+.ob7-back-button:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Header */
+.ob7-header {
+  text-align: center;
+  margin-bottom: 32px;
+  margin-top: 8px;
+  padding: 0 20px;
+}
+
+.ob7-title {
+  margin: 0 0 12px 0;
+  font-size: 28px;
+  font-weight: 850;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.ob7-subtitle {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(144, 161, 185, 0.85);
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* VISUAL */
+.ob7-visual {
+  position: relative;
+  flex: 1;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 40px;
+  padding: 0 20px;
+}
+
+/* Privacy Badge - Über dem iPhone */
+.ob7-privacy {
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 22px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.25) 0%,
+    rgba(16, 185, 129, 0.15) 100%);
+  border: 2px solid rgba(16, 185, 129, 0.35);
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(16, 185, 129, 0.3),
+    0 10px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  z-index: 3;
+  animation: ob7-floatBadge 3s ease-in-out infinite;
+}
+
+@keyframes ob7-floatBadge {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+.ob7-privacy-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.3) 0%,
+    rgba(16, 185, 129, 0.2) 100%);
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  color: rgba(167, 243, 208, 1);
+  font-weight: 900;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.ob7-privacy-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ob7-privacy-strong {
+  color: rgba(255, 255, 255, 1);
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.ob7-privacy-small {
+  color: rgba(209, 250, 229, 0.95);
+  font-size: 13px;
+  line-height: 1.2;
+  max-width: 160px;
+}
+
+/* Document Hintergrund */
+.ob7-doc {
+  position: absolute;
+  width: 280px;
+  height: 300px;
+  border-radius: 36px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 32px 120px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  opacity: 0.8;
+  transform: translateX(-40px) rotate(-5deg);
+  animation: ob7-floatDoc 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+.ob7-doc::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: 28px;
+  background: radial-gradient(
+    120% 80% at 50% 30%,
+    rgba(96, 165, 250, 0.25),
+    rgba(0, 0, 0, 0)
+  );
+  pointer-events: none;
+}
+
+.ob7-doc-lines {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 32px;
+  display: grid;
+  gap: 16px;
+  opacity: 0.7;
+}
+
+.ob7-line {
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.2) 100%);
+}
+
+.ob7-line--w1 { width: 70%; }
+.ob7-line--w2 { width: 88%; }
+.ob7-line--w3 { width: 62%; }
+
+/* iPhone - Realistischer */
+.ob7-phone {
+  position: absolute;
+  width: 280px;
+  height: 320px;
+  border-radius: 44px;
+  background: linear-gradient(135deg, 
+    rgba(30, 30, 30, 0.95) 0%,
+    rgba(20, 20, 20, 0.98) 100%);
+  border: 12px solid rgba(15, 15, 15, 0.95);
+  box-shadow:
+    0 40px 140px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  animation: ob7-floatPhone 4s ease-in-out infinite;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.ob7-notch {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 28px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, 
+    rgba(15, 15, 15, 0.9) 0%,
+    rgba(10, 10, 10, 0.95) 100%);
+  margin-top: 4px;
+  z-index: 1;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.ob7-card {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  bottom: 8px;
+  border-radius: 36px;
+  background: linear-gradient(135deg, 
+    rgba(20, 20, 20, 0.95) 0%,
+    rgba(10, 10, 10, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 60px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ob7-card-title {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 28px;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+/* Results - Bessere Darstellung */
+.ob7-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  opacity: 0.9; /* Verblasst */
+}
+
+.ob7-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
+}
+
+.ob7-pill {
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  min-width: 120px;
+  text-align: center;
+}
+
+.ob7-pill--green {
+  color: rgba(167, 243, 208, 0.95);
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.2) 0%,
+    rgba(16, 185, 129, 0.12) 100%);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.ob7-pill--amber {
+  color: rgba(253, 230, 138, 0.95);
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.2) 0%,
+    rgba(245, 158, 11, 0.12) 100%);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.ob7-pill--red {
+  color: rgba(254, 202, 202, 0.95);
+  background: linear-gradient(135deg, 
+    rgba(239, 68, 68, 0.2) 0%,
+    rgba(239, 68, 68, 0.12) 100%);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.ob7-row-right {
+  color: rgba(144, 161, 185, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.ob7-check {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.2) 0%,
+    rgba(59, 130, 246, 0.1) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: rgba(147, 197, 253, 0.95);
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: 
+    0 8px 24px rgba(59, 130, 246, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ACTIONS */
+.ob7-actions {
+  text-align: center;
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+/* Button Row - Nebeneinander */
+.ob7-btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.ob7-btn {
+  border: none;
+  border-radius: 16px;
+  padding: 18px 16px;
+  font-weight: 700;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.ob7-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.ob7-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+}
+
+.ob7-btn--primary {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 100%),
+    #1d4ed8 !important;
+  color: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 24px 60px rgba(29, 78, 216, 0.4),
+    0 10px 22px rgba(0, 0, 0, 0.35);
+  border: none !important;
+}
+
+.ob7-btn--secondary {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.04) 100%);
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ob7-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ob7-camera-icon,
+.ob7-upload-icon {
+  width: 20px;
+  height: 20px;
+  color: currentColor;
+}
+
+.ob7-lock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(144, 161, 185, 0.85);
+  font-size: 13px;
+  margin-bottom: 24px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.ob7-checkbox {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(72, 187, 120, 0.1);
+  border: 2px solid rgba(72, 187, 120, 0.25);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.ob7-lock-icon {
+  width: 12px;
+  height: 12px;
+  color: #48bb78;
+}
+
+.ob7-skip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(144, 161, 185, 0.85);
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.ob7-skip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ANIMATIONS */
+@keyframes ob7-floatDoc {
+  0%, 100% {
+    transform: translateX(-40px) rotate(-5deg) translateY(0);
+  }
+  50% {
+    transform: translateX(-40px) rotate(-5deg) translateY(-10px);
+  }
+}
+
+@keyframes ob7-floatPhone {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes ob7-fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ob7-header {
+  animation: ob7-fadeInUp 0.6s ease-out forwards;
+}
+
+.ob7-visual {
+  animation: ob7-fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.1s;
+}
+
+.ob7-actions {
+  animation: ob7-fadeInUp 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .ob7-content {
+    padding-top: 28px !important;
+    padding-bottom: 20px !important;
+  }
+  
+  .ob7-back-button {
+    top: 16px;
+    left: 16px;
+  }
+  
+  .ob7-header {
+    padding: 0 16px;
+    margin-bottom: 28px;
+  }
+  
+  .ob7-title {
+    font-size: 24px;
+  }
+  
+  .ob7-subtitle {
+    font-size: 14px;
+    max-width: 260px;
+  }
+  
+  .ob7-visual {
+    min-height: 320px;
+    margin: 16px 0 32px;
+    padding: 0 16px;
+  }
+  
+  .ob7-privacy {
+    padding: 12px 18px;
+    top: -15px;
+  }
+  
+  .ob7-privacy-dot {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+  
+  .ob7-privacy-strong {
+    font-size: 14px;
+  }
+  
+  .ob7-privacy-small {
+    font-size: 12px;
+  }
+  
+  .ob7-doc {
+    width: 240px;
+    height: 260px;
+    transform: translateX(-30px) rotate(-5deg);
+  }
+  
+  .ob7-phone {
+    width: 300px;
+    height: 380px;
+    border-radius: 40px;
+    border-width: 10px;
+  }
+  
+  .ob7-card {
+    padding: 54px 20px 20px 20px;
+    border-radius: 32px;
+  }
+  
+  .ob7-card-title {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .ob7-row {
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  
+  .ob7-pill {
+    font-size: 14px;
+    padding: 7px 12px;
+    min-width: 110px;
+  }
+  
+  .ob7-row-right {
+    font-size: 13px;
+  }
+  
+  .ob7-btn-row {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  
+  .ob7-btn {
+    padding: 16px 12px;
+    font-size: 14px;
+    gap: 8px;
+  }
+  
+  .ob7-camera-icon,
+  .ob7-upload-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .ob7-actions {
+    padding: 0 16px;
+  }
+  
+  .ob7-lock {
+    font-size: 12px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+  }
+  
+  .ob7-skip {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ob7-title {
+    font-size: 30px;
+  }
+  
+  .ob7-subtitle {
+    font-size: 16px;
+    max-width: 320px;
+  }
+  
+  .ob7-visual {
+    min-height: 400px;
+  }
+  
+  .ob7-doc {
+    width: 320px;
+    height: 340px;
+  }
+  
+  .ob7-phone {
+    width: 320px;
+    height: 360px;
+  }
+}
+
+/* FIX FOR TEXT OVERFLOW */
+.ob7-title,
+.ob7-subtitle,
+.ob7-btn,
+.ob7-pill {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
