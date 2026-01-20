@@ -26,6 +26,12 @@ export default function Onboarding0({ onNext }: Props) {
             <span className="ob0-dot" />
             <span className="ob0-dot" />
             <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
           </div>
 
 

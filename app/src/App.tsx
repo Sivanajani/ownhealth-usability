@@ -1,21 +1,20 @@
+// App.tsx - KORRIGIERT MIT TYPE-ONLY IMPORT
 import { useState } from "react";
-import OnboardingFlow from "./pages/onboarding/OnboardingFlow";
+import OnboardingFlow, { type FocusKey } from "./pages/onboarding/OnboardingFlow"; // <-- type hinzufügen
 import HomeFlow from "./pages/home/HomeFlow";
-
-export type FocusKey = "longevity" | "chronic";
 
 export default function App() {
   const [isOnboarded, setIsOnboarded] = useState(false);
   const [userName, setUserName] = useState<string>("");
   const [age, setAge] = useState<number | null>(null);
-  const [focus, setFocus] = useState<FocusKey>("longevity"); 
+  const [focusKey, setFocusKey] = useState<FocusKey>("longevity"); 
   const [hasSeenHomeInsight, setHasSeenHomeInsight] = useState(false);
 
   return isOnboarded ? (
     <HomeFlow 
       userName={userName} 
       age={age} 
-      focus={focus} 
+      focus={focusKey} 
       hasSeenHomeInsight={hasSeenHomeInsight}           
       onSeenHomeInsight={() => setHasSeenHomeInsight(true)} 
     /> 
@@ -26,7 +25,8 @@ export default function App() {
       setUserName={setUserName}
       age={age}
       setAge={setAge}
-      onFocus={setFocus} 
+      focusKey={focusKey} 
+      setFocusKey={setFocusKey} 
     />
   );
 }

@@ -1,147 +1,145 @@
-// Onboarding3.tsx
-import { useState } from "react";
-import "./onboardingStart.css";
-import "./onboarding3.css";
+// onboarding3.tsx - WITH PROPS FOR FLOW
+import { useLayoutEffect, useRef, useState } from "react";
+import "../onboarding/onboarding3.css";
+import "../onboarding/onboardingStart.css";
 
-import FemaleIcon from "../../assets/woma.svg?react";
-import MaleIcon from "../../assets/man.svg?react";
-import ShieldIcon from "../../assets/schild.svg?react";
+// Import der Icons
+import SchildIcon from "../../assets/schild.svg?react";
+import LockIcon from "../../assets/lock.svg?react";
 
-type Props = {
-  onFinish?: () => void;
+// Props für den Flow
+interface Onboarding3Props {
+  onFinish: () => void;
   name: string;
-  onNameChange: (v: string) => void;
-  age: number | null;                     
-  onAgeChange: (v: number | null) => void;
-};
+  onNameChange: (name: string) => void;
+  age: number | null;
+  onAgeChange: (age: number | null) => void;
+}
 
+const Onboarding3: React.FC<Onboarding3Props> = ({
+  onFinish,  
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
-type Sex = "Männlich" | "Weiblich" | "Divers" | null;
+  useLayoutEffect(() => {
+    const timer = setTimeout(() => {
+      setHasAnimated(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
-export default function Onboarding3({
-  onFinish,
-  name,
-  onNameChange,
-  age,
-  onAgeChange,
-}: Props) {
-  
-  const [sex, setSex] = useState<Sex>(null);
-  const canFinish = name.trim().length > 0 && (age ?? 0) > 0 && sex !== null;
+  const handleVerstandenClick = () => {
+    // Hier kannst du noch Validierungen machen falls nötig
+    // z.B.: if (!name) { alert("Bitte Namen eingeben"); return; }
+    
+    // Dann weiter zum nächsten Schritt
+    onFinish();
+  };
 
   return (
-    <div className="ob-root">
+    <div className="ob-root" ref={containerRef}>
       <div className="ob-content ob3-content">
-        {/* Top (Dots + Title) */}
-        <div className="ob-top ob3-top">
-          <div className="ob2-topbar">
-            <div className="ob0-dots" aria-hidden="true">
-              <span className="ob0-dot ob0-dot--active" />
-              <span className="ob0-dot ob0-dot--active" />
-              <span className="ob0-dot ob0-dot--active" />
-              <span className="ob0-dot ob0-dot--active" />
-              <span className="ob0-dot ob0-dot--active" />
+        <div className="ob0-dots" aria-hidden="true">
+          <span className="ob0-dot ob0-dot--active" />
+          <span className="ob0-dot ob0-dot--active" />
+          <span className="ob0-dot ob0-dot--active" />
+          <span className="ob0-dot ob0-dot--active" />
+          <span className="ob0-dot" />
+          <span className="ob0-dot" />
+          <span className="ob0-dot" />
+          <span className="ob0-dot" />
+          <span className="ob0-dot" />
+          <span className="ob0-dot" />
+        </div>
+
+        {/* TITEL */}
+        <div className={`ob3-title-section ${hasAnimated ? 'ob3-animated' : ''}`}>
+          <h1 className="ob3-title">Deine Daten.</h1>
+          <h2 className="ob3-subtitle">Dein Besitz.</h2>
+        </div>
+
+        {/* SCHILD ICON */}
+        <div className={`ob3-shield-section ${hasAnimated ? 'ob3-animated' : ''}`}>
+          <div className="ob3-icon-circle">
+            <SchildIcon className="ob3-shield" />
+          </div>
+        </div>
+
+        <div className="ob3-middle">
+          {/* NUR DU ZUGRIFF */}
+          <div className={`ob3-access-section ${hasAnimated ? 'ob3-animated' : ''}`}>
+            <div className="ob3-access-badge">
+              Nur <span className="ob3-you">DU</span> hast Zugriff 
+              <span className="ob3-check"> ✔</span>
             </div>
           </div>
 
-          <div className="ob-brand">
-            <h1 className="ob-title">Fast fertig.</h1>
-            <p className="ob-subtitle">
-              Für den Start brauchen wir drei Infos.                      
-            </p>
+          {/* LISTE DER BESCHRÄNKUNGEN */}
+          <div className="ob3-restrictions-list">
+            <div className={`ob3-restriction-item ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.4s' }}>
+              <span className="ob3-restriction-icon">❌</span>
+              <span className="ob3-restriction-text">Nicht wir.</span>
+            </div>
+            <div className={`ob3-restriction-item ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.5s' }}>
+              <span className="ob3-restriction-icon">❌</span>
+              <span className="ob3-restriction-text">Nicht dein Arbeitgeber.</span>
+            </div>
+            <div className={`ob3-restriction-item ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.6s' }}>
+              <span className="ob3-restriction-icon">❌</span>
+              <span className="ob3-restriction-text">Nicht deine Krankenkasse.</span>
+            </div>
+            <div className={`ob3-restriction-item ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.7s' }}>
+              <span className="ob3-restriction-icon">❌</span>
+              <span className="ob3-restriction-text">Keine Tech-Giganten</span>
+            </div>
+          </div>
+
+          {/* VERSCHLÜSSELUNGS-BOX */}
+          <div className={`ob3-encryption-box ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.3s' }}>
+            <div className="ob3-lock-wrapper">
+              <LockIcon className="ob3-lock-icon" />
+            </div>
+            <div className="ob3-encryption-content">
+              <h3 className="ob3-encryption-title">
+                Deine Daten bleiben verschlüsselt auf deinen Geräten
+              </h3>
+              <div className="ob3-encryption-features">
+                <span className="ob3-feature">Ende-zu-Ende-Verschlüsselung</span>
+                <span className="ob3-feature-divider">•</span>
+                <span className="ob3-feature">Lokale Verarbeitung</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Form */}
-        <div className="ob4-form">
-
-          <div className="ob4-field">
-            <label className="ob4-label">Wie dürfen wir dich nennen?</label>
-            <input
-              className="ob4-input ob3-input"
-              placeholder="Vorname oder Pseudonym"
-              type="text"
-              value={name}
-              onChange={(e) => onNameChange(e.target.value)}
-            />
-          <div className="ob3-badge" role="note" aria-label="Hinweis">
-            <span className="ob3-badgeIcon" aria-hidden="true">
-              <ShieldIcon className="ob3-badgeSvg" />
-            </span>
-            <span className="ob3-badgeText">OWN funktioniert komplett anonym.</span>
+        <div className="ob3-bottom">
+          <div className="ob-cta">
+            <button 
+              className="ob-button ob3-button"
+              onClick={handleVerstandenClick}
+            >
+              Verstanden
+            </button>
           </div>
-        </div>
-
-          <div className="ob4-field">
-            <label className="ob4-label">Alter</label>
-            <input
-              className="ob4-input ob3-input"
-              placeholder="z. B. 38"
-              type="number"
-              inputMode="numeric"
-              value={age ?? ""}
-              onChange={(e) => {
-                const v = e.target.value;
-                onAgeChange(v === "" ? null : Number(v));
+                    {/* FAQ LINK */}
+          <div className={`ob3-faq-section ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.8s' }}>
+            <button 
+              className="ob3-faq-button"
+              onClick={() => {
+                // Hier könnte man einen Modal oder eine separate Seite öffnen
+                // für detaillierte Erklärungen zum Datenaustausch
+                console.log("FAQ zum Datenaustausch angeklickt");
               }}
-            />
+            >
+              Wie funktioniert Datenaustausch &<br />Datenschutz genau?              
+            </button>
           </div>
-
-          <div className="ob4-field">
-            <label className="ob4-label">Biologisches Geschlecht</label>
-
-            <div className="ob3-genderGrid" role="group" aria-label="Biologisches Geschlecht">
-              <button
-                type="button"
-                className={`ob3-genderCard ob3-genderCard--stack ${
-                  sex === "Männlich" ? "is-active" : ""
-                }`}
-                onClick={() => setSex("Männlich")}
-              >
-                <MaleIcon className="ob3-genderIcon" aria-hidden="true" />
-                <span className="ob3-genderLabel">Männlich</span>
-              </button>
-
-              <button
-                type="button"
-                className={`ob3-genderCard ob3-genderCard--stack ${
-                  sex === "Weiblich" ? "is-active" : ""
-                }`}
-                onClick={() => setSex("Weiblich")}
-              >
-                <FemaleIcon className="ob3-genderIcon" aria-hidden="true" />
-                <span className="ob3-genderLabel">Weiblich</span>
-              </button>
-
-              <button
-                type="button"
-                className={`ob3-genderCard ob3-genderCard--full ${
-                  sex === "Divers" ? "is-active" : ""
-                }`}
-                onClick={() => setSex("Divers")}
-              >
-                <span className="ob3-genderIconText" aria-hidden="true">
-                  ⚧
-                </span>
-                <span className="ob3-genderLabel">Divers</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="ob-cta">
-          <button
-            className={`ob-button ${!canFinish ? "ob3-buttonDisabled" : ""}`}
-            onClick={onFinish}
-            disabled={!canFinish}
-          >
-            Konto starten
-          </button>
-
-          <div className="ob2-lock">🔒 Deine Daten bleiben privat</div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Onboarding3;

@@ -79,6 +79,12 @@ export default function Onboarding2({ onNext, onClose }: Props) {
             <span className="ob0-dot ob0-dot--active" />
             <span className="ob0-dot" />
             <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
+            <span className="ob0-dot" />
           </div>
 
           {onClose ? (

@@ -41,6 +41,12 @@ export default function Onboarding1({ onNext, onBack }: Props) {
               <span className="ob0-dot" />
               <span className="ob0-dot" />
               <span className="ob0-dot" />
+              <span className="ob0-dot" />
+              <span className="ob0-dot" />
+              <span className="ob0-dot" />
+              <span className="ob0-dot" />
+              <span className="ob0-dot" />
+              <span className="ob0-dot" />
             </div>
 
             {onBack && (

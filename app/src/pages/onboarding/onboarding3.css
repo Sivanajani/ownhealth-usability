@@ -1,169 +1,464 @@
+/* onboarding3.css - COMPLETE VERSION */
 
-.ob3-content{
-    justify-content: flex-start;
-    gap: 18px;
-}
-
-/* input etwas "wertiger" */
-.ob3-input{
-  cursor: text;
-  appearance: none;
-  background-image: none !important;
-}
-
-/* Gender Cards wie im Mock (2 oben, 1 unten breit) */
-.ob3-genderGrid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.ob3-genderCard{
-  height: 78px;
-
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: radial-gradient(600px 240px at 30% 0%, rgba(255,255,255,0.06), transparent 55%), rgba(255,255,255,0.04);
-
-  box-shadow: 0 18px 60px rgba(0,0,0,0.22);
-
+.ob3-content {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
   display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* SCHILD SECTION - größer und zentriert */
+.ob3-shield-section {
+  text-align: center;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.ob3-shield-section.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-icon-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  background: rgba(59, 130, 246, 0.15);
+  border: 2px solid rgba(59, 130, 246, 0.35);
+  box-shadow: 
+    0 0 0 8px rgba(59, 130, 246, 0.1),
+    0 24px 72px rgba(59, 130, 246, 0.3);
+}
+
+.ob3-shield {
+  width: 48px;
+  height: 48px;
+  color: rgba(147, 197, 253, 1);
+  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.4));
+}
+
+/* TITEL SECTION */
+.ob3-title-section {
+  text-align: center;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+}
+
+.ob3-title-section.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-title {
+  margin: 0 0 4px 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 850;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.ob3-subtitle {
+  margin: 0;
+  color: rgba(147, 197, 253, 0.95);
+  font-weight: 850;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ACCESS BADGE */
+.ob3-access-section {
+  margin-bottom: 24px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+}
+
+.ob3-access-section.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-access-badge {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
+}
+
+.ob3-you {
+  color: rgba(110, 231, 183, 0.95);
+  font-weight: 800;
+  margin: 0 4px;
+}
+
+.ob3-check {
+  color: rgba(16, 185, 129, 1);
+  font-size: 18px;
+  margin-left: 6px;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5));
+}
+
+/* MIDDLE CONTENT */
+.ob3-middle {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* ENCRYPTION BOX */
+.ob3-encryption-box {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 12px 48px rgba(16, 185, 129, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ob3-encryption-box.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-lock-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+.ob3-lock-icon {
+  width: 22px;
+  height: 22px;
+  color: rgba(110, 231, 183, 0.95);
+}
+
+.ob3-encryption-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ob3-encryption-title {
+  color: rgba(110, 231, 183, 0.95);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.3;
+  margin: 0 0 6px 0;
+  text-align: left;
+  word-break: break-word;
+}
+
+.ob3-encryption-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.ob3-feature {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ob3-feature-divider {
+  color: rgba(144, 161, 185, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* RESTRICTIONS LIST */
+.ob3-restrictions-list {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 18px 16px;
+  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.25);
+}
+
+.ob3-restriction-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ob3-restriction-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.ob3-restriction-item.ob3-animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ob3-restriction-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgba(239, 68, 68, 0.95);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.15);
+}
+
+.ob3-restriction-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* FAQ SECTION */
+.ob3-faq-section {
+  text-align: center;
+  padding-top: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ob3-faq-section.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-faq-button {
+  background: transparent;
+  border: none;
+  color: rgba(147, 197, 253, 0.9);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-
-  cursor: pointer;
-  
-  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease, box-shadow 120ms ease, color 120ms ease;
-  
-  /* Icon-Farbe kommt über currentColor (SVG inline / ?react) */
-  color: rgba(144,161,185,0.85);
+  gap: 4px;
 }
 
-.ob3-genderCard:active{
-  transform: translateY(1px);
+.ob3-faq-button:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: rgba(147, 197, 253, 1);
+  transform: translateY(-1px);
 }
 
-/* wie Mock: Icon oben, Text unten */
-.ob3-genderCard--stack{
-  height: 100px;
-  flex-direction: column;  
+.ob3-faq-arrow {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+  margin-left: 2px;
 }
 
-.ob3-genderCard--full{
-  grid-column: 1 / -1;
-  height: 56px;
-  flex-direction: row;
-  gap: 12px;
+.ob3-faq-button:hover .ob3-faq-arrow {
+  transform: translateX(3px);
 }
 
-/* Icons: gleich gross, keine Kreise/Badges/Backgrounds */
-.ob3-genderIcon{
-  width: 22px;
-  height: 22px;
-  display: block;
-  opacity: 0.85;
-
-  /* falls du irgendwo noch <img> nutzt */
-  object-fit: contain;
-  
-  transition: opacity 120ms ease, transform 120ms ease;
+/* BOTTOM CTA */
+.ob3-bottom {
+  margin-top: auto;
+  padding-top: 16px;
 }
 
-/* Emoji/ASCII Icon (Divers) separat, damit es optisch passt */
-.ob3-genderIconText{
-  width: 22px;
-  height: 22px;
-  display: grid;
-  place-items: center;
-  font-size: 18px;
-  line-height: 1;
-  opacity: 0.85;
-}
-
-/* Label */
-.ob3-genderLabel{
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: rgba(255,255,255,0.92);
-}
-
-/* Active State */
-.ob3-genderCard.is-active{
-  border-color: rgba(59,130,246,0.55);
-  background: rgba(59,130,246,0.14);
+/* BUTTON - iPhone Blau */
+.ob3-button {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 100%),
+    #007AFF !important;
+  border: none !important;
   box-shadow:
-    0 0 0 2px rgba(59,130,246,0.18),
-    0 18px 60px rgba(0,0,0,0.25);
-
-  /* macht Icons blau (bei SVG currentColor) */
-  color: rgb(59,130,246);
+    0 22px 60px rgba(0, 122, 255, 0.35),
+    0 10px 22px rgba(0, 0, 0, 0.35) !important;
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: -0.02em !important;
+  transition: all 0.2s ease !important;
 }
 
-.ob3-genderCard.is-active .ob3-genderIcon,
-.ob3-genderCard.is-active .ob3-genderIconText{
-  opacity: 1;
-  transform: scale(1.06);
+.ob3-button:hover {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.08) 100%),
+    #007AFF !important;
+  transform: translateY(-1px);
+  box-shadow:
+    0 26px 70px rgba(0, 122, 255, 0.45),
+    0 12px 26px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* Finish Button disabled */
-.ob3-buttonDisabled{
-  opacity: 0.40;
-  box-shadow: none;
-  cursor: not-allowed;
+.ob3-button:active {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.02) 100%),
+    #0056CC !important;
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 0 0 6px rgba(0, 122, 255, 0.25),
+    0 18px 50px rgba(0, 122, 255, 0.5) !important;
 }
 
-.ob3-lockLine{
-  margin-top: 10px;
+/* HINT TEXT */
+.ob3-hint {
   text-align: center;
   font-size: 12px;
-  color: rgba(144,161,185,0.75);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(144, 161, 185, 0.65);
+  margin-top: 8px;
+  margin-bottom: 0;
 }
 
-/* Green badge like mock */
-.ob3-badge{
-  margin: 14px auto 0;
-  width: 100%;
-  max-width: 340px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 12px 14px;
-  border-radius: 14px;
-
-  border: 1px solid rgba(16,185,129,0.22);
-  background:
-    radial-gradient(700px 220px at 30% 0%, rgba(16,185,129,0.16), transparent 60%),
-    rgba(10, 22, 30, 0.35);
-
-  box-shadow:
-    0 18px 60px rgba(0,0,0,0.22),
-    0 0 0 1px rgba(255,255,255,0.04) inset;
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+/* ANIMATIONS */
+@keyframes pulse {
+  0% {
+    box-shadow: 
+      0 0 0 8px rgba(59, 130, 246, 0.1),
+      0 24px 72px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 0 12px rgba(59, 130, 246, 0.15),
+      0 28px 80px rgba(59, 130, 246, 0.4);
+  }
+  100% {
+    box-shadow: 
+      0 0 0 8px rgba(59, 130, 246, 0.1),
+      0 24px 72px rgba(59, 130, 246, 0.3);
+  }
 }
 
-.ob3-badgeIcon{
-  width: 28px;
-  height: 28px;
-  display: grid;
-  place-items: center;
-
-  border-radius: 10px;
-  border: 1px solid rgba(16,185,129,0.25);
-  background: rgba(16,185,129,0.08);
-
-  font-size: 14px;
-  line-height: 1;
+.ob3-icon-circle {
+  animation: pulse 4s ease-in-out infinite;
 }
 
-.ob3-badgeText{
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: rgba(255,255,255,0.88);
+/* RESPONSIVE */
+@media (max-width: 380px) {
+  .ob3-icon-circle {
+    width: 84px;
+    height: 84px;
+  }
+  
+  .ob3-shield {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .ob3-title,
+  .ob3-subtitle {
+    font-size: 24px;
+  }
+  
+  .ob3-access-badge {
+    font-size: 15px;
+    padding: 8px 16px;
+  }
+  
+  .ob3-encryption-box {
+    padding: 14px;
+    gap: 12px;
+  }
+  
+  .ob3-encryption-title {
+    font-size: 14px;
+  }
+  
+  .ob3-feature {
+    font-size: 12px;
+  }
+  
+  .ob3-restrictions-list {
+    padding: 16px 14px;
+    max-width: 260px;
+  }
+  
+  .ob3-restriction-text {
+    font-size: 14px;
+  }
+  
+  .ob3-faq-button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+
+@media (min-width: 400px) {
+  .ob3-icon-circle {
+    width: 108px;
+    height: 108px;
+  }
+  
+  .ob3-shield {
+    width: 54px;
+    height: 54px;
+  }
+  
+  .ob3-title,
+  .ob3-subtitle {
+    font-size: 32px;
+  }
+  
+  .ob3-restrictions-list {
+    max-width: 300px;
+  }
+}
+
+/* FIX FOR TEXT OVERFLOW */
+.ob3-encryption-title,
+.ob3-restriction-text,
+.ob3-faq-button {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
