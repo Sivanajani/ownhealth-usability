@@ -1,0 +1,169 @@
+
+.ob3-content{
+    justify-content: flex-start;
+    gap: 18px;
+}
+
+/* input etwas "wertiger" */
+.ob3-input{
+  cursor: text;
+  appearance: none;
+  background-image: none !important;
+}
+
+/* Gender Cards wie im Mock (2 oben, 1 unten breit) */
+.ob3-genderGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ob3-genderCard{
+  height: 78px;
+
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: radial-gradient(600px 240px at 30% 0%, rgba(255,255,255,0.06), transparent 55%), rgba(255,255,255,0.04);
+
+  box-shadow: 0 18px 60px rgba(0,0,0,0.22);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  cursor: pointer;
+  
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease, box-shadow 120ms ease, color 120ms ease;
+  
+  /* Icon-Farbe kommt über currentColor (SVG inline / ?react) */
+  color: rgba(144,161,185,0.85);
+}
+
+.ob3-genderCard:active{
+  transform: translateY(1px);
+}
+
+/* wie Mock: Icon oben, Text unten */
+.ob3-genderCard--stack{
+  height: 100px;
+  flex-direction: column;  
+}
+
+.ob3-genderCard--full{
+  grid-column: 1 / -1;
+  height: 56px;
+  flex-direction: row;
+  gap: 12px;
+}
+
+/* Icons: gleich gross, keine Kreise/Badges/Backgrounds */
+.ob3-genderIcon{
+  width: 22px;
+  height: 22px;
+  display: block;
+  opacity: 0.85;
+
+  /* falls du irgendwo noch <img> nutzt */
+  object-fit: contain;
+  
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+/* Emoji/ASCII Icon (Divers) separat, damit es optisch passt */
+.ob3-genderIconText{
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+/* Label */
+.ob3-genderLabel{
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: rgba(255,255,255,0.92);
+}
+
+/* Active State */
+.ob3-genderCard.is-active{
+  border-color: rgba(59,130,246,0.55);
+  background: rgba(59,130,246,0.14);
+  box-shadow:
+    0 0 0 2px rgba(59,130,246,0.18),
+    0 18px 60px rgba(0,0,0,0.25);
+
+  /* macht Icons blau (bei SVG currentColor) */
+  color: rgb(59,130,246);
+}
+
+.ob3-genderCard.is-active .ob3-genderIcon,
+.ob3-genderCard.is-active .ob3-genderIconText{
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* Finish Button disabled */
+.ob3-buttonDisabled{
+  opacity: 0.40;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.ob3-lockLine{
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(144,161,185,0.75);
+}
+
+/* Green badge like mock */
+.ob3-badge{
+  margin: 14px auto 0;
+  width: 100%;
+  max-width: 340px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(16,185,129,0.22);
+  background:
+    radial-gradient(700px 220px at 30% 0%, rgba(16,185,129,0.16), transparent 60%),
+    rgba(10, 22, 30, 0.35);
+
+  box-shadow:
+    0 18px 60px rgba(0,0,0,0.22),
+    0 0 0 1px rgba(255,255,255,0.04) inset;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ob3-badgeIcon{
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+  border: 1px solid rgba(16,185,129,0.25);
+  background: rgba(16,185,129,0.08);
+
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ob3-badgeText{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: rgba(255,255,255,0.88);
+}
