@@ -38,7 +38,7 @@ export default function Onboarding1({ onNext, onBack }: Props) {
             <div className="ob0-dots" aria-hidden="true">
               <span className="ob0-dot ob0-dot--active" />
               <span className="ob0-dot ob0-dot--active" />
-              <span className="ob0-dot ob0-dot--active" />
+              <span className="ob0-dot" />
               <span className="ob0-dot" />
               <span className="ob0-dot" />
             </div>
@@ -56,16 +56,10 @@ export default function Onboarding1({ onNext, onBack }: Props) {
           </div>
 
           <h1 className="ob-title">
-            Wir führen deine
+            OWN verbindet
             <br />
-            Daten zusammen
+            ALLE deine Daten
           </h1>
-
-          <p className="ob-subtitle">
-            OWN vereint alle Gesundheitsdaten
-            <br />
-            zu einem Gesamtbild.
-          </p>
         </div>
 
         {/* Middle */}
@@ -92,9 +86,7 @@ export default function Onboarding1({ onNext, onBack }: Props) {
         <div className="ob-bottom ob2-bottom">
           <button className="ob-button" onClick={onNext}>
             Zusammenführung starten
-          </button>
-
-          <div className="ob2-waitlist">30 Sekunden • 🔒 DSGVO-konform</div>
+          </button>          
         </div>
       </div>
     </div>

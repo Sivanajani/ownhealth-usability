@@ -14,7 +14,7 @@ type Props = {
   onClose?: () => void;
 };
 
-export default function Onboarding0({ onNext, onClose }: Props) {
+export default function Onboarding0({ onNext }: Props) {
   return (
     <div className="ob-root">
       <div className="ob-content obS2-content">
@@ -28,11 +28,7 @@ export default function Onboarding0({ onNext, onClose }: Props) {
             <span className="ob0-dot" />
           </div>
 
-          {onClose ? (
-            <button className="obS2-close" onClick={onClose} aria-label="Close">
-              ✕
-            </button>
-          ) : null}
+
 
           <h1 className="obS2-title">
             Deine <br />
