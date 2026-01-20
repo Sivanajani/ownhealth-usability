@@ -9,7 +9,8 @@ import FolderIcon from "../../assets/folder.svg?react";
 import SettingsIcon from "../../assets/setting.svg?react";
 import LockIcon from "../../assets/lock.svg?react";
 
-import type { FocusKey } from "../../App";
+import type { FocusKey } from "../../types/focus";
+
 
 type Props = {
   userName: string;

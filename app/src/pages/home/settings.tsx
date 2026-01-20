@@ -11,7 +11,7 @@ import SchildIcon from "../../assets/schild.svg?react";
 import SettingIcon from "../../assets/setting.svg?react";
 import QuestionIcon from "../../assets/question.svg?react";
 import LogoutIcon from "../../assets/logout.svg?react";
-import type { FocusKey } from "../onboarding/OnboardingFlow";
+import type { FocusKey } from "../../types/focus";
 
 type Props = {
   userName: string;
