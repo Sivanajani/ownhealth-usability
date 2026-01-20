@@ -28,7 +28,7 @@ export default function OnboardingStart({ onStart }: Props) {
             Start
           </button>
 
-          <p className="ob-hint">Startklar in 60 Sek.</p>
+          <p className="ob-hint">Startklar in 90 Sek.</p>
         </div>
       </div>
     </div>
