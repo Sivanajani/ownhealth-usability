@@ -10,7 +10,7 @@ import Onboarding6 from "./Onboarding6";
 import Onboarding7 from "./Onboarding7";
 import Onboarding8 from "./Onboarding8";
 import Onboarding9 from "./Onboarding9"; 
-import Onboarding10 from "./Onboarding10"; // ✅ NEU: Onboarding10 importieren
+import Onboarding10 from "./Onboarding10"; 
 import type { FocusKey } from "../../types/focus";
 
 type Props = {
