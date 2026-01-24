@@ -1,207 +1,89 @@
+// Onboarding2.tsx
 import { useLayoutEffect, useRef, useState } from "react";
-import DocuIcon from "../../assets/document.svg?react";
-import AppIcon from "../../assets/smartphone-call.svg?react";
-import DrugIcon from "../../assets/pills.svg?react";
-import BloodIcon from "../../assets/medical.svg?react";
-import "../onboarding/onboardingStart.css";
 import "../onboarding/onboarding2.css";
+import "../onboarding/onboardingStart.css";
 
-type Props = {
-  onNext?: () => void;
-  onClose?: () => void;
-};
+import SchildIcon from "../../assets/schild.svg?react";
 
-type Pt = { x: number; y: number };
-type Lines = {
-  docBR: Pt;
-  pillTL: Pt;
-  pillBR: Pt;
-  labTL: Pt;
-  labBR: Pt;
-  phoneTL: Pt;
-};
+interface Onboarding2Props {
+  onNext: () => void;           
+}
 
-export default function Onboarding2({ onNext, onClose }: Props) {
-  const graphRef = useRef<HTMLDivElement | null>(null);
-  const docRef = useRef<HTMLDivElement | null>(null);
-  const pillRef = useRef<HTMLDivElement | null>(null);
-  const labRef = useRef<HTMLDivElement | null>(null);
-  const phoneRef = useRef<HTMLDivElement | null>(null);
-
-  const [L, setL] = useState<Lines | null>(null);
+const Onboarding2: React.FC<Onboarding2Props> = ({ onNext }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useLayoutEffect(() => {
-    const calc = () => {
-      const graph = graphRef.current;
-      const doc = docRef.current;
-      const pill = pillRef.current;
-      const lab = labRef.current;
-      const phone = phoneRef.current;
-      if (!graph || !doc || !pill || !lab || !phone) return;
-
-      const g = graph.getBoundingClientRect();
-      const rDoc = doc.getBoundingClientRect();
-      const rPill = pill.getBoundingClientRect();
-      const rLab = lab.getBoundingClientRect();
-      const rPhone = phone.getBoundingClientRect();
-
-      const toLocal = (x: number, y: number): Pt => ({ x: x - g.left, y: y - g.top });
-
-      // Ecke-zu-Ecke (wie du es aktuell eingestellt hast)
-      const docBR = toLocal(rDoc.right, rDoc.bottom);
-      const pillTL = toLocal(rPill.left, rPill.top);
-      const pillBR = toLocal(rPill.left, rPill.bottom);   // BL (links unten) bei dir
-      const labTL = toLocal(rLab.right, rLab.top);         // TR (rechts oben) bei dir
-      const labBR = toLocal(rLab.right, rLab.bottom);
-      const phoneTL = toLocal(rPhone.left, rPhone.top);
-
-      setL({ docBR, pillTL, pillBR, labTL, labBR, phoneTL });
-    };
-
-    calc();
-    window.addEventListener("resize", calc);
-    const t = window.setTimeout(calc, 60);
-
-    return () => {
-      window.removeEventListener("resize", calc);
-      window.clearTimeout(t);
-    };
+    const timer = setTimeout(() => setHasAnimated(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="ob-root">
-      <div className="ob-content obN-content">
-        {/* Top */}
-        <div className="ob-top obN-top">
-          <div className="ob0-dots" aria-hidden="true">
-            <span className="ob0-dot ob0-dot--active" />
-            <span className="ob0-dot ob0-dot--active" />
-            <span className="ob0-dot ob0-dot--active" />
-            <span className="ob0-dot" />
-            <span className="ob0-dot" />
-            <span className="ob0-dot" />
-            <span className="ob0-dot" />
-            <span className="ob0-dot" />
-            <span className="ob0-dot" />
-            <span className="ob0-dot" />
-            <span className="ob0-dot" />
-          </div>
+    <div className="ob-root" ref={containerRef}>
+      <div className="ob-content ob3-content">
 
-          {onClose ? (
-            <button className="obN-close" onClick={onClose} aria-label="Close">
-              ✕
-            </button>
-          ) : null}
-
+        {/* TITEL */}
+        <div className={`ob3-title-section ${hasAnimated ? "ob3-animated" : ""}`}>
           <h1 className="ob01-title">
-            Von Rätselraten <br />
-            zu Gewissheit
+            Deine Daten. <br /> Dein Besitz.
           </h1>
         </div>
 
-        {/* Middle */}
-        <div className="ob-middle obN-middle">
-          <div className="obN-compare">
-            {/* Ohne OWN */}
-            <div className="obN-col obN-col--muted">
-              <div className="obN-colHeader">
-                <span className="obN-colTitle">Ohne OWN</span>
-              </div>
+        {/* SCHILD ICON */}
+        <div className={`ob3-shield-section ${hasAnimated ? "ob3-animated" : ""}`}>
+          <div className="ob3-icon-circle">
+            <SchildIcon className="ob3-shield" />
+          </div>
+        </div>
 
-              <div className="obN-stack" aria-hidden="true">
-                <div className="obN-chip obN-chip--muted obN-chip--doc">
-                  <DocuIcon className="obN-svg" />
-                  <span className="obN-question" aria-hidden="true">?</span>
-                </div>
-
-                <div className="obN-chip obN-chip--muted obN-chip--apps">
-                  <AppIcon className="obN-svg" />
-                  <span className="obN-question" aria-hidden="true">?</span>
-                </div>
-
-                <div className="obN-chip obN-chip--muted obN-chip--meds">
-                  <DrugIcon className="obN-svg" />
-                  <span className="obN-question" aria-hidden="true">?</span>
-                </div>
-
-                <div className="obN-chip obN-chip--muted obN-chip--labs">
-                  <BloodIcon className="obN-svg" />
-                  <span className="obN-question" aria-hidden="true">?</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Mit OWN */}
-            <div className="obN-col obN-col--own">
-              <div className="obN-colHeader">
-                <span className="obN-colTitle obN-colTitle--own">Mit OWN</span>
-              </div>
-
-              <div className="obN-graph" ref={graphRef} aria-hidden="true">
-                <svg className="obN-lines" aria-hidden="true">
-                  {L && (
-                    <>
-                      {/* Doc BR -> Pill TL */}
-                      <line
-                        className="obN-link"
-                        x1={L.docBR.x}
-                        y1={L.docBR.y}
-                        x2={L.pillTL.x}
-                        y2={L.pillTL.y}
-                      />
-                      {/* Pill BL -> Lab TR (bei dir pillBR=BL, labTL=TR) */}
-                      <line
-                        className="obN-link"
-                        x1={L.pillBR.x}
-                        y1={L.pillBR.y}
-                        x2={L.labTL.x}
-                        y2={L.labTL.y}
-                      />
-                      {/* Lab BR -> Phone TL */}
-                      <line
-                        className="obN-link"
-                        x1={L.labBR.x}
-                        y1={L.labBR.y}
-                        x2={L.phoneTL.x}
-                        y2={L.phoneTL.y}
-                      />
-                    </>
-                  )}
-                </svg>
-
-                <div ref={docRef} className="obN-node obN-node--blue">
-                  <DocuIcon className="obN-svg" />
-                </div>
-
-                <div ref={pillRef} className="obN-node obN-node--yellow">
-                  <DrugIcon className="obN-svg" />
-                </div>
-
-                <div ref={labRef} className="obN-node obN-node--red">
-                  <BloodIcon className="obN-svg" />
-                </div>
-
-                <div ref={phoneRef} className="obN-node obN-node--green">
-                  <AppIcon className="obN-svg" />
-                </div>
-              </div>
+        <div className="ob3-middle">
+          {/* NUR DU ZUGRIFF */}
+          <div className={`ob3-access-section ${hasAnimated ? "ob3-animated" : ""}`}>
+            <div className="ob3-access-badge">
+              Nur <span className="ob3-you">DU</span> hast Zugriff
             </div>
           </div>
 
-          <p className="obN-footnote">
-            <strong>OWN</strong> analysiert <strong>ALLE</strong> deine Quellen
-            <br />
-            <span>– nicht nur eine.</span>
-          </p>
+          {/* LISTE */}
+          <div className="ob3-restrictions-list">
+            <div className={`ob3-restriction-item ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.4s" }}>
+              <span className="ob3-restriction-icon">❌</span>
+              <span className="ob3-restriction-text">Nicht wir.</span>
+            </div>
+
+            <div className={`ob3-restriction-item ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.5s" }}>
+              <span className="ob3-restriction-icon">❌</span>
+              <span className="ob3-restriction-text">Nicht dein Arbeitgeber.</span>
+            </div>
+
+            <div className={`ob3-restriction-item ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.6s" }}>
+              <span className="ob3-restriction-icon">❌</span>
+              <span className="ob3-restriction-text">Nicht deine Krankenkasse.</span>
+            </div>
+
+            <div className={`ob3-restriction-item ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.7s" }}>
+              <span className="ob3-restriction-icon">❌</span>
+              <span className="ob3-restriction-text">Keine Tech-Giganten</span>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom */}
-        <div className="ob-bottom obN-bottom">
-          <button className="ob-button" onClick={onNext}>
-            Jetzt anfangen
-          </button>
+        <div className="ob3-bottom">
+          <div className="ob-cta">
+            <button className="ob-button ob3-button" onClick={onNext}>
+              Jetzt Anfangen
+            </button>
+          </div>
+
+          <div className={`ob3-faq-section ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.8s" }}>
+            <button className="ob3-faq-button" onClick={() => console.log("FAQ angeklickt")}>
+              Mehr zum Datenschutz
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Onboarding2;

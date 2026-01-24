@@ -1,0 +1,232 @@
+/* ===== Onboarding NEW: Von Rätselraten zu Gewissheit ===== */
+
+.obN-content {
+  padding-top: calc(env(safe-area-inset-top) + 22px);
+}
+
+.obN-top {
+  position: relative;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.obN-close {
+  position: absolute;
+  right: 0;
+  top: -4px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+}
+
+.obN-title {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.96);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-size: clamp(26px, 7.6vw, 36px);
+}
+
+.obN-middle {
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 10px;
+}
+
+.obN-compare {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ===== Cards ===== */
+
+.obN-col {
+  border-radius: 26px;
+  padding: 14px 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(300px, 46vh, 380px);
+  margin-top: 12px;
+}
+
+.obN-col--muted {
+  background:
+    radial-gradient(500px 220px at 50% -30%, rgba(255, 255, 255, 0.06), transparent 55%),
+    rgba(255, 255, 255, 0.03);
+}
+
+.obN-col--own {
+  background:
+    radial-gradient(700px 360px at 50% -30%, rgba(59, 130, 246, 0.16), transparent 60%),
+    rgba(0, 183, 219, 0.12);
+  border-color: rgba(83, 233, 253, 0.18);
+}
+
+.obN-colHeader {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.obN-colTitle {
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(144, 161, 185, 0.72);
+}
+
+.obN-colTitle--own {
+  color: rgba(83, 233, 253, 0.92);
+}
+
+/* ===== LEFT: Ohne OWN ===== */
+
+.obN-stack {
+  position: relative;
+  height: calc(100% - 32px);
+}
+
+.obN-chip {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+}
+
+
+.obN-chip--doc  { left: 22%; top: 15%; transform: translate(-50%, -50%) rotate(-10deg); }
+.obN-chip--apps { left: 66%; top: 36%; transform: translate(-50%, -50%) rotate(12deg); }
+.obN-chip--meds { left: 26%; top: 58%; transform: translate(-50%, -50%) rotate(8deg); }
+.obN-chip--labs { left: 66%; top: 85%; transform: translate(-50%, -50%) rotate(-12deg); }
+
+
+
+.obN-chip--muted {
+  opacity: 0.55;
+  filter: saturate(0) brightness(1.1);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+/* ===== RIGHT: Mit OWN ===== */
+
+.obN-graph {
+  position: relative;
+  height: calc(100% - 32px);
+  padding: 10px 6px 6px;
+}
+
+/* SVG unter den Icons */
+.obN-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.obN-link {
+  stroke: rgba(83, 233, 253, 0.75);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 6 8;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.28));
+}
+
+/* Icons über den Linien */
+.obN-node {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  z-index: 2;
+}
+
+/* Mehr Platz (du wolltest Abstand) */
+.obN-node--blue   { left: 1%; top: 1%; border-color: rgba(59,130,246,0.55);  box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 26px rgba(59,130,246,0.35); }
+.obN-node--yellow { left: 50%; top: 25%; border-color: rgba(245,158,11,0.55);  box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 26px rgba(245,158,11,0.30); }
+.obN-node--red    { left: 1%; top: 50%; border-color: rgba(239,68,68,0.55);   box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 26px rgba(239,68,68,0.28); }
+.obN-node--green  { left: 50%; top: 75%; border-color: rgba(16,185,129,0.55);  box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 26px rgba(16,185,129,0.28); }
+
+.obN-svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+  opacity: 0.95;
+  color: rgba(255, 255, 255, 0.92);
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  overflow: visible;
+}
+
+.obN-footnote {
+  margin: 46px 0 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.90);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.obN-footnote span {
+  color: rgba(144, 161, 185, 0.78);
+  font-weight: 650;
+}
+
+.obN-bottom {
+  padding-top: 6px;
+}
+
+/* Icon-Container muss Referenz sein */
+
+.obN-question{
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.obN-chip--muted .obN-question{
+  filter: saturate(0.6);
+}
+

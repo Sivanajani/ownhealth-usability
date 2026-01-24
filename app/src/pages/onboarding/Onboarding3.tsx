@@ -30,33 +30,16 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
   }, []);
 
   const handleVerstandenClick = () => {
-    // Hier kannst du noch Validierungen machen falls nötig
-    // z.B.: if (!name) { alert("Bitte Namen eingeben"); return; }
-    
-    // Dann weiter zum nächsten Schritt
     onFinish();
   };
 
   return (
     <div className="ob-root" ref={containerRef}>
       <div className="ob-content ob3-content">
-        <div className="ob0-dots" aria-hidden="true">
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-        </div>
 
         {/* TITEL */}
         <div className={`ob3-title-section ${hasAnimated ? 'ob3-animated' : ''}`}>
-          <h1 className="ob01-title">Deine Daten.</h1>
-          <h2 className="ob01-title">Dein Besitz.</h2>
+          <h1 className="ob01-title">Deine Daten. <br /> Dein Besitz.</h1>          
         </div>
 
         {/* SCHILD ICON */}
@@ -109,9 +92,7 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
           <div className={`ob3-faq-section ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.8s' }}>
             <button 
               className="ob3-faq-button"
-              onClick={() => {
-                // Hier könnte man einen Modal oder eine separate Seite öffnen
-                // für detaillierte Erklärungen zum Datenaustausch
+              onClick={() => {                
                 console.log("FAQ zum Datenaustausch angeklickt");
               }}
             >

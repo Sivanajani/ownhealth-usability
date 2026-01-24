@@ -23,8 +23,8 @@
 }
 
 .ob3-icon-circle {
-  width: 96px;
-  height: 96px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -37,8 +37,8 @@
 }
 
 .ob3-shield {
-  width: 48px;
-  height: 48px;
+  width: 80px;
+  height: 80px;
   color: rgba(147, 197, 253, 1);
   filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.4));
 }
@@ -386,13 +386,13 @@
 /* RESPONSIVE */
 @media (max-width: 380px) {
   .ob3-icon-circle {
-    width: 84px;
-    height: 84px;
+    width: 150px;
+    height: 150px;
   }
   
   .ob3-shield {
-    width: 42px;
-    height: 42px;
+    width: 80px;
+    height: 80px;
   }
   
   .ob3-title,
@@ -435,13 +435,13 @@
 
 @media (min-width: 400px) {
   .ob3-icon-circle {
-    width: 108px;
-    height: 108px;
+    width: 150px;
+    height: 150px;
   }
   
   .ob3-shield {
-    width: 54px;
-    height: 54px;
+    width: 80px;
+    height: 80px;
   }
   
   .ob3-title,

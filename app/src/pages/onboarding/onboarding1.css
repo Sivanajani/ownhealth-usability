@@ -1,0 +1,334 @@
+.ob01-content{
+  padding-top: calc(env(safe-area-inset-top) + 28px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 26px);
+}
+
+.ob01-top{
+  text-align: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.ob01-intro {
+  margin-top: 4px;
+  margin-bottom: -100px;
+  color: rgba(144,161,185,0.85);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.ob01-intro strong {
+  color: rgba(147,197,253,0.95);
+  font-weight: 700;
+}
+
+.ob01-middle{
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Karte ===== */
+.ob01-card{
+  width: 100%;
+  border-radius: 20px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(147,197,253,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.ob01-card--glow {
+  box-shadow: 
+    0 0 0 1px rgba(59,130,246,0.2) inset,
+    0 8px 32px rgba(0,0,0,0.4),
+    0 0 40px rgba(59,130,246,0.2);
+}
+
+/* ===== Tabs - FIXED ===== */
+.ob01-tabs{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px 0 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.ob01-tab{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid transparent;
+}
+
+.ob01-tab:hover {
+  background: rgba(59,130,246,0.05);
+  border-color: rgba(59,130,246,0.2);
+  transform: translateY(-2px);
+}
+
+.ob01-tab--active {
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.3);
+  transform: translateY(-2px);
+}
+
+.ob01-tab--active .ob01-tabLabel {
+  color: rgba(147,197,253,0.95);
+  font-weight: 700;
+}
+
+/* WICHTIG: Icon-Container */
+.ob01-tabIcon{
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white; /* Textfarbe für Fallback */
+}
+
+.ob01-tabIcon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  color: rgba(255,255,255,0.9); /* Farbe für SVG Icons */
+  fill: currentColor; /* Wichtig für SVG */
+}
+
+.ob01-tab--active .ob01-tabIcon {
+  background: rgba(59,130,246,0.15);
+  border-color: rgba(59,130,246,0.4);
+}
+
+.ob01-tab--active .ob01-tabIcon svg {
+  color: rgba(147,197,253,0.95);
+}
+
+.ob01-tabLabel{
+  font-size: 14px;
+  color: rgba(144,161,185,0.9);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.ob01-tabGlow {
+  display: none; /* Optional */
+}
+
+/* ===== Verbindungslinien ===== */
+.ob01-connector {
+  position: absolute;
+  height: 2px;
+  background: rgba(59,130,246,0.4);
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.connector-medikation {
+  top: 80px;
+  left: 32%;
+  width: 15px;
+  background: rgba(239,68,68,0.4);
+}
+
+.connector-labordaten {
+  top: 80px;
+  right: 32%;
+  width: 15px;  
+  background: rgba(16,185,129,0.4);
+}
+
+/* ===== Body ===== */
+.ob01-body{
+  padding: 16px 8px 12px;
+}
+
+.ob01-kicker{
+  color: rgba(34,211,238,0.95);
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.ob01-metricRow{
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.ob01-metricValue{
+  font-size: 42px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: rgba(34,211,238,0.98);
+  text-shadow: 0 0 20px rgba(34,211,238,0.3);
+}
+
+.ob01-metricLabel{
+  font-size: 18px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.95);
+  flex: 1;
+}
+
+.ob01-subline{
+  margin-top: 4px;
+  font-size: 16px;
+  color: rgba(144,161,185,0.9);
+  font-weight: 500;
+}
+
+.ob01-insight{
+  margin-top: 20px;
+  padding: 12px;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ob01-insightIcon{
+  font-size: 18px;
+}
+
+.ob01-insightText{
+  color: rgba(110,231,183,0.95);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ===== Footnote ===== */
+.ob01-foot{
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.ob01-footnote{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ob01-footnoteIcon{
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.ob01-footnoteText{
+  font-size: 16px;
+  color: rgba(144,161,185,0.75);
+  font-weight: 500;
+}
+
+/* ===== UX-Hinweis ===== */
+.ob01-uxHint{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: rgba(144,161,185,0.8);
+  font-weight: 500;
+}
+
+/* ===== Progress Dots ===== */
+.ob01-progress{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ob01-progressDot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(144,161,185,0.3);
+}
+
+.ob01-progressDot.active{
+  background: rgba(147,197,253,0.95);
+  transform: scale(1.2);
+  box-shadow: 0 0 12px rgba(147,197,253,0.4);
+}
+
+/* ===== Button ===== */
+.ob01-button{
+  transition: all 0.3s ease;
+}
+
+.ob01-button:hover {
+  transform: translateY(-2px);
+}
+
+.ob01-buttonText{
+  margin-right: 8px;
+}
+
+.ob01-buttonArrow{
+  transition: transform 0.3s ease;
+}
+
+.ob01-button:hover .ob01-buttonArrow {
+  transform: translateX(4px);
+}
+
+.ob01-ctaText{
+  margin-top: 12px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(144,161,185,0.7);
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 380px) {
+  .ob01-card {
+    padding: 14px;
+  }
+  
+  .ob01-tabs {
+    gap: 6px;
+  }
+  
+  .ob01-tabIcon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .ob01-tabIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .ob01-metricValue {
+    font-size: 36px;
+  }
+  
+  .ob01-metricLabel {
+    font-size: 14px;
+  }
+}
+
+

@@ -1,232 +1,464 @@
-/* ===== Onboarding NEW: Von Rätselraten zu Gewissheit ===== */
+/* onboarding3.css - COMPLETE VERSION */
 
-.obN-content {
-  padding-top: calc(env(safe-area-inset-top) + 22px);
-}
-
-.obN-top {
-  position: relative;
-  align-items: center;
-  text-align: center;
-  gap: 12px;
-}
-
-.obN-close {
-  position: absolute;
-  right: 0;
-  top: -4px;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.85);
-  cursor: pointer;
-}
-
-.obN-title {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.96);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  font-size: clamp(26px, 7.6vw, 36px);
-}
-
-.obN-middle {
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 10px;
-}
-
-.obN-compare {
-  width: 100%;
-  max-width: 340px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-/* ===== Cards ===== */
-
-.obN-col {
-  border-radius: 26px;
-  padding: 14px 12px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
-  position: relative;
-  overflow: hidden;
-  min-height: clamp(300px, 46vh, 380px);
-  margin-top: 12px;
-}
-
-.obN-col--muted {
-  background:
-    radial-gradient(500px 220px at 50% -30%, rgba(255, 255, 255, 0.06), transparent 55%),
-    rgba(255, 255, 255, 0.03);
-}
-
-.obN-col--own {
-  background:
-    radial-gradient(700px 360px at 50% -30%, rgba(59, 130, 246, 0.16), transparent 60%),
-    rgba(0, 183, 219, 0.12);
-  border-color: rgba(83, 233, 253, 0.18);
-}
-
-.obN-colHeader {
+.ob3-content {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+  min-height: 100%;
 }
 
-.obN-colTitle {
-  font-size: 12px;
-  font-weight: 800;
-  color: rgba(144, 161, 185, 0.72);
-}
-
-.obN-colTitle--own {
-  color: rgba(83, 233, 253, 0.92);
-}
-
-/* ===== LEFT: Ohne OWN ===== */
-
-.obN-stack {
-  position: relative;
-  height: calc(100% - 32px);
-}
-
-.obN-chip {
-  position: absolute;
-  width: 58px;
-  height: 58px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.03);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
-}
-
-
-.obN-chip--doc  { left: 22%; top: 15%; transform: translate(-50%, -50%) rotate(-10deg); }
-.obN-chip--apps { left: 66%; top: 36%; transform: translate(-50%, -50%) rotate(12deg); }
-.obN-chip--meds { left: 26%; top: 58%; transform: translate(-50%, -50%) rotate(8deg); }
-.obN-chip--labs { left: 66%; top: 85%; transform: translate(-50%, -50%) rotate(-12deg); }
-
-
-
-.obN-chip--muted {
-  opacity: 0.55;
-  filter: saturate(0) brightness(1.1);
-  border-color: rgba(255, 255, 255, 0.10);
-}
-
-/* ===== RIGHT: Mit OWN ===== */
-
-.obN-graph {
-  position: relative;
-  height: calc(100% - 32px);
-  padding: 10px 6px 6px;
-}
-
-/* SVG unter den Icons */
-.obN-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.obN-link {
-  stroke: rgba(83, 233, 253, 0.75);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 6 8;
-  opacity: 0.95;
-  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.28));
-}
-
-/* Icons über den Linien */
-.obN-node {
-  position: absolute;
-  width: 62px;
-  height: 62px;
-  border-radius: 20px;
-  display: grid;
-  place-items: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1.5px solid rgba(255, 255, 255, 0.10);
-  z-index: 2;
-}
-
-/* Mehr Platz (du wolltest Abstand) */
-.obN-node--blue   { left: 1%; top: 1%; border-color: rgba(59,130,246,0.55);  box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 26px rgba(59,130,246,0.35); }
-.obN-node--yellow { left: 50%; top: 25%; border-color: rgba(245,158,11,0.55);  box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 26px rgba(245,158,11,0.30); }
-.obN-node--red    { left: 1%; top: 50%; border-color: rgba(239,68,68,0.55);   box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 26px rgba(239,68,68,0.28); }
-.obN-node--green  { left: 50%; top: 75%; border-color: rgba(16,185,129,0.55);  box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 26px rgba(16,185,129,0.28); }
-
-.obN-svg {
-  width: 32px;
-  height: 32px;
-  display: block;
-  opacity: 0.95;
-  color: rgba(255, 255, 255, 0.92);
-  fill: currentColor !important;
-  stroke: currentColor !important;
-  overflow: visible;
-}
-
-.obN-footnote {
-  margin: 46px 0 0;
+/* SCHILD SECTION - größer und zentriert */
+.ob3-shield-section {
   text-align: center;
-  color: rgba(255, 255, 255, 0.90);
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.35;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.obN-footnote span {
-  color: rgba(144, 161, 185, 0.78);
-  font-weight: 650;
+.ob3-shield-section.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.obN-bottom {
-  padding-top: 6px;
-}
-
-/* Icon-Container muss Referenz sein */
-
-.obN-question{
-  position: absolute;
-  right: -6px;
-  bottom: -6px;
-
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-
+.ob3-icon-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
+  margin: 0 auto;
+  background: rgba(59, 130, 246, 0.15);
+  border: 2px solid rgba(59, 130, 246, 0.35);
+  box-shadow: 
+    0 0 0 8px rgba(59, 130, 246, 0.1),
+    0 24px 72px rgba(59, 130, 246, 0.3);
+}
 
+.ob3-shield {
+  width: 80px;
+  height: 80px;
+  color: rgba(147, 197, 253, 1);
+  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.4));
+}
+
+/* TITEL SECTION */
+.ob3-title-section {
+  text-align: center;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+}
+
+.ob3-title-section.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-title {
+  margin: 0 0 4px 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 850;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.ob3-subtitle {
+  margin: 0;
+  color: rgba(147, 197, 253, 0.95);
+  font-weight: 850;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ACCESS BADGE */
+.ob3-access-section {
+  margin-bottom: 24px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+}
+
+.ob3-access-section.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-access-badge {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
+}
+
+.ob3-you {
+  color: rgba(110, 231, 183, 0.95);
+  font-weight: 800;
+  margin: 0 4px;
+}
+
+.ob3-check {
+  color: rgba(16, 185, 129, 1);
+  font-size: 18px;
+  margin-left: 6px;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5));
+}
+
+/* MIDDLE CONTENT */
+.ob3-middle {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* ENCRYPTION BOX */
+.ob3-encryption-box {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 12px 48px rgba(16, 185, 129, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ob3-encryption-box.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-lock-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+.ob3-lock-icon {
+  width: 22px;
+  height: 22px;
+  color: rgba(110, 231, 183, 0.95);
+}
+
+.ob3-encryption-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ob3-encryption-title {
+  color: rgba(110, 231, 183, 0.95);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.3;
+  margin: 0 0 6px 0;
+  text-align: left;
+  word-break: break-word;
+}
+
+.ob3-encryption-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.ob3-feature {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ob3-feature-divider {
+  color: rgba(144, 161, 185, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* RESTRICTIONS LIST */
+.ob3-restrictions-list {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 18px 16px;
+  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.25);
+}
+
+.ob3-restriction-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ob3-restriction-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.ob3-restriction-item.ob3-animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ob3-restriction-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
   font-size: 12px;
   font-weight: 800;
-
-  color: rgba(255,255,255,0.75);
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-
-  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-
-  opacity: 0.75;
-  pointer-events: none;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgba(239, 68, 68, 0.95);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.15);
 }
 
-.obN-chip--muted .obN-question{
-  filter: saturate(0.6);
+.ob3-restriction-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
+/* FAQ SECTION */
+.ob3-faq-section {
+  text-align: center;
+  padding-top: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ob3-faq-section.ob3-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ob3-faq-button {
+  background: transparent;
+  border: none;
+  color: rgba(147, 197, 253, 0.9);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.ob3-faq-button:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: rgba(147, 197, 253, 1);
+  transform: translateY(-1px);
+}
+
+.ob3-faq-arrow {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+  margin-left: 2px;
+}
+
+.ob3-faq-button:hover .ob3-faq-arrow {
+  transform: translateX(3px);
+}
+
+/* BOTTOM CTA */
+.ob3-bottom {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+/* BUTTON - iPhone Blau */
+.ob3-button {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 100%),
+    #007AFF !important;
+  border: none !important;
+  box-shadow:
+    0 22px 60px rgba(0, 122, 255, 0.35),
+    0 10px 22px rgba(0, 0, 0, 0.35) !important;
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: -0.02em !important;
+  transition: all 0.2s ease !important;
+}
+
+.ob3-button:hover {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.08) 100%),
+    #007AFF !important;
+  transform: translateY(-1px);
+  box-shadow:
+    0 26px 70px rgba(0, 122, 255, 0.45),
+    0 12px 26px rgba(0, 0, 0, 0.4) !important;
+}
+
+.ob3-button:active {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.02) 100%),
+    #0056CC !important;
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 0 0 6px rgba(0, 122, 255, 0.25),
+    0 18px 50px rgba(0, 122, 255, 0.5) !important;
+}
+
+/* HINT TEXT */
+.ob3-hint {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(144, 161, 185, 0.65);
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+/* ANIMATIONS */
+@keyframes pulse {
+  0% {
+    box-shadow: 
+      0 0 0 8px rgba(59, 130, 246, 0.1),
+      0 24px 72px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 0 12px rgba(59, 130, 246, 0.15),
+      0 28px 80px rgba(59, 130, 246, 0.4);
+  }
+  100% {
+    box-shadow: 
+      0 0 0 8px rgba(59, 130, 246, 0.1),
+      0 24px 72px rgba(59, 130, 246, 0.3);
+  }
+}
+
+.ob3-icon-circle {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* RESPONSIVE */
+@media (max-width: 380px) {
+  .ob3-icon-circle {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .ob3-shield {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .ob3-title,
+  .ob3-subtitle {
+    font-size: 32px;
+  }
+  
+  .ob3-access-badge {
+    font-size: 15px;
+    padding: 8px 16px;
+  }
+  
+  .ob3-encryption-box {
+    padding: 14px;
+    gap: 12px;
+  }
+  
+  .ob3-encryption-title {
+    font-size: 14px;
+  }
+  
+  .ob3-feature {
+    font-size: 12px;
+  }
+  
+  .ob3-restrictions-list {
+    padding: 16px 14px;
+    max-width: 260px;
+  }
+  
+  .ob3-restriction-text {
+    font-size: 14px;
+  }
+  
+  .ob3-faq-button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+
+@media (min-width: 400px) {
+  .ob3-icon-circle {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .ob3-shield {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .ob3-title,
+  .ob3-subtitle {
+    font-size: 32px;
+  }
+  
+  .ob3-restrictions-list {
+    max-width: 300px;
+  }
+}
+
+/* FIX FOR TEXT OVERFLOW */
+.ob3-encryption-title,
+.ob3-restriction-text,
+.ob3-faq-button {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
