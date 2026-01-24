@@ -5,7 +5,6 @@ import "../onboarding/onboardingStart.css";
 
 // Import der Icons
 import SchildIcon from "../../assets/schild.svg?react";
-import LockIcon from "../../assets/lock.svg?react";
 
 // Props für den Flow
 interface Onboarding3Props {
@@ -56,8 +55,8 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
 
         {/* TITEL */}
         <div className={`ob3-title-section ${hasAnimated ? 'ob3-animated' : ''}`}>
-          <h1 className="ob3-title">Deine Daten.</h1>
-          <h2 className="ob3-subtitle">Dein Besitz.</h2>
+          <h1 className="ob01-title">Deine Daten.</h1>
+          <h2 className="ob01-title">Dein Besitz.</h2>
         </div>
 
         {/* SCHILD ICON */}
@@ -72,7 +71,7 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
           <div className={`ob3-access-section ${hasAnimated ? 'ob3-animated' : ''}`}>
             <div className="ob3-access-badge">
               Nur <span className="ob3-you">DU</span> hast Zugriff 
-              <span className="ob3-check"> ✔</span>
+              {/*<span className="ob3-check"> ✔</span>*/}
             </div>
           </div>
 
@@ -95,23 +94,6 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
               <span className="ob3-restriction-text">Keine Tech-Giganten</span>
             </div>
           </div>
-
-          {/* VERSCHLÜSSELUNGS-BOX */}
-          <div className={`ob3-encryption-box ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.3s' }}>
-            <div className="ob3-lock-wrapper">
-              <LockIcon className="ob3-lock-icon" />
-            </div>
-            <div className="ob3-encryption-content">
-              <h3 className="ob3-encryption-title">
-                Deine Daten bleiben verschlüsselt auf deinen Geräten
-              </h3>
-              <div className="ob3-encryption-features">
-                <span className="ob3-feature">Ende-zu-Ende-Verschlüsselung</span>
-                <span className="ob3-feature-divider">•</span>
-                <span className="ob3-feature">Lokale Verarbeitung</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="ob3-bottom">
@@ -120,7 +102,7 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
               className="ob-button ob3-button"
               onClick={handleVerstandenClick}
             >
-              Verstanden
+              Jetzt Anfangen
             </button>
           </div>
                     {/* FAQ LINK */}
@@ -133,7 +115,7 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
                 console.log("FAQ zum Datenaustausch angeklickt");
               }}
             >
-              Wie funktioniert Datenaustausch &<br />Datenschutz genau?              
+              Mehr zum Datenschutz              
             </button>
           </div>
         </div>

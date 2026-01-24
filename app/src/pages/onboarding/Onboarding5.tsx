@@ -8,9 +8,9 @@ import BlitzIcon from "../../assets/blitz.svg?react";
 import FoodIcon from "../../assets/restaurant.svg?react";
 
 interface Onboarding5Props {
-  onContinue: (question: string) => void;   // ✅ speichert Frage + weiter
-  onSkip: () => void;                      // ✅ skip ohne Frage
-  initialQuestion?: string;                // ✅ optional: vorbefüllen
+  onContinue: (question: string) => void;   
+  onSkip: () => void;                      
+  initialQuestion?: string;                
 }
 
 const Onboarding5: React.FC<Onboarding5Props> = ({
@@ -26,7 +26,7 @@ const Onboarding5: React.FC<Onboarding5Props> = ({
     const trimmed = question.trim();
     if (trimmed) {
       console.log("Frage gespeichert:", trimmed);
-      onContinue(trimmed); // ✅ Frage nach oben geben
+      onContinue(trimmed); 
     }
   };
 
@@ -79,11 +79,11 @@ const Onboarding5: React.FC<Onboarding5Props> = ({
 
         <div className="ob5-header">
           <h1 className="ob5-title">Wobei kann OWN dich als erstes unterstützen?</h1>
-          <p className="ob5-subtitle">Stelle deine Gesundheitsfrage.</p>
         </div>
 
         <div className="ob5-middle">
           <form className="ob5-form" onSubmit={handleSubmit}>
+            <p className="ob5-subtitle">Stelle deine Gesundheitsfrage.</p>
             <div className={`ob5-input-wrapper ${isFocused ? "ob5-input-focused" : ""}`}>
               <textarea
                 className="ob5-textarea"
@@ -92,7 +92,7 @@ const Onboarding5: React.FC<Onboarding5Props> = ({
                 onChange={(e) => setQuestion(e.target.value)}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                rows={4}
+                rows={2}
                 maxLength={500}
               />
               <div className="ob5-input-footer">

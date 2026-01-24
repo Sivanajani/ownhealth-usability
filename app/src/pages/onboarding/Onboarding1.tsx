@@ -61,7 +61,7 @@ export default function Onboarding1({ onNext, onBack }: Props) {
             )}
           </div>
 
-          <h1 className="ob-title">
+          <h1 className="ob01-title">
             OWN verbindet
             <br />
             ALLE deine Daten

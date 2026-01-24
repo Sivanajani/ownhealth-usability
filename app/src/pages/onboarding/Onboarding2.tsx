@@ -93,7 +93,7 @@ export default function Onboarding2({ onNext, onClose }: Props) {
             </button>
           ) : null}
 
-          <h1 className="obN-title">
+          <h1 className="ob01-title">
             Von Rätselraten <br />
             zu Gewissheit
           </h1>

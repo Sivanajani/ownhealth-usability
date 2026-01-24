@@ -1,5 +1,3 @@
-/* onboarding4.css - MIT DIREKTEN ICON FARBEN */
-
 .ob4-content {
   padding-top: 28px !important;
   padding-bottom: 20px !important;
@@ -47,7 +45,7 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 22px;
-  padding: 28px 24px 24px 24px;
+  padding: 18px 18px 18px 18px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -147,7 +145,7 @@
 
 .ob4-card-description {
   color: rgba(144, 161, 185, 0.85);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   margin: 0 0 16px 0;
   text-align: center;
@@ -181,14 +179,14 @@
 /* HINT SECTION */
 .ob4-hint-section {
   text-align: center;
-  margin-top: auto;
+  margin: 10px;
 }
 
 .ob4-hint-text {
   color: rgba(144, 161, 185, 0.7);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  margin: 0;
+  margin: 10px;
   text-align: center;
   line-height: 1.4;
 }
@@ -330,7 +328,7 @@
   }
   
   .ob4-title {
-    font-size: 26px;
+    font-size: 32px;
   }
   
   .ob4-option-card {
@@ -369,7 +367,7 @@
   }
   
   .ob4-hint-text {
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 

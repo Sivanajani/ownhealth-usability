@@ -70,7 +70,7 @@
   margin: 0;
   color: rgba(147, 197, 253, 0.95);
   font-weight: 850;
-  font-size: 28px;
+  font-size: 32px;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -397,7 +397,7 @@
   
   .ob3-title,
   .ob3-subtitle {
-    font-size: 24px;
+    font-size: 32px;
   }
   
   .ob3-access-badge {

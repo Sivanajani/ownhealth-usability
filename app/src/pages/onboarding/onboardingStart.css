@@ -78,6 +78,26 @@
   font-size: clamp(38px, 9.2vw, 52px);
 }
 
+.ob01-title {
+  margin: 0;
+  color: var(--white);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-size: 34px;
+  text-align: center;
+}
+
+.ob01-title-strong {
+  margin: 5px;
+  color: rgba(147, 197, 253, 0.95);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-size: 34px;
+  text-align: center;
+}
+
 .ob-subtitle {
   margin: 0;
   color: rgba(144,161,185,0.92);
