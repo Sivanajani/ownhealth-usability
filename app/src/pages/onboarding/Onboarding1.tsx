@@ -17,8 +17,8 @@ export default function Onboarding1({ onNext }: Props) {
   const [showConnection, setShowConnection] = useState(false);
   const [showCard, setShowCard] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
-  const [showIntro, setShowIntro] = useState(false);
-  const [pulseTab, setPulseTab] = useState<number>(-1); // -1 = keine, 0/1/2 = Tab index
+  const [, setShowIntro] = useState(false);
+  const [pulseTab, setPulseTab] = useState<number>(-1); 
 
   // Animation beim ersten Laden - LÄNGER UND BESSER SEQUENZIERT
   useEffect(() => {
@@ -91,11 +91,8 @@ export default function Onboarding1({ onNext }: Props) {
         {/* TOP */}
         <div className="ob-top ob01-top">
           <h1 className={`ob01-title ${showTitle ? 'show' : ''}`}>
-            Finde Muster in deinen Gesundheitsdaten{" "}            
+            Zusammenhänge endlich verstehen
           </h1>
-          <p className={`ob01-intro ${showIntro ? 'show' : ''}`}>
-            OWN zeigt dir Muster zwischen deinen Medikamenten, Schlaf und Laborwerten.
-          </p>
         </div>
 
         {/* MIDDLE */}
@@ -172,30 +169,18 @@ export default function Onboarding1({ onNext }: Props) {
             </div>
 
             <div className="ob01-body">
-              <div className="ob01-kicker">🎯 Für dich erkannt</div>
-
+              <div className="ob01-kicker">Für dich erkannt</div>
               <div className="ob01-metricRow">
                 <div className="ob01-metricValue">+22%</div>
                 <div className="ob01-metricLabel">mehr Tiefschlaf</div>
               </div>
 
-              <div className="ob01-subline">seit Beginn deiner Magnesium-Einnahme</div>
-              
-              {/* Dynamischer Insight basierend auf aktivem Tab */}
-              <div className="ob01-insight">
-                <div className="ob01-insightIcon">💡</div>
-                <div className="ob01-insightText">
-                  {activeTab === "medikation" && "Magnesium kann deine Schlafqualität verbessern"}
-                  {activeTab === "schlaf" && "Besserer Schlaf führt zu mehr Energie am Tag"}
-                  {activeTab === "labordaten" && "Optimale Magnesium-Werte unterstützen den Schlaf"}
-                </div>
-              </div>
+              <div className="ob01-subline">seit Beginn deiner Magnesium-Einnahme</div>            
             </div>
 
             <div className="ob01-foot">
-              <div className="ob01-footnote">
-                <span className="ob01-footnoteIcon">📋</span>
-                <span className="ob01-footnoteText">Besprich dies mit deinem Arzt</span>
+              <div className="ob01-footnote">                
+                <span className="ob01-footnoteText">Zur ärztlichen Abstimmung</span>
               </div>
             </div>
           </div>        

@@ -13,10 +13,9 @@
 
 /* Title Animation */
 .ob01-title {
-  margin: 0;
+  margin: 4px;
   color: var(--white);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 700;
   font-size: 34px;
   text-align: center;
   opacity: 0;
@@ -31,7 +30,7 @@
 
 .ob01-intro {
   margin-top: 4px;
-  margin-bottom: -100px;
+  margin-bottom: 100px;
   color: rgba(144,161,185,0.85);
   font-size: 16px;
   line-height: 1.5;
@@ -57,10 +56,8 @@
 
 /* ===== Karte Animation ===== */
 .ob01-card{
-  width: 100%;
   border-radius: 20px;
   padding: 18px;
-  position: relative;
   overflow: hidden;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(147,197,253,0.15);
@@ -88,7 +85,7 @@
 .ob01-tabs{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 20px;
   padding: 10px 0 20px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
@@ -239,7 +236,7 @@
 
 .ob01-kicker{
   color: rgba(34,211,238,0.95);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -266,7 +263,7 @@
   line-height: 1;
   font-weight: 900;
   letter-spacing: -0.03em;
-  color: rgba(34,211,238,0.98);
+  color: rgba(34, 238, 61, 0.98);
   text-shadow: 0 0 20px rgba(34,211,238,0.3);
 }
 
@@ -341,7 +338,7 @@
 }
 
 .ob01-footnoteText{
-  font-size: 16px;
+  font-size: 14px;
   color: rgba(144,161,185,0.75);
   font-weight: 500;
 }
