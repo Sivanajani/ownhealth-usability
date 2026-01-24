@@ -15,30 +15,74 @@ export default function Onboarding1({ onNext }: Props) {
   const [activeTab, setActiveTab] = useState<"medikation" | "schlaf" | "labordaten">("schlaf");
   const [isGlowing, setIsGlowing] = useState(false);
   const [showConnection, setShowConnection] = useState(false);
+  const [showCard, setShowCard] = useState(false);
+  const [showTitle, setShowTitle] = useState(false);
+  const [showIntro, setShowIntro] = useState(false);
+  const [pulseTab, setPulseTab] = useState<number>(-1); // -1 = keine, 0/1/2 = Tab index
 
-  // DEBUG: Log icons to console
+  // Animation beim ersten Laden - LÄNGER UND BESSER SEQUENZIERT
   useEffect(() => {
-    console.log("DrugIcon:", DrugIcon);
-    console.log("MoonIcon:", MoonIcon);
-    console.log("DocuIcon:", DocuIcon);
-  }, []);
-
-  // Animation beim ersten Laden
-  useEffect(() => {
-    const timer1 = setTimeout(() => setIsGlowing(true), 300);
-    const timer2 = setTimeout(() => setShowConnection(true), 600);
-    const timer3 = setTimeout(() => setActiveTab("schlaf"), 900);
+    // 1. Card erscheint
+    const timer1 = setTimeout(() => setShowCard(true), 300);
+    
+    // 2. Title erscheint
+    const timer2 = setTimeout(() => setShowTitle(true), 500);
+    
+    // 3. Intro Text erscheint
+    const timer3 = setTimeout(() => setShowIntro(true), 700);
+    
+    // 4. Card beginnt zu glühen
+    const timer4 = setTimeout(() => setIsGlowing(true), 1000);
+    
+    // 5. Verbindungslinien erscheinen nacheinander
+    const timer5 = setTimeout(() => setShowConnection(true), 1200);
+    
+    // 6. Tab Animation - zeigt dem User, dass Tabs klickbar sind
+    const timer6 = setTimeout(() => {
+      // Zuerst Schlaf-Tab (default) pulsieren lassen
+      setPulseTab(1); // Schlaf = Index 1
+      
+      // Dann nach 1s zum nächsten Tab
+      setTimeout(() => {
+        setPulseTab(0); // Medikation
+        setTimeout(() => {
+          setPulseTab(2); // Labordaten
+          setTimeout(() => {
+            setPulseTab(-1); // Animation beenden
+          }, 800);
+        }, 800);
+      }, 800);
+    }, 1500);
     
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
       clearTimeout(timer3);
+      clearTimeout(timer4);
+      clearTimeout(timer5);
+      clearTimeout(timer6);
     };
   }, []);
 
   const handleTabClick = (tab: "medikation" | "schlaf" | "labordaten") => {
     setActiveTab(tab);
+    setPulseTab(-1); // Pulsieren stoppen bei Klick
     console.log("Tab geklickt:", tab);
+  };
+
+  const handleNextClick = () => {
+    if (onNext) {
+      // Fade-out Animation vor onNext
+      const root = document.querySelector('.ob-root');
+      if (root) {
+        root.classList.add('ob-fadeOut');
+        setTimeout(() => {
+          onNext();
+        }, 400);
+      } else {
+        onNext();
+      }
+    }
   };
 
   return (
@@ -46,19 +90,19 @@ export default function Onboarding1({ onNext }: Props) {
       <div className="ob-content ob01-content">
         {/* TOP */}
         <div className="ob-top ob01-top">
-          <h1 className="ob01-title">
+          <h1 className={`ob01-title ${showTitle ? 'show' : ''}`}>
             Finde Muster in deinen Gesundheitsdaten{" "}            
           </h1>
-          <p className="ob01-intro">
-            OIWN zeigt dir Muster zwischen deinen Medikamenten, Schlaf und Laborwerten.
+          <p className={`ob01-intro ${showIntro ? 'show' : ''}`}>
+            OWN zeigt dir Muster zwischen deinen Medikamenten, Schlaf und Laborwerten.
           </p>
         </div>
 
         {/* MIDDLE */}
         <div className="ob-middle ob01-middle">
-          <div className={`ob01-card ${isGlowing ? 'ob01-card--glow' : ''}`}>
+          <div className={`ob01-card ${showCard ? 'show' : ''} ${isGlowing ? 'ob01-card--glow' : ''}`}>
             
-            {/* Verbindungslinien - nur sichtbar nach Animation */}
+            {/* Verbindungslinien - erscheinen nacheinander */}
             {showConnection && (
               <>
                 <div className="ob01-connector connector-medikation" />
@@ -70,7 +114,9 @@ export default function Onboarding1({ onNext }: Props) {
             <div className="ob01-tabs">
               {/* Medikation Tab */}
               <div 
-                className={`ob01-tab ${activeTab === "medikation" ? "ob01-tab--active" : ""}`}
+                className={`ob01-tab ${activeTab === "medikation" ? "ob01-tab--active" : ""} ${
+                  pulseTab === 0 ? "ob01-tab--pulse" : ""
+                }`}
                 onClick={() => handleTabClick("medikation")}
                 style={{ cursor: "pointer" }}
               >
@@ -88,7 +134,9 @@ export default function Onboarding1({ onNext }: Props) {
 
               {/* Schlaf Tab */}
               <div 
-                className={`ob01-tab ${activeTab === "schlaf" ? "ob01-tab--active" : ""}`}
+                className={`ob01-tab ${activeTab === "schlaf" ? "ob01-tab--active" : ""} ${
+                  pulseTab === 1 ? "ob01-tab--pulse" : ""
+                }`}
                 onClick={() => handleTabClick("schlaf")}
                 style={{ cursor: "pointer" }}
               >
@@ -105,7 +153,9 @@ export default function Onboarding1({ onNext }: Props) {
 
               {/* Labordaten Tab */}
               <div 
-                className={`ob01-tab ${activeTab === "labordaten" ? "ob01-tab--active" : ""}`}
+                className={`ob01-tab ${activeTab === "labordaten" ? "ob01-tab--active" : ""} ${
+                  pulseTab === 2 ? "ob01-tab--pulse" : ""
+                }`}
                 onClick={() => handleTabClick("labordaten")}
                 style={{ cursor: "pointer" }}
               >
@@ -155,7 +205,7 @@ export default function Onboarding1({ onNext }: Props) {
         <div className="ob-bottom">
           <button 
             className="ob-button ob01-button" 
-            onClick={onNext}
+            onClick={handleNextClick}
             onMouseEnter={() => setIsGlowing(true)}
           >
             <span className="ob01-buttonText">Meine Muster entdecken</span>            
