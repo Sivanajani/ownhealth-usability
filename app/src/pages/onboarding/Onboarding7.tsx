@@ -20,13 +20,6 @@ export default function Onboarding7({ onTakePhoto, onUploadPdf, onSkip, onBack }
         <div className="ob0-dots" aria-hidden="true">
           <span className="ob0-dot ob0-dot--active" />
           <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot" />
           <span className="ob0-dot" />
         </div>
 
@@ -57,49 +50,46 @@ export default function Onboarding7({ onTakePhoto, onUploadPdf, onSkip, onBack }
           </p>
         </div>
 
-        {/* Visual */}
+        {/* Visual */}        
         <div className="ob7-visual">
-          <div className="ob7-privacy">
-            <div className="ob7-privacy-dot">✓</div>
-            <div className="ob7-privacy-text">
-              <div className="ob7-privacy-strong">100% Anonym</div>
-              <div className="ob7-privacy-small">Namen werden automatisch entfernt.</div>
+          <div className="ob7-scanframe" aria-hidden="true">
+            {/* Scan-Corners */}
+            <span className="ob7-corner ob7-corner--tl" />
+            <span className="ob7-corner ob7-corner--tr" />
+            <span className="ob7-corner ob7-corner--bl" />
+            <span className="ob7-corner ob7-corner--br" />
+
+            {/* Kamera-Kreis oben */}
+            <div className="ob7-camera-bubble">
+              <CameraIcon className="ob7-camera-bubble-icon" />
             </div>
-          </div>
 
-          <div className="ob7-doc" aria-hidden="true">
-            <div className="ob7-doc-lines">
-              <div className="ob7-line ob7-line--w1" />
-              <div className="ob7-line ob7-line--w2" />
-              <div className="ob7-line ob7-line--w3" />
-              <div className="ob7-line ob7-line--w2" />
-            </div>
-          </div>
-
-          <div className="ob7-phone" aria-hidden="true">
-            <div className="ob7-notch" />
-            <div className="ob7-card">
-              <div className="ob7-card-title">Analyse-Ergebnis</div>
-
-              <div className="ob7-row">
-                <span className="ob7-pill ob7-pill--green">Optimal</span>
-                <span className="ob7-row-right">12 Werte</span>
+            {/* Dokument-Karte */}
+            <div className="ob7-doccard">
+              <div className="ob7-doc-header">
+                <div className="ob7-doc-file" />
+                <span className="ob7-doc-title">Bluttest Ergebnis</span>
               </div>
 
-              <div className="ob7-row">
-                <span className="ob7-pill ob7-pill--amber">Erhöht</span>
-                <span className="ob7-row-right">3 Werte</span>
+              <div className="ob7-doc-lines">
+                <div className="ob7-doc-line w1" />
+                <div className="ob7-doc-line w2" />
+                <div className="ob7-doc-line w3" />
+                <div className="ob7-doc-line w2" />
               </div>
 
-              <div className="ob7-row">
-                <span className="ob7-pill ob7-pill--red">Kritisch</span>
-                <span className="ob7-row-right">1 Wert</span>
+              {/* Anonym-Badge AUF der Karte */}
+              <div className="ob7-anon-badge">
+                <div className="ob7-anon-check">✓</div>
+                <div className="ob7-anon-text">
+                  <div className="ob7-anon-title">100% Anonym:</div>
+                  <div className="ob7-anon-sub">Namen werden automatisch entfernt.</div>
+                </div>
               </div>
-
-              <div className="ob7-check">✓</div>
             </div>
           </div>
         </div>
+        
 
         {/* Actions */}
         <div className="ob7-actions">

@@ -29,13 +29,6 @@ export default function Onboarding6({ onConnect, onLater }: Props) {
       <div className="ob-content ob6-content">
         <div className="ob0-dots" aria-hidden="true">
           <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
           <span className="ob0-dot" />
           <span className="ob0-dot" />
         </div>
@@ -83,8 +76,7 @@ export default function Onboarding6({ onConnect, onLater }: Props) {
                 <span>Verbinde...</span>
               </>
             ) : (
-              <>
-                <LockIcon className="ob6-button-lock-icon" />
+              <>                
                 <span>Apple Health verbinden</span>
               </>
             )}

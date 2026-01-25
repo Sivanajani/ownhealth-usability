@@ -1,5 +1,3 @@
-/* Onboarding 7 - Bluttest Scan */
-
 .ob7-content {
   display: flex;
   flex-direction: column;
@@ -38,7 +36,7 @@
 
 .ob7-title {
   margin: 0 0 12px 0;
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 850;
   color: rgba(255, 255, 255, 0.95);
   letter-spacing: -0.02em;
@@ -47,24 +45,14 @@
 
 .ob7-subtitle {
   margin: 0;
-  font-size: 15px;
+  font-size: 22px;
   line-height: 1.5;
   color: rgba(144, 161, 185, 0.85);
   max-width: 280px;
   margin: 0 auto;
 }
 
-/* VISUAL */
-.ob7-visual {
-  position: relative;
-  flex: 1;
-  min-height: 360px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0 40px;
-  padding: 0 20px;
-}
+
 
 /* Privacy Badge - Über dem iPhone */
 .ob7-privacy {
@@ -530,11 +518,11 @@
   }
   
   .ob7-title {
-    font-size: 24px;
+    font-size: 34px;
   }
   
   .ob7-subtitle {
-    font-size: 14px;
+    font-size: 18px;
     max-width: 260px;
   }
   
@@ -636,11 +624,11 @@
 
 @media (min-width: 768px) {
   .ob7-title {
-    font-size: 30px;
+    font-size: 34px;
   }
   
   .ob7-subtitle {
-    font-size: 16px;
+    font-size: 22px;
     max-width: 320px;
   }
   
@@ -667,4 +655,159 @@
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
+}
+
+/* ===== Mock Visual (Scan Frame) ===== */
+
+.ob7-visual {
+  position: relative;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  margin: 14px 0 22px;
+  padding: 0 20px;
+  min-height: 260px; /* wie Mock */
+}
+
+.ob7-scanframe {
+  position: relative;
+  width: 260px;
+  height: 300px;
+}
+
+/* Blue scan corners */
+.ob7-corner {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgba(76, 158, 247, 0.95);
+  border-radius: 16px;
+  opacity: 0.95;
+}
+
+.ob7-corner--tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.ob7-corner--tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.ob7-corner--bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.ob7-corner--br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+/* Camera bubble top center */
+.ob7-camera-bubble {
+  position: absolute;
+  top: 75px;                 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 122, 255, 0.16);
+  border: 1px solid rgba(0, 122, 255, 0.28);
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, 0.45),
+    0 0 0 8px rgba(0, 122, 255, 0.06);
+  z-index: 3;                
+}
+
+.ob7-camera-bubble-icon {
+  width: 35px;
+  height: 35px;
+  display: block;
+  color: rgba(147, 197, 253, 0.95);
+}
+
+/* Document card */
+.ob7-doccard {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 270px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+  padding: 14px;
+}
+
+.ob7-doc-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(170, 190, 220, 0.95);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.ob7-doc-file {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.ob7-doc-title {
+  opacity: 0.95;
+  font-size: 14px;
+}
+
+.ob7-doc-lines {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+  opacity: 0.75;
+}
+
+.ob7-doc-line {
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.34), rgba(255,255,255,0.12));
+}
+
+.ob7-doc-line.w1 { width: 72%; }
+.ob7-doc-line.w2 { width: 92%; }
+.ob7-doc-line.w3 { width: 64%; }
+
+/* Green anonym badge ON card */
+.ob7-anon-badge {
+  position: absolute;
+  right: 14px;
+  left: 14px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+}
+
+.ob7-anon-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 185, 129, 0.22);
+  color: rgba(167, 243, 208, 1);
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.ob7-anon-title {
+  font-size: 14px;
+  font-weight: 900;
+  color: rgba(209, 250, 229, 0.95);
+  line-height: 1.1;
+}
+
+.ob7-anon-sub {
+  font-size: 14px;
+  color: rgba(209, 250, 229, 0.85);
+  line-height: 1.1;
 }
