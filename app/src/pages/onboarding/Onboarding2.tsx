@@ -1,89 +1,370 @@
-// Onboarding2.tsx
-import { useLayoutEffect, useRef, useState } from "react";
-import "../onboarding/onboarding2.css";
-import "../onboarding/onboardingStart.css";
+// Onboarding2.tsx — Zukunfts-Karussell (Coming Soon) — FINAL (Mock-like, responsive, asset-icons)
+import { useMemo, useRef, useState } from "react";
+import "./onboardingStart.css";
+import "./onboarding2.css";
 
-import SchildIcon from "../../assets/schild.svg?react";
+// --- Your SVG assets ---
+import ShieldIcon from "../../assets/schild.svg?react";
+import TrendIcon from "../../assets/trend.svg?react";
+import PeopleIcon from "../../assets/people.svg?react";
+import ClockIcon from "../../assets/clock.svg?react";
+import UserIcon from "../../assets/user.svg?react";
+import WarningIcon from "../../assets/warning.svg?react";
+import OWN from "../../assets/O_Logo.svg?react";
+import Rocket from "../../assets/rocket.svg?react";
 
-interface Onboarding2Props {
-  onNext: () => void;           
+type Props = {
+  onNext?: () => void; // "Jetzt anfangen"
+};
+
+type Slide = {
+  id: string;
+  icon: "shield" | "trend" | "people";
+  kicker?: string;
+  title: string;
+  desc: string;
+  contentType: "accounts" | "chart" | "knowledge";
+};
+
+function SlideIcon({ name }: { name: Slide["icon"] }) {
+  if (name === "shield") return <ShieldIcon className="ob02-iconSvg" aria-hidden="true" />;
+  if (name === "trend") return <TrendIcon className="ob02-iconSvg" aria-hidden="true" />;
+  return <PeopleIcon className="ob02-iconSvg" aria-hidden="true" />;
 }
 
-const Onboarding2: React.FC<Onboarding2Props> = ({ onNext }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
+export default function Onboarding2({ onNext }: Props) {
+  const slides: Slide[] = useMemo(
+    () => [
+      {
+        id: "family",
+        icon: "shield",
+        title: "Ein Konto.\nDie ganze Familie.",
+        desc: "Verwalte die Gesundheit deiner Liebsten so sicher und einfach wie beim Online-Banking.",
+        contentType: "accounts",
+      },
+      {
+        id: "forecast",
+        icon: "trend",
+        title: "Sieh, was kommt.\nBevor es passiert.",
+        desc: "Erkenne Risiken früh genug, um sie zu verhindern.",
+        contentType: "chart",
+        kicker: "FRÜHERKENNUNG",
+      },
+      {
+        id: "together",
+        icon: "people",
+        title: "Du bist nicht allein.\nWir sind viele.",
+        desc: "Tausende in ähnlicher Situation haben bereits Wege gefunden.",
+        contentType: "knowledge",
+        kicker: "KOLLEKTIVES WISSEN",
+      },
+    ],
+    []
+  );
 
-  useLayoutEffect(() => {
-    const timer = setTimeout(() => setHasAnimated(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+  const [index, setIndex] = useState(0);
+
+  const clamp = (n: number) => Math.max(0, Math.min(slides.length - 1, n));
+  const go = (n: number) => setIndex(clamp(n));
+
+  // Swipe
+  const startX = useRef<number | null>(null);
+  const dragging = useRef(false);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    dragging.current = true;
+    startX.current = e.clientX;
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (!dragging.current || startX.current == null) return;
+    const dx = e.clientX - startX.current;
+    dragging.current = false;
+    startX.current = null;
+
+    if (Math.abs(dx) < 40) return;
+    if (dx < 0) go(index + 1);
+    else go(index - 1);
+  };
+
+  const active = slides[index];
 
   return (
-    <div className="ob-root" ref={containerRef}>
-      <div className="ob-content ob3-content">
-
-        {/* TITEL */}
-        <div className={`ob3-title-section ${hasAnimated ? "ob3-animated" : ""}`}>
-          <h1 className="ob01-title">
-            Deine Daten. <br /> Dein Besitz.
-          </h1>
-        </div>
-
-        {/* SCHILD ICON */}
-        <div className={`ob3-shield-section ${hasAnimated ? "ob3-animated" : ""}`}>
-          <div className="ob3-icon-circle">
-            <SchildIcon className="ob3-shield" />
+    <div className="ob-root">
+      <div className="ob02-screen">
+        {/* TOP */}
+        <header className="ob02-top">
+          <div className="ob02-pill">
+            <ClockIcon className="ob02-pillIcon" aria-hidden="true" />
+            <span>COMING SOON</span>
           </div>
-        </div>
 
-        <div className="ob3-middle">
-          {/* NUR DU ZUGRIFF */}
-          <div className={`ob3-access-section ${hasAnimated ? "ob3-animated" : ""}`}>
-            <div className="ob3-access-badge">
-              Nur <span className="ob3-you">DU</span> hast Zugriff
+          <h1 className="ob02-title">Ein Blick in die Zukunft</h1>
+          <p className="ob02-subtitle">Diese Features kommen noch 2026</p>
+        </header>
+
+        {/* MIDDLE */}
+        <main className="ob02-middle">
+          <div
+            className="ob02-carousel"
+            onPointerDown={onPointerDown}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
+          >
+            <div className="ob02-track" style={{ transform: `translateX(${-index * 100}%)` }}>
+              {slides.map((sl) => (
+                <section className="ob02-slide" key={sl.id} aria-hidden={sl.id !== active.id}>
+                  <div className="ob02-card">
+                    <div className="ob02-cardIcon">
+                      <SlideIcon name={sl.icon} />
+                    </div>
+
+                    <h2 className="ob02-cardTitle">
+                      {sl.title.split("\n").map((line, i) => (
+                        <span key={i}>
+                          {line}
+                          {i === 0 ? <br /> : null}
+                        </span>
+                      ))}
+                    </h2>
+
+                    <p className="ob02-cardDesc">{sl.desc}</p>
+
+                    {/* 1) ACCOUNTS */}
+                    {sl.contentType === "accounts" && (
+                      <div className="ob02-previewBox">
+                        <div className="ob02-personRow is-active">
+                          <div className="ob02-avatar is-blue">
+                            <UserIcon className="ob02-avatarIcon" aria-hidden="true" />
+                          </div>
+                          <div className="ob02-personText">
+                            <div className="ob02-personName">Ich</div>
+                            <div className="ob02-personRole">Hauptkonto</div>
+                          </div>
+                        </div>
+
+                        <div className="ob02-personRow">
+                          <div className="ob02-avatar">
+                            <UserIcon className="ob02-avatarIcon" aria-hidden="true" />
+                          </div>
+                          <div className="ob02-personText">
+                            <div className="ob02-personName">Vater</div>
+                            <div className="ob02-personRole">Unterkonto</div>
+                          </div>
+                        </div>
+
+                        <div className="ob02-personRow">
+                          <div className="ob02-avatar">
+                            <UserIcon className="ob02-avatarIcon" aria-hidden="true" />
+                          </div>
+                          <div className="ob02-personText">
+                            <div className="ob02-personName">Mutter</div>
+                            <div className="ob02-personRole">Unterkonto</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 2) CHART */}                 
+                    {sl.contentType === "chart" && (
+                      <div className="ob02-chartWrap">
+                        <div className="ob02-chartTop">
+                          <span className="ob02-chartTopLabel">JETZT</span>
+                          <span className="ob02-chartTopLabel is-right">MIT OWN</span>
+                        </div>
+
+                        {/* Timeline / Ampel-Story: Jetzt → Frühe Warnung → Spätes Problem */}
+                        <div className="ob02-early">
+                          <div className="ob02-earlyBar" aria-hidden="true">
+                            <span className="ob02-earlyGlow" />
+                          </div>
+
+                          {/* Stops */}
+                          <div className="ob02-earlyStops">
+                            {/* NOW */}
+                            <div className="ob02-stop">
+                              <div className="ob02-dotStop is-now" >
+                                <Rocket className="ob02-stopIcon is-now" aria-hidden="true" />
+                              </div>
+                              <div className="ob02-stopText">
+                                <div className="ob02-stopTitle">Jetzt</div>
+                                <div className="ob02-stopSub">Startpunkt</div>
+                              </div>
+                            </div>
+
+                            {/* EARLY WARNING (OWN) */}
+                            <div className="ob02-stop">
+                              <div className="ob02-dotStop is-early">
+                                <OWN className="ob02-stopIcon is-warn" aria-hidden="true" />
+                              </div>
+                              <div className="ob02-stopText">
+                                <div className="ob02-stopTitle is-blue">Frühe Warnung</div>
+                                <div className="ob02-stopSub is-blue">mit OWN</div>
+                              </div>
+                            </div>
+
+                            {/* LATE PROBLEM (NO DATA) */}
+                            <div className="ob02-stop">
+                              <div className="ob02-dotStop is-late">
+                                <WarningIcon className="ob02-stopIcon is-warn" aria-hidden="true" />
+                              </div>
+                              <div className="ob02-stopText">
+                                <div className="ob02-stopTitle is-red">Zu spät</div>
+                                <div className="ob02-stopSub is-red">ohne Daten</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* little legend */}
+                          <div className="ob02-earlyLegend">
+                            <span className="ob02-legendPill is-blue">OWN erkennt Trends früh</span>
+                            <span className="ob02-legendPill is-red">Ohne Daten merkst du’s spät</span>
+                          </div>
+                        </div>
+
+                        <div className="ob02-badge">{sl.kicker}</div>
+                      </div>
+                    )}
+
+                    {/* 3) KNOWLEDGE */}
+                    {sl.contentType === "knowledge" && (
+                      <>
+                        <div className="ob02-network">
+                          <svg
+                            className="ob02-networkSvg"
+                            viewBox="0 0 100 100"
+                            preserveAspectRatio="xMidYMid meet"
+                            aria-hidden="true"
+                          >
+                            <defs>
+                              <radialGradient id="coreGlow" cx="50%" cy="50%" r="60%">
+                                <stop offset="0%" stopColor="rgba(80,200,255,0.28)" />
+                                <stop offset="45%" stopColor="rgba(80,200,255,0.12)" />
+                                <stop offset="100%" stopColor="rgba(80,200,255,0)" />
+                              </radialGradient>
+                            </defs>
+
+                            {/* glow background */}
+                            <circle cx="50" cy="50" r="28" fill="url(#coreGlow)" />
+
+                            {(() => {
+                              const nodes = [
+                                { x: 18, y: 32 },
+                                { x: 26, y: 62 },
+                                { x: 40, y: 20 },
+                                { x: 58, y: 22 },
+                                { x: 74, y: 40 },
+                                { x: 78, y: 66 },
+                                { x: 60, y: 78 },
+                                { x: 36, y: 78 },
+                                { x: 22, y: 48 },
+                                { x: 70, y: 54 },
+                              ];
+                              const center = { x: 50, y: 50 };
+
+                              const ring: Array<[number, number]> = [
+                                [0, 2],
+                                [2, 3],
+                                [3, 4],
+                                [4, 9],
+                                [9, 5],
+                                [5, 6],
+                                [6, 7],
+                                [7, 1],
+                                [1, 8],
+                                [8, 0],
+                              ];
+
+                              const spokes: Array<[number, number]> = nodes.map(
+                                (_, i) => [i, -1] as [number, number]
+                              );
+
+                              const edges: Array<[number, number]> = [...ring, ...spokes];
+
+                              return (
+                                <>
+                                  {/* lines */}
+                                  <g className="ob02-netLines">
+                                    {edges.map(([a, b], idx) => {
+                                      const p1 = nodes[a];
+                                      const p2 = b === -1 ? center : nodes[b];
+                                      return (
+                                        <line
+                                          key={idx}
+                                          x1={p1.x}
+                                          y1={p1.y}
+                                          x2={p2.x}
+                                          y2={p2.y}
+                                          className={
+                                            b === -1
+                                              ? "ob02-line ob02-lineSpoke"
+                                              : "ob02-line ob02-lineRing"
+                                          }
+                                        />
+                                      );
+                                    })}
+                                  </g>
+
+                                  {/* nodes */}
+                                  <g className="ob02-netNodes">
+                                    {nodes.map((p, i) => (
+                                      <circle
+                                        key={i}
+                                        cx={p.x}
+                                        cy={p.y}
+                                        r={2.2}
+                                        className={`ob02-nodeSvg ${
+                                          i === 2 || i === 6 || i === 9 ? "is-hot" : ""
+                                        }`}
+                                      />
+                                    ))}
+                                  </g>
+
+                                  {/* core */}
+                                  <g className="ob02-netCore">
+                                    <circle cx="50" cy="50" r="3.2" className="ob02-coreSvg" />
+                                  </g>
+                                </>
+                              );
+                            })()}
+                          </svg>
+                        </div>
+
+                        <div className="ob02-knowledgeCard">
+                          <div className="ob02-badge is-knowledge">{sl.kicker}</div>
+                          <p className="ob02-knowledgeText">
+                            Erfahre, welche Medikation, Routinen und Therapien positive Veränderungen gebracht haben.
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </section>
+              ))}
             </div>
           </div>
 
-          {/* LISTE */}
-          <div className="ob3-restrictions-list">
-            <div className={`ob3-restriction-item ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.4s" }}>
-              <span className="ob3-restriction-icon">❌</span>
-              <span className="ob3-restriction-text">Nicht wir.</span>
-            </div>
-
-            <div className={`ob3-restriction-item ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.5s" }}>
-              <span className="ob3-restriction-icon">❌</span>
-              <span className="ob3-restriction-text">Nicht dein Arbeitgeber.</span>
-            </div>
-
-            <div className={`ob3-restriction-item ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.6s" }}>
-              <span className="ob3-restriction-icon">❌</span>
-              <span className="ob3-restriction-text">Nicht deine Krankenkasse.</span>
-            </div>
-
-            <div className={`ob3-restriction-item ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.7s" }}>
-              <span className="ob3-restriction-icon">❌</span>
-              <span className="ob3-restriction-text">Keine Tech-Giganten</span>
-            </div>
+          {/* Dots */}
+          <div className="ob02-dots" role="tablist" aria-label="Karussell">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                className={`ob02-dot ${i === index ? "is-active" : ""}`}
+                onClick={() => go(i)}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
           </div>
-        </div>
+        </main>
 
-        <div className="ob3-bottom">
-          <div className="ob-cta">
-            <button className="ob-button ob3-button" onClick={onNext}>
-              Jetzt Anfangen
-            </button>
-          </div>
-
-          <div className={`ob3-faq-section ${hasAnimated ? "ob3-animated" : ""}`} style={{ animationDelay: "0.8s" }}>
-            <button className="ob3-faq-button" onClick={() => console.log("FAQ angeklickt")}>
-              Mehr zum Datenschutz
-            </button>
-          </div>
-        </div>
+        {/* BOTTOM */}
+        <footer className="ob02-bottom">
+          <button className="ob02-cta" type="button" onClick={() => onNext?.()}>
+            Jetzt anfangen
+          </button>
+        </footer>
       </div>
     </div>
   );
-};
-
-export default Onboarding2;
+}
