@@ -19,10 +19,8 @@ type Props = {
   setUserName: (v: string) => void;
   age: number | null;
   setAge: (v: number | null) => void;
-
-  // jetzt null möglich (damit NICHTS vor-ausgewählt ist)
   focusKey: FocusKey | null;
-  setFocusKey: (v: FocusKey) => void;
+  setFocusKey: (v: FocusKey | null) => void;
 };
 
 const STORAGE_KEY = "ownhealth_onboarding_focus";
@@ -41,17 +39,25 @@ export default function OnboardingFlow({
   // Frage speichern
   const [firstQuestion, setFirstQuestion] = useState<string>("");
 
-  // optional: falls du innerhalb des Flows mal refresh-frei den Focus “lesen” willst
   useEffect(() => {
     const stored = sessionStorage.getItem(STORAGE_KEY) as FocusKey | null;
-    // Wir setzen NICHT automatisch in State, damit es wirklich “frisch” bleibt,
-    // aber du kannst es hier nutzen wenn du willst.
     void stored;
   }, []);
 
+  // Helper: zurück zur Fokus-Wahl (Onboarding4)
+  const goBackToFocus = () => {
+    sessionStorage.removeItem(STORAGE_KEY);
+    setFocusKey(null);
+    setStep(5);
+  };
+
   if (step === 0) return <OnboardingStart onStart={() => setStep(1)} />;
-  if (step === 1) return <Onboarding0 onNext={() => setStep(2)} onClose={() => setStep(0)} />;
+
+  if (step === 1)
+    return <Onboarding0 onNext={() => setStep(2)} onClose={() => setStep(0)} />;
+
   if (step === 2) return <Onboarding1 onNext={() => setStep(3)} />;
+
   if (step === 3) return <Onboarding2 onNext={() => setStep(4)} />;
 
   if (step === 4)
@@ -65,11 +71,11 @@ export default function OnboardingFlow({
       />
     );
 
-  // Screen 4 = Fokuswahl (dein Onboarding4)
+  // Screen 4 = Fokuswahl
   if (step === 5)
     return (
       <Onboarding4
-        initialFocus={null} // ✅ NICHT vor-auswählen
+        initialFocus={null}
         onContinue={(pickedFocus) => {
           setFocusKey(pickedFocus);
           setStep(6);
@@ -77,11 +83,7 @@ export default function OnboardingFlow({
       />
     );
 
-  // ------------------------------------------------------------------
-  // AB HIER: Wege trennen (longevity vs chronic)
-  // ------------------------------------------------------------------
-
-  // Falls aus irgendeinem Grund kein Fokus da ist, zurück zur Auswahl
+  // Falls kein Fokus existiert: zurück zur Auswahl
   if (step >= 6 && !focusKey) {
     return (
       <Onboarding4
@@ -96,11 +98,12 @@ export default function OnboardingFlow({
 
   // -------------------- Longevity Pfad --------------------
   if (focusKey === "longevity") {
-    // Step 6: Frage
     if (step === 6)
       return (
         <Onboarding5
+          focusKey={focusKey}
           initialQuestion={firstQuestion}
+          onBack={goBackToFocus} // Pfeil oben links
           onContinue={(q) => {
             setFirstQuestion(q);
             setStep(7);
@@ -112,11 +115,14 @@ export default function OnboardingFlow({
         />
       );
 
-    // Step 7: Apple Health verbinden
     if (step === 7)
-      return <Onboarding6 onConnect={() => setStep(8)} onLater={() => setStep(8)} />;
+      return (
+        <Onboarding6
+          onConnect={() => setStep(8)}
+          onLater={() => setStep(8)}
+        />
+      );
 
-    // Step 8: Bluttest
     if (step === 8)
       return (
         <Onboarding7
@@ -127,7 +133,6 @@ export default function OnboardingFlow({
         />
       );
 
-    // Step 9: Medikamente
     if (step === 9)
       return (
         <Onboarding8
@@ -137,7 +142,6 @@ export default function OnboardingFlow({
         />
       );
 
-    // Step 10: Name/Age/Geschlecht
     if (step === 10)
       return (
         <Onboarding9
@@ -150,21 +154,17 @@ export default function OnboardingFlow({
         />
       );
 
-    // Step 11: Loader -> Finish
-    if (step === 11)
-      return <Onboarding10 onContinue={() => onFinish?.()} />;
+    if (step === 11) return <Onboarding10 onContinue={() => onFinish?.()} />;
   }
 
   // -------------------- Chronic Pfad --------------------
   if (focusKey === "chronic") {
-    // Hier kannst du später eigene Screens einsetzen:
-    // z.B. Onboarding5Chronic, Onboarding6Chronic, ...
-    // Für jetzt verwende ich die bestehenden, damit es sofort läuft.
-
     if (step === 6)
       return (
         <Onboarding5
+          focusKey={focusKey}
           initialQuestion={firstQuestion}
+          onBack={goBackToFocus} //Pfeil oben links
           onContinue={(q) => {
             setFirstQuestion(q);
             setStep(7);
@@ -177,7 +177,12 @@ export default function OnboardingFlow({
       );
 
     if (step === 7)
-      return <Onboarding6 onConnect={() => setStep(8)} onLater={() => setStep(8)} />;
+      return (
+        <Onboarding6
+          onConnect={() => setStep(8)}
+          onLater={() => setStep(8)}
+        />
+      );
 
     if (step === 8)
       return (
@@ -210,8 +215,7 @@ export default function OnboardingFlow({
         />
       );
 
-    if (step === 11)
-      return <Onboarding10 onContinue={() => onFinish?.()} />;
+    if (step === 11) return <Onboarding10 onContinue={() => onFinish?.()} />;
   }
 
   return null;

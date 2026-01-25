@@ -1,5 +1,3 @@
-/* Onboarding 5 - Gesundheitsfrage */
-
 .ob5-content {
   padding-top: 24px !important;
   padding-bottom: 20px !important;
@@ -8,15 +6,16 @@
   min-height: 100%;
 }
 
-/* HEADER */
 .ob5-header {
+  position: relative;
   text-align: center;
+  padding-top: 30px;
 }
 
 .ob5-title {
   color: rgba(255, 255, 255, 0.95);
   font-weight: 850;
-  font-size: 26px;
+  font-size: 34px;
   line-height: 1.2;
   margin-top: 10px;
   text-align: center;
@@ -76,7 +75,7 @@
   resize: none;
   outline: none;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
-  min-height: 50px;
+  min-height: 32px;
 }
 
 .ob5-textarea::placeholder {
@@ -111,11 +110,10 @@
   color: rgba(255, 255, 255, 0.9);
   font-weight: 700;
   font-size: 16px;
-  margin: 0 0 12px 0;
+  margin-bottom: 0px;
   text-align: left;
 }
 
-/* 2x2 GRID LAYOUT */
 .ob5-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -151,39 +149,15 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #3ddc8545;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* KRÄFTIGE SCHWARZE ICONS (nicht blau!) */
 .ob5-grid-icon {
   width: 24px;
   height: 24px;
-  /* Kräftiges schwarz mit leichter Transparenz */
-  color: rgba(255, 255, 255, 0.95);
   filter: brightness(1.2) contrast(1.2);
-}
-
-/* Optional: Unterschiedliche Farben für die Icons */
-.ob5-grid-icon-wrapper:nth-child(1) .ob5-grid-icon {
-  /* Pills Icon - weiß/kräftig */
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.ob5-grid-icon-wrapper:nth-child(2) .ob5-grid-icon {
-  /* Blood Icon - weiß/kräftig */
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.ob5-grid-icon-wrapper:nth-child(3) .ob5-grid-icon {
-  /* Food Icon - weiß/kräftig */
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.ob5-grid-icon-wrapper:nth-child(4) .ob5-grid-icon {
-  /* Blitz Icon - hellblau */
-  color: rgba(147, 197, 253, 0.95);
 }
 
 .ob5-grid-text {
@@ -272,7 +246,7 @@
 .ob5-blitz-icon {
   width: 20px;
   height: 20px;
-  color: rgba(147, 197, 253, 1); /* Hellblau */
+  color: rgba(147, 197, 253, 1); 
 }
 
 .ob5-hint {
@@ -286,10 +260,8 @@
 
 /* BOTTOM */
 .ob5-bottom {
-  margin-top: 16px;
+  margin-top: 5px;
   text-align: center;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ob5-skip {
@@ -346,7 +318,7 @@
   }
   
   .ob5-title {
-    font-size: 22px;
+    font-size: 34px;
   }
   
   .ob5-subtitle {
@@ -367,7 +339,7 @@
   
   .ob5-examples-title {
     font-size: 15px;
-    margin-bottom: 14px;
+    margin-bottom: 0px;
   }
   
   .ob5-grid {
@@ -411,7 +383,7 @@
 
 @media (min-width: 400px) {
   .ob5-title {
-    font-size: 28px;
+    font-size: 34px;
   }
   
   .ob5-examples {
@@ -431,6 +403,105 @@
 
 /* ICON STÄRKE/INTENSITÄT ERHÖHEN */
 .ob5-grid-icon {
-  /* Mehr Kontrast und Sättigung für kräftigere Icons */
   filter: brightness(1.3) contrast(1.3) saturate(1.5);
+}
+
+/* Longevity Variante: anderer Look ohne Layout zu ändern */
+.ob5--longevity .ob5-title {
+  font-weight: 860;
+}
+
+.ob5--longevity .ob5-subtitle {
+  color: rgba(160, 180, 210, 0.9);
+}
+
+/* Icons: etwas “fresh/blue-ish” (optional) */
+.ob5--longevity .ob5-grid-icon-wrapper {
+  background: rgba(0, 122, 255, 0.12);
+  border-color: rgba(0, 122, 255, 0.22);
+}
+
+.ob5--longevity .ob5-grid-item:hover {
+  border-color: rgba(0, 122, 255, 0.35);
+}
+
+/* Button: etwas stärkerer Blue-Glow (optional) */
+.ob5--longevity .ob5-button {
+  box-shadow:
+    0 26px 70px rgba(0, 122, 255, 0.42),
+    0 12px 26px rgba(0, 0, 0, 0.38) !important;
+}
+
+.ob5-bottom-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ob5-back {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.ob5-back:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+/* BACK ARROW (Top Left) */
+.ob5-back-arrow {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 122, 255, 0.12);
+  border: 1px solid rgba(0, 122, 255, 0.25);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.ob5-back-arrow:hover {
+  background: rgba(0, 122, 255, 0.2);
+  transform: translateX(-2px);
+}
+
+.ob5-back-arrow:active {
+  transform: translateX(-4px) scale(0.96);
+}
+
+/* Arrow Icon */
+.ob5-back-icon {
+  width: 18px;
+  height: 18px;
+  color: #4c9ef7;
+}
+
+
+/* ===== ICON COLORS BY FOCUS ===== */
+
+/* Longevity = Blue */
+.ob5--longevity .ob5-grid-icon {
+  color: #4c9ef7;
+}
+
+/* Chronic = Green */
+.ob5--chronic .ob5-grid-icon {
+  color: #3ddc84;
 }

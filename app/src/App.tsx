@@ -9,8 +9,6 @@ export default function App() {
   const [isOnboarded, setIsOnboarded] = useState(false);
   const [userName, setUserName] = useState<string>("");
   const [age, setAge] = useState<number | null>(null);
-
-  // wichtig: NICHT default longevity -> sonst ist’s “vor-ausgewählt”
   const [focusKey, setFocusKey] = useState<FocusKey | null>(null);
 
   const [hasSeenHomeInsight, setHasSeenHomeInsight] = useState(false);
