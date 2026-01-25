@@ -203,17 +203,15 @@ export default function Onboarding2({ onNext }: Props) {
                           </div>
                         </div>
 
-                        {/* ✅ wie Knowledge: Badge + Erklärungstext in eigener Card */}
-                        <div className="ob02-forecastInfoCard">
+                        {/* wie Knowledge: Badge + Erklärungstext in eigener Card */}
+                        {/*<div className="ob02-forecastInfoCard">
                           <div className="ob02-badge is-forecast">{sl.kicker}</div>
                           <p className="ob02-forecastInfoText">
                             OWN analysiert deine Gesundheitsdaten kontinuierlich, um Auffälligkeiten früh sichtbar zu machen.
                           </p>
-                        </div>
+                        </div>*/}
                       </>
                     )}
-
-
 
                     {/* 3) KNOWLEDGE */}
                     {sl.contentType === "knowledge" && (
