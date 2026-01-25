@@ -8,44 +8,36 @@ import PuzzleIcon from "../../assets/puzzle.svg?react";
 import type { FocusKey } from "../../types/focus";
 
 interface Onboarding4Props {
-  initialFocus?: FocusKey | null;
   onContinue: (focusKey: FocusKey) => void;
+  initialFocus?: FocusKey | null;
 }
 
-const Onboarding4: React.FC<Onboarding4Props> = ({
-  onContinue,
-  initialFocus = null,
-}) => {
-  const [selectedFocus, setSelectedFocus] =
-    useState<FocusKey | null>(initialFocus);
+const Onboarding4: React.FC<Onboarding4Props> = ({ onContinue }) => {
+  const [selectedFocus, setSelectedFocus] = useState<FocusKey | null>(null);
+  const [isLeaving, setIsLeaving] = useState(false);
 
-  const handleContinue = () => {
-    if (selectedFocus) {
-      console.log("Ausgewählter Fokus:", selectedFocus);
-      onContinue(selectedFocus);
-    }
-  };
-
-  const handleFocusSelect = (focus: FocusKey) => {
+  const goNext = (focus: FocusKey) => {
+    if (isLeaving) return; // verhindert Doppelklicks
+    setIsLeaving(true);
     setSelectedFocus(focus);
+
+    // kurzer Delay für Tap-Feedback / Selected-State
+    window.setTimeout(() => {
+      onContinue(focus);
+    }, 180);
   };
+
+  const onKeyActivate =
+    (focus: FocusKey) => (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        goNext(focus);
+      }
+    };
 
   return (
     <div className="ob-root">
       <div className="ob-content ob4-content">
-        <div className="ob0-dots" aria-hidden="true">
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot ob0-dot--active" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-          <span className="ob0-dot" />
-        </div>
-
         <div className="ob4-header">
           <h1 className="ob4-title">Was ist dein primärer Fokus?</h1>
         </div>
@@ -58,10 +50,12 @@ const Onboarding4: React.FC<Onboarding4Props> = ({
                 selectedFocus === "longevity"
                   ? "ob4-option-selected ob4-longevity-selected"
                   : ""
-              }`}
-              onClick={() => handleFocusSelect("longevity")}
+              } ${isLeaving ? "ob4-disabled" : ""}`}
+              onClick={() => goNext("longevity")}
+              onKeyDown={onKeyActivate("longevity")}
               role="button"
               tabIndex={0}
+              aria-disabled={isLeaving}
             >
               <div className="ob4-card-icon ob4-rocket-container">
                 <RocketIcon className="ob4-rocket-icon" />
@@ -78,10 +72,12 @@ const Onboarding4: React.FC<Onboarding4Props> = ({
                 selectedFocus === "chronic"
                   ? "ob4-option-selected ob4-chronic-selected"
                   : ""
-              }`}
-              onClick={() => handleFocusSelect("chronic")}
+              } ${isLeaving ? "ob4-disabled" : ""}`}
+              onClick={() => goNext("chronic")}
+              onKeyDown={onKeyActivate("chronic")}
               role="button"
               tabIndex={0}
+              aria-disabled={isLeaving}
             >
               <div className="ob4-card-icon ob4-puzzle-container">
                 <PuzzleIcon className="ob4-puzzle-icon" />
@@ -95,20 +91,6 @@ const Onboarding4: React.FC<Onboarding4Props> = ({
 
           <div className="ob4-hint-section">
             <p className="ob4-hint-text">Du kannst deinen Fokus jederzeit ändern</p>
-          </div>
-        </div>
-
-        <div className="ob4-bottom">
-          <div className="ob-cta">
-            <button
-              className={`ob-button ob4-button ${
-                !selectedFocus ? "ob4-button-disabled" : ""
-              }`}
-              onClick={handleContinue}
-              disabled={!selectedFocus}
-            >
-              Weiter
-            </button>
           </div>
         </div>
       </div>

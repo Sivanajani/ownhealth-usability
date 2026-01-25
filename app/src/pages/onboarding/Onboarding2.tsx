@@ -5,16 +5,15 @@ import "./onboarding2.css";
 
 // --- Your SVG assets ---
 import ShieldIcon from "../../assets/schild.svg?react";
-import TrendIcon from "../../assets/trend.svg?react";
+import Notification from "../../assets/notification.svg?react";
 import PeopleIcon from "../../assets/people.svg?react";
 import ClockIcon from "../../assets/clock.svg?react";
 import UserIcon from "../../assets/user.svg?react";
 import WarningIcon from "../../assets/warning.svg?react";
 import OWN from "../../assets/O_Logo.svg?react";
-import Rocket from "../../assets/rocket.svg?react";
 
 type Props = {
-  onNext?: () => void; // "Jetzt anfangen"
+  onNext?: () => void;
 };
 
 type Slide = {
@@ -28,7 +27,7 @@ type Slide = {
 
 function SlideIcon({ name }: { name: Slide["icon"] }) {
   if (name === "shield") return <ShieldIcon className="ob02-iconSvg" aria-hidden="true" />;
-  if (name === "trend") return <TrendIcon className="ob02-iconSvg" aria-hidden="true" />;
+  if (name === "trend") return <Notification className="ob02-iconSvg" aria-hidden="true" />;
   return <PeopleIcon className="ob02-iconSvg" aria-hidden="true" />;
 }
 
@@ -45,7 +44,7 @@ export default function Onboarding2({ onNext }: Props) {
       {
         id: "forecast",
         icon: "trend",
-        title: "Sieh, was kommt.\nBevor es passiert.",
+        title: "OWN warnt dich,\nbevor du krank wirst.",
         desc: "Erkenne Risiken früh genug, um sie zu verhindern.",
         contentType: "chart",
         kicker: "FRÜHERKENNUNG",
@@ -53,8 +52,8 @@ export default function Onboarding2({ onNext }: Props) {
       {
         id: "together",
         icon: "people",
-        title: "Du bist nicht allein.\nWir sind viele.",
-        desc: "Tausende in ähnlicher Situation haben bereits Wege gefunden.",
+        title: "Du bist nicht allein.",
+        desc: "Menschen mit ähnlichen Bedürfnissen entdecken neue Möglichkeiten.",
         contentType: "knowledge",
         kicker: "KOLLEKTIVES WISSEN",
       },
@@ -164,67 +163,57 @@ export default function Onboarding2({ onNext }: Props) {
                         </div>
                       </div>
                     )}
-
-                    {/* 2) CHART */}                 
+                                                    
+                    {/* 2) FORECAST */}                                     
                     {sl.contentType === "chart" && (
-                      <div className="ob02-chartWrap">
-                        <div className="ob02-chartTop">
-                          <span className="ob02-chartTopLabel">JETZT</span>
-                          <span className="ob02-chartTopLabel is-right">MIT OWN</span>
-                        </div>
-
-                        {/* Timeline / Ampel-Story: Jetzt → Frühe Warnung → Spätes Problem */}
-                        <div className="ob02-early">
-                          <div className="ob02-earlyBar" aria-hidden="true">
-                            <span className="ob02-earlyGlow" />
-                          </div>
-
-                          {/* Stops */}
-                          <div className="ob02-earlyStops">
-                            {/* NOW */}
-                            <div className="ob02-stop">
-                              <div className="ob02-dotStop is-now" >
-                                <Rocket className="ob02-stopIcon is-now" aria-hidden="true" />
-                              </div>
-                              <div className="ob02-stopText">
-                                <div className="ob02-stopTitle">Jetzt</div>
-                                <div className="ob02-stopSub">Startpunkt</div>
-                              </div>
+                      <>
+                        <div className="ob02-forecastCard">
+                          {/* Ohne OWN */}
+                          <div className="ob02-forecastRow">
+                            <div className="ob02-forecastAvatar is-red">
+                              <UserIcon className="ob02-forecastAvatarIcon" aria-hidden="true" />
+                              <span className="ob02-forecastBadge is-red" aria-hidden="true">
+                                <WarningIcon className="ob02-forecastBadgeIcon" />
+                              </span>
                             </div>
 
-                            {/* EARLY WARNING (OWN) */}
-                            <div className="ob02-stop">
-                              <div className="ob02-dotStop is-early">
-                                <OWN className="ob02-stopIcon is-warn" aria-hidden="true" />
-                              </div>
-                              <div className="ob02-stopText">
-                                <div className="ob02-stopTitle is-blue">Frühe Warnung</div>
-                                <div className="ob02-stopSub is-blue">mit OWN</div>
-                              </div>
-                            </div>
-
-                            {/* LATE PROBLEM (NO DATA) */}
-                            <div className="ob02-stop">
-                              <div className="ob02-dotStop is-late">
-                                <WarningIcon className="ob02-stopIcon is-warn" aria-hidden="true" />
-                              </div>
-                              <div className="ob02-stopText">
-                                <div className="ob02-stopTitle is-red">Zu spät</div>
-                                <div className="ob02-stopSub is-red">ohne Daten</div>
+                            <div className="ob02-forecastText">
+                              <div className="ob02-forecastRowTitle">Ohne OWN</div>
+                              <div className="ob02-forecastRowSub">
+                                Du merkst es erst,<br />wenn&apos;s passiert
                               </div>
                             </div>
                           </div>
 
-                          {/* little legend */}
-                          <div className="ob02-earlyLegend">
-                            <span className="ob02-legendPill is-blue">OWN erkennt Trends früh</span>
-                            <span className="ob02-legendPill is-red">Ohne Daten merkst du’s spät</span>
+                          {/* Mit OWN */}
+                          <div className="ob02-forecastRow is-active">
+                            <div className="ob02-forecastAvatar is-blue">
+                              <UserIcon className="ob02-forecastAvatarIcon" aria-hidden="true" />
+                              <span className="ob02-forecastBadge is-blue" aria-hidden="true">
+                                <OWN className="ob02-forecastBadgeIcon is-own" />
+                              </span>
+                            </div>
+
+                            <div className="ob02-forecastText">
+                              <div className="ob02-forecastRowTitle">Mit OWN</div>
+                              <div className="ob02-forecastRowSub is-blue">
+                                Du wirst früh gewarnt
+                              </div>
+                            </div>
                           </div>
                         </div>
 
-                        <div className="ob02-badge">{sl.kicker}</div>
-                      </div>
+                        {/* ✅ wie Knowledge: Badge + Erklärungstext in eigener Card */}
+                        <div className="ob02-forecastInfoCard">
+                          <div className="ob02-badge is-forecast">{sl.kicker}</div>
+                          <p className="ob02-forecastInfoText">
+                            OWN analysiert deine Gesundheitsdaten kontinuierlich, um Auffälligkeiten früh sichtbar zu machen.
+                          </p>
+                        </div>
+                      </>
                     )}
+
+
 
                     {/* 3) KNOWLEDGE */}
                     {sl.contentType === "knowledge" && (

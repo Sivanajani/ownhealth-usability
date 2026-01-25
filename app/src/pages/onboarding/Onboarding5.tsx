@@ -78,7 +78,7 @@ const Onboarding5: React.FC<Onboarding5Props> = ({
         </div>
 
         <div className="ob5-header">
-          <h1 className="ob5-title">Wobei kann OWN dich als erstes unterstützen?</h1>
+          <h1 className="ob5-title">Wobei kann OWN dir helfen?</h1>
         </div>
 
         <div className="ob5-middle">
@@ -93,10 +93,10 @@ const Onboarding5: React.FC<Onboarding5Props> = ({
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 rows={2}
-                maxLength={500}
+                maxLength={100}
               />
               <div className="ob5-input-footer">
-                <span className="ob5-char-count">{question.length}/500</span>
+                <span className="ob5-char-count">{question.length}/100</span>
               </div>
             </div>
 

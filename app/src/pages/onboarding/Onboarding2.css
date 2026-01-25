@@ -725,3 +725,186 @@
   .ob02-stopTitle{ font-size: 11.5px; }
   .ob02-stopSub{ font-size: 10.5px; }
 }
+
+/* ---------- FORECAST (Mock-like) ---------- */
+.ob02-forecastWrap{
+  border-radius: 18px;
+  padding: 14px 12px 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.18);
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.ob02-forecastIcon{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 12px;
+}
+
+.ob02-forecastIconSvg{
+  width: 18px;
+  height: 18px;
+  color: rgba(170,205,255,0.9);
+  fill: currentColor;
+  opacity: 0.9;
+}
+
+.ob02-forecastTitle{
+  margin: 0 0 8px 0;
+  color: rgba(255,255,255,0.96);
+  font-weight: 850;
+  font-size: 22px;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.ob02-forecastSubtitle{
+  margin: 0 0 14px 0;
+  color: rgba(160,175,198,0.88);
+  font-weight: 650;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.ob02-forecastCard{
+  border-radius: 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 10px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.22) inset;
+}
+
+.ob02-forecastRow{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.ob02-forecastRow + .ob02-forecastRow{
+  margin-top: 8px;
+}
+
+.ob02-forecastRow.is-active{
+  background: rgba(120,170,255,0.10);
+  border: 1px solid rgba(120,170,255,0.22);
+  box-shadow: 0 0 0 1px rgba(120,170,255,0.10) inset;
+}
+
+.ob02-forecastAvatar{
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  flex: 0 0 auto;
+}
+
+.ob02-forecastAvatar.is-red{
+  border-color: rgba(255,120,120,0.18);
+}
+
+.ob02-forecastAvatar.is-blue{
+  background: rgba(40,120,255,0.18);
+  border-color: rgba(120,170,255,0.30);
+  box-shadow: 0 0 16px rgba(60,140,255,0.12);
+}
+
+.ob02-forecastAvatarIcon{
+  width: 20px;
+  height: 20px;
+  color: rgba(255,255,255,0.92);
+  fill: currentColor;
+}
+
+.ob02-forecastBadge{
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.25);
+}
+
+.ob02-forecastBadge.is-red{
+  border-color: rgba(255,120,120,0.22);
+  background: rgba(255,90,90,0.14);
+}
+
+.ob02-forecastBadge.is-blue{
+  border-color: rgba(120,170,255,0.22);
+  background: rgba(120,170,255,0.12);
+}
+
+.ob02-forecastBadgeIcon{
+  width: 12px;
+  height: 12px;
+  color: rgba(255,255,255,0.92);
+  fill: currentColor;
+}
+
+.ob02-forecastBadgeIcon.is-own{
+  width: 12px;
+  height: 12px;
+  color: rgba(120,170,255,0.95);
+}
+
+.ob02-forecastText{
+  min-width: 0;
+}
+
+.ob02-forecastRowTitle{
+  color: rgba(255,255,255,0.92);
+  font-weight: 850;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.ob02-forecastRowSub{
+  margin-top: 3px;
+  color: rgba(160,175,198,0.78);
+  font-weight: 650;
+  font-size: 12px;
+  line-height: 1.15;
+}
+
+.ob02-forecastRowSub.is-blue{
+  color: rgba(120,170,255,0.95);
+}
+
+/* FORECAST Info Card (wie Knowledge) */
+.ob02-forecastInfoCard{
+  margin-top: 10px;
+  border-radius: 18px;
+  padding: clamp(10px, 1.6vh, 12px);
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.ob02-badge.is-forecast{
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.ob02-forecastInfoText{
+  margin: 0;
+  color: rgba(255,255,255,0.92);
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 500;
+}
