@@ -1,5 +1,3 @@
-/* onboarding1.css - ERWEITERTE VERSION */
-
 .ob01-content{
   padding-top: calc(env(safe-area-inset-top) + 28px);
   padding-bottom: calc(env(safe-area-inset-bottom) + 26px);
@@ -56,6 +54,7 @@
 
 /* ===== Karte Animation ===== */
 .ob01-card{
+  position: relative;
   border-radius: 20px;
   padding: 18px;
   overflow: hidden;
@@ -74,11 +73,14 @@
   transform: translateY(0) scale(1);
 }
 
-.ob01-card--glow {
-  box-shadow: 
-    0 0 0 1px rgba(59,130,246,0.2) inset,
-    0 8px 32px rgba(0,0,0,0.4),
-    0 0 40px rgba(59,130,246,0.2);
+/* Glow am Rand */
+.ob01-card--glow{
+  border: 1px solid rgba(56,189,248,0.55); 
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.22) inset,  
+    0 0 18px rgba(56,189,248,0.28),         
+    0 0 48px rgba(56,189,248,0.18),         
+    0 12px 36px rgba(0,0,0,0.45);           
 }
 
 /* ===== Tabs ===== */
@@ -90,6 +92,7 @@
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
+/* Tabs sind rein dekorativ (nicht klickbar) */
 .ob01-tab{
   display: flex;
   flex-direction: column;
@@ -98,46 +101,27 @@
   gap: 8px;
   padding: 12px 8px;
   border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+
+  cursor: default;        /* kein Hand-Cursor */
+  pointer-events: none;   /* wirklich nicht klickbar */
+
+  transition: none;       /* kein "interaktiv"-Gefühl */
   position: relative;
   background: rgba(255,255,255,0.02);
   border: 1px solid transparent;
 }
 
-.ob01-tab:hover {
-  background: rgba(59,130,246,0.05);
-  border-color: rgba(59,130,246,0.2);
-  transform: translateY(-2px);
+/* Hover neutralisieren (falls Browser trotzdem Styles cached) */
+.ob01-tab:hover{
+  background: rgba(255,255,255,0.02);
+  border-color: transparent;
+  transform: none;
 }
 
+/* Optional: eine "aktive" Optik als Deko (z.B. Schlaf) */
 .ob01-tab--active {
   background: rgba(59,130,246,0.08);
   border: 1px solid rgba(59,130,246,0.3);
-  transform: translateY(-2px);
-}
-
-/* Tab Pulsieren Animation */
-.ob01-tab--pulse {
-  animation: tab-pulse 1.2s ease-in-out infinite alternate;
-}
-
-@keyframes tab-pulse {
-  0% {
-    background: rgba(59,130,246,0.05);
-    border-color: rgba(59,130,246,0.2);
-    transform: translateY(-2px) scale(1);
-  }
-  100% {
-    background: rgba(59,130,246,0.12);
-    border-color: rgba(59,130,246,0.4);
-    transform: translateY(-2px) scale(1.05);
-  }
-}
-
-.ob01-tab--active .ob01-tabLabel {
-  color: rgba(147,197,253,0.95);
-  font-weight: 700;
 }
 
 /* WICHTIG: Icon-Container */
@@ -150,24 +134,24 @@
   border-radius: 12px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
-  color: white; /* Textfarbe für Fallback */
-  transition: all 0.3s ease;
+  color: white;
 }
 
 .ob01-tabIcon svg {
   width: 24px;
   height: 24px;
   display: block;
-  color: rgba(255,255,255,0.9); /* Farbe für SVG Icons */
-  fill: currentColor; /* Wichtig für SVG */
+  color: rgba(255,255,255,0.9);
+  fill: currentColor;
 }
 
-.ob01-tab--active .ob01-tabIcon {
+/* active look for icon */
+.ob01-tabIcon--active{
   background: rgba(59,130,246,0.15);
   border-color: rgba(59,130,246,0.4);
 }
 
-.ob01-tab--active .ob01-tabIcon svg {
+.ob01-tabIcon--active svg{
   color: rgba(147,197,253,0.95);
 }
 
@@ -175,15 +159,18 @@
   font-size: 14px;
   color: rgba(144,161,185,0.9);
   font-weight: 600;
-  transition: all 0.3s ease;
   text-align: center;
+}
+
+.ob01-tab--active .ob01-tabLabel{
+  color: rgba(147,197,253,0.95);
+  font-weight: 700;
 }
 
 /* ===== Verbindungslinien mit Animation ===== */
 .ob01-connector {
   position: absolute;
   height: 2px;
-  background: rgba(59,130,246,0.4);
   z-index: 1;
   opacity: 0;
   transform: scaleX(0);
@@ -235,7 +222,7 @@
 }
 
 .ob01-kicker{
-  color: rgba(34,211,238,0.95);
+  color: rgb(0, 212, 170);
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.08em;
@@ -263,8 +250,8 @@
   line-height: 1;
   font-weight: 900;
   letter-spacing: -0.03em;
-  color: rgba(34, 238, 61, 0.98);
-  text-shadow: 0 0 20px rgba(34,211,238,0.3);
+  color: rgb(0, 212, 170);
+  text-shadow: 0 0 20px rgba(0, 212, 170, 0.37);
 }
 
 .ob01-metricLabel{
@@ -285,37 +272,11 @@
   animation-delay: 0.6s;
 }
 
-.ob01-insight{
-  margin-top: 20px;
-  padding: 12px;
-  background: rgba(16,185,129,0.08);
-  border: 1px solid rgba(16,185,129,0.15);
-  border-radius: 12px;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.7s ease forwards;
-  animation-delay: 0.7s;
-}
-
 @keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.ob01-insightIcon{
-  font-size: 18px;
-}
-
-.ob01-insightText{
-  color: rgba(110,231,183,0.95);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
 }
 
 /* ===== Footnote ===== */
@@ -330,11 +291,6 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-}
-
-.ob01-footnoteIcon{
-  font-size: 20px;
-  opacity: 0.8;
 }
 
 .ob01-footnoteText{

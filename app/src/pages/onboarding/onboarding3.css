@@ -8,7 +8,6 @@
   min-height: 100%;
 }
 
-/* SCHILD SECTION - größer und zentriert */
 .ob3-shield-section {
   text-align: center;
   margin-bottom: 20px;
@@ -257,7 +256,7 @@
 /* FAQ SECTION */
 .ob3-faq-section {
   text-align: center;
-  padding-top: 8px;
+  padding-top: 2px;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.5s ease, transform 0.5s ease;

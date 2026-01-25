@@ -61,15 +61,15 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
           <div className="ob3-restrictions-list">
             <div className={`ob3-restriction-item ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.4s' }}>
               <span className="ob3-restriction-icon">❌</span>
-              <span className="ob3-restriction-text">Nicht wir.</span>
+              <span className="ob3-restriction-text">Nicht wir</span>
             </div>
             <div className={`ob3-restriction-item ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.5s' }}>
               <span className="ob3-restriction-icon">❌</span>
-              <span className="ob3-restriction-text">Nicht dein Arbeitgeber.</span>
+              <span className="ob3-restriction-text">Nicht dein Arbeitgeber</span>
             </div>
             <div className={`ob3-restriction-item ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.6s' }}>
               <span className="ob3-restriction-icon">❌</span>
-              <span className="ob3-restriction-text">Nicht deine Krankenkasse.</span>
+              <span className="ob3-restriction-text">Nicht deine Krankenkasse</span>
             </div>
             <div className={`ob3-restriction-item ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.7s' }}>
               <span className="ob3-restriction-icon">❌</span>
@@ -87,7 +87,7 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
               Jetzt Anfangen
             </button>
           </div>
-                    {/* FAQ LINK */}
+          {/* FAQ LINK */}
           <div className={`ob3-faq-section ${hasAnimated ? 'ob3-animated' : ''}`} style={{ animationDelay: '0.8s' }}>
             <button 
               className="ob3-faq-button"

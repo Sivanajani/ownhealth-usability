@@ -44,7 +44,7 @@ export default function Onboarding2({ onNext }: Props) {
       {
         id: "forecast",
         icon: "trend",
-        title: "OWN warnt dich,\nbevor du krank wirst.",
+        title: "Wir warnen dich,\nbevor du krank wirst.",
         desc: "Erkenne Risiken früh genug, um sie zu verhindern.",
         contentType: "chart",
         kicker: "FRÜHERKENNUNG",
@@ -53,7 +53,7 @@ export default function Onboarding2({ onNext }: Props) {
         id: "together",
         icon: "people",
         title: "Du bist nicht allein.",
-        desc: "Menschen mit ähnlichen Bedürfnissen entdecken neue Möglichkeiten.",
+        desc: "Tausende in ähnlicher Situation haben bereits Wege gefunden.",
         contentType: "knowledge",
         kicker: "KOLLEKTIVES WISSEN",
       },
