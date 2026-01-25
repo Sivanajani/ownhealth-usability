@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OnboardingFlow from "./pages/onboarding/OnboardingFlow";
 import HomeFlow from "./pages/home/HomeFlow";
 import type { FocusKey } from "./types/focus";
+
+const STORAGE_KEY = "ownhealth_onboarding_focus";
 
 export default function App() {
   const [isOnboarded, setIsOnboarded] = useState(false);
   const [userName, setUserName] = useState<string>("");
   const [age, setAge] = useState<number | null>(null);
 
-  // Default passend zu FocusKey = "longevity" | "chronic"
-  const [focusKey, setFocusKey] = useState<FocusKey>("longevity");
+  // wichtig: NICHT default longevity -> sonst ist’s “vor-ausgewählt”
+  const [focusKey, setFocusKey] = useState<FocusKey | null>(null);
 
   const [hasSeenHomeInsight, setHasSeenHomeInsight] = useState(false);
 
+  useEffect(() => {
+    
+    const clearTemp = () => {
+      sessionStorage.removeItem(STORAGE_KEY);
+    };
+    window.addEventListener("beforeunload", clearTemp);
+
+    return () => {
+      window.removeEventListener("beforeunload", clearTemp);
+    };
+  }, []);
+
   return isOnboarded ? (
     <HomeFlow
-      userName={userName}            
+      userName={userName}
       hasSeenHomeInsight={hasSeenHomeInsight}
       onSeenHomeInsight={() => setHasSeenHomeInsight(true)}
     />
@@ -27,7 +41,7 @@ export default function App() {
       age={age}
       setAge={setAge}
       focusKey={focusKey}
-      setFocusKey={setFocusKey}
+      setFocusKey={(v) => setFocusKey(v)}
     />
   );
 }

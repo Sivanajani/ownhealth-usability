@@ -12,17 +12,26 @@ interface Onboarding4Props {
   initialFocus?: FocusKey | null;
 }
 
-const Onboarding4: React.FC<Onboarding4Props> = ({ onContinue }) => {
-  const [selectedFocus, setSelectedFocus] = useState<FocusKey | null>(null);
+const STORAGE_KEY = "ownhealth_onboarding_focus";
+
+const Onboarding4: React.FC<Onboarding4Props> = ({ onContinue, initialFocus = null }) => {
+  // Wichtig: default = null (nichts vor-ausgewählt)
+  const [selectedFocus, setSelectedFocus] = useState<FocusKey | null>(initialFocus);
   const [isLeaving, setIsLeaving] = useState(false);
 
   const goNext = (focus: FocusKey) => {
-    if (isLeaving) return; // verhindert Doppelklicks
+    if (isLeaving) return;
     setIsLeaving(true);
     setSelectedFocus(focus);
 
+    console.log("[Onboarding4] Focus selected:", focus);
+
+    // Temporär speichern (für die weiteren Screens im Flow)
+    sessionStorage.setItem(STORAGE_KEY, focus);
+
     // kurzer Delay für Tap-Feedback / Selected-State
     window.setTimeout(() => {
+      console.log("[Onboarding4] Continue with focus:", focus);
       onContinue(focus);
     }, 180);
   };
