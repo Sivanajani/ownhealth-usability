@@ -21,6 +21,8 @@ type Props = {
   setAge: (v: number | null) => void;
   focusKey: FocusKey | null;
   setFocusKey: (v: FocusKey | null) => void;
+  firstQuestion: string;
+  setFirstQuestion: (q: string) => void;
 };
 
 const STORAGE_KEY = "ownhealth_onboarding_focus";
@@ -33,11 +35,10 @@ export default function OnboardingFlow({
   setUserName,
   focusKey,
   setFocusKey,
+  firstQuestion,
+  setFirstQuestion,
 }: Props) {
   const [step, setStep] = useState(0);
-
-  // Frage speichern
-  const [firstQuestion, setFirstQuestion] = useState<string>("");
 
   useEffect(() => {
     const stored = sessionStorage.getItem(STORAGE_KEY) as FocusKey | null;
@@ -106,6 +107,7 @@ export default function OnboardingFlow({
           onBack={goBackToFocus} // Pfeil oben links
           onContinue={(q) => {
             setFirstQuestion(q);
+            sessionStorage.setItem("ownhealth_first_question", q);
             setStep(7);
           }}
           onSkip={() => {
@@ -164,9 +166,10 @@ export default function OnboardingFlow({
         <Onboarding5
           focusKey={focusKey}
           initialQuestion={firstQuestion}
-          onBack={goBackToFocus} //Pfeil oben links
+          onBack={goBackToFocus} 
           onContinue={(q) => {
             setFirstQuestion(q);
+            sessionStorage.setItem("ownhealth_first_question", q);
             setStep(7);
           }}
           onSkip={() => {

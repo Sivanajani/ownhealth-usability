@@ -75,7 +75,7 @@
   resize: none;
   outline: none;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
-  min-height: 32px;
+  min-height: 50px;
 }
 
 .ob5-textarea::placeholder {

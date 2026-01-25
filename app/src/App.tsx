@@ -10,10 +10,15 @@ export default function App() {
   const [userName, setUserName] = useState<string>("");
   const [age, setAge] = useState<number | null>(null);
   const [focusKey, setFocusKey] = useState<FocusKey | null>(null);
-
+  const [firstQuestion, setFirstQuestion] = useState<string>("");
   const [hasSeenHomeInsight, setHasSeenHomeInsight] = useState(false);
 
   useEffect(() => {
+
+      const stored = sessionStorage.getItem("ownhealth_first_question");
+  if (stored) {
+    setFirstQuestion(stored);
+  }
     
     const clearTemp = () => {
       sessionStorage.removeItem(STORAGE_KEY);
@@ -28,6 +33,7 @@ export default function App() {
   return isOnboarded ? (
     <HomeFlow
       userName={userName}
+      firstQuestion={firstQuestion}
       hasSeenHomeInsight={hasSeenHomeInsight}
       onSeenHomeInsight={() => setHasSeenHomeInsight(true)}
     />
@@ -40,6 +46,8 @@ export default function App() {
       setAge={setAge}
       focusKey={focusKey}
       setFocusKey={(v) => setFocusKey(v)}
+      firstQuestion={firstQuestion}
+      setFirstQuestion={setFirstQuestion}
     />
   );
 }

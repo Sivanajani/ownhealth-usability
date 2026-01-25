@@ -22,12 +22,14 @@ type HomeStep =
 
 type Props = {
   userName: string;
+  firstQuestion: string;
   hasSeenHomeInsight: boolean;
   onSeenHomeInsight: () => void;
 };
 
 export default function HomeFlow({
   userName,
+  //firstQuestion,
   hasSeenHomeInsight,
   onSeenHomeInsight,
 }: Props) {
