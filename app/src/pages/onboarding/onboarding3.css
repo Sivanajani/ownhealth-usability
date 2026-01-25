@@ -61,7 +61,7 @@
   margin: 0 0 4px 0;
   color: rgba(255, 255, 255, 0.95);
   font-weight: 850;
-  font-size: 28px;
+  font-size: 34px;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -462,3 +462,5 @@
   word-wrap: break-word;
   hyphens: auto;
 }
+
+

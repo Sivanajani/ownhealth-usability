@@ -1,4 +1,3 @@
-// onboarding3.tsx - WITH PROPS FOR FLOW
 import { useLayoutEffect, useRef, useState } from "react";
 import "../onboarding/onboarding3.css";
 import "../onboarding/onboardingStart.css";
@@ -39,7 +38,7 @@ const Onboarding3: React.FC<Onboarding3Props> = ({
 
         {/* TITEL */}
         <div className={`ob3-title-section ${hasAnimated ? 'ob3-animated' : ''}`}>
-          <h1 className="ob01-title">Deine Daten. <br /> Dein Besitz.</h1>          
+          <h1 className="ob3-title">Deine Daten. <br /> Dein Besitz.</h1>
         </div>
 
         {/* SCHILD ICON */}
