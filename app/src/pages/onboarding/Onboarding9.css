@@ -4,6 +4,32 @@
     gap: 18px;
 }
 
+.ob9-title {
+  margin: 0 0 12px 0;
+  font-size: 34px;
+  font-weight: 850;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.ob9-subtitle {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(144, 161, 185, 0.85);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.ob9-label {
+  color: rgba(144, 161, 185, 0.85);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 4px;
+}
+
 /* input etwas "wertiger" */
 .ob3-input{
   cursor: text;
@@ -166,4 +192,18 @@
   font-weight: 700;
   letter-spacing: -0.01em;
   color: rgba(255,255,255,0.88);
+}
+
+
+.ob2-lock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ob2-lockIcon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.9;
 }
