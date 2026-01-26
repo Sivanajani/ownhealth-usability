@@ -154,7 +154,7 @@ export default function OnboardingFlow({
         />
       );
 
-    if (step === 11) return <Onboarding10 onContinue={() => onFinish?.()} />;
+    if (step === 11) return <Onboarding10 focusKey={focusKey} onContinue={() => onFinish?.()} />;
   }
 
   // -------------------- Chronic Pfad --------------------
@@ -217,7 +217,8 @@ export default function OnboardingFlow({
         />
       );
 
-    if (step === 11) return <Onboarding10 onContinue={() => onFinish?.()} />;
+    if (step === 11) return <Onboarding10 focusKey={focusKey} onContinue={() => onFinish?.()} />;
+
   }
 
   return null;

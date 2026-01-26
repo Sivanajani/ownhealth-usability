@@ -12,7 +12,7 @@ export default function App() {
   const [hasSeenHomeInsight, setHasSeenHomeInsight] = useState(false);
 
   useEffect(() => {
-    // ✅ bei JEDEM Reload: ALLES löschen
+    // bei JEDEM Reload: ALLES löschen
     sessionStorage.clear();
   }, []);
 

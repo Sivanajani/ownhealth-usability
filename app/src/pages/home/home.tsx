@@ -1,4 +1,3 @@
-// src/pages/home/home.tsx
 import { useEffect, useState } from "react";
 import "./home.css";
 
@@ -9,7 +8,7 @@ import FoodIcon from "../../assets/restaurant.svg?react";
 import SymptomIcon from "../../assets/pills.svg?react";
 import DocumentIcon from "../../assets/document.svg?react";
 import HomeIcon from "../../assets/home.svg?react";
-import AssistantIcon from "../../assets/chatbot.svg?react";
+import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 import SettingsIcon from "../../assets/setting.svg?react";
 import RefreshIcon from "../../assets/refresh.svg?react";

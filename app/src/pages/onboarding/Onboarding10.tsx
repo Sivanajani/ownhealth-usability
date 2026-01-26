@@ -1,35 +1,42 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import "./onboardingStart.css";
 import "./onboardingDone.css";
+import type { FocusKey } from "../../types/focus";
+
+import RefreshIcon from "../../assets/refresh.svg?react";
+import LockIcon from "../../assets/lock.svg?react";
+import BlitzIcon from "../../assets/blitz.svg?react";
+import ChatIcon from "../../assets/chat.svg?react";
 
 type Props = {
+  focusKey: FocusKey;
   onContinue?: () => void;
 };
 
-type StepKey = "sync" | "secure" | "focus";
+type StepKey = "sync" | "secure" | "focus" | "answer";
 
-// für den wechselnden Status-Text oben
 type Phase =
   | "syncing"
   | "syncActive"
   | "encrypting"
   | "encrypted"
   | "focus"
+  | "answer"
   | "done";
 
-export default function Onboarding10({ onContinue }: Props) {
-  // ca. 15 Sekunden gesamt
+export default function Onboarding10({ focusKey, onContinue }: Props) {
+  console.log("Onboarding10 focusKey =", focusKey);
+
   const timeline = useMemo(
     () => ({
-      // Texte/Phasen
-      syncing: 800,        // "Daten werden synchronisiert…"
-      syncActive: 4200,    // "Sync ist aktiv"
-      encrypting: 6800,    // "Daten werden sicher verschlüsselt…"
-      encrypted: 9800,     // "Sicher verschlüsselt"
-      focus: 12400,        // "Fokus auf Performance & Optimierung"
-      done: 14800,         // Spinner fertig + Check
-      autoGo: 15300,       // automatisch weiter
-      total: 15300,
+      syncing: 400,
+      syncActive: 1800,
+      encrypting: 2800,
+      encrypted: 4200,
+      focus: 5600,
+      answer: 7200,
+      done: 9000,
+      total: 9000,
     }),
     []
   );
@@ -38,6 +45,7 @@ export default function Onboarding10({ onContinue }: Props) {
     sync: false,
     secure: false,
     focus: false,
+    answer: false,
   });
 
   const [phase, setPhase] = useState<Phase>("syncing");
@@ -46,12 +54,10 @@ export default function Onboarding10({ onContinue }: Props) {
   useEffect(() => {
     const timers: number[] = [];
 
-    // Startphase
-    timers.push(
-      window.setTimeout(() => setPhase("syncing"), timeline.syncing)
-    );
+    // Start
+    timers.push(window.setTimeout(() => setPhase("syncing"), timeline.syncing));
 
-    // Sync aktiv + check
+    // Sync aktiv + Check
     timers.push(
       window.setTimeout(() => {
         setPhase("syncActive");
@@ -64,7 +70,7 @@ export default function Onboarding10({ onContinue }: Props) {
       window.setTimeout(() => setPhase("encrypting"), timeline.encrypting)
     );
 
-    // Sicher verschlüsselt + check
+    // Sicher verschlüsselt + Check
     timers.push(
       window.setTimeout(() => {
         setPhase("encrypted");
@@ -72,7 +78,7 @@ export default function Onboarding10({ onContinue }: Props) {
       }, timeline.encrypted)
     );
 
-    // Fokus + check
+    // Fokus + Check
     timers.push(
       window.setTimeout(() => {
         setPhase("focus");
@@ -80,39 +86,47 @@ export default function Onboarding10({ onContinue }: Props) {
       }, timeline.focus)
     );
 
-    // Done (Spinner -> Check)
+    // Antwort + Check
+    timers.push(
+      window.setTimeout(() => {
+        setPhase("answer");
+        setChecked((s) => ({ ...s, answer: true }));
+      }, timeline.answer)
+    );
+
+    // ✅ DONE + automatisch weiter (NUR EIN TIMER)
     timers.push(
       window.setTimeout(() => {
         setPhase("done");
         setIsDone(true);
-      }, timeline.done)
-    );
-
-    // automatisch weiter
-    timers.push(
-      window.setTimeout(() => {
         onContinue?.();
-      }, timeline.autoGo)
+      }, timeline.done)
     );
 
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [timeline, onContinue]);
 
-  const statusText = getStatusText(phase);
+  // ✅ richtige Zuordnung
+  const focusLabel =
+    focusKey === "longevity"
+      ? "Fokus: Performance &\nLongevity"
+      : "Fokus: Gesundheit verstehen";
 
   return (
     <div className="ob-root">
       <div className="ob-content obdone-content">
         {/* Top */}
         <div className="obdone-top">
-          <div className={`obdone-spinner ${isDone ? "is-done" : ""}`} aria-hidden="true">
+          <div
+            className={`obdone-spinner ${isDone ? "is-done" : ""}`}
+            aria-hidden="true"
+          >
             <div className="obdone-ring" />
             <div className="obdone-inner">
               <span className={`obdone-check ${isDone ? "show" : ""}`}>✓</span>
             </div>
           </div>
 
-          {/* Headline bleibt ruhig, nur Subline wechselt */}
           {isDone ? (
             <>
               <h1 className="ob-title">Du bist startklar.</h1>
@@ -121,7 +135,7 @@ export default function Onboarding10({ onContinue }: Props) {
           ) : (
             <>
               <h1 className="ob-title">Wir richten dein Gesundheitskonto ein.</h1>
-              <p className="ob-subtitle">{statusText}</p>
+              <p className="ob-subtitle">{getStatusText(phase, focusKey)}</p>
             </>
           )}
         </div>
@@ -129,33 +143,49 @@ export default function Onboarding10({ onContinue }: Props) {
         {/* Card */}
         <div className="obdone-card">
           <Row
-            icon="⟳"
+            icon={<RefreshIcon className="obdone-svg" />}
             iconClass="is-blue"
-            label={checked.sync ? "Sync ist aktiv" : "Daten werden synchronisiert…"}
+            label={checked.sync ? "Daten-Sync aktiv" : "Daten werden synchronisiert…"}
             checked={checked.sync}
           />
           <Row
-            icon="🔒"
+            icon={<LockIcon className="obdone-svg" />}
             iconClass="is-blue"
-            label={checked.secure ? "Sicher verschlüsselt" : "Daten werden sicher verschlüsselt…"}
+            label={
+              checked.secure
+                ? "Sicher verschlüsselt"
+                : "Daten werden sicher verschlüsselt…"
+            }
             checked={checked.secure}
           />
           <Row
-            icon="⚡"
+            icon={<BlitzIcon className="obdone-svg" />}
             iconClass="is-yellow"
-            label={"Fokus: Performance &\nOptimierung"}
+            label={focusLabel}
             checked={checked.focus}
           />
+          <Row
+            icon={<ChatIcon className="obdone-svg" />}
+            iconClass="is-blue"
+            label={
+              checked.answer
+                ? "Antwort auf deine Frage\nwird verarbeitet"
+                : "Antwort wird vorbereitet…"
+            }
+            checked={checked.answer}
+          />
         </div>
-
-        {/* Bottom: kein Button mehr */}
-        {!isDone && <p className="ob-hint">Bitte warte kurz…</p>}
       </div>
     </div>
   );
 }
 
-function getStatusText(phase: Phase): React.ReactNode {
+function getStatusText(phase: Phase, focusKey: FocusKey): React.ReactNode {
+  const focusLine =
+    focusKey === "longevity"
+      ? "Fokus: Performance & Longevity."
+      : "Fokus: Gesundheit verstehen.";
+
   switch (phase) {
     case "syncing":
       return (
@@ -192,13 +222,20 @@ function getStatusText(phase: Phase): React.ReactNode {
     case "focus":
       return (
         <>
-          Fokus auf Performance & Optimierung.
+          {focusLine}
           <br />
           Gleich geht’s weiter.
         </>
       );
+    case "answer":
+      return (
+        <>
+          Wir verarbeiten deine Frage.
+          <br />
+          Du bekommst gleich deine Antwort.
+        </>
+      );
     case "done":
-      return null;
     default:
       return null;
   }
@@ -210,7 +247,7 @@ function Row({
   checked,
   iconClass,
 }: {
-  icon: string;
+  icon: ReactNode;
   label: string;
   checked: boolean;
   iconClass?: string;
@@ -218,14 +255,17 @@ function Row({
   return (
     <div className="obdone-row">
       <div className={`obdone-icon ${iconClass ?? ""}`} aria-hidden="true">
-        <span>{icon}</span>
+        {icon}
       </div>
 
       <div className="obdone-label" style={{ whiteSpace: "pre-line" }}>
         {label}
       </div>
 
-      <div className={`obdone-status ${checked ? "is-checked" : ""}`} aria-hidden="true">
+      <div
+        className={`obdone-status ${checked ? "is-checked" : ""}`}
+        aria-hidden="true"
+      >
         <span className="obdone-tick">✓</span>
       </div>
     </div>
