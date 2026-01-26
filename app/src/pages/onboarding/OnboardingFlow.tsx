@@ -101,7 +101,7 @@ export default function OnboardingFlow({
         <Onboarding5
           focusKey={focusKey}
           initialQuestion={firstQuestion}
-          onBack={goBackToFocus} // Pfeil oben links
+          onBack={goBackToFocus} 
           onContinue={(q) => {
             setFirstQuestion(q);
             sessionStorage.setItem("ownhealth_first_question", q);

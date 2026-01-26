@@ -68,6 +68,7 @@ export default function HomeFlow({
         onOpenHome={() => setStep("home")}
         onOpenFolder={() => setStep("folder")}        
         initialQuestion={firstQuestion}
+        userName={userName}
       />
     );
 
