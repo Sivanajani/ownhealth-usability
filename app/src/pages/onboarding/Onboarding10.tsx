@@ -94,7 +94,7 @@ export default function Onboarding10({ focusKey, onContinue }: Props) {
       }, timeline.answer)
     );
 
-    // ✅ DONE + automatisch weiter (NUR EIN TIMER)
+    // DONE + automatisch weiter (NUR EIN TIMER)
     timers.push(
       window.setTimeout(() => {
         setPhase("done");
@@ -106,7 +106,7 @@ export default function Onboarding10({ focusKey, onContinue }: Props) {
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [timeline, onContinue]);
 
-  // ✅ richtige Zuordnung
+  // richtige Zuordnung
   const focusLabel =
     focusKey === "longevity"
       ? "Fokus: Performance &\nLongevity"

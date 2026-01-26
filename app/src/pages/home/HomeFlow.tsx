@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Home from "./home";
 import Chat from "./chat";
@@ -28,14 +28,21 @@ type Props = {
   firstQuestion: string;
   hasSeenHomeInsight: boolean;
   onSeenHomeInsight: () => void;
+  initialStep?: HomeStep;
 };
 
 export default function HomeFlow({
   userName,
+  firstQuestion,
   hasSeenHomeInsight,
   onSeenHomeInsight,
+  initialStep = "home",
 }: Props) {
-  const [step, setStep] = useState<HomeStep>("home");
+  const [step, setStep] = useState<HomeStep>(initialStep);
+  
+  useEffect(() => {
+    setStep(initialStep);
+  }, [initialStep]);
 
   /* =========================
      HOME
@@ -59,7 +66,8 @@ export default function HomeFlow({
     return (
       <Chat
         onOpenHome={() => setStep("home")}
-        onOpenFolder={() => setStep("folder")}
+        onOpenFolder={() => setStep("folder")}        
+        initialQuestion={firstQuestion}
       />
     );
 

@@ -1,25 +1,573 @@
-.chat-root {
+.chat-root{
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+
+  /* WICHTIG: Layout fix */
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  min-height: 100vh;
+
+  /* Platz für BottomNav */
+  padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom));
+}
+
+.chat-header {
+  margin-bottom: 10px;
 }
 
 .chat-title {
   margin: 0;
-  font-size: 22px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--home-text-primary, rgba(255,255,255,0.95));
+  text-align: center;
+}
+
+.chat-subtitle {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: var(--home-text-tertiary, rgba(255,255,255,0.5));
+  text-align: center;
+}
+
+/* ====== Chat container ====== */
+.chatP {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.chatP-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.chatP-quick {
+  width: 100%;
+  padding: 16px;
+  border-radius: 20px;
+  text-align: left;
+
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.92);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.chatP-quick:active {
+  transform: translateY(1px);
+}
+
+/* Scroll list */
+.chatP-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+
+  padding-right: 4px;
+  padding-bottom: calc(
+    var(--chat-dock-h) +
+    var(--bottom-nav-h) +
+    env(safe-area-inset-bottom) +
+    16px
+  );
+}
+
+.chatP-row {
+  display: flex;
+}
+
+.chatP-row.is-user {
+  justify-content: flex-end;
+}
+
+.chatP-row.is-assistant {
+  justify-content: flex-start;
+}
+
+.chatP-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  max-width: 100%;
+}
+
+.chatP-row.is-user .chatP-msg {
+  align-items: flex-end;
+}
+
+.chatP-bubble {
+  max-width: 86%;
+  padding: 12px 14px;
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.92);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: pre-wrap;
+}
+
+.chatP-row.is-user .chatP-bubble {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.28);
+}
+
+.chatP-timeUnder {
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(170,190,220,0.45);
+}
+
+/* Sources (assistant text bubble) */
+.chatP-sources {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(170,190,220,0.75);
+}
+
+.chatP-source::before {
+  content: "• ";
+  color: rgba(120,140,170,0.8);
+}
+
+.chatP-actionBtn {
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.chatP-actionBtn:active {
+  transform: translateY(1px);
+}
+
+/* ====== Card answer (like screenshot) ====== */
+.chatCard {
+  width: min(360px, 92vw);
+  border-radius: 22px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.chatCard-title {
+  font-size: 14px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: 10px;
+}
+
+.chatCard-sec {
+  margin-top: 12px;
+}
+
+.chatCard-secHead {
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 8px;
+}
+
+.chatCard-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chatCard-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+
+.chatCard-ico {
+  flex: 0 0 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.chatCard-rowTitle {
+  font-size: 13px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 2px;
+}
+
+.chatCard-rowSub {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.25;
+}
+
+.chatCard-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.70);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.chatCard-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chatCard-chip {
+  font-size: 11px;
+  font-weight: 900;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.78);
+}
+
+/* Tiny icons */
+.cI {
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.cI--check { color: rgba(16, 185, 129, 0.95); }
+.cI--warn  { color: rgba(245, 158, 11, 0.95); }
+.cI--heart { color: rgba(244, 114, 182, 0.95); }
+.cI--bolt  { color: rgba(96, 165, 250, 0.95); }
+.cI--moon  { color: rgba(160, 180, 255, 0.95); }
+.cI--fire  { color: rgba(251, 191, 36, 0.95); }
+.cI--clock { color: rgba(170, 190, 220, 0.85); }
+
+/* ====== Input dock (fixed above bottom nav) ====== */
+.chatDock {
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom));
+  z-index: 120;
+  padding: 0 0 19px;
+}
+
+.chatDock .chatP-inputBar {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* Input bar (from your ChatPanel, tuned) */
+.chatP-inputBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 95%;
+  height: 64px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Attach (+) */
+.chatP-attachWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.chatP-plus {
+  width: 46px;
+  height: 46px;
+  border-radius: 200px;
+
+  border: 0;
+  background: rgba(255,255,255,0.95);
+  color: rgba(30, 64, 175, 0.95);
+  font-size: 30px;
+  line-height: 1;
+
+  display: grid;
+  place-items: center;
+  flex: 0 0 56px;
+  cursor: pointer;
+}
+
+.chatP-plus.is-open .chatP-plusIcon{
+  transform: rotate(45deg);
+  transition: transform 0.18s ease;
+}
+
+
+.chatP-plusIcon{
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.chatP-plusIcon{ transition: transform 0.18s ease; }
+
+
+/* sorgt dafür, dass SVG die Button-Farbe übernimmt */
+.chatP-plusIcon *{
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+
+/* Attach menu */
+.chatP-attachMenu {
+  position: absolute;
+  left: 0;
+  bottom: 72px;
+  min-width: 210px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10, 18, 34, 0.95);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 200;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.chatP-attachItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.95);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.chatP-attachItem:active {
+  transform: translateY(1px);
+}
+
+.chatP-attachIcon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  color: rgba(255,255,255,0.95);
+}
+
+.chatP-attachIcon * {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Input */
+.chatP-input2 {
+  flex: 1 1 auto;
+  height: 56px;
+
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: rgba(255,255,255,0.92);
+
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 0;
+}
+
+.chatP-input2::placeholder {
+  color: rgba(255,255,255,0.45);
+  font-size: 15px;
   font-weight: 700;
 }
 
-.chat-placeholder {
-  flex: 1;
-  border-radius: var(--radius-lg);
-  background: var(--card);
-  box-shadow: var(--shadow-card);
-  padding: 20px;
+/* Send */
+.chatP-send2 {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.35);
+  color: rgba(255,255,255,0.95);
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 56px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.chatP-send2.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ====== SVG Icons (Row Icons) ====== */
+.cI {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+/* sorgt dafür, dass SVG die Farbe via currentColor übernimmt */
+.cI * {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Icon-Farben per currentColor */
+.cI--check { color: rgba(16, 185, 129, 0.95); }
+.cI--warn  { color: rgba(245, 158, 11, 0.95); }
+.cI--heart { color: rgba(244, 114, 182, 0.95); }
+.cI--bolt  { color: rgba(96, 165, 250, 0.95); }
+.cI--moon  { color: rgba(160, 180, 255, 0.95); }
+.cI--fire  { color: rgba(251, 191, 36, 0.95); }
+.cI--clock { color: rgba(170, 190, 220, 0.85); }
+
+/* ====== Card Section Header (Icon + Title) ====== */
+.chatCard-secHead {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--muted);
-  font-size: 15px;
+  gap: 10px;
+
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 8px;
+}
+
+.chatCard-secIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex: 0 0 16px;
+}
+
+.chatCard-secIcon * {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.chatCard-secIcon--good { color: rgba(16, 185, 129, 0.95); }
+.chatCard-secIcon--warn { color: rgba(245, 158, 11, 0.95); }
+.chatCard-secIcon--trend { color: rgba(96, 165, 250, 0.95); }
+
+.chatCard-secTitle {
+  line-height: 1;
+}
+
+.chatP-sendIcon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.chatP-sendIcon * {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.chatP-plusIcon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  transition: transform 0.18s ease;
+}
+
+.chatP-plus.is-open .chatP-plusIcon {
+  transform: rotate(45deg);
+}
+
+.chatCard-ico {
+  flex: 0 0 30px;
+  height: 30px;
+  border-radius: 10px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.chatCard-ico svg {
+  transform: translateY(0.5px);
+}
+
+.chatP-typing{
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  height: 18px;
+  padding: 2px 0;
+}
+
+.chatP-typing .dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.70);
+  opacity: 0.35;
+  transform: translateY(0);
+  animation: chatDot 1.05s infinite ease-in-out;
+}
+
+.chatP-typing .dot:nth-child(2){ animation-delay: 0.15s; }
+.chatP-typing .dot:nth-child(3){ animation-delay: 0.30s; }
+
+@keyframes chatDot{
+  0%, 70%, 100% { opacity: 0.35; transform: translateY(0); }
+  35% { opacity: 0.95; transform: translateY(-3px); }
 }

@@ -10,9 +10,9 @@ export default function App() {
   const [focusKey, setFocusKey] = useState<FocusKey | null>(null);
   const [firstQuestion, setFirstQuestion] = useState("");
   const [hasSeenHomeInsight, setHasSeenHomeInsight] = useState(false);
+  const [startInChat, setStartInChat] = useState(false);
 
   useEffect(() => {
-    // bei JEDEM Reload: ALLES löschen
     sessionStorage.clear();
   }, []);
 
@@ -22,10 +22,14 @@ export default function App() {
       firstQuestion={firstQuestion}
       hasSeenHomeInsight={hasSeenHomeInsight}
       onSeenHomeInsight={() => setHasSeenHomeInsight(true)}
+      initialStep={startInChat ? "chat" : "home"}
     />
   ) : (
     <OnboardingFlow
-      onFinish={() => setIsOnboarded(true)}
+      onFinish={() => {
+        setStartInChat(true);   
+        setIsOnboarded(true);
+      }}
       userName={userName}
       setUserName={setUserName}
       age={age}
