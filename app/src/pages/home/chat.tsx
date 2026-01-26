@@ -53,9 +53,10 @@ type AnswerCard = {
   chips?: string[];
 };
 
+type ChoiceOptionValue = "yes" | "no" | "upload" | "explore";
 type ChoiceMsg = {
   prompt: string;
-  options: { label: string; value: "yes" | "no" }[];
+  options: { label: string; value: ChoiceOptionValue }[];
 };
 
 type Msg = {
@@ -278,15 +279,17 @@ function getCardForQuestion(q: string): AnswerCard | null {
         {
           title: "Verträglich",
           tone: "good",
-          rows: [
-            { icon: "check", title: "Ramipril + L-Thyroxin", text: "Verträglich, Schilddrüsenwerte stabil" },
-          ],
+          rows: [{ icon: "check", title: "Ramipril + L-Thyroxin", text: "Verträglich, Schilddrüsenwerte stabil" }],
         },
         {
           title: "Achtung",
           tone: "warn",
           rows: [
-            { icon: "warn", title: "Ramipril + Ibuprofen", text: "Kann Nieren belasten (Kreatinin war grenzwertig: 1,2 mg/dl)" },
+            {
+              icon: "warn",
+              title: "Ramipril + Ibuprofen",
+              text: "Kann Nieren belasten (Kreatinin war grenzwertig: 1,2 mg/dl)",
+            },
             { icon: "clock", title: "Timing", text: "L-Thyroxin: morgens nüchtern, Abstand zu Kaffee/Eisen/Calcium" },
           ],
         },
@@ -312,9 +315,7 @@ function getCardForQuestion(q: string): AnswerCard | null {
         {
           title: "Optimierbar",
           tone: "trend",
-          rows: [
-            { icon: "bolt", title: "Ferritin", text: "18 ng/ml (niedrig, optimal: 50–100) → kann HRV/Energie drücken" },
-          ],
+          rows: [{ icon: "bolt", title: "Ferritin", text: "18 ng/ml (niedrig, optimal: 50–100) → kann HRV/Energie drücken" }],
         },
       ],
       note: "Tipp: Eisen + Vitamin C (und Ursachen-Check) kann helfen – besonders wenn Müdigkeit/HRV niedrig ist.",
@@ -415,6 +416,8 @@ function fakeAssistantReply(userText: string): { text: string; sources: string[]
 
 type SendOpts = { isAuto?: boolean };
 
+const WELCOME_KEY = "owni_welcome_done";
+
 export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userName }: Props) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -422,6 +425,7 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
 
   const [welcomeShown, setWelcomeShown] = useState(false);
   const [pendingFirstQ, setPendingFirstQ] = useState<string>("");
+  const [postIntroShown, setPostIntroShown] = useState(false);
 
   const endRef = useRef<HTMLDivElement | null>(null);
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -436,7 +440,6 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
       "Wirken meine Supplements?",
       "Wie werde ich fitter?",
       "Was sollte ich bei meiner Ernährung beachten?",
-
       // Chroniker
       "Vertragen sich meine Medikamente?",
       "Was bedeutet mein Blutbild?",
@@ -483,7 +486,7 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
     setMessages((prev) => [...prev, { id: uid(), role: "assistant", kind: "card", card, ts: Date.now() }]);
   };
 
-  const pushAssistantChoice = (prompt: string) => {
+  const pushAssistantChoice = (prompt: string, options: ChoiceMsg["options"]) => {
     setMessages((prev) => [
       ...prev,
       {
@@ -491,13 +494,7 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
         role: "assistant",
         kind: "choice",
         ts: Date.now(),
-        choice: {
-          prompt,
-          options: [
-            { label: "Ja", value: "yes" },
-            { label: "Nein", value: "no" },
-          ],
-        },
+        choice: { prompt, options },
       },
     ]);
   };
@@ -508,10 +505,7 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
 
   const pushTyping = () => {
     const id = uid();
-    setMessages((prev) => [
-      ...prev,
-      { id, role: "assistant", kind: "text", ts: Date.now(), isTyping: true, text: "" },
-    ]);
+    setMessages((prev) => [...prev, { id, role: "assistant", kind: "text", ts: Date.now(), isTyping: true, text: "" }]);
     return id;
   };
 
@@ -535,9 +529,25 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
     };
 
     later(tick, 180);
-
-    // return estimated duration so you can chain things after typing ends
     return 180 + full.length * speed;
+  };
+
+  const showPostIntroNudge = () => {
+    if (postIntroShown) return;
+    setPostIntroShown(true);
+
+    const nudge =
+      "Wenn du noch genauere Antworten willst, hilft mir mehr Kontext.\n" +
+      "Zum Beispiel: ein aktuelles Blutbild, ein Medikament (oder Dosierung), oder ein Dokument.\n\n" +
+      "Was möchtest du als Nächstes machen?";
+
+    const dur = typeAssistantText(nudge);
+    later(() => {
+      pushAssistantChoice("Weiter geht’s mit…", [
+        { label: "Mehr Daten hochladen", value: "upload" },
+        { label: "App erkunden", value: "explore" },
+      ]);
+    }, dur + 120);
   };
 
   const send = (text: string, opts?: SendOpts) => {
@@ -564,14 +574,19 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
     }, thinkingMs);
   };
 
-  const onWelcomeChoice = (v: "yes" | "no") => {
-    // alle choice msgs entfernen
+  const clearChoices = () => {
     setMessages((prev) => prev.filter((m) => m.kind !== "choice"));
+  };
+
+  const onWelcomeChoice = (v: "yes" | "no") => {
+    clearChoices();
 
     if (v === "no") {
-      typeAssistantText(
-        "Alles klar 🙂 Dann stell mir einfach deine nächste Frage."
-      );
+      typeAssistantText("Alles klar 🙂 Stell mir einfach deine nächste Frage – oder wähle unten eine Option.");
+      // welcome gilt trotzdem als gesehen (damit es nicht wieder kommt)
+      try {
+        sessionStorage.setItem(WELCOME_KEY, "1");
+      } catch {}
       return;
     }
 
@@ -583,15 +598,54 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
     const card = getCardForQuestion(q);
     if (card) {
       pushAssistantCard(card);
+      // nach der ersten Antwort: Nudge + Auswahl
+      later(() => showPostIntroNudge(), 450);
+      try {
+        sessionStorage.setItem(WELCOME_KEY, "1");
+      } catch {}
       return;
     }
 
     const reply = fakeAssistantReply(q);
-    typeAssistantText(reply.text, reply.sources, reply.action);
+    const dur = typeAssistantText(reply.text, reply.sources, reply.action);
+    later(() => showPostIntroNudge(), dur + 250);
+
+    try {
+      sessionStorage.setItem(WELCOME_KEY, "1");
+    } catch {}
   };
 
-  // Welcome + Frage anbieten (statt auto-send) + typed
+  const onPostIntroChoice = (v: "upload" | "explore") => {
+    clearChoices();
+
+    if (v === "upload") {
+      // sanfter Flow: Menü aufklappen (nicht direkt File Picker erzwingen)
+      setAttachOpen(true);
+      typeAssistantText("Super. Du kannst ein Foto oder Dokument hochladen – ich nutze es nur für bessere Antworten.");
+      return;
+    }
+
+    // explore
+    typeAssistantText("Alles klar – schau dich um 🙂 Wenn du wieder eine Frage hast, bin ich hier.");
+    later(() => onOpenHome(), 250);
+  };
+
+  const onChoiceClick = (value: ChoiceOptionValue) => {
+    if (value === "yes" || value === "no") return onWelcomeChoice(value);
+    if (value === "upload" || value === "explore") return onPostIntroChoice(value);
+  };
+    
   useEffect(() => {
+    const alreadyDone = (() => {
+      try {
+        return sessionStorage.getItem(WELCOME_KEY) === "1";
+      } catch {
+        return false;
+      }
+    })();
+
+    if (alreadyDone) return;
+
     const q = (initialQuestion ?? "").trim();
     if (!q) return;
     if (welcomeShown) return;
@@ -602,16 +656,17 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
     const welcomeText =
       `Hallo ${userName}! Willkommen 👋\n\n` +
       `Ich bin OWNI – dein persönlicher KI-Gesundheitsassistent.\n` +
-      `Ich bin hier und beantworte mit deinen Daten jede Frage, die du hast.\n` +
-      `Ich helfe dir, deine Gesundheit zu optimieren.\n\n` +
+      `Ich beantworte deine Fragen auf Basis deiner Daten.\n\n` +
       `Deine Frage aus dem Onboarding war:\n“${q}”\n\n` +
       `Willst du die Antwort jetzt sehen?`;
 
     const dur = typeAssistantText(welcomeText);
 
-    // choice buttons erst nach dem Tippen einblenden
     later(() => {
-      pushAssistantChoice("Antwort anzeigen?");
+      pushAssistantChoice("Antwort anzeigen?", [
+        { label: "Ja", value: "yes" },
+        { label: "Nein", value: "no" },
+      ]);
     }, dur + 120);
   }, [initialQuestion, userName, welcomeShown]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -688,10 +743,10 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
                         <div className="chatChoiceRow">
                           {m.choice.options.map((o) => (
                             <button
-                              key={o.value}
+                              key={`${m.id}-${o.value}`}
                               type="button"
                               className="chatChoiceBtn"
-                              onClick={() => onWelcomeChoice(o.value)}
+                              onClick={() => onChoiceClick(o.value)}
                             >
                               {o.label}
                             </button>
