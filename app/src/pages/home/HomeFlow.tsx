@@ -10,6 +10,7 @@ import Medication from "./medikation";
 import Nutrition from "./nutrition";
 import Profile from "./profile";
 import RegisterFlow from "../registration/registerFlow";
+import type { FocusKey } from "../../types/focus";
 
 type HomeStep =
   | "home"
@@ -28,6 +29,7 @@ type Props = {
   firstQuestion: string;
   hasSeenHomeInsight: boolean;
   onSeenHomeInsight: () => void;
+  focusKey: FocusKey;
   initialStep?: HomeStep;
 };
 
@@ -36,6 +38,7 @@ export default function HomeFlow({
   firstQuestion,
   hasSeenHomeInsight,
   onSeenHomeInsight,
+  focusKey,
   initialStep = "home",
 }: Props) {
   const [step, setStep] = useState<HomeStep>(initialStep);
@@ -50,6 +53,7 @@ export default function HomeFlow({
   if (step === "home")
     return (
       <Home
+        focusKey={focusKey}
         hasSeenHomeInsight={hasSeenHomeInsight}
         onSeenHomeInsight={onSeenHomeInsight}
         onOpenChat={() => setStep("chat")}

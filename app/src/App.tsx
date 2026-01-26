@@ -22,7 +22,8 @@ export default function App() {
       firstQuestion={firstQuestion}
       hasSeenHomeInsight={hasSeenHomeInsight}
       onSeenHomeInsight={() => setHasSeenHomeInsight(true)}
-      initialStep={startInChat ? "chat" : "home"}
+      initialStep={startInChat ? "chat" : "home"} 
+      focusKey={"longevity"}    
     />
   ) : (
     <OnboardingFlow
