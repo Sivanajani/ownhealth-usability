@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import OnboardingStart from "./OnboardingStart";
 import Onboarding0 from "./Onboarding0";
 import Onboarding1 from "./Onboarding1";
@@ -40,14 +40,11 @@ export default function OnboardingFlow({
 }: Props) {
   const [step, setStep] = useState(0);
 
-  useEffect(() => {
-    const stored = sessionStorage.getItem(STORAGE_KEY) as FocusKey | null;
-    void stored;
-  }, []);
-
   // Helper: zurück zur Fokus-Wahl (Onboarding4)
   const goBackToFocus = () => {
     sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem("ownhealth_first_question");
+    setFirstQuestion("");
     setFocusKey(null);
     setStep(5);
   };
@@ -138,6 +135,7 @@ export default function OnboardingFlow({
     if (step === 9)
       return (
         <Onboarding8
+          focusKey={focusKey}
           onBack={() => setStep(8)}
           onTakePhoto={() => setStep(10)}
           onSkip={() => setStep(10)}
@@ -199,7 +197,8 @@ export default function OnboardingFlow({
 
     if (step === 9)
       return (
-        <Onboarding8
+        <Onboarding8                  
+          focusKey={focusKey}
           onBack={() => setStep(8)}
           onTakePhoto={() => setStep(10)}
           onSkip={() => setStep(10)}

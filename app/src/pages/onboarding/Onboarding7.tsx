@@ -93,6 +93,13 @@ export default function Onboarding7({ onTakePhoto, onUploadPdf, onSkip, onBack }
 
         {/* Actions */}
         <div className="ob7-actions">
+          <div className="ob7-lock">
+            <div className="ob7-checkbox">
+              <LockIcon className="ob7-lock-icon" />
+            </div>
+            <span>Deine Daten werden sicher verschlüsselt.</span>
+          </div>
+
           {/* Buttons nebeneinander */}
           <div className="ob7-btn-row">
             <button className="ob7-btn ob7-btn--primary" onClick={onTakePhoto} type="button">
@@ -110,16 +117,10 @@ export default function Onboarding7({ onTakePhoto, onUploadPdf, onSkip, onBack }
             </button>
           </div>
 
-          <div className="ob7-lock">
-            <div className="ob7-checkbox">
-              <LockIcon className="ob7-lock-icon" />
-            </div>
-            <span>Deine Daten werden sicher verschlüsselt.</span>
-          </div>
-
           <button className="ob7-skip" onClick={onSkip} type="button">
             Habe ich gerade nicht parat
-          </button>
+          </button>        
+
         </div>
       </div>
     </div>

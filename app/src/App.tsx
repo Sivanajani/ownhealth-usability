@@ -4,6 +4,7 @@ import HomeFlow from "./pages/home/HomeFlow";
 import type { FocusKey } from "./types/focus";
 
 const STORAGE_KEY = "ownhealth_onboarding_focus";
+const QUESTION_KEY = "ownhealth_first_question";
 
 export default function App() {
   const [isOnboarded, setIsOnboarded] = useState(false);
@@ -12,23 +13,20 @@ export default function App() {
   const [focusKey, setFocusKey] = useState<FocusKey | null>(null);
   const [firstQuestion, setFirstQuestion] = useState<string>("");
   const [hasSeenHomeInsight, setHasSeenHomeInsight] = useState(false);
+  
+  useEffect(() => { 
+    sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(QUESTION_KEY);
 
-  useEffect(() => {
-
-      const stored = sessionStorage.getItem("ownhealth_first_question");
-  if (stored) {
-    setFirstQuestion(stored);
-  }
-    
     const clearTemp = () => {
       sessionStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem(QUESTION_KEY);
     };
-    window.addEventListener("beforeunload", clearTemp);
 
-    return () => {
-      window.removeEventListener("beforeunload", clearTemp);
-    };
+    window.addEventListener("beforeunload", clearTemp);
+    return () => window.removeEventListener("beforeunload", clearTemp);
   }, []);
+
 
   return isOnboarded ? (
     <HomeFlow
