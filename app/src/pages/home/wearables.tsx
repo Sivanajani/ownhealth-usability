@@ -1,17 +1,19 @@
 // wearables.tsx
 import "../../styles/appShell.css";
 import "./wearables.css";
-import ChatIcon from "../../assets/chat.svg?react";
+import HomeIcon from "../../assets/home.svg?react";
+import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 
 type Props = {
   onBack?: () => void;
+  onBackToHome?: () => void;
+  onOpenFolder?: () => void;
   onBackToChat?: () => void;
-  onBackToFolder?: () => void;
 };
 
 
-export default function Wearables({ onBack, onBackToChat, onBackToFolder }: Props) {
+export default function Wearables({ onBack, onBackToHome, onOpenFolder, onBackToChat }: Props) {
   return (
     <div className="oh-screen wear-bg">
       <div className="oh-safe wear-safe">
@@ -159,22 +161,23 @@ export default function Wearables({ onBack, onBackToChat, onBackToFolder }: Prop
         </main>
       </div>
 
-      {/* Register (fix) */}
-      <nav className="bottomNav">
-        <button className="navItem" onClick={onBackToChat} disabled={!onBackToChat} type="button">
-          <span className="navIcon" aria-hidden="true">
-            <ChatIcon className="navSvg" />
-          </span>
-          <span>Chat</span>
+      {/* Bottom Nav */}
+      <nav className="home-navigation">
+        <button className="home-nav-item" onClick={onBackToHome} type="button">
+            <HomeIcon className="home-nav-icon" />
+            <span className="home-nav-label">Home</span>
         </button>
 
-        <button className="navItem navItem--active" type="button" onClick={onBackToFolder} disabled={!onBackToFolder} >
-          <span className="navIcon" aria-hidden="true">
-            <FolderIcon className="navSvg" />
-          </span>
-          <span>Ordner</span>
+        <button className="home-nav-item" onClick={onBackToChat} type="button">
+            <AssistantIcon className="home-nav-icon" />
+            <span className="home-nav-label">Assistent</span>
         </button>
-      </nav>     
+
+        <button className="home-nav-item home-nav-item--active" onClick={onOpenFolder} type="button">
+            <FolderIcon className="home-nav-icon" />
+            <span className="home-nav-label">Ordner</span>
+        </button>
+      </nav>      
     </div>
   );
 }

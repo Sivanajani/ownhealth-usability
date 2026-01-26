@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import Home from "./home";
+import Chat from "./chat";
 import Folder from "./folder";
 import Settings from "./settings";
 import Wearables from "./wearables";
@@ -10,6 +12,7 @@ import Profile from "./profile";
 import RegisterFlow from "../registration/registerFlow";
 
 type HomeStep =
+  | "home"
   | "chat"
   | "folder"
   | "settings"
@@ -29,27 +32,45 @@ type Props = {
 
 export default function HomeFlow({
   userName,
-  //firstQuestion,
   hasSeenHomeInsight,
   onSeenHomeInsight,
 }: Props) {
-  const [step, setStep] = useState<HomeStep>("chat");
+  const [step, setStep] = useState<HomeStep>("home");
 
-  if (step === "chat")
+  /* =========================
+     HOME
+  ========================= */
+  if (step === "home")
     return (
-      <Home        
+      <Home
         hasSeenHomeInsight={hasSeenHomeInsight}
         onSeenHomeInsight={onSeenHomeInsight}
+        onOpenChat={() => setStep("chat")}
         onOpenFolder={() => setStep("folder")}
         onOpenSettings={() => setStep("settings")}
         onOpenProfile={() => setStep("profile")}
       />
     );
 
+  /* =========================
+     CHAT / ASSISTENT
+  ========================= */
+  if (step === "chat")
+    return (
+      <Chat
+        onOpenHome={() => setStep("home")}
+        onOpenFolder={() => setStep("folder")}
+      />
+    );
+
+  /* =========================
+     FOLDER
+  ========================= */
   if (step === "folder")
     return (
       <Folder
-        onBackToChat={() => setStep("chat")}
+        onBackToHome={() => setStep("home")}
+        onOpenChat={() => setStep("chat")}
         onOpenWearables={() => setStep("wearables")}
         onOpenDocuments={() => setStep("documents")}
         onOpenMedication={() => setStep("medication")}
@@ -57,12 +78,16 @@ export default function HomeFlow({
       />
     );
 
+  /* =========================
+     SUB FOLDER SCREENS
+  ========================= */
   if (step === "wearables")
     return (
       <Wearables
         onBack={() => setStep("folder")}
+        onBackToHome={() => setStep("home")}
         onBackToChat={() => setStep("chat")}
-        onBackToFolder={() => setStep("folder")}
+        onOpenFolder={() => setStep("folder")}
       />
     );
 
@@ -70,8 +95,9 @@ export default function HomeFlow({
     return (
       <Documents
         onBack={() => setStep("folder")}
+        onBackToHome={() => setStep("home")}
         onBackToChat={() => setStep("chat")}
-        onBackToFolder={() => setStep("folder")}
+        onOpenFolder={() => setStep("folder")}
       />
     );
 
@@ -79,8 +105,9 @@ export default function HomeFlow({
     return (
       <Medication
         onBack={() => setStep("folder")}
+        onBackToHome={() => setStep("home")}
         onBackToChat={() => setStep("chat")}
-        onBackToFolder={() => setStep("folder")}
+        onOpenFolder={() => setStep("folder")}
       />
     );
 
@@ -88,16 +115,20 @@ export default function HomeFlow({
     return (
       <Nutrition
         onBack={() => setStep("folder")}
+        onBackToHome={() => setStep("home")}
         onBackToChat={() => setStep("chat")}
-        onBackToFolder={() => setStep("folder")}
+        onOpenFolder={() => setStep("folder")}
       />
     );
 
+  /* =========================
+     SETTINGS / PROFILE
+  ========================= */
   if (step === "settings")
     return (
       <Settings
         userName={userName}
-        onBack={() => setStep("chat")}
+        onBack={() => setStep("home")}
         onOpenProfile={() => setStep("profile")}
       />
     );
@@ -105,7 +136,7 @@ export default function HomeFlow({
   if (step === "profile")
     return (
       <Profile
-        onBack={() => setStep("chat")}
+        onBack={() => setStep("home")}
         onSecureNow={() => setStep("registerflow")}
       />
     );

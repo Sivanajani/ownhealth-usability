@@ -8,17 +8,19 @@ import BlitzIcon from "../../assets/blitz.svg?react";
 import TrendIcon from "../../assets/trend.svg?react";
 import RoundIcon from "../../assets/round.svg?react";
 import Meat from "../../assets/meat.svg?react";
-import ChatIcon from "../../assets/chat.svg?react";
+import HomeIcon from "../../assets/home.svg?react";
+import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 
 
 type Props = {
   onBack?: () => void;
+  onBackToHome?: () => void;
   onBackToChat?: () => void;
-  onBackToFolder?: () => void;
+  onOpenFolder?: () => void;
 };
 
-export default function Medication({ onBack, onBackToChat, onBackToFolder }: Props) {
+export default function Medication({ onBack, onBackToHome, onBackToChat, onOpenFolder }: Props) {
   const b12Taken = true; 
   return (
     <div className="oh-screen med-bg">
@@ -188,19 +190,21 @@ export default function Medication({ onBack, onBackToChat, onBackToFolder }: Pro
         </button>
       </div>
       
-      <nav className="bottomNav">
-        <button className="navItem" onClick={onBackToChat} disabled={!onBackToChat} type="button">
-          <span className="navIcon" aria-hidden="true">
-            <ChatIcon className="navSvg" />
-          </span>
-          <span>Chat</span>
+      {/* Bottom Nav */}
+      <nav className="home-navigation">
+        <button className="home-nav-item" onClick={onBackToHome} type="button">
+            <HomeIcon className="home-nav-icon" />
+            <span className="home-nav-label">Home</span>
         </button>
 
-        <button className="navItem navItem--active" type="button" onClick={onBackToFolder} disabled={!onBackToFolder} >
-          <span className="navIcon" aria-hidden="true">
-            <FolderIcon className="navSvg" />
-          </span>
-          <span>Ordner</span>
+        <button className="home-nav-item" onClick={onBackToChat} type="button">
+            <AssistantIcon className="home-nav-icon" />
+            <span className="home-nav-label">Assistent</span>
+        </button>
+
+        <button className="home-nav-item home-nav-item--active" onClick={onOpenFolder} type="button">
+            <FolderIcon className="home-nav-icon" />
+            <span className="home-nav-label">Ordner</span>
         </button>
       </nav>   
     </div>

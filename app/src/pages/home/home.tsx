@@ -23,12 +23,14 @@ type Props = {
   onOpenFolder: () => void;
   onOpenSettings: () => void;
   onOpenProfile: () => void;
+  onOpenChat: () => void;
 };
 
 export default function Home({  
   hasSeenHomeInsight,
   onSeenHomeInsight,
   onOpenFolder,
+  onOpenChat,
   onOpenSettings,
   onOpenProfile,
 }: Props) {
@@ -251,7 +253,7 @@ export default function Home({
             <span className="home-nav-label">Home</span>
           </button>
 
-          <button className="home-nav-item" type="button">
+          <button className="home-nav-item" onClick={onOpenChat} type="button">
             <AssistantIcon className="home-nav-icon" />
             <span className="home-nav-label">Assistent</span>
           </button>

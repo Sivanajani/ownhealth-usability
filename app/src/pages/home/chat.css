@@ -1,0 +1,25 @@
+.chat-root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.chat-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.chat-placeholder {
+  flex: 1;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+}

@@ -13,12 +13,13 @@ import RestaurantIcon from "../../assets/restaurant.svg?react";
 import CameraIcon from "../../assets/camera.svg?react";
 import UploadIcon from "../../assets/upload.svg?react";
 
-import ChatIcon from "../../assets/chat.svg?react";
+import HomeIcon from "../../assets/home.svg?react";
+import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 
 type Props = {
-  onBackToChat?: () => void;
-
+  onBackToHome?: () => void;
+  onOpenChat?: () => void;
   onOpenWearables?: () => void;
   onOpenDocuments?: () => void;
   onOpenMedication?: () => void;
@@ -26,7 +27,8 @@ type Props = {
 };
 
 export default function Folder({
-  onBackToChat,
+  onBackToHome,
+  onOpenChat,
   onOpenWearables,
   onOpenDocuments,
   onOpenMedication,
@@ -199,20 +201,21 @@ export default function Folder({
       </div>
 
       {/* Bottom Nav */}
-      <nav className="bottomNav">
-        <button className="navItem" onClick={onBackToChat} type="button">
-          <span className="navIcon" aria-hidden="true">
-            <ChatIcon className="navSvg" />
-          </span>
-          <span>Chat</span>
-        </button>
+      <nav className="home-navigation">
+          <button className="home-nav-item" onClick={onBackToHome} type="button">
+            <HomeIcon className="home-nav-icon" />
+            <span className="home-nav-label">Home</span>
+          </button>
 
-        <button className="navItem navItem--active" >
-          <span className="navIcon" aria-hidden="true">
-            <FolderIcon className="navSvg" />
-          </span>
-          <span>Ordner</span>
-        </button>
+          <button className="home-nav-item" onClick={onOpenChat} type="button">
+            <AssistantIcon className="home-nav-icon" />
+            <span className="home-nav-label">Assistent</span>
+          </button>
+
+          <button className="home-nav-item home-nav-item--active" type="button">
+            <FolderIcon className="home-nav-icon" />
+            <span className="home-nav-label">Ordner</span>
+          </button>
       </nav>      
     </div>
   );
