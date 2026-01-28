@@ -1,17 +1,19 @@
-// medication.tsx
+import { useMemo, useState } from "react";
 import "../../styles/appShell.css";
 import "./medication.css";
 
 import ClockIcon from "../../assets/clock.svg?react";
 import WarningIcon from "../../assets/warning.svg?react";
 import BlitzIcon from "../../assets/blitz.svg?react";
-import TrendIcon from "../../assets/trend.svg?react";
-import RoundIcon from "../../assets/round.svg?react";
-import Meat from "../../assets/meat.svg?react";
+
+import CoffeeIcon from "../../assets/coffee.svg?react";
+import BloodIcon from "../../assets/blood.svg?react";
+import CheckIcon from "../../assets/check.svg?react";
+import AddIcon from "../../assets/add.svg?react";
+
 import HomeIcon from "../../assets/home.svg?react";
 import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
-
 
 type Props = {
   onBack?: () => void;
@@ -20,193 +22,246 @@ type Props = {
   onOpenFolder?: () => void;
 };
 
-export default function Medication({ onBack, onBackToHome, onBackToChat, onOpenFolder }: Props) {
-  const b12Taken = true; 
+function pad2(n: number) {
+  return String(n).padStart(2, "0");
+}
+function nowHHMM() {
+  const d = new Date();
+  return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+}
+
+type TakenState = { taken: boolean; time?: string };
+
+export default function Supplements({
+  onBack,
+  onBackToHome,
+  onBackToChat,
+  onOpenFolder,
+}: Props) {
+  // initial wie Mock: B12 schon genommen, Zink nicht
+  const [takenByKey, setTakenByKey] = useState<Record<string, TakenState>>({
+    b12: { taken: true, time: "09:15" },
+    zinc: { taken: false },
+  });
+
+  const toggleTaken = (key: "b12" | "zinc") => {
+    setTakenByKey((prev) => {
+      const cur = prev[key];
+      // wenn man auf "genommen" schaltet -> Zeit setzen
+      if (!cur.taken) {
+        return { ...prev, [key]: { taken: true, time: nowHHMM() } };
+      }
+      // wenn man wieder abwählt -> Zeit entfernen
+      return { ...prev, [key]: { taken: false, time: undefined } };
+    });
+  };
+
+  const b12 = takenByKey.b12;
+  const zinc = takenByKey.zinc;
+
   return (
-    <div className="oh-screen med-bg">
-      <div className="oh-safe med-safe">
+    <div className="oh-screen sup-bg">
+      <div className="oh-safe sup-safe">
         {/* Header */}
-        <header className="med-header">
+        <header className="sup-header">
           <button className="docs-back" onClick={onBack} type="button">
-            <span className="docs-backArrow" aria-hidden="true">‹</span>
+            <span className="docs-backArrow" aria-hidden="true">
+              ‹
+            </span>
             <span>Zurück</span>
           </button>
-          <h1 className="underfolder-title">Medikation</h1>
-          <div className="med-spacer" />
+          <h1 className="underfolder-title">Supplements</h1>
+          <div className="sup-headerRight" />
         </header>
 
-        {/* Alert (mit Warning Icon links + runder Badge rechts) */}
-        <section className="med-alert">
-          <div className="med-alertIcon" aria-hidden="true">
-            <WarningIcon className="med-alertSvg" />
+        {/* Alert */}
+        <section className="sup-alert" role="note" aria-label="Hinweis">
+          <div className="sup-alertIcon" aria-hidden="true">
+            <WarningIcon className="sup-alertSvg" />
           </div>
 
-          <div className="med-alertText">
-            <div className="med-alertTitle">Zink behindert B12</div>
-            <div className="med-alertMeta">2h zeitversetzt</div>
+          <div className="sup-alertText">
+            <div className="sup-alertTitle">Zink behindert B12</div>
+            <div className="sup-alertMeta">
+              Bitte nimm Zink mindestens 2h zeitversetzt.
+            </div>
           </div>
         </section>
 
         {/* HEUTE */}
-        <div className="med-sectionLabel">HEUTE</div>
+        <div className="sup-sectionLabel">HEUTE</div>
 
-        <section className="med-stack">
+        <section className="sup-stack">
           {/* Vitamin B12 */}
-          <div className="med-card">
-            {/* Icon */}
-            <div className="med-iconCell">
-              <div className="med-check med-check--on">✓</div>
-            </div>
+          <div className="sup-card">
+            {/* CLICKABLE round check */}
+            <button
+              className="sup-iconCellBtn"
+              type="button"
+              onClick={() => toggleTaken("b12")}
+              aria-label={b12.taken ? "Vitamin B12 abwählen" : "Vitamin B12 als genommen markieren"}
+            >
+              <div className={`sup-check ${b12.taken ? "sup-check--on" : "sup-check--off"}`}>
+                {b12.taken && <CheckIcon className="sup-checkSvg" aria-hidden="true" />}
+              </div>
+            </button>
 
-            {/* Text */}
-            <div className="med-content">
-              <div className="med-title">Vitamin B12</div>
-              <div className="med-subRow">
+            <div className="sup-content">
+              <div className="sup-nameRow">
+                <div className="sup-name">Vitamin B12</div>
+
+                {/* Zeit-Badge nur wenn genommen */}
+                {b12.taken && b12.time ? (
+                  <div className="sup-pill sup-pill--done">{b12.time}</div>
+                ) : null}
+              </div>
+
+              <div className="sup-metaRow">
                 <span>1000 IE</span>
-                <span className="med-dot" aria-hidden="true">•</span>
+              </div>
 
-                {/* Clock + Text als Einheit */}
-                <span className="med-metaGroup">
-                  <ClockIcon className="med-metaIcon" aria-hidden="true" />
-                  <span>Nüchtern, 07:00–10:00</span>
+              <div className="sup-metaRow sup-metaRow--muted">
+                <span className="sup-metaGroup">
+                  <ClockIcon className="sup-metaIcon" aria-hidden="true" />
+                  <span>{b12.taken && b12.time ? `${b12.time} • ` : ""}07:00–10:00</span>
+                </span>
+              </div>
+
+              <div className="sup-tags">
+                <span className="sup-tag sup-tag--coffee">
+                  <CoffeeIcon className="sup-tagIcon" aria-hidden="true" />
+                  <span>Nüchtern</span>
+                </span>
+                <span className="sup-tag sup-tag--blood">
+                  <BloodIcon className="sup-tagIcon" aria-hidden="true" />
+                  <span>Optional</span>
                 </span>
               </div>
             </div>
-
-            {/* Zeit-Pill (eigene Spalte wie im Mock) */}
-            <div className="med-timeCell">
-              <div className={`med-timePill ${b12Taken ? "med-timePill--done" : "med-timePill--todo"}`}>
-                <span>{b12Taken ? "09:15" : "07:00–10:00"}</span>
-              </div>
-            </div>
-
-            
-            {/* Tage (eigene Spalte ganz rechts) 
-            <div className="med-daysWrap">
-              <div className="med-days med-days--amber">15</div>
-              <div className="med-daysUnit">Tage</div>
-            </div>
-            */}
           </div>
 
-
           {/* Zink */}
-          <div className="med-card med-card--noTime">
-            {/* Icon */}
-            <div className="med-iconCell">
-              <div className="med-round" aria-hidden="true">
-                <RoundIcon className="med-roundSvg" />
+          <div className="sup-card sup-card--secondary">
+            {/* CLICKABLE round check */}
+            <button
+              className="sup-iconCellBtn"
+              type="button"
+              onClick={() => toggleTaken("zinc")}
+              aria-label={zinc.taken ? "Zink abwählen" : "Zink als genommen markieren"}
+            >
+              <div className={`sup-check ${zinc.taken ? "sup-check--on" : "sup-check--off"}`}>
+                {zinc.taken && <CheckIcon className="sup-checkSvg" aria-hidden="true" />}
               </div>
-            </div>
+            </button>
 
-            {/* Text */}
-            <div className="med-content">
-              <div className="med-title">Zink</div>
+            <div className="sup-content">
+              <div className="sup-nameRow">
+                <div className="sup-name">Zink</div>
 
-              <div className="med-subRow">
+                {/* Zeit-Badge nur wenn genommen */}
+                {zinc.taken && zinc.time ? (
+                  <div className="sup-pill sup-pill--done">{zinc.time}</div>
+                ) : null}
+              </div>
+
+              <div className="sup-metaRow">
                 <span>25mg</span>
               </div>
 
-              <div className="med-subRow med-subRow--secondary">                
-                <span>Mit Essen, 19:00–22:00</span>
+              <div className="sup-metaRow sup-metaRow--muted">
+                <span className="sup-metaGroup">
+                  <ClockIcon className="sup-metaIcon" aria-hidden="true" />
+                  <span>{zinc.taken && zinc.time ? `${zinc.time} • ` : ""}19:00–22:00</span>
+                </span>
               </div>
 
-              <div className="med-note med-note--inline">
-                <span className="med-noteItem med-noteItem--pink">
-                  <Meat className="med-inlineSvg" aria-hidden="true" />
-                  Mit Fett
+              <div className="sup-tags">
+                <span className="sup-tag sup-tag--coffee">
+                  <CoffeeIcon className="sup-tagIcon" aria-hidden="true" />
+                  <span>Mit Essen</span>
                 </span>
-
-                <span className="med-noteItem med-noteItem--amber">
-                  <WarningIcon className="med-inlineSvg" aria-hidden="true" />
-                  In 12 Tagen nachbestellen
+                <span className="sup-tag sup-tag--warn">
+                  <WarningIcon className="sup-tagIcon" aria-hidden="true" />
+                  <span>In 12 Tagen nachbestellen</span>
                 </span>
               </div>
             </div>
-
-            {/* Tage ganz rechts 
-            <div className="med-daysWrap">
-              <div className="med-days med-days--mint">68</div>
-              <div className="med-daysUnit">Tage</div>
-            </div>
-            */}
           </div>
-
         </section>
 
         {/* ENTWICKLUNG */}
-        <div className="med-devBoost">
-          <TrendIcon className="med-inlineSvg" aria-hidden="true" />
-          <span className="med-sectionLabel"> ENTWICKLUNG</span>
-        </div>    
+        <div className="sup-devLabel">
+          <span>ENTWICKLUNG</span>
+        </div>
 
-        <section className="med-devCard">
-          <div className="med-devHeader">
-            <div className="med-devHeadLeft">
-              <div className="med-devTitle">B12 seit 42 Tagen</div>
-              <div className="med-devBoostLine">
-                <BlitzIcon className="med-devBolt" aria-hidden="true" />
-                <span>Energie +15%</span>
-              </div>
+        <section className="sup-devCard">
+          <div className="sup-devHead">
+            <div className="sup-devTitle">B12 seit 42 Tagen</div>
+            <div className="sup-devBoost">
+              <BlitzIcon className="sup-devBolt" aria-hidden="true" />
+              <span>Energie +15%</span>
             </div>
           </div>
 
-          <div className="med-bars" aria-hidden="true">
-            {[28, 32, 30, 23, 34, 31, 32, 35, 38, 48].map((h, i) => (
+          <div className="sup-bars" aria-hidden="true">
+            {[24, 26, 25, 20, 27, 26, 26, 28, 30, 36].map((h, i) => (
               <span
                 key={i}
-                className={`med-bar ${i === 9 ? "med-bar--hi" : ""}`}
+                className={`sup-bar ${i === 9 ? "sup-bar--hi" : ""}`}
                 style={{ height: `${h}px` }}
               />
             ))}
           </div>
 
-          <div className="med-stats">
-            <div className="med-stat med-stat--left">
-              <div className="med-statValue med-statValue--green">92%</div>
-              <div className="med-statLabel">Diese Woche</div>
+          <div className="sup-stats">
+            <div className="sup-stat sup-stat--left">
+              <div className="sup-statValue sup-statValue--green">92%</div>
+              <div className="sup-statLabel">Diese Woche</div>
             </div>
 
-            <div className="med-stat med-stat--center">
-              <div className="med-statValue med-statValue--purple">12</div>
-              <div className="med-statLabel">Tage Serie</div>
+            <div className="sup-stat sup-stat--center">
+              <div className="sup-statValue sup-statValue--amber">12</div>
+              <div className="sup-statLabel">Tage Serie</div>
             </div>
 
-            <div className="med-stat med-stat--right">
-              <div className="med-statValue med-statValue--white">2</div>
-              <div className="med-statLabel">Aktiv</div>
+            <div className="sup-stat sup-stat--right">
+              <div className="sup-statValue sup-statValue--white">2</div>
+              <div className="sup-statLabel">Aktiv</div>
             </div>
           </div>
         </section>
 
-
-        <button className="med-detailsBtn" type="button">
-          <ClockIcon className="med-inlineSvg" aria-hidden="true" />
-          Alle Details <span className="med-detailsArrow" aria-hidden="true">›</span>
+        <button className="sup-detailsBtn" type="button">
+          Alle Details <span className="sup-detailsArrow" aria-hidden="true">›</span>
         </button>
 
-        <button className="med-primaryBtn" type="button">
-          + Präparat hinzufügen
+        <button className="sup-primaryBtn" type="button">
+          <AddIcon className="sup-primaryPlus" aria-hidden="true" />
+          Präparat hinzufügen
         </button>
       </div>
-      
+
       {/* Bottom Nav */}
       <nav className="home-navigation">
         <button className="home-nav-item" onClick={onBackToHome} type="button">
-            <HomeIcon className="home-nav-icon" />
-            <span className="home-nav-label">Home</span>
+          <HomeIcon className="home-nav-icon" />
+          <span className="home-nav-label">Home</span>
         </button>
 
         <button className="home-nav-item" onClick={onBackToChat} type="button">
-            <AssistantIcon className="home-nav-icon" />
-            <span className="home-nav-label">Assistent</span>
+          <AssistantIcon className="home-nav-icon" />
+          <span className="home-nav-label">Assistent</span>
         </button>
 
-        <button className="home-nav-item home-nav-item--active" onClick={onOpenFolder} type="button">
-            <FolderIcon className="home-nav-icon" />
-            <span className="home-nav-label">Ordner</span>
+        <button
+          className="home-nav-item home-nav-item--active"
+          onClick={onOpenFolder}
+          type="button"
+        >
+          <FolderIcon className="home-nav-icon" />
+          <span className="home-nav-label">Ordner</span>
         </button>
-      </nav>   
+      </nav>
     </div>
   );
 }

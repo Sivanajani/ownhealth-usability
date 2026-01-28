@@ -159,8 +159,7 @@ export default function Wearables({
                 <span className="wear-plus" aria-hidden="true">＋</span>
                 Weiteres Wearable
               </button>
-            </>
-            ) : (
+            </>) : (
               <>
                 {/* Muster erkannt (Top) - ohne Icon */}
                 <section className="wear-patternCard">
@@ -258,6 +257,7 @@ export default function Wearables({
                 </button>
               </>
             )}
+
         </main>
       </div>
 
