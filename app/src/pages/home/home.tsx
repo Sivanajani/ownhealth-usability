@@ -17,6 +17,7 @@ import SymptomIcon from "../../assets/pills.svg?react";
 import DocumentIcon from "../../assets/document.svg?react";
 import CameraIcon from "../../assets/camera.svg?react";
 import Upload from "../../assets/upload.svg?react";
+import Symptom from "../../assets/digital.svg?react";
 
 
 // Kleine Icons in Cards
@@ -257,14 +258,14 @@ export default function Home({
           tag: "SYMPTOM-MUSTER",
           title: "",
           body: "Weniger Schmerzschübe bei 8h+ Schlaf",
-          icon: <Question className="h-icon" />,
+          icon: <Question className="h-icon icon-question" />,
         },
         {
           tone: "blue" as InsightTone,
           tag: "LABOR-TREND",
           title: "",
           body: "Entzündungswert (CRP) −15% gesunken",
-          icon: <Blood className="h-icon" />,
+          icon: <Blood className="h-icon icon-blood" />,
         },
       ],
       actionsTitle: "Action",
@@ -296,7 +297,7 @@ export default function Home({
       ],
       quickActions: [
         { key: "food", label: "Essen", icon: <CameraIcon className="food-icon" />, onClick: onOpenFood },
-        { key: "sym", label: "Symptom", icon: <SymptomIcon className="supmed-icon" />, onClick: onOpenSymptom },
+        { key: "sym", label: "Symptom", icon: <Symptom className="supmed-icon" />, onClick: onOpenSymptom },
         { key: "doc", label: "Dokument", icon: <Upload className="up-icon" />, onClick: onOpenDocument },
       ],
     };
@@ -469,7 +470,17 @@ export default function Home({
         {(!isLongevity && data.scheduleCard) && (
           <div className="home2-section">
             <div className="home2-sectionHead">
-              <h2 className="home2-h2">Termine</h2>
+              <button
+                className="home2-sectionTitleBtn"
+                type="button"
+                onClick={() => {
+                  // später: navigate("/termine")
+                }}
+                aria-label="Termine öffnen"
+              >
+                <h2 className="home2-h2 home2-h2--btn">Termine</h2>
+                <ChevronRightIcon className="home2-sectionChevron" />
+              </button>
             </div>
 
             <button className="home2-appointment" type="button">
@@ -495,23 +506,31 @@ export default function Home({
         {/* Insights */}
         <div className="home2-section">
           <div className="home2-sectionHead">
-            <h2 className="home2-h2">Insights</h2>
-            <button className="home2-link" type="button">
-              Alle insights <ChevronRightIcon className="home2-linkChevron" />
+            <button
+              className="home2-sectionTitleBtn"
+              type="button"
+              onClick={() => {
+                // später: navigate("/insights")
+              }}
+              aria-label="Insights öffnen"
+            >
+              <h2 className="home2-h2 home2-h2--btn">Insights</h2>
+              <ChevronRightIcon className="home2-sectionChevron" />
             </button>
           </div>
-
           <div className="home2-insights">
             {data.insights.map((it: any, idx: number) => (
               <div key={idx} className={`home2-insight home2-insight--${it.tone}`}>
-                <div className="home2-insightTop">
+                <div className="home2-insightRow">
                   <div className="home2-insightIcon">{it.icon}</div>
-                  <div className="home2-insightTag">{it.tag}</div>
-                </div>
-                <div className="home2-insightBody">
-                  <div className="home2-insightLine">
-                    {it.title ? <span className="home2-insightMetricInline">{it.title}</span> : null}
-                    <span className="home2-insightTextInline">{it.body}</span>
+
+                  <div className="home2-insightContent">
+                    <div className="home2-insightTag">{it.tag}</div>
+
+                    <div className="home2-insightLine">
+                      {it.title ? <span className="home2-insightMetricInline">{it.title}</span> : null}
+                      <span className="home2-insightTextInline">{it.body}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -521,8 +540,18 @@ export default function Home({
 
         {/* Action */}
         <div className="home2-section">
-          <h2 className="home2-h2">{data.actionsTitle}</h2>
-
+          <div className="home2-sectionHead">
+            <button
+              className="home2-sectionTitleBtn"
+              type="button"
+              onClick={() => {                
+              }}
+              aria-label="Action öffnen"
+            >
+              <h2 className="home2-h2 home2-h2--btn">{data.actionsTitle}</h2>
+              <ChevronRightIcon className="home2-sectionChevron" />
+            </button>
+          </div>
           <div className="home2-actions">
             {data.actions.map((a: any, idx: number) => (
               <button key={idx} type="button" className={`home2-actionRow home2-actionRow--${a.tone}`}>

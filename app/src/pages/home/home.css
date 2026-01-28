@@ -166,11 +166,10 @@
 
 .home2-h2{
   margin: 0 0 10px;
-  font-size: 14px;
-  letter-spacing: 0.6px;
+  font-size: 16px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
   color: rgb(255,255,255);
-  font-weight: 700;
 }
 
 .home2-sectionHead{
@@ -527,14 +526,19 @@
   flex-shrink: 0;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
+  overflow: hidden;
 }
 
+
+
 /* ONLY target icons you control (avoid svg + h-icon conflicts) */
-.home2-insightIcon .h-icon{
-  width: 18px;
-  height: 18px;
-  display: block;
-  transform: translateY(0.5px); /* tweak: 0px / 0.5px / 1px */
+/* Optische SVG-Korrekturen */
+.home2-insightIcon .icon-question {
+  transform: translateY(-1px);
+}
+
+.home2-insightIcon .icon-blood {
+  transform: translateY(1px);
 }
 
 .home2-insightBody{
@@ -895,3 +899,50 @@
   animation: hrvPulse 2.4s ease-in-out infinite;
   will-change: transform;
 }
+
+/* Klickbarer Section-Titel (Titel + Chevron) */
+.home2-sectionTitleBtn{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.home2-sectionTitleBtn:active{
+  transform: scale(0.98);
+}
+
+.home2-h2--btn{
+  margin: 5px; /* wichtig, sonst altes margin von h2 */
+}
+
+.home2-sectionChevron{
+  width: 16px;
+  height: 16px;
+  opacity: 0.75;
+  transform: translateY(-1px);
+}
+
+.home2-insightRow{
+  display: flex;
+  gap: 12px;
+  align-items: center; /* DAS ist der Key: Icon-Box zentriert zum Textblock */
+}
+
+.home2-insightContent{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Das brauchst du dann NICHT mehr */
+.home2-insightBody{
+  padding-left: 0;
+}
+
