@@ -53,22 +53,36 @@ type MedItem = {
   taken: boolean;
 };
 
+type CircleTone = "blue" | "green" | "hrv";
+
 function CircleStat({
   value,
   total,
   label,
+  tone = "blue",
+  ok = false,
+  showTotal = true,
 }: {
   value: number;
   total: number;
   label: string;
+  tone?: CircleTone;
+  ok?: boolean;
+  showTotal?: boolean;
 }) {
-  // Kreis-UI (strokeDasharray)
   const clampedTotal = Math.max(1, total);
-  const pct = Math.max(0, Math.min(1, value / clampedTotal));
+  const pctRaw = Math.max(0, Math.min(1, value / clampedTotal));
+  
+  const pct = ok ? 1 : pctRaw;
   const dash = pct * 283;
 
+
   return (
-    <div className="home2-circleStat" role="group" aria-label={label}>
+    <div
+      className={`home2-circleStat home2-circleStat--${tone} ${ok ? "is-ok" : ""}`}
+      role="group"
+      aria-label={label}
+    >
       <div className="home2-circleRing" aria-hidden="true">
         <svg className="home2-circleSvg" viewBox="0 0 100 100">
           <circle className="home2-circleBg" cx="50" cy="50" r="45" />
@@ -80,16 +94,26 @@ function CircleStat({
             strokeDasharray={`${dash} 283`}
           />
         </svg>
+
         <div className="home2-circleCenter">
           <div className="home2-circleVal">
-            {value}/{total}
+            {showTotal ? (
+              <>
+                {value}/{total}
+              </>
+            ) : (
+              value
+            )}
           </div>
         </div>
       </div>
+
       <div className="home2-circleLabel">{label}</div>
     </div>
   );
 }
+
+
 
 export default function Home({
   focusKey,
@@ -326,23 +350,28 @@ export default function Home({
           {/* CHRONIC: Kreis-Überblick statt Steps-Card */}
           {!isLongevity ? (
             <div className="home2-circleRow">
-              <CircleStat value={medsTaken} total={medsTotal} label="Medikamente" />
-              <div className="home2-circleStat" role="group" aria-label="HRV">
-                <div className="home2-circleRing">
+              {/* Medikamente: blau */}
+              <CircleStat value={medsTaken} total={medsTotal} label="Medikamente" tone="blue" />
+
+              {/* HRV: spezieller Look */}
+              <div className="home2-circleStat home2-circleStat--hrv" role="group" aria-label="HRV">
+                <div className="home2-circleRing home2-circleRing--hrv is-pulse">
                   <div className="home2-circleCenter">
-                    <div className="home2-circleVal">{hrvValue}</div>
+                    <div className="home2-circleVal">{hrvValue}</div>                    
                   </div>
                 </div>
                 <div className="home2-circleLabel">HRV</div>
               </div>
-              <div className="home2-circleStat" role="group" aria-label="Symptome">
-                <div className="home2-circleRing">
-                  <div className="home2-circleCenter">
-                    <div className="home2-circleVal">{symptomsCount}</div>
-                  </div>
-                </div>
-                <div className="home2-circleLabel">Symptome</div>
-              </div>
+
+              {/* Symptome: grün + "ok" wenn 0 */}
+              <CircleStat
+                value={symptomsCount}
+                total={1}
+                label="Symptome"
+                tone="green"
+                ok={symptomsCount === 0}
+                showTotal={false}
+              />
             </div>
           ) : (
             // Longevity: deine alte KPI Card bleibt

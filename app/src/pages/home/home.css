@@ -402,8 +402,8 @@
 }
 
 .home2-dateBadge{
-  width: 54px;
-  height: 54px;
+  width: 59px;
+  height: 59px;
   border-radius: 18px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.14);
@@ -417,13 +417,14 @@
 .home2-dateBadgeTop{
   font-size: 12px;
   font-weight: 700;
-  color: rgba(255,255,255,0.70);
+  color: rgba(32, 180, 218, 0.7);
   text-transform: uppercase;
 }
 
 .home2-dateBadgeBottom{
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
+  color: rgba(255,255,255,0.90);
 }
 
 .home2-appointmentText{ flex: 1; min-width: 0; }
@@ -431,6 +432,7 @@
 .home2-appointmentTitle{
   font-size: 14px;
   font-weight: 700;
+  color: rgba(255,255,255,0.90);
 }
 
 .home2-appointmentSub{
@@ -804,4 +806,63 @@
 .home2-circleLabel {
   font-size: 12px;
   opacity: 0.85;
+}
+
+/* ===== Circle tones ===== */
+.home2-circleStat--blue .home2-circleFill {
+  stroke: rgba(77, 232, 255, 0.90);
+}
+
+.home2-circleStat--green .home2-circleFill {
+  stroke: rgba(16, 185, 129, 0.95);
+}
+
+/* Wenn Symptome 0 sind -> "alles ok" Look */
+.home2-circleStat--green.is-ok .home2-circleRing {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(16, 185, 129, 0.18),
+    0 10px 30px rgba(16, 185, 129, 0.12);
+}
+
+
+.home2-circleStat--green.is-ok .home2-circleVal {
+  color: rgba(16, 185, 129, 0.95);
+  font-size: 24px;
+}
+
+.home2-circleStat--blue .home2-circleVal {
+  font-size: 24px;
+}
+
+/* ===== HRV special ===== */
+.home2-circleStat--hrv .home2-circleRing--hrv {
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  background: linear-gradient(135deg, rgba(139,92,246,0.18), rgba(20,184,166,0.10));
+  box-shadow:
+    0 0 0 1px rgba(139,92,246,0.12),
+    0 12px 30px rgba(0,0,0,0.25);
+}
+
+.home2-circleStat--hrv .home2-circleVal {
+  font-size: 24px;
+  letter-spacing: 0.2px;
+}
+
+.home2-circleSub {
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
+}
+
+@keyframes hrvPulse {
+  0%   { transform: scale(1);   box-shadow: 0 0 0 1px rgba(139,92,246,0.12), 0 12px 30px rgba(0,0,0,0.25); }
+  50%  { transform: scale(1.02); box-shadow: 0 0 0 1px rgba(139,92,246,0.18), 0 16px 36px rgba(0,0,0,0.30); }
+  100% { transform: scale(1);   box-shadow: 0 0 0 1px rgba(139,92,246,0.12), 0 12px 30px rgba(0,0,0,0.25); }
+}
+
+.home2-circleRing--hrv.is-pulse {
+  animation: hrvPulse 2.4s ease-in-out infinite;
+  will-change: transform;
 }
