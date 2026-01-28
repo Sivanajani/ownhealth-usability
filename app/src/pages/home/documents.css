@@ -325,3 +325,110 @@
   fill: currentColor !important;
   stroke: currentColor !important;
 }
+
+/* =========================
+   Chronic: Insight + Chips
+========================= */
+
+.docs-insightCard{
+  margin-top: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(20, 220, 200, 0.22);
+  background: linear-gradient(180deg, rgba(20, 220, 200, 0.18) 0%, rgba(12, 18, 32, 0.35) 100%);
+  box-shadow: var(--shadow-card);
+  padding: 14px;
+  display:flex;
+  gap: 12px;
+  align-items:flex-start;
+}
+
+.docs-insightIcon{
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(20, 220, 200, 0.18);
+  border: 1px solid rgba(20, 220, 200, 0.22);
+  color: rgba(20, 220, 200, 0.95);
+  flex: 0 0 auto;
+}
+
+.docs-insightIconSvg{
+  width: 18px;
+  height: 18px;
+  display:block;
+  color: currentColor;
+}
+.docs-insightIconSvg,
+.docs-insightIconSvg *{
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.docs-insightTitle{
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 4px;
+}
+
+.docs-insightBody{
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.70);
+}
+
+.docs-subLabel{
+  margin-top: 14px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.60);
+}
+
+.docs-chipsRow{
+  display:flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.docs-chipsRow::-webkit-scrollbar{ display:none; }
+
+.docs-chip{
+  flex: 0 0 auto;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.70);
+  font-size: 12px;
+}
+
+.docs-chip--active{
+  border-color: rgba(20, 220, 200, 0.35);
+  background: rgba(20, 220, 200, 0.22);
+  color: rgba(230, 255, 252, 0.95);
+  font-weight: 650;
+}
+
+/* =========================
+   AddIcon in CTA Button
+========================= */
+.docs-addBtn{
+  gap: 10px;
+}
+
+.docs-addBtnIcon{
+  width: 16px;
+  height: 16px;
+  display:block;
+  color: currentColor;
+}
+.docs-addBtnIcon,
+.docs-addBtnIcon *{
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}

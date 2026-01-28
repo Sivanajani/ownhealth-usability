@@ -109,6 +109,7 @@ export default function HomeFlow({
   if (step === "documents")
     return (
       <Documents
+        focusKey={focusKey}  
         onBack={() => setStep("folder")}
         onBackToHome={() => setStep("home")}
         onBackToChat={() => setStep("chat")}
