@@ -13,8 +13,6 @@ import HomeIcon from "../../assets/home.svg?react";
 import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 
-import Add from "../../assets/add.svg?react";
-
 type Props = {
   onBack?: () => void;
   onOpenCategory?: (key: string) => void;

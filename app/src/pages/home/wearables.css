@@ -473,3 +473,187 @@
   fill: none !important;
 }
 */
+
+/* =========================
+   Chronic layout
+========================= */
+
+.wear-patternCard{
+  background: linear-gradient(
+    180deg,
+    rgba(139,92,246,0.38) 0%,
+    rgba(139,92,246,0.12) 100%
+  );
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+
+.wear-patternTitle{
+  font-weight: 700;
+  font-size: 16px;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 6px;
+}
+
+.wear-patternText{
+  font-size: 14px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.70);
+}
+
+.wear-patternLink{
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: rgba(255,255,255,0.60);
+  font-size: 13px;
+  text-align: left;
+}
+
+.wear-chronicSectionTitle{
+  margin-top: 14px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+}
+
+/* Today card */
+.wear-todayCard{
+  background: rgba(10,14,26,0.32);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+
+.wear-todayTop{
+  display:flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wear-todayBig{
+  font-size: 26px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.2px;
+}
+
+.wear-todaySub{
+  font-size: 13px;
+  color: rgba(255,255,255,0.60);
+}
+
+.wear-miniChart{
+  margin-top: 10px;
+  height: 42px;
+  color: rgba(139,92,246,0.95); /* Linie violett */
+  opacity: 0.9;
+}
+
+.wear-miniChart svg{
+  width: 100%;
+  height: 100%;
+  display:block;
+}
+
+.wear-todayFooter{
+  margin-top: 8px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+
+.wear-todayFooterRight{
+  color: rgba(255,255,255,0.60);
+}
+
+/* Two mini KPI cards */
+.wear-miniKpiRow{
+  margin-top: 10px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.wear-miniKpiCard{
+  background: rgba(10,14,26,0.32);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+
+.wear-miniKpiTop{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.wear-miniKpiIcon{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgb(138,92,246);
+}
+
+.wear-miniKpiIcon svg{
+  width: 14px;
+  height: 14px;
+  display:block;
+}
+
+
+.wear-miniKpiLabel{
+  font-size: 12px;
+  color: rgba(255,255,255,0.60);
+}
+
+.wear-miniKpiValue{
+  font-size: 20px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+}
+
+.wear-miniKpiValue span{
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.55);
+  margin-left: 4px;
+}
+
+.wear-miniKpiMeta{
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+
+.wear-miniKpiBar{
+  margin-top: 10px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  overflow:hidden;
+}
+
+.wear-miniKpiBar > span{
+  display:block;
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(139,92,246,0.65);
+}
+
+.wear-miniKpiBar--purple > span{
+  background: rgba(139,92,246,0.95);
+}

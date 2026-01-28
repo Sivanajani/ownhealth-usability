@@ -246,8 +246,8 @@ export default function Folder({
                 </div>
               </div>
 
-              <div className="dataTitle">My Bodyscan</div>
-              <div className="dataSub">Letzter Scan: 5. Jan</div>
+              <div className="dataTitle">{isLongevity ? "Body" : "Symptome"}</div>              
+              <div className="dataSub">{isLongevity ? "Letzter Scan: 5. Jan" : "Letzter Eintrag: Heute: 8:15"}</div>
             </div>
           </div>
         </main>
