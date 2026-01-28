@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./home.css";
 
-import RefreshIcon from "../../assets/refresh.svg?react";
 import LockIcon from "../../assets/lock.svg?react";
 import SettingsIcon from "../../assets/setting.svg?react";
 
@@ -11,26 +10,27 @@ import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 
 import ChevronRightIcon from "../../assets/chevron-right.svg?react";
-import CalendarIcon from "../../assets/calendar.svg?react";
 
 // Quick actions (unten, 3 Buttons)
 import FoodIcon from "../../assets/restaurant.svg?react";
 import SymptomIcon from "../../assets/pills.svg?react";
 import DocumentIcon from "../../assets/document.svg?react";
-import CameraIcon from "../../assets/camera.svg?react"; // für "Body Scan" (falls du ein eigenes icon hast: tauschen)
+import CameraIcon from "../../assets/camera.svg?react";
 
 // Kleine Icons in Cards
 import CheckIcon from "../../assets/check.svg?react";
 import WarningIcon from "../../assets/warning.svg?react";
 import HeartIcon from "../../assets/heartbeat.svg?react";
 import BoltIcon from "../../assets/blitz.svg?react";
-import Steps from "../../assets/footstep.svg?react";
 import MoonIcon from "../../assets/moon.svg?react";
+import Clock from "../../assets/clock.svg?react";
+
+import OwnLogo from "../../assets/O_Logo.svg?react";
 
 import type { FocusKey } from "../../types/focus";
 
 type Props = {
-  focusKey: FocusKey; // "longevity" | "chronic" (wie bei dir im Onboarding)
+  focusKey: FocusKey;
   hasSeenHomeInsight: boolean;
   onSeenHomeInsight: () => void;
   onOpenFolder: () => void;
@@ -38,7 +38,6 @@ type Props = {
   onOpenProfile: () => void;
   onOpenChat: () => void;
 
-  // optional: wenn du später echte Navigation möchtest
   onOpenFood?: () => void;
   onOpenSymptom?: () => void;
   onOpenDocument?: () => void;
@@ -47,6 +46,50 @@ type Props = {
 
 type InsightTone = "purple" | "blue" | "green";
 type ActionTone = "purple" | "blue" | "teal";
+
+type MedItem = {
+  id: string;
+  label: string;
+  taken: boolean;
+};
+
+function CircleStat({
+  value,
+  total,
+  label,
+}: {
+  value: number;
+  total: number;
+  label: string;
+}) {
+  // Kreis-UI (strokeDasharray)
+  const clampedTotal = Math.max(1, total);
+  const pct = Math.max(0, Math.min(1, value / clampedTotal));
+  const dash = pct * 283;
+
+  return (
+    <div className="home2-circleStat" role="group" aria-label={label}>
+      <div className="home2-circleRing" aria-hidden="true">
+        <svg className="home2-circleSvg" viewBox="0 0 100 100">
+          <circle className="home2-circleBg" cx="50" cy="50" r="45" />
+          <circle
+            className="home2-circleFill"
+            cx="50"
+            cy="50"
+            r="45"
+            strokeDasharray={`${dash} 283`}
+          />
+        </svg>
+        <div className="home2-circleCenter">
+          <div className="home2-circleVal">
+            {value}/{total}
+          </div>
+        </div>
+      </div>
+      <div className="home2-circleLabel">{label}</div>
+    </div>
+  );
+}
 
 export default function Home({
   focusKey,
@@ -63,10 +106,29 @@ export default function Home({
 }: Props) {
   const isLongevity = focusKey === "longevity";
 
-  const [profilePower, setProfilePower] = useState(26);
-  const [currentTime, setCurrentTime] = useState("");
+  const [profilePower] = useState(26);
+  const [, setCurrentTime] = useState("");
 
-  // "Heute" (ohne Uhrzeit im Screenshot), aber du wolltest ja bisher Zeit: wir zeigen nur "Heute"
+  // CHRONIC: Medikation State (klickbar)
+  const [meds, setMeds] = useState<MedItem[]>([
+    { id: "lthyroxin", label: "L-Thyroxin", taken: true },
+    { id: "metformin", label: "Metformin", taken: true },
+    { id: "ramipril", label: "Ramipril", taken: false },
+  ]);
+
+  const toggleMed = (id: string) => {
+    setMeds((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, taken: !m.taken } : m))
+    );
+  };
+
+  const medsTaken = meds.filter((m) => m.taken).length;
+  const medsTotal = meds.length;
+
+  // CHRONIC: weitere Circle Werte (Mock)
+  const hrvValue = 65;
+  const symptomsCount = 0;
+
   useEffect(() => {
     const update = () => {
       const now = new Date();
@@ -104,7 +166,7 @@ export default function Home({
             tag: "MUSTER ERKANNT",
             title: "HRV",
             body: "+14% bei Essen vor 18 Uhr",
-            icon: <Steps className="h-icon" />,
+            icon: <Clock className="h-icon" />,
           },
           {
             tone: "blue" as InsightTone,
@@ -150,20 +212,11 @@ export default function Home({
       };
     }
 
-    // chronic
+    // CHRONIC
     return {
       sectionTodayTitle: "Heute",
-      headlineLeft: "12,450",
-      headlineLeftSub: "Schritte",
-      headlineLeftHint: "Höher als dein Durchschnitt",
-      headlineRight: "HRV",
-      headlineRightValue: "65",
       secondaryCardTitle: "Medikation",
-      secondaryPills: [
-        { label: "L-Thyroxin", active: true },
-        { label: "Metformin", active: true },
-        { label: "Ramipril", active: false },
-      ],
+      secondaryPills: [],
       scheduleCard: {
         title: "Kardiologie",
         date: "Jan\n22",
@@ -229,10 +282,10 @@ export default function Home({
           <button
             className="home2-iconbtn"
             type="button"
-            aria-label="Aktualisieren"
-            onClick={() => setProfilePower(26)}
+            aria-label="ownHealth"
+            onClick={onOpenProfile}
           >
-            <RefreshIcon className="home2-top-icon" />
+            <OwnLogo className="home2-logo" />
           </button>
 
           <div className="home2-top-mid">
@@ -240,7 +293,6 @@ export default function Home({
               <LockIcon className="home2-lock-icon" />
               <span>Sicher verschlüsselt</span>
             </div>
-            <div className="home2-date">{currentTime}</div>
           </div>
 
           <div className="home2-top-right">
@@ -267,50 +319,121 @@ export default function Home({
           </div>
         </div>
 
-        {/* Heute - KPI Card */}
+        {/* Heute */}
         <div className="home2-section">
           <h2 className="home2-h2">{data.sectionTodayTitle}</h2>
 
-          <div className="home2-kpiCard">
-            <div className="home2-kpiLeft">
-              <div className="home2-kpiIcon">
-                <Steps className="h-icon" />
+          {/* CHRONIC: Kreis-Überblick statt Steps-Card */}
+          {!isLongevity ? (
+            <div className="home2-circleRow">
+              <CircleStat value={medsTaken} total={medsTotal} label="Medikamente" />
+              <div className="home2-circleStat" role="group" aria-label="HRV">
+                <div className="home2-circleRing">
+                  <div className="home2-circleCenter">
+                    <div className="home2-circleVal">{hrvValue}</div>
+                  </div>
+                </div>
+                <div className="home2-circleLabel">HRV</div>
               </div>
-              <div className="home2-kpiText">
-                <div className="home2-kpiValue">{data.headlineLeft}</div>
-                <div className="home2-kpiSub">{data.headlineLeftSub}</div>
-                <div className="home2-kpiHint">{data.headlineLeftHint}</div>
+              <div className="home2-circleStat" role="group" aria-label="Symptome">
+                <div className="home2-circleRing">
+                  <div className="home2-circleCenter">
+                    <div className="home2-circleVal">{symptomsCount}</div>
+                  </div>
+                </div>
+                <div className="home2-circleLabel">Symptome</div>
               </div>
             </div>
+          ) : (
+            // Longevity: deine alte KPI Card bleibt
+            <div className="home2-kpiCard">
+              <div className="home2-kpiLeft">
+                <div className="home2-kpiIcon">
+                  {/* Steps Icon war bei dir importiert – falls du es weiterhin brauchst, wieder reinnehmen */}
+                </div>
+                <div className="home2-kpiText">
+                  <div className="home2-kpiValue">{data.headlineLeft}</div>
+                  <div className="home2-kpiSub">{data.headlineLeftSub}</div>
+                  <div className="home2-kpiHint">{data.headlineLeftHint}</div>
+                </div>
+              </div>
 
-            <div className="home2-kpiRight">
-              <div className="home2-chip">
-                <span className="home2-chipTop">{data.headlineRight}</span>
-                <span className="home2-chipVal">{data.headlineRightValue}</span>
+              <div className="home2-kpiRight">
+                <div className="home2-chip">
+                  <span className="home2-chipTop">{data.headlineRight}</span>
+                  <span className="home2-chipVal">{data.headlineRightValue}</span>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Supplements / Medikation */}
-          <div className="home2-miniCard">
-            <div className="home2-miniTitle">{data.secondaryCardTitle}</div>
-            <div className="home2-pillRow">
-              {data.secondaryPills.map((p) => (
-                <button
-                  key={p.label}
-                  type="button"
-                  className={`home2-pill ${p.active ? "is-active" : ""}`}
-                  aria-pressed={p.active}
-                >
-                  {p.label}
-                </button>
-              ))}
+          {/* CHRONIC: Medikation mit Toggle */}
+          {!isLongevity && (
+            <div className="home2-miniCard">
+              <div className="home2-miniTitle">{data.secondaryCardTitle}</div>
+
+              <div className="home2-suppGrid">
+                {meds.map((m) => (
+                  <button
+                    key={m.id}
+                    type="button"
+                    className={`home2-suppTile ${m.taken ? "is-active" : ""}`}
+                    aria-pressed={m.taken}
+                    onClick={() => toggleMed(m.id)}
+                  >
+                    <div className="home2-suppIconWrap">
+                      <div className="home2-suppIcon">
+                        <SymptomIcon className="supmed-icon" />
+                      </div>
+
+                      {m.taken && (
+                        <span className="home2-suppCheck" aria-hidden="true">
+                          <CheckIcon className="home2-suppCheckIcon" />
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="home2-suppLabel">{m.label}</div>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* Longevity: Supplements wie gehabt */}
+          {isLongevity && (
+            <div className="home2-miniCard">
+              <div className="home2-miniTitle">{data.secondaryCardTitle}</div>
+              <div className="home2-suppGrid">
+                {data.secondaryPills.map((p: any) => (
+                  <button
+                    key={p.label}
+                    type="button"
+                    className={`home2-suppTile ${p.active ? "is-active" : ""}`}
+                    aria-pressed={p.active}
+                  >
+                    <div className="home2-suppIconWrap">
+                      <div className="home2-suppIcon">
+                        <SymptomIcon className="supmed-icon" />
+                      </div>
+
+                      {p.active && (
+                        <span className="home2-suppCheck" aria-hidden="true">
+                          <CheckIcon className="home2-suppCheckIcon" />
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="home2-suppLabel">{p.label}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Chroniker: Termine */}
-        {data.scheduleCard && (
+        {(!isLongevity && data.scheduleCard) && (
           <div className="home2-section">
             <div className="home2-sectionHead">
               <h2 className="home2-h2">Termine</h2>
@@ -346,15 +469,17 @@ export default function Home({
           </div>
 
           <div className="home2-insights">
-            {data.insights.map((it, idx) => (
+            {data.insights.map((it: any, idx: number) => (
               <div key={idx} className={`home2-insight home2-insight--${it.tone}`}>
                 <div className="home2-insightTop">
                   <div className="home2-insightIcon">{it.icon}</div>
                   <div className="home2-insightTag">{it.tag}</div>
                 </div>
                 <div className="home2-insightBody">
-                  {it.title ? <div className="home2-insightTitle">{it.title}</div> : null}
-                  <div className="home2-insightText">{it.body}</div>
+                  <div className="home2-insightLine">
+                    {it.title ? <span className="home2-insightMetricInline">{it.title}</span> : null}
+                    <span className="home2-insightTextInline">{it.body}</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -366,10 +491,9 @@ export default function Home({
           <h2 className="home2-h2">{data.actionsTitle}</h2>
 
           <div className="home2-actions">
-            {data.actions.map((a, idx) => (
+            {data.actions.map((a: any, idx: number) => (
               <button key={idx} type="button" className={`home2-actionRow home2-actionRow--${a.tone}`}>
                 <div className="home2-actionIcon">{a.icon}</div>
-
                 <div className="home2-actionText">
                   <div className="home2-actionTitle">{a.title}</div>
                   <div className="home2-actionSub">{a.sub}</div>
@@ -381,9 +505,9 @@ export default function Home({
           </div>
         </div>
 
-        {/* Quick Actions (3 buttons wie Screenshot) */}
+        {/* Quick Actions */}
         <div className="home2-quickDock">
-          {data.quickActions.map((q) => (
+          {data.quickActions.map((q: any) => (
             <button
               key={q.key}
               type="button"
@@ -398,7 +522,7 @@ export default function Home({
         </div>
 
         {/* Bottom Nav */}
-        <nav className="home-navigation" >
+        <nav className="home-navigation">
           <button className="home-nav-item home-nav-item--active" type="button">
             <HomeIcon className="home-nav-icon" />
             <span className="home-nav-label">Home</span>
@@ -413,7 +537,7 @@ export default function Home({
             <FolderIcon className="home-nav-icon" />
             <span className="home-nav-label">Ordner</span>
           </button>
-        </nav>  
+        </nav>
       </div>
     </div>
   );

@@ -42,9 +42,9 @@
 
 /* ===== Top ===== */
 .home2-top{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 12px;
 }
@@ -54,13 +54,13 @@
   height: 40px;
   border-radius: 14px;
   border: 1px solid var(--h-stroke);
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0);
   box-shadow: var(--h-inset);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--h-text);
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .home2-iconbtn:active{ transform: scale(0.98); }
@@ -68,35 +68,39 @@
 .home2-top-icon{
   width: 18px;
   height: 18px;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .home2-top-mid{
-  flex:1;
-  min-width:0;
+  flex: 1;
+  min-width: 0;
   padding-top: 2px;
 }
 
 .home2-lock{
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 6px;
   font-size: 12px;
   color: rgba(255,255,255,0.70);
   margin-bottom: 2px;
 }
 
-.home2-lock-icon{ width: 12px; height: 12px; opacity: .9; }
+.home2-lock-icon{
+  width: 12px;
+  height: 12px;
+  opacity: 0.9;
+}
 
 .home2-date{
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.2px;
 }
 
 .home2-top-right{
-  display:flex;
-  align-items:flex-start;
+  display: flex;
+  align-items: flex-start;
   gap: 10px;
 }
 
@@ -105,11 +109,11 @@
   border: none;
   background: transparent;
   color: var(--h-text);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 6px;
-  cursor:pointer;
+  cursor: pointer;
   padding: 0;
 }
 
@@ -117,27 +121,27 @@
   width: 46px;
   height: 46px;
   position: relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home2-power-svg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   transform: rotate(-90deg);
 }
 
 .home2-power-bg{
-  fill:none;
+  fill: none;
   stroke: rgba(255,255,255,0.12);
   stroke-width: 3.2;
 }
 
 .home2-power-fill{
-  fill:none;
+  fill: none;
   stroke: var(--h-blue);
   stroke-width: 3.2;
   stroke-linecap: round;
@@ -146,7 +150,7 @@
 
 .home2-power-val{
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255,255,255,0.85);
   position: relative;
 }
@@ -159,19 +163,20 @@
 
 /* ===== Sections ===== */
 .home2-section{ margin-top: 14px; }
+
 .home2-h2{
   margin: 0 0 10px;
   font-size: 14px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  color: rgb(255, 255, 255);
-  font-weight: 800;
+  color: rgb(255,255,255);
+  font-weight: 700;
 }
 
 .home2-sectionHead{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 10px;
 }
@@ -180,18 +185,18 @@
   border: none;
   background: transparent;
   color: rgba(255,255,255,0.60);
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 6px;
   font-weight: 700;
-  cursor:pointer;
+  cursor: pointer;
   padding: 0;
 }
 
 .home2-linkChevron{
   width: 14px;
   height: 14px;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 /* ===== KPI Card ===== */
@@ -201,16 +206,16 @@
   border-radius: var(--h-r-xl);
   padding: 14px;
   box-shadow: var(--h-inset);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 10px;
 }
 
 .home2-kpiLeft{
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 12px;
   min-width: 0;
 }
@@ -221,39 +226,51 @@
   border-radius: 16px;
   background: rgba(59,130,246,0.12);
   border: 1px solid rgba(59,130,246,0.20);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
+/* Default icon sizing (used in many places) */
 .h-icon{
   width: 18px;
   height: 18px;
+  display: block;
 }
 
-.home2-kpiText{ min-width:0; }
+.supmed-icon{
+  width: 18px;
+  height: 18px;
+  color: #10B981;
+  display: block;
+}
+
+.home2-kpiText{ min-width: 0; }
+
 .home2-kpiValue{
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.2px;
 }
+
 .home2-kpiSub{
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   color: rgba(255,255,255,0.75);
   margin-top: 2px;
 }
+
 .home2-kpiHint{
   font-size: 12px;
   color: rgba(255,255,255,0.55);
   margin-top: 4px;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 6px;
 }
 
-.home2-kpiRight{ flex-shrink:0; }
+.home2-kpiRight{ flex-shrink: 0; }
 
 .home2-chip{
   width: 62px;
@@ -261,20 +278,21 @@
   border-radius: 22px;
   background: rgba(59,130,246,0.12);
   border: 1px solid rgba(59,130,246,0.20);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .home2-chipTop{
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255,255,255,0.75);
 }
+
 .home2-chipVal{
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 /* ===== Mini Card (Supplements/Medikation) ===== */
@@ -288,46 +306,98 @@
 
 .home2-miniTitle{
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255,255,255,0.80);
   margin-bottom: 10px;
 }
 
-.home2-pillRow{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
+/* Supplements grid */
+.home2-suppGrid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
-.home2-pill{
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.75);
-  border-radius: 999px;
-  padding: 9px 12px;
-  font-weight: 900;
+.home2-suppTile{
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  padding: 12px 10px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--h-inset);
+}
+
+.home2-suppTile:active{ transform: scale(0.99); }
+
+.home2-suppIconWrap{
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 8px;
+}
+
+.home2-suppIcon{
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  opacity: 0.55;
+}
+
+.home2-suppLabel{
   font-size: 12px;
-  cursor:pointer;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
 }
 
-.home2-pill.is-active{
-  background: rgba(16,185,129,0.10);
-  border-color: rgba(16,185,129,0.22);
-  color: rgba(255,255,255,0.92);
+.home2-suppTile.is-active .home2-suppIcon{
+  background: rgba(20,184,166,0.14);
+  border-color: rgba(20,184,166,0.24);
+  opacity: 1;
+}
+
+.home2-suppTile.is-active .home2-suppLabel{
+  color: rgba(255,255,255,0.90);
+}
+
+.home2-suppCheck{
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(16,185,129,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.home2-suppCheckIcon{
+  width: 12px;
+  height: 12px;
+  display: block;
 }
 
 /* ===== Appointment (Chronic) ===== */
 .home2-appointment{
   width: 100%;
-  text-align:left;
+  text-align: left;
   border: 1px solid rgba(59,130,246,0.18);
-  background: rgba(59, 131, 246, 0.247);
+  background: rgba(59,131,246,0.247);
   border-radius: var(--h-r-xl);
   padding: 14px;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 12px;
-  cursor:pointer;
+  cursor: pointer;
   box-shadow: var(--h-inset);
 }
 
@@ -337,29 +407,32 @@
   border-radius: 18px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.14);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .home2-dateBadgeTop{
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255,255,255,0.70);
   text-transform: uppercase;
 }
+
 .home2-dateBadgeBottom{
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
-.home2-appointmentText{ flex:1; min-width:0; }
+.home2-appointmentText{ flex: 1; min-width: 0; }
+
 .home2-appointmentTitle{
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
 }
+
 .home2-appointmentSub{
   font-size: 12px;
   color: rgba(255,255,255,0.65);
@@ -368,20 +441,24 @@
 
 .home2-appointmentMeta{
   margin-top: 6px;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 6px;
   color: rgba(16,185,129,0.95);
-  font-weight: 900;
+  font-weight: 700;
   font-size: 12px;
 }
 
-.home2-metaIcon{ width: 14px; height: 14px; }
+.home2-metaIcon{
+  width: 14px;
+  height: 14px;
+  display: block;
+}
 
 /* ===== Insights ===== */
 .home2-insights{
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -394,74 +471,118 @@
 }
 
 .home2-insightTop{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
+.home2-insightTag{
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: rgba(255,255,255,0.92);
+}
+
+/* Icon container: stable centering */
 .home2-insightIcon{
   width: 34px;
   height: 34px;
   border-radius: 14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
 }
 
-.home2-insightTag{
-  font-size: 12px;
-  font-weight: 1000;
-  letter-spacing: .4px;
-  color: rgba(255,255,255,0.85);
+/* ONLY target icons you control (avoid svg + h-icon conflicts) */
+.home2-insightIcon .h-icon{
+  width: 18px;
+  height: 18px;
+  display: block;
+  transform: translateY(0.5px); /* tweak: 0px / 0.5px / 1px */
 }
 
-.home2-insightTitle{
+.home2-insightBody{
+  padding-left: 46px; /* aligned under the tag */
+}
+
+.home2-insightLine{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.home2-insightMetricInline{
   font-size: 14px;
-  font-weight: 1000;
-  margin-bottom: 2px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.2px;
+  flex: 0 0 auto;
 }
 
-.home2-insightText{
-  font-size: 13px;
-  color: rgba(255,255,255,0.70);
+.home2-insightTextInline{
+  font-size: 14px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.25;
   font-weight: 700;
 }
 
+/* Insight tones */
 .home2-insight--purple{
   background: linear-gradient(135deg, rgba(139,92,246,0.18), rgba(139,92,246,0.08));
   border-color: rgba(139,92,246,0.22);
 }
+
 .home2-insight--blue{
   background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(59,130,246,0.08));
   border-color: rgba(59,130,246,0.22);
 }
+
 .home2-insight--green{
   background: linear-gradient(135deg, rgba(16,185,129,0.18), rgba(16,185,129,0.08));
   border-color: rgba(16,185,129,0.22);
 }
 
+/* Default: Tag/Icon take tone color */
+.home2-insight--purple .home2-insightTag,
+.home2-insight--purple .home2-insightIcon{ color: var(--h-purple); }
+
+.home2-insight--blue .home2-insightTag,
+.home2-insight--blue .home2-insightIcon{ color: var(--h-blue); }
+
+/* Slightly tinted icon backgrounds */
+.home2-insight--purple .home2-insightIcon{
+  background: rgba(139,92,246,0.12);
+  border-color: rgba(139,92,246,0.22);
+}
+
+.home2-insight--blue .home2-insightIcon{
+  background: rgba(59,130,246,0.12);
+  border-color: rgba(59,130,246,0.22);
+}
+
 /* ===== Actions ===== */
 .home2-actions{
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
 .home2-actionRow{
-  width:100%;
-  text-align:left;
+  width: 100%;
+  text-align: left;
   border-radius: var(--h-r-xl);
   padding: 12px 14px;
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(255,255,255,0.05);
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 12px;
-  cursor:pointer;
+  cursor: pointer;
   box-shadow: var(--h-inset);
 }
 
@@ -469,46 +590,50 @@
   width: 38px;
   height: 38px;
   border-radius: 16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.75);
 }
 
 .home2-actionText{
-  flex:1;
-  min-width:0;
+  flex: 1;
+  min-width: 0;
 }
 
 .home2-actionTitle{
   font-size: 14px;
-  font-weight: 1000;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
 }
 
 .home2-actionSub{
   margin-top: 3px;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   color: rgba(255,255,255,0.65);
 }
 
 .home2-chevron{
   width: 16px;
   height: 16px;
-  opacity: .7;
-  flex-shrink:0;
+  opacity: 0.7;
+  flex-shrink: 0;
+  color: rgba(255,255,255,0.75);
 }
 
 .home2-actionRow--purple{
   background: linear-gradient(135deg, rgba(139,92,246,0.16), rgba(139,92,246,0.06));
   border-color: rgba(139,92,246,0.20);
 }
+
 .home2-actionRow--blue{
   background: linear-gradient(135deg, rgba(59,130,246,0.16), rgba(59,130,246,0.06));
   border-color: rgba(59,130,246,0.20);
 }
+
 .home2-actionRow--teal{
   background: linear-gradient(135deg, rgba(20,184,166,0.16), rgba(20,184,166,0.06));
   border-color: rgba(20,184,166,0.20);
@@ -517,23 +642,23 @@
 /* ===== Quick Dock (3 Buttons) ===== */
 .home2-quickDock{
   margin-top: 14px;
-  display:flex;
+  display: flex;
   gap: 14px;
-  justify-content:space-between;
+  justify-content: space-between;
   padding-bottom: 10px;
 }
 
 .home2-quickBtn{
-  flex:1;
+  flex: 1;
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(255,255,255,0.04);
   border-radius: 18px;
   padding: 12px 10px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
-  cursor:pointer;
+  cursor: pointer;
   box-shadow: var(--h-inset);
 }
 
@@ -543,26 +668,26 @@
   width: 42px;
   height: 42px;
   border-radius: 16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: grid;
+  place-items: center;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.75);
 }
 
 .home2-quickLabel{
-  font-size: 12px;
-  font-weight: 1000;
+  font-size: 14px;
   color: rgba(255,255,255,0.80);
+  font-weight: 700;
 }
 
-/* ===== Bottom Nav (bleibt kompatibel zu deinem AppShell CSS) ===== */
+/* ===== Bottom Nav ===== */
 .home-navigation{
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(11, 15, 26, 0.95);
+  background: rgba(11,15,26,0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255,255,255,0.10);
@@ -574,14 +699,14 @@
 }
 
 .home-nav-item{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 6px;
   background: transparent;
   border: none;
   color: rgba(255,255,255,0.55);
-  cursor:pointer;
+  cursor: pointer;
   padding: 8px 12px;
   transition: all .2s ease;
 }
@@ -589,8 +714,16 @@
 .home-nav-item:hover{ color: rgba(255,255,255,0.75); }
 .home-nav-item--active{ color: var(--h-blue); }
 
-.home-nav-icon{ width: 24px; height: 24px; }
-.home-nav-label{ font-size: 12px; font-weight: 700; }
+.home-nav-icon{
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.home-nav-label{
+  font-size: 12px;
+  font-weight: 700;
+}
 
 .navSvg *{ fill: currentColor; stroke: currentColor; }
 
@@ -598,4 +731,77 @@
 @media (max-width: 360px){
   .home2-content{ padding: 16px 12px; }
   .home2-quickDock{ gap: 10px; }
+}
+
+/* ===== Chronic Circle Overview ===== */
+.home2-circleRow {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px 2px 20px;
+}
+
+.home2-circleStat {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.home2-circleRing {
+  width: 86px;
+  height: 86px;
+  border-radius: 999px;
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  /* fallback look wenn kein svg-fill sichtbar */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.home2-circleSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.home2-circleBg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.10);
+  stroke-width: 10;
+}
+
+.home2-circleFill {
+  fill: none;
+  stroke: rgba(77, 232, 255, 0.90);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dasharray 200ms ease;
+}
+
+.home2-circleCenter {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 0 6px;
+}
+
+.home2-circleVal {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+
+.home2-circleLabel {
+  font-size: 12px;
+  opacity: 0.85;
 }

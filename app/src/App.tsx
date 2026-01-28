@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import OnboardingFlow from "./pages/onboarding/OnboardingFlow";
 import HomeFlow from "./pages/home/HomeFlow";
 import type { FocusKey } from "./types/focus";
@@ -12,9 +12,7 @@ export default function App() {
   const [hasSeenHomeInsight, setHasSeenHomeInsight] = useState(false);
   const [startInChat, setStartInChat] = useState(false);
 
-  useEffect(() => {
-    sessionStorage.clear();
-  }, []);
+  const resolvedFocus: FocusKey = focusKey ?? "longevity";
 
   return isOnboarded ? (
     <HomeFlow
@@ -22,13 +20,13 @@ export default function App() {
       firstQuestion={firstQuestion}
       hasSeenHomeInsight={hasSeenHomeInsight}
       onSeenHomeInsight={() => setHasSeenHomeInsight(true)}
-      initialStep={startInChat ? "chat" : "home"} 
-      focusKey={"longevity"}    
+      initialStep={startInChat ? "chat" : "home"}
+      focusKey={resolvedFocus}
     />
   ) : (
     <OnboardingFlow
       onFinish={() => {
-        setStartInChat(true);   
+        setStartInChat(true);
         setIsOnboarded(true);
       }}
       userName={userName}
