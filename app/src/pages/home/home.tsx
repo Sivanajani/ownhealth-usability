@@ -16,14 +16,18 @@ import FoodIcon from "../../assets/restaurant.svg?react";
 import SymptomIcon from "../../assets/pills.svg?react";
 import DocumentIcon from "../../assets/document.svg?react";
 import CameraIcon from "../../assets/camera.svg?react";
+import Upload from "../../assets/upload.svg?react";
+
 
 // Kleine Icons in Cards
 import CheckIcon from "../../assets/check.svg?react";
-import WarningIcon from "../../assets/warning.svg?react";
+//import WarningIcon from "../../assets/warning.svg?react";
 import HeartIcon from "../../assets/heartbeat.svg?react";
 import BoltIcon from "../../assets/blitz.svg?react";
 import MoonIcon from "../../assets/moon.svg?react";
 import Clock from "../../assets/clock.svg?react";
+import Question from "../../assets/question-sign.svg?react";
+import Blood from "../../assets/blood.svg?react";
 
 import OwnLogo from "../../assets/O_Logo.svg?react";
 
@@ -229,7 +233,7 @@ export default function Home({
         ],
         quickActions: [
           { key: "food", label: "Essen", icon: <FoodIcon className="h-icon" />, onClick: onOpenFood },
-          { key: "doc", label: "Dokument", icon: <DocumentIcon className="h-icon" />, onClick: onOpenDocument },
+          { key: "doc", label: "Dokument", icon: <Upload className="h-icon" />, onClick: onOpenDocument },
           { key: "scan", label: "Body Scan", icon: <CameraIcon className="h-icon" />, onClick: onOpenBodyScan },
         ],
         scheduleCard: null as null,
@@ -253,14 +257,14 @@ export default function Home({
           tag: "SYMPTOM-MUSTER",
           title: "",
           body: "Weniger Schmerzschübe bei 8h+ Schlaf",
-          icon: <MoonIcon className="h-icon" />,
+          icon: <Question className="h-icon" />,
         },
         {
           tone: "blue" as InsightTone,
           tag: "LABOR-TREND",
           title: "",
           body: "Entzündungswert (CRP) −15% gesunken",
-          icon: <HeartIcon className="h-icon" />,
+          icon: <Blood className="h-icon" />,
         },
       ],
       actionsTitle: "Action",
@@ -270,7 +274,7 @@ export default function Home({
           title: "Zusammenfassung bereit",
           sub: "Kardiologie-Report ansehen & teilen",
           right: "",
-          icon: <DocumentIcon className="h-icon" />,
+          icon: <DocumentIcon className="h-icon-doc" />,
           chevron: true,
         },
         {
@@ -278,7 +282,7 @@ export default function Home({
           title: "L-Thyroxin nachbestellen",
           sub: "Vorrat reicht noch für 5 Tage",
           right: "",
-          icon: <WarningIcon className="h-icon" />,
+          icon: <SymptomIcon className="supmed-icon" />,
           chevron: true,
         },
         {
@@ -286,14 +290,14 @@ export default function Home({
           title: "Labor-Trend für Termin",
           sub: "Wichtige Erkenntnis für das Gespräch",
           right: "",
-          icon: <BoltIcon className="h-icon" />,
+          icon: <Blood className="labor-icon" />,
           chevron: true,
         },
       ],
       quickActions: [
-        { key: "food", label: "Essen", icon: <FoodIcon className="h-icon" />, onClick: onOpenFood },
-        { key: "sym", label: "Symptom", icon: <SymptomIcon className="h-icon" />, onClick: onOpenSymptom },
-        { key: "doc", label: "Dokument", icon: <DocumentIcon className="h-icon" />, onClick: onOpenDocument },
+        { key: "food", label: "Essen", icon: <CameraIcon className="food-icon" />, onClick: onOpenFood },
+        { key: "sym", label: "Symptom", icon: <SymptomIcon className="supmed-icon" />, onClick: onOpenSymptom },
+        { key: "doc", label: "Dokument", icon: <Upload className="up-icon" />, onClick: onOpenDocument },
       ],
     };
   }, [isLongevity, onOpenFood, onOpenDocument, onOpenBodyScan, onOpenSymptom]);

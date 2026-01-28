@@ -239,12 +239,41 @@
   display: block;
 }
 
+.h-icon-doc{
+  width: 18px;
+  height: 18px;
+  display: block;
+  color: rgb(99, 207, 240);
+}
+
 .supmed-icon{
   width: 18px;
   height: 18px;
   color: #10B981;
   display: block;
 }
+
+.labor-icon{
+  width: 18px;
+  height: 18px;
+  color: #8B5CF6;
+  display: block;
+}
+
+.food-icon{
+  width: 18px;
+  height: 18px;
+  display: block;
+  color: #f6ec5c;
+}
+
+.up-icon{
+  width: 18px;
+  height: 18px;
+  display: block;
+  color: #5cf65c;
+}
+
 
 .home2-kpiText{ min-width: 0; }
 
