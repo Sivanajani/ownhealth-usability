@@ -211,3 +211,117 @@
   border: 1px solid rgba(255,255,255,0.10);
   line-height: 1;
 }
+
+.docs-safe{
+  padding-top: 18px;
+  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+}
+
+/* Header like screenshot */
+.docs-header--tight{
+  margin-bottom: 10px;
+}
+
+.docs-title{
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  margin: 0;
+}
+
+.docs-backRound{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.docs-backRound:active{ transform: scale(0.99); }
+
+.docs-headerRight{ width: 34px; }
+
+/* Kategorien row header + green plus */
+.docs-rowHeader{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  margin-top: 14px;
+  margin-bottom: 10px;
+}
+
+.docs-sectionLabel--noTop{
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(255,255,255,0.55);
+}
+
+.docs-plusMini{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(16,185,129,0.35);
+  background: rgba(16,185,129,0.18);
+  color: rgba(16,185,129,0.95);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.docs-plusMini:active{ transform: scale(0.99); }
+
+/* Make all category tones teal like screenshot */
+.docs-card--teal{ border-color: rgba(20, 220, 200, 0.20); }
+.docs-iconWrap--teal{ color: rgba(20, 220, 200, 0.95); }
+
+/* CTA button teal like screenshot */
+.docs-addBtn--teal{
+  margin-top: 18px;
+  height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(20, 220, 200, 0.25);
+  background: rgba(20, 220, 200, 0.20);
+  color: rgba(230, 255, 252, 0.95);
+  font-weight: 650;
+}
+
+.docs-footHint{
+  margin-top: 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+}
+
+.docs-plusMini{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(16,185,129,0.35);
+  background: rgba(16,185,129,0.18);
+  color: rgba(16,185,129,0.95);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.docs-plusMiniIcon{
+  width: 14px;
+  height: 14px;
+  display:block;
+  color: currentColor;
+}
+
+/* erzwingt, dass add.svg wirklich currentColor nutzt */
+.docs-plusMiniIcon,
+.docs-plusMiniIcon *{
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
