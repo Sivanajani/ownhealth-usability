@@ -1,19 +1,37 @@
 // wearables.tsx
 import "../../styles/appShell.css";
 import "./wearables.css";
+
 import HomeIcon from "../../assets/home.svg?react";
 import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 
+import HeartIcon from "../../assets/heart.svg?react";
+import LowBatteryIcon from "../../assets/low-battery.svg?react";
+import MoonIcon from "../../assets/moon.svg?react";
+
+import Smartwatch from "../../assets/1smartwatch.svg?react";
+
+import type { FocusKey } from "../../types/focus";
+
 type Props = {
+  focusKey: FocusKey;
+
   onBack?: () => void;
   onBackToHome?: () => void;
   onOpenFolder?: () => void;
   onBackToChat?: () => void;
 };
 
+export default function Wearables({
+  focusKey,
+  onBack,
+  onBackToHome,
+  onOpenFolder,
+  onBackToChat,
+}: Props) {
+  const isLongevity = focusKey === "longevity";
 
-export default function Wearables({ onBack, onBackToHome, onOpenFolder, onBackToChat }: Props) {
   return (
     <div className="oh-screen wear-bg">
       <div className="oh-safe wear-safe">
@@ -27,157 +45,150 @@ export default function Wearables({ onBack, onBackToHome, onOpenFolder, onBackTo
           <div className="wear-spacer" />
         </header>
 
-        {/* Scrollbarer Inhalt */}
         <main className="wear-content">
-          {/* Top Card */}
-          <section className="wear-heroCard">
-            <div className="wear-heroTop">
-              <div className="wear-heroLeft">
-                <div className="wear-heroKicker">
-                  <span className="wear-heart" aria-hidden="true">♡</span>
-                  <span>HERZGESUNDHEIT</span>
+          {isLongevity ? (
+            <>
+              {/* Bio Status (Top) */}
+              <section className="wear-bioCard">
+                <div className="wear-bioTitle">Dein Bio-Status</div>
+                <div className="wear-bioText">
+                  Deine HRV ist heute 12% höher – ein Zeichen der Erholung durch dein
+                  Magnesium-Supplement gestern Abend.
                 </div>
-                <div className="wear-heroNav">
-                  <button className="wear-miniBtn" aria-label="Zurück">‹</button>
-                  <div className="wear-metric">
-                    <div className="wear-metricValue">
-                      <span className="wear-metricNum">48</span>
-                      <span className="wear-metricUnit">ppm</span>
-                    </div>
-                    <div className="wear-pill">Sehr gut</div>
+              </section>
+
+              {/* 3 Rings */}
+              <section className="wear-ringRow">
+                <div className="wear-ringCard">
+                  <div className="wear-ringIcon wear-ringIcon--purple" aria-hidden="true">
+                    <MoonIcon />
                   </div>
-                  <button className="wear-miniBtn" aria-label="Weiter">›</button>
+                  <div className="wear-ringLabel">Schlaf</div>
+                  <div className="wear-ringValue">7.5h</div>
                 </div>
 
-                <div className="wear-subMetrics">
-                  <span>HRV: 58ms</span>
-                  <span>SpO2: 98%</span>
+                <div className="wear-ringCard">
+                  <div className="wear-ringIcon wear-ringIcon--purple" aria-hidden="true">
+                    <LowBatteryIcon />
+                  </div>
+                  <div className="wear-ringLabel">Erholung</div>
+                  <div className="wear-ringValue">88%</div>
                 </div>
-              </div>
+
+                <div className="wear-ringCard">
+                  <div className="wear-ringIcon wear-ringIcon--purple" aria-hidden="true">
+                    <HeartIcon />
+                  </div>
+                  <div className="wear-ringLabel">Vaskulär</div>
+                  <div className="wear-ringValue">92%</div>
+                </div>
+              </section>
+
+              {/* Analyse link */}
+              <button className="wear-analyseLink" type="button">
+                Analyse <span aria-hidden="true">›</span>
+              </button>
+
+              {/* Metric cards */}
+              <section className="wear-metricGrid">
+                <div className="wear-metricCard">
+                  <div className="wear-metricLabel">HRV</div>
+                  <div className="wear-metricBig">
+                    54 <span>ms</span>
+                  </div>
+                  <div className="wear-bars" aria-hidden="true">
+                    <span /><span /><span /><span /><span /><span />
+                  </div>
+                  <div className="wear-metricHint">
+                    Optimaler Stress-Resilienz-Bereich für dein Alter.
+                  </div>
+                </div>
+
+                <div className="wear-metricCard">
+                  <div className="wear-metricLabel">Ruhe-Puls</div>
+                  <div className="wear-metricBig">
+                    48 <span>BPM</span>
+                  </div>
+                  <div className="wear-bars" aria-hidden="true">
+                    <span /><span /><span /><span /><span /><span />
+                  </div>
+                  <div className="wear-metricHint">4% unter deinem Schnitt.</div>
+                </div>
+
+                <div className="wear-metricCard">
+                  <div className="wear-metricLabel">Atemfrequenz</div>
+                  <div className="wear-metricBig">
+                    14.2 <span>/min</span>
+                  </div>
+                  <div className="wear-bars" aria-hidden="true">
+                    <span /><span /><span /><span /><span /><span />
+                  </div>
+                  <div className="wear-metricHint">
+                    Normaler Wert – keine veränderte Schlafqualität.
+                  </div>
+                </div>
+
+                <div className="wear-metricCard">
+                  <div className="wear-metricLabel">Temperatur</div>
+                  <div className="wear-metricBig">
+                    36.4 <span>°</span>
+                  </div>
+                  <div className="wear-bars" aria-hidden="true">
+                    <span /><span /><span /><span /><span /><span />
+                  </div>
+                  <div className="wear-metricHint">
+                    Keine Anzeichen von Entzündungen oder Infekten.
+                  </div>
+                </div>
+              </section>
+
+              {/* Device Card */}
+              <section className="wear-deviceCard">
+                <div className="wear-deviceIcon" aria-hidden="true"><Smartwatch/></div>
+                <div className="wear-deviceText">
+                  <div className="wear-deviceTitle">Apple Watch Series 9</div>
+                  <div className="wear-deviceMeta">vor 2 Minuten</div>
+                </div>
+                <div className="wear-deviceStatus">
+                  <span className="wear-onlineDot" aria-hidden="true" />
+                  <span>Verbunden</span>
+                </div>
+              </section>
+
+              <button className="wear-addBtn" type="button">
+                <span className="wear-plus" aria-hidden="true">＋</span>
+                Weiteres Wearable
+              </button>
+            </>
+          ) : (
+            <div style={{ opacity: 0.65, padding: "10px 2px" }}>
+              Chronic-Ansicht kommt als Nächstes.
             </div>
-
-            <div className="wear-bar">
-              <span className="wear-barSeg wear-barSeg--g1" />
-              <span className="wear-barSeg wear-barSeg--g2" />
-              <span className="wear-barSeg wear-barSeg--o" />
-            </div>
-          </section>
-
-          {/* KPI Grid */}
-          <section className="wear-grid">
-            <div className="wear-kpi wear-kpi--teal">
-              <div className="wear-kpiTop">
-                <span className="wear-dot wear-dot--teal" />
-                <span className="wear-kpiLabel">Sehr aktiv</span>
-              </div>
-              <div className="wear-kpiValue">12.450</div>
-              <div className="wear-kpiMeta">124% Ziel</div>
-            </div>
-
-            <div className="wear-kpi wear-kpi--amber">
-              <div className="wear-kpiTop">
-                <span className="wear-dot wear-dot--amber" />
-                <span className="wear-kpiLabel">Gut</span>
-              </div>
-              <div className="wear-kpiValue">7,2h</div>
-              <div className="wear-kpiMeta">80% Ziel</div>
-            </div>
-
-            <div className="wear-kpi wear-kpi--mint">
-              <div className="wear-kpiTop">
-                <span className="wear-dot wear-dot--mint" />
-                <span className="wear-kpiLabel">Erholt</span>
-              </div>
-              <div className="wear-kpiValue">58ms</div>
-              <div className="wear-kpiMeta">+8ms vs. Ø</div>
-            </div>
-
-            <div className="wear-kpi">
-              <div className="wear-kpiTop">
-                <span className="wear-dot" />
-                <span className="wear-kpiLabel">Entspannt</span>
-              </div>
-              <div className="wear-kpiValue">Niedrig</div>
-              <div className="wear-kpiMeta">23 von 100</div>
-            </div>
-
-            <div className="wear-kpi wear-kpi--mint">
-              <div className="wear-kpiTop">
-                <span className="wear-dot wear-dot--mint" />
-                <span className="wear-kpiLabel">Sehr gut</span>
-              </div>
-              <div className="wear-kpiValue">2.450</div>
-              <div className="wear-kpiMeta">kcal</div>
-            </div>
-
-            <div className="wear-kpi wear-kpi--amber">
-              <div className="wear-kpiTop">
-                <span className="wear-dot wear-dot--amber" />
-                <span className="wear-kpiLabel">Fast da</span>
-              </div>
-              <div className="wear-kpiValue">10/12</div>
-              <div className="wear-kpiMeta">2h fehlen</div>
-            </div>
-          </section>
-
-          {/* Für dich */}
-          <div className="wear-sectionLabel">✨ FÜR DICH</div>
-
-          <section className="wear-suggestions">
-            <button className="wear-suggestCard" type="button">
-              <div className="wear-suggestTitle">Früher ins Bett heute</div>
-              <div className="wear-suggestMeta">47 Min Schlafdefizit</div>
-              <div className="wear-suggestArrow" aria-hidden="true">›</div>
-            </button>
-
-            <button className="wear-suggestCard" type="button">
-              <div className="wear-suggestTitle">HRV steigt weiter</div>
-              <div className="wear-suggestMeta">Gute Erholungstendenz</div>
-              <div className="wear-suggestArrow" aria-hidden="true">›</div>
-            </button>
-
-            <button className="wear-link" type="button">
-              Alle Metriken anzeigen <span aria-hidden="true">›</span>
-            </button>
-          </section>
-
-          {/* Device Card */}
-          <section className="wear-deviceCard">
-            <div className="wear-deviceIcon" aria-hidden="true">⌚</div>
-            <div className="wear-deviceText">
-              <div className="wear-deviceTitle">Apple Watch Series 9</div>
-              <div className="wear-deviceMeta">vor 2 Minuten</div>
-            </div>
-            <div className="wear-deviceStatus">
-              <span className="wear-onlineDot" aria-hidden="true" />
-              <span>Verbunden</span>
-            </div>
-          </section>
-
-          <button className="wear-addBtn" type="button">
-            <span className="wear-plus" aria-hidden="true">＋</span>
-            Weiteres Wearable
-          </button>
+          )}
         </main>
       </div>
 
       {/* Bottom Nav */}
       <nav className="home-navigation">
         <button className="home-nav-item" onClick={onBackToHome} type="button">
-            <HomeIcon className="home-nav-icon" />
-            <span className="home-nav-label">Home</span>
+          <HomeIcon className="home-nav-icon" />
+          <span className="home-nav-label">Home</span>
         </button>
 
         <button className="home-nav-item" onClick={onBackToChat} type="button">
-            <AssistantIcon className="home-nav-icon" />
-            <span className="home-nav-label">Assistent</span>
+          <AssistantIcon className="home-nav-icon" />
+          <span className="home-nav-label">Assistent</span>
         </button>
 
-        <button className="home-nav-item home-nav-item--active" onClick={onOpenFolder} type="button">
-            <FolderIcon className="home-nav-icon" />
-            <span className="home-nav-label">Ordner</span>
+        <button
+          className="home-nav-item home-nav-item--active"
+          onClick={onOpenFolder}
+          type="button"
+        >
+          <FolderIcon className="home-nav-icon" />
+          <span className="home-nav-label">Ordner</span>
         </button>
-      </nav>      
+      </nav>
     </div>
   );
 }

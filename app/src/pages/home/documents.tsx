@@ -13,6 +13,8 @@ import HomeIcon from "../../assets/home.svg?react";
 import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 
+import Add from "../../assets/add.svg?react";
+
 type Props = {
   onBack?: () => void;
   onOpenCategory?: (key: string) => void;
@@ -106,8 +108,9 @@ export default function Documents({ onBack, onOpenCategory, onOpenFolder, onBack
 
         <button className="docs-addBtn" type="button">
           <span className="docs-addPlus" aria-hidden="true">＋</span>
-          Kategorie hinzufügen
+          Dokument hinzufügen
         </button>
+        <span className="docs-sectionLabel" aria-hidden="true">Die KI sortiert dein Dokument automatisch ein</span>
       </div>
 
       {/* Bottom Nav */}
