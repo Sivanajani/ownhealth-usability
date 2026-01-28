@@ -1,39 +1,49 @@
 import "../../styles/appShell.css";
 import "./folder.css";
 
-import TrendIcon from "../../assets/trend.svg?react";
-import WarningIcon from "../../assets/warning.svg?react";
-import FileIcon from "../../assets/file.svg?react";
-
+import LockIcon from "../../assets/lock.svg?react";
 import SmartwatchIcon from "../../assets/smartwatch.svg?react";
 import DocumentIcon from "../../assets/document.svg?react";
 import PillsIcon from "../../assets/pills.svg?react";
 import RestaurantIcon from "../../assets/restaurant.svg?react";
-
-import CameraIcon from "../../assets/camera.svg?react";
-import UploadIcon from "../../assets/upload.svg?react";
-
 import HomeIcon from "../../assets/home.svg?react";
 import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
+import BodyInlineIcon from "../../assets/user.svg?react";
+import CheckupsInlineIcon from "../../assets/calendar.svg?react";
+import Pulse from "../../assets/heartbeat.svg?react";
+import AddIcon from "../../assets/add.svg?react";
+
+
+import type { FocusKey } from "../../types/focus";
 
 type Props = {
+  focusKey: FocusKey;
   onBackToHome?: () => void;
   onOpenChat?: () => void;
   onOpenWearables?: () => void;
   onOpenDocuments?: () => void;
   onOpenMedication?: () => void;
   onOpenNutrition?: () => void;
+  onOpenCheckups?: () => void;
+  onOpenBody?: () => void;
+  onAddData?: () => void; 
 };
 
 export default function Folder({
+  focusKey,
   onBackToHome,
   onOpenChat,
   onOpenWearables,
   onOpenDocuments,
   onOpenMedication,
   onOpenNutrition,
+  onOpenCheckups,
+  onOpenBody,
+  onAddData,
 }: Props) {
+  const isLongevity = focusKey === "longevity";
+
   return (
     <div className="oh-screen folder-bg">
       <div className="oh-safe folder-safe">
@@ -42,51 +52,74 @@ export default function Folder({
           <div className="folder-titleBlock">
             <h1 className="folder-title">Ordner</h1>
             <div className="folder-sub">
-              <span className="folder-lock" aria-hidden="true">🔒</span>
+              <span className="folder-lock" aria-hidden="true">
+                <LockIcon />
+              </span>
               <span>Sicher verschlüsselt</span>
             </div>
           </div>
         </header>
 
-        {/* Content */}
         <main className="folder-content">
-          <div className="folder-sectionLabel">INSIGHTS</div>
-
-          <div className="insightCard insightCard--good">
-            <div className="insightIcon" aria-hidden="true">
-              <TrendIcon />
+          {/* Progress */}
+          <section className="folder-progress">
+            <div className="folder-progressRow">
+              <div className="folder-progressLabel">
+                {isLongevity ? "Mehr Daten = präzisere Insights" : "Mehr Daten = Genauere Ergebnisse"}
+              </div>
+              <div className="folder-progressPct">26%</div>
             </div>
-            <div className="insightText">
-              <div className="insightTitle">Schlaf verbessert!</div>
-              <div className="insightMeta">+23% seit Magnesium</div>
+            <div className="folder-progressTrack" aria-hidden="true">
+              <div className="folder-progressFill" style={{ width: "26%" }} />
             </div>
-          </div>
+          </section>
 
-          <div className="insightCard insightCard--warn">
-            <div className="insightIcon" aria-hidden="true">
-              <WarningIcon />
-            </div>
-            <div className="insightText">
-              <div className="insightTitle">Vitamin D niedrig</div>
-              <div className="insightMeta">18 ng/ml (Ziel: 30+)</div>
-            </div>
-          </div>
-
-          <button className="summaryBtn">
-            <span className="summaryIcon" aria-hidden="true">
-              <FileIcon />
-            </span>
-            <span>Arzt-Summary erstellen</span>
-          </button>
-
+          {/* Next steps */}
           <div className="folder-sectionLabel folder-sectionLabel--spaced">
-            MEINE DATEN
+            NÄCHSTE SCHRITTE
           </div>
 
-          <div className="folder-grid">
+          <div className="nextSteps">
+            <button className="nextStepItem" type="button">
+              <span className="nextStepIcon" aria-hidden="true">
+                <DocumentIcon />
+              </span>
+              <span className="nextStepText">Bluttest hochladen</span>
+              <span className="nextStepGain">+15%</span>
+            </button>
+
+            <button className="nextStepItem" type="button">
+              <span className="nextStepIcon nextStepIcon--pulse" aria-hidden="true">
+                <Pulse />
+              </span>
+              <span className="nextStepText">Basis-Check</span>
+              <span className="nextStepGain">+20%</span>
+            </button>
+          </div>
+
+          {/* My data header */}
+          <div className="folder-rowHeader">
+            <div className="folder-sectionLabel folder-sectionLabel--spaced">
+              MEINE DATEN
+            </div>
+
+            <button
+              type="button"
+              className="folder-plusBtn"
+              aria-label="Daten hinzufügen"
+              onClick={onAddData}
+            >
+              <span className="folder-plusIcon" aria-hidden="true">
+                <AddIcon />
+              </span>
+            </button>
+          </div>
+
+          {/* Grid */}
+          <div className="folder-grid folder-grid--6">
             {/* Wearables */}
             <div
-              className="dataCard dataCard--teal"
+              className="dataCard dataCard--purple"
               role="button"
               tabIndex={0}
               onClick={onOpenWearables}
@@ -96,22 +129,22 @@ export default function Folder({
                 <div className="dataIcon" aria-hidden="true">
                   <SmartwatchIcon />
                 </div>
-                <div className="chev" aria-hidden="true">›</div>
+                <div className="chev" aria-hidden="true">
+                  ›
+                </div>
               </div>
 
               <div className="dataTitle">Wearables</div>
-              <div className="dataSub">Apple Health • Live</div>
+              <div className="dataSub">Whoop • Sehr aktiv</div>
 
               <div className="dataBottom">
-                <div className="dataStrong">Sehr aktiv</div>
-                <div className="dataMeta">12,450 Schritte</div>
-                <div className="dataMeta">72 Std. Erholt ↗</div>
+                <div className="dataMeta">Heute: 12,450 Schritte</div>
               </div>
             </div>
 
             {/* Dokumente */}
             <div
-              className="dataCard dataCard--indigo"
+              className="dataCard dataCard--cyan"
               role="button"
               tabIndex={0}
               onClick={onOpenDocuments}
@@ -121,28 +154,19 @@ export default function Folder({
                 <div className="dataIcon" aria-hidden="true">
                   <DocumentIcon />
                 </div>
-                <div className="chev" aria-hidden="true">›</div>
+                <div className="chev" aria-hidden="true">
+                  ›
+                </div>
               </div>
 
               <div className="dataTitle">Dokumente</div>
+              <div className="dataSub">...</div>
               <div className="dataSub">12 Dateien</div>
-
-              <div
-                className="dataActions"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button className="pillBtn" aria-label="Kamera">
-                  <CameraIcon />
-                </button>
-                <button className="pillBtn" aria-label="Upload">
-                  <UploadIcon />
-                </button>
-              </div>
             </div>
 
-            {/* Medikation */}
+            {/* Supplements / Medikation */}
             <div
-              className="dataCard dataCard--purple"
+              className="dataCard dataCard--orange"
               role="button"
               tabIndex={0}
               onClick={onOpenMedication}
@@ -152,21 +176,15 @@ export default function Folder({
                 <div className="dataIcon" aria-hidden="true">
                   <PillsIcon />
                 </div>
-                <div className="chev" aria-hidden="true">›</div>
+                <div className="chev" aria-hidden="true">
+                  ›
+                </div>
               </div>
 
-              <div className="dataTitle">Medikation</div>
-              <div className="dataSub">Heute:</div>
-              <div className="dataMeta">B12 ✓</div>
-              <div className="dataMeta">Zink</div>
-
-              <button
-                className="dataFooterBtn"
-                aria-label="Scannen"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <CameraIcon />
-              </button>
+              <div className="dataTitle">{isLongevity ? "Supplements" : "Medikation"}</div>
+              <div className="dataSub">
+                {isLongevity ? "B12, Zink, Omega-3" : "Heute: B12 ✓, Zink"}
+              </div>
             </div>
 
             {/* Nutrition */}
@@ -181,42 +199,77 @@ export default function Folder({
                 <div className="dataIcon" aria-hidden="true">
                   <RestaurantIcon />
                 </div>
-                <div className="chev" aria-hidden="true">›</div>
+                <div className="chev" aria-hidden="true">
+                  ›
+                </div>
               </div>
 
               <div className="dataTitle">Ernährung</div>
-              <div className="dataSub">Heute: 1,850 kcal</div>
-              <div className="dataMeta">• 2 Mahlzeiten</div>
+              <div className="dataSub">2 Mahlzeiten</div>
+            </div>
 
-              <button
-                className="dataFooterBtn"
-                aria-label="Scannen"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <CameraIcon />
-              </button>
+            {/* Check-Ups */}
+            <div
+              className="dataCard dataCard--blue"
+              role="button"
+              tabIndex={0}
+              onClick={onOpenCheckups}
+              onKeyDown={(e) => e.key === "Enter" && onOpenCheckups?.()}
+            >
+              <div className="dataTop">
+                <div className="dataIcon" aria-hidden="true">
+                  <CheckupsInlineIcon />
+                </div>
+                <div className="chev" aria-hidden="true">
+                  ›
+                </div>
+              </div>
+
+              <div className="dataTitle">Termine</div>
+              <div className="dataSub">Nächster: 24. Jan</div>
+            </div>
+
+            {/* Body */}
+            <div
+              className="dataCard dataCard--pink"
+              role="button"
+              tabIndex={0}
+              onClick={onOpenBody}
+              onKeyDown={(e) => e.key === "Enter" && onOpenBody?.()}
+            >
+              <div className="dataTop">
+                <div className="dataIcon" aria-hidden="true">
+                  <BodyInlineIcon />
+                </div>
+                <div className="chev" aria-hidden="true">
+                  ›
+                </div>
+              </div>
+
+              <div className="dataTitle">My Bodyscan</div>
+              <div className="dataSub">Letzter Scan: 5. Jan</div>
             </div>
           </div>
         </main>
       </div>
 
-      {/* Bottom Nav */}
+      {/* Bottom Nav (NICHT ÄNDERN) */}
       <nav className="home-navigation">
-          <button className="home-nav-item" onClick={onBackToHome} type="button">
-            <HomeIcon className="home-nav-icon" />
-            <span className="home-nav-label">Home</span>
-          </button>
+        <button className="home-nav-item" onClick={onBackToHome} type="button">
+          <HomeIcon className="home-nav-icon" />
+          <span className="home-nav-label">Home</span>
+        </button>
 
-          <button className="home-nav-item" onClick={onOpenChat} type="button">
-            <AssistantIcon className="home-nav-icon" />
-            <span className="home-nav-label">Assistent</span>
-          </button>
+        <button className="home-nav-item" onClick={onOpenChat} type="button">
+          <AssistantIcon className="home-nav-icon" />
+          <span className="home-nav-label">Assistent</span>
+        </button>
 
-          <button className="home-nav-item home-nav-item--active" type="button">
-            <FolderIcon className="home-nav-icon" />
-            <span className="home-nav-label">Ordner</span>
-          </button>
-      </nav>      
+        <button className="home-nav-item home-nav-item--active" type="button">
+          <FolderIcon className="home-nav-icon" />
+          <span className="home-nav-label">Ordner</span>
+        </button>
+      </nav>
     </div>
   );
 }

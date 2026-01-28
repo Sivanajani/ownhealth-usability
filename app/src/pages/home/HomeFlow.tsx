@@ -82,6 +82,7 @@ export default function HomeFlow({
   if (step === "folder")
     return (
       <Folder
+        focusKey={focusKey}
         onBackToHome={() => setStep("home")}
         onOpenChat={() => setStep("chat")}
         onOpenWearables={() => setStep("wearables")}
