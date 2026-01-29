@@ -648,3 +648,349 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* =========================
+   Meal Sheet (Add Meal Popup)
+========================= */
+
+.ms-backdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  align-items: end;
+}
+
+.ms-backdropBtn{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.55);
+  border:0;
+  padding:0;
+}
+
+.ms-sheet{
+  position: relative;
+  width: 100%;
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  background: rgba(8, 12, 22, 0.92);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 -18px 40px rgba(0,0,0,0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 10px 14px 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  isolation: isolate;
+}
+
+.ms-grab{
+  width: 56px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.18);
+  margin: 4px auto 10px;
+}
+
+.ms-topbar{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.ms-iconBtn{
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.ms-chip{
+  flex: 1;
+  text-align:center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.80);
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+}
+
+.ms-card{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(12,18,32,0.42);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  padding: 14px;
+}
+
+.ms-heroImg{
+  display:flex;
+  justify-content:center;
+  margin: 6px 0 10px;
+}
+
+.ms-plate{
+  width: 94px;
+  height: 94px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(43,212,143,0.45), transparent 55%),
+    radial-gradient(circle at 65% 55%, rgba(59,130,246,0.35), transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15), transparent 65%),
+    rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+
+.ms-title{
+  font-size: 16px;
+  font-weight: 820;
+  color: rgba(255,255,255,0.92);
+  text-align:center;
+  margin-top: 4px;
+}
+
+.ms-sub{
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  text-align:center;
+  margin-top: 4px;
+}
+
+.ms-kpis{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.ms-kpi{
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+}
+
+.ms-kpiLabel{
+  font-size: 11px;
+  color: rgba(255,255,255,0.50);
+}
+
+.ms-kpiValue{
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.92);
+}
+
+.ms-sectionTitle{
+  margin: 12px 2px 10px;
+  font-size: 14px;
+  font-weight: 820;
+  color: rgba(255,255,255,0.92);
+}
+
+.ms-list{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ms-row{
+  width: 100%;
+  border-radius: 18px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(12,18,32,0.40);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  text-align:left;
+}
+
+.ms-row--muted{
+  opacity: 0.85;
+}
+
+.ms-rowLeft{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ms-rowIcon{
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  flex: 0 0 auto;
+}
+
+.ms-rowIcon--ok{
+  border-color: rgba(43,212,143,0.22);
+  background: rgba(43,212,143,0.10);
+}
+
+.ms-rowIcon--info{
+  border-color: rgba(59,130,246,0.22);
+  background: rgba(59,130,246,0.10);
+}
+
+.ms-rowText{
+  min-width: 0;
+}
+
+.ms-rowTitle{
+  font-size: 13px;
+  font-weight: 760;
+  color: rgba(255,255,255,0.92);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ms-rowMeta{
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ms-rowMeta--ok{
+  color: rgba(43,212,143,0.95);
+}
+
+.ms-rowMeta--info{
+  color: rgba(59,130,246,0.95);
+}
+
+.ms-chevron{
+  font-size: 22px;
+  line-height: 1;
+  color: rgba(255,255,255,0.45);
+  margin-left: 12px;
+}
+
+.ms-footer{
+  margin-top: 12px;
+  padding-top: 6px;
+}
+
+.ms-primary{
+  width: 100%;
+  height: 54px;
+  border-radius: 16px;
+  border: 1px solid rgba(70,140,255,0.25);
+  background: rgba(70,140,255,0.90);
+  color: rgba(255,255,255,0.95);
+  font-size: 14px;
+  font-weight: 780;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+}
+
+.ms-primary:active{
+  transform: translateY(1px);
+  filter: brightness(0.98);
+}
+
+.ms-footNote{
+  margin-top: 10px;
+  text-align:center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ===== Meal Sheet: make it scroll + keep save button visible ===== */
+
+/* backdrop muss alles abdecken und taps blocken */
+.ms-backdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  align-items: end;
+}
+
+/* CLICK AREA */
+.ms-backdropBtn{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.55);
+  border:0;
+  padding:0;
+}
+
+/* WICHTIG: Sheet muss begrenzt sein und scrollen können */
+.ms-sheet{
+  position: relative;
+  width: 100%;
+  max-height: calc(100dvh - 16px);        /* <= macht das sheet intern scrollbar */
+  overflow-y: auto;                       /* <= scroll im sheet */
+  -webkit-overflow-scrolling: touch;
+
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  background: rgba(8, 12, 22, 0.92);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 -18px 40px rgba(0,0,0,0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  padding: 10px 14px 14px;
+  padding-bottom: calc(120px + env(safe-area-inset-bottom)); /* Platz für sticky footer */
+}
+
+/* Footer bleibt sichtbar */
+.ms-footer{
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+
+  margin-top: 12px;
+  padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
+
+  /* Glasverlauf wie iOS – damit Text dahinter nicht stört */
+  background: linear-gradient(
+    to top,
+    rgba(8,12,22,0.98),
+    rgba(8,12,22,0.75),
+    rgba(8,12,22,0.00)
+  );
+}
+
+/* Button im Footer */
+.ms-primary{
+  width: 100%;
+  height: 54px;
+  border-radius: 16px;
+  border: 1px solid rgba(70,140,255,0.25);
+  background: rgba(70,140,255,0.90);
+  color: rgba(255,255,255,0.95);
+  font-size: 14px;
+  font-weight: 780;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+}
+
+.ms-primary:active{
+  transform: translateY(1px);
+  filter: brightness(0.98);
+}

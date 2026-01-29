@@ -2,6 +2,8 @@
 import "../../styles/appShell.css";
 import "./nutrition.css";
 
+import { useEffect, useState } from "react";
+
 import LeafIcon from "../../assets/leaf.svg?react";
 import FireIcon from "../../assets/fire.svg?react";
 import MeatIcon from "../../assets/meat.svg?react";
@@ -24,8 +26,8 @@ type Props = {
   onBackToChat?: () => void;
   onOpenFolder?: () => void;
 
-  onAddMeal?: () => void;      
-  onOpenHistory?: () => void;  
+  onAddMeal?: () => void; // optional: falls du trotzdem extern navigieren willst
+  onOpenHistory?: () => void;
 };
 
 const todayLabel = new Intl.DateTimeFormat("de-CH", {
@@ -33,16 +35,161 @@ const todayLabel = new Intl.DateTimeFormat("de-CH", {
   month: "short",
 }).format(new Date());
 
+function MealAddSheet({
+  open,
+  onClose,
+  onSave,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onSave: () => void;
+}) {
+  // Scroll-Lock
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  // ESC schließt
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="ms-backdrop" role="dialog" aria-modal="true">
+      <button className="ms-backdropBtn" onClick={onClose} aria-label="Schließen" />
+
+      <div className="ms-sheet" role="document">
+        <div className="ms-grab" aria-hidden="true" />
+
+        <div className="ms-topbar">
+          <button className="ms-iconBtn" onClick={onClose} type="button" aria-label="Zurück">
+            ‹
+          </button>
+
+          <div className="ms-chip">Lebensmittel scannen</div>
+
+          <button className="ms-iconBtn" onClick={onClose} type="button" aria-label="Schließen">
+            ✕
+          </button>
+        </div>
+
+        <div className="ms-card">
+          <div className="ms-heroImg" aria-hidden="true">
+            {/* Placeholder-Kreis wie im Screenshot */}
+            <div className="ms-plate" />
+          </div>
+
+          <div className="ms-title">Buddha Bowl mit Quinoa</div>
+          <div className="ms-sub">KI analysiert Nährstoffe automatisch</div>
+
+          <div className="ms-kpis">
+            <div className="ms-kpi">
+              <div className="ms-kpiLabel">Kalorien</div>
+              <div className="ms-kpiValue">~650 kcal</div>
+            </div>
+
+            <div className="ms-kpi">
+              <div className="ms-kpiLabel">Protein</div>
+              <div className="ms-kpiValue">35g</div>
+            </div>
+
+            <div className="ms-kpi">
+              <div className="ms-kpiLabel">Carbs</div>
+              <div className="ms-kpiValue">60g</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="ms-sectionTitle">Wichtig für deine Optimierung</div>
+
+        <div className="ms-list">
+          <button className="ms-row" type="button">
+            <div className="ms-rowLeft">
+              <div className="ms-rowIcon ms-rowIcon--ok" aria-hidden="true">⚖️</div>
+              <div className="ms-rowText">
+                <div className="ms-rowTitle">Makronährstoff-Balance</div>
+                <div className="ms-rowMeta ms-rowMeta--ok">✓ Passt zu deinen Zielen</div>
+              </div>
+            </div>
+            <span className="ms-chevron" aria-hidden="true">›</span>
+          </button>
+
+          <button className="ms-row" type="button">
+            <div className="ms-rowLeft">
+              <div className="ms-rowIcon" aria-hidden="true">🥦</div>
+              <div className="ms-rowText">
+                <div className="ms-rowTitle">Mikronährstoffe &amp; Bioaktive</div>
+                <div className="ms-rowMeta">Polyphenole, Antioxidantien, Vitamine</div>
+              </div>
+            </div>
+            <span className="ms-chevron" aria-hidden="true">›</span>
+          </button>
+
+          <button className="ms-row" type="button">
+            <div className="ms-rowLeft">
+              <div className="ms-rowIcon ms-rowIcon--info" aria-hidden="true">⏱️</div>
+              <div className="ms-rowText">
+                <div className="ms-rowTitle">Timing-Effekt</div>
+                <div className="ms-rowMeta ms-rowMeta--info">Optimal vor 18 Uhr für HRV</div>
+              </div>
+            </div>
+            <span className="ms-chevron" aria-hidden="true">›</span>
+          </button>
+
+          <button className="ms-row ms-row--muted" type="button">
+            <div className="ms-rowLeft">
+              <div className="ms-rowText">
+                <div className="ms-rowTitle">Zusätzliche Infos (optional)</div>
+              </div>
+            </div>
+            <span className="ms-chevron" aria-hidden="true">›</span>
+          </button>
+        </div>
+
+        <div className="ms-footer">
+          <button className="ms-primary" type="button" onClick={onSave}>
+            Mahlzeit speichern
+          </button>
+          <div className="ms-footNote">Wird mit deinen Biomarkern verknüpft</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Nutrition({
   focusKey,
   onBack,
   onBackToHome,
   onBackToChat,
   onOpenFolder,
-  onAddMeal,
   onOpenHistory,
 }: Props) {
   const isLongevity = focusKey === "longevity";
+  const [mealSheetOpen, setMealSheetOpen] = useState(false);
+
+  const handleOpenMeal = () => {
+    // wenn du extern navigieren willst, kannst du das trotzdem lassen:
+    // onAddMeal?.();
+    setMealSheetOpen(true);
+  };
+
+  const handleSaveMeal = () => {
+    // später: API Call / State Update
+    setMealSheetOpen(false);
+  };
 
   return (
     <div className="oh-screen nut-bg">
@@ -171,15 +318,12 @@ export default function Nutrition({
           </section>
         )}
 
-
         {/* Wirkung */}
         <div className="nut-sectionLabel">WIRKUNG</div>
 
         <section className="nut-effectCard">
           <div className="nut-effectRow">
-            <div className="nut-effectTitle">
-              Seit präziser Makro-Steuerung (14 Tage):
-            </div>
+            <div className="nut-effectTitle">Seit präziser Makro-Steuerung (14 Tage):</div>
 
             <div className="nut-spark" aria-hidden="true">
               <span />
@@ -212,9 +356,9 @@ export default function Nutrition({
         </button>
       </div>
 
-      {/* Sticky Add Button (klickbar) */}
+      {/* Sticky Add Button (öffnet Sheet) */}
       <div className="nut-stickyCta">
-        <button className="nut-primaryBtn" type="button" onClick={onAddMeal}>
+        <button className="nut-primaryBtn" type="button" onClick={handleOpenMeal}>
           <span className="nut-plus" aria-hidden="true">+</span>
           Mahlzeit hinzufügen
         </button>
@@ -241,6 +385,13 @@ export default function Nutrition({
           <span className="home-nav-label">Ordner</span>
         </button>
       </nav>
+
+      {/* Sheet */}
+      <MealAddSheet
+        open={mealSheetOpen}
+        onClose={() => setMealSheetOpen(false)}
+        onSave={handleSaveMeal}
+      />
     </div>
   );
 }
