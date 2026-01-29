@@ -130,6 +130,7 @@ export default function HomeFlow({
   if (step === "nutrition")
     return (
       <Nutrition
+        focusKey={focusKey}  
         onBack={() => setStep("folder")}
         onBackToHome={() => setStep("home")}
         onBackToChat={() => setStep("chat")}

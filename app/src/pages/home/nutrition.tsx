@@ -9,17 +9,23 @@ import MeatIcon from "../../assets/meat.svg?react";
 import ChickenIcon from "../../assets/chicken-leg.svg?react";
 import CoffeeIcon from "../../assets/coffee.svg?react";
 import WarningIcon from "../../assets/warning.svg?react";
-import TrendIcon from "../../assets/trend.svg?react";
 
 import HomeIcon from "../../assets/home.svg?react";
 import AssistantIcon from "../../assets/chat.svg?react";
 import FolderIcon from "../../assets/folder.svg?react";
 
+export type FocusKey = "longevity" | "chronic";
+
 type Props = {
+  focusKey: FocusKey;
+
   onBack?: () => void;
   onBackToHome?: () => void;
   onBackToChat?: () => void;
   onOpenFolder?: () => void;
+
+  onAddMeal?: () => void;      
+  onOpenHistory?: () => void;  
 };
 
 const todayLabel = new Intl.DateTimeFormat("de-CH", {
@@ -27,8 +33,17 @@ const todayLabel = new Intl.DateTimeFormat("de-CH", {
   month: "short",
 }).format(new Date());
 
+export default function Nutrition({
+  focusKey,
+  onBack,
+  onBackToHome,
+  onBackToChat,
+  onOpenFolder,
+  onAddMeal,
+  onOpenHistory,
+}: Props) {
+  const isLongevity = focusKey === "longevity";
 
-export default function Nutrition({ onBack, onBackToHome, onBackToChat, onOpenFolder }: Props) {
   return (
     <div className="oh-screen nut-bg">
       <div className="oh-safe nut-safe">
@@ -103,8 +118,8 @@ export default function Nutrition({ onBack, onBackToHome, onBackToChat, onOpenFo
               <CoffeeIcon className="nut-mealSvg" />
             </div>
             <div className="nut-mealText">
-              <div className="nut-mealTitle">Haferflocken mit Banane</div>
-              <div className="nut-mealMeta">350 kcal • 09:00</div>
+              <div className="nut-mealTitle">Haferflocken mit Beeren</div>
+              <div className="nut-mealMeta">350 kcal • 08:00</div>
             </div>
           </button>
 
@@ -113,7 +128,7 @@ export default function Nutrition({ onBack, onBackToHome, onBackToChat, onOpenFo
               <MeatIcon className="nut-mealSvg" />
             </div>
             <div className="nut-mealText">
-              <div className="nut-mealTitle">Pasta mit Tomatensoße</div>
+              <div className="nut-mealTitle">Lachs-Bowl</div>
               <div className="nut-mealMeta">650 kcal • 13:30</div>
             </div>
           </button>
@@ -123,35 +138,38 @@ export default function Nutrition({ onBack, onBackToHome, onBackToChat, onOpenFo
               <ChickenIcon className="nut-mealSvg" />
             </div>
             <div className="nut-mealText">
-              <div className="nut-mealTitle">Hähnchen mit Gemüse</div>
+              <div className="nut-mealTitle">Protein-Shake</div>
               <div className="nut-mealMeta">550 kcal • 19:00</div>
             </div>
           </button>
         </section>
 
-        {/* Primary */}
-        <button className="nut-primaryBtn" type="button">
-          + Mahlzeit hinzufügen
-        </button>                
+        {/* Tips row (Longevity) */}
+        {isLongevity && (
+          <section className="nut-insights">
+            <div className="nut-insightCard nut-insightCard--warn">
+              <div className="nut-insightIcon nut-insightIcon--warn" aria-hidden="true">
+                <WarningIcon className="nut-insightSvg" />
+              </div>
 
-        {/* Tips row */}
-        <section className="nut-tips">
-          <div className="nut-tipCard">
-            <div className="nut-tipTop">
-              <WarningIcon className="nut-tipSvg nut-tipSvg--amber" aria-hidden="true" />
-              <div className="nut-tipTitle">45g Protein fehlen</div>
+              <div className="nut-insightText">
+                <div className="nut-insightTitle">45g Protein fehlen</div>
+                <div className="nut-insightMeta">Shake oder Quark</div>
+              </div>
             </div>
-            <div className="nut-tipMeta nut-tipMeta--amber">Shake oder Quark</div>
-          </div>
 
-          <div className="nut-tipCard nut-tipCard--green">
-            <div className="nut-tipTop">
-              <span className="nut-check" aria-hidden="true">✓</span>
-              <div className="nut-tipTitle">Carbs perfekt</div>
+            <div className="nut-insightCard nut-insightCard--ok">
+              <div className="nut-insightIcon nut-insightIcon--ok" aria-hidden="true">
+                ✓
+              </div>
+
+              <div className="nut-insightText">
+                <div className="nut-insightTitle">Stoffwechsel stabil</div>
+                <div className="nut-insightMeta">Zellschutz</div>
+              </div>
             </div>
-            <div className="nut-tipMeta nut-tipMeta--mint">Energie für Training</div>
-          </div>
-        </section>
+          </section>
+        )}
 
 
         {/* Wirkung */}
@@ -159,7 +177,10 @@ export default function Nutrition({ onBack, onBackToHome, onBackToChat, onOpenFo
 
         <section className="nut-effectCard">
           <div className="nut-effectRow">
-            <div className="nut-effectTitle">Seit höherem Protein (14 Tage):</div>
+            <div className="nut-effectTitle">
+              Seit präziser Makro-Steuerung (14 Tage):
+            </div>
+
             <div className="nut-spark" aria-hidden="true">
               <span />
               <span />
@@ -168,42 +189,58 @@ export default function Nutrition({ onBack, onBackToHome, onBackToChat, onOpenFo
             </div>
           </div>
 
-          <div className="nut-effectMeta">
-            <TrendIcon className="nut-historySvg" aria-hidden="true" />
-            <span className="nut-positive">Energie +12%</span>
-            <TrendIcon className="nut-historySvg" aria-hidden="true" />
-            <span className="nut-positive">Workout +8%</span>
+          <div className="nut-effectMetaPills">
+            <span className="nut-pill">
+              <span className="nut-pillPlus" aria-hidden="true">+</span>
+              Energie&nbsp;<strong>12%</strong>
+            </span>
+
+            <span className="nut-pill">
+              <span className="nut-pillPlus" aria-hidden="true">+</span>
+              Biologische Vitalität&nbsp;<strong>8%</strong>
+            </span>
           </div>
         </section>
 
         {/* Verlauf */}
-        <button className="nut-historyBtn" type="button">
-        <div className="nut-historyLeft">
+        <button className="nut-historyBtn" type="button" onClick={onOpenHistory}>
+          <div className="nut-historyLeft">
             <div className="nut-historyTitle">Verlauf</div>
             <div className="nut-historyMeta">Durchschnitt, Trends, Details</div>
-        </div>
+          </div>
+          <span className="nut-historyChevron" aria-hidden="true">›</span>
+        </button>
+      </div>
 
-        <span className="nut-historyChevron" aria-hidden="true">›</span>
+      {/* Sticky Add Button (klickbar) */}
+      <div className="nut-stickyCta">
+        <button className="nut-primaryBtn" type="button" onClick={onAddMeal}>
+          <span className="nut-plus" aria-hidden="true">+</span>
+          Mahlzeit hinzufügen
         </button>
       </div>
 
       {/* Bottom Nav */}
       <nav className="home-navigation">
         <button className="home-nav-item" onClick={onBackToHome} type="button">
-            <HomeIcon className="home-nav-icon" />
-            <span className="home-nav-label">Home</span>
+          <HomeIcon className="home-nav-icon" />
+          <span className="home-nav-label">Home</span>
         </button>
 
         <button className="home-nav-item" onClick={onBackToChat} type="button">
-            <AssistantIcon className="home-nav-icon" />
-            <span className="home-nav-label">Assistent</span>
+          <AssistantIcon className="home-nav-icon" />
+          <span className="home-nav-label">Assistent</span>
         </button>
 
-        <button className="home-nav-item home-nav-item--active" onClick={onOpenFolder} type="button">
-            <FolderIcon className="home-nav-icon" />
-            <span className="home-nav-label">Ordner</span>
+        <button
+          className="home-nav-item home-nav-item--active"
+          onClick={onOpenFolder}
+          type="button"
+        >
+          <FolderIcon className="home-nav-icon" />
+          <span className="home-nav-label">Ordner</span>
         </button>
-      </nav> 
+      </nav>
     </div>
   );
 }
