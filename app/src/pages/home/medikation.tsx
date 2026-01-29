@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/appShell.css";
 import "./medication.css";
 
@@ -32,6 +32,101 @@ function nowHHMM() {
 
 type TakenState = { taken: boolean; time?: string };
 
+function SupplementAddSheet({
+  open,
+  onClose,
+  onTrack,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onTrack: () => void;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="ss-backdrop" role="dialog" aria-modal="true">
+      <button className="ss-backdropBtn" onClick={onClose} aria-label="Schließen" />
+
+      <div className="ss-sheet" role="document">
+        <div className="ss-top">
+          <button className="ss-x" onClick={onClose} type="button" aria-label="Schließen">
+            ✕
+          </button>
+          <div className="ss-chip">Supplement scannen</div>
+          <div className="ss-xSpacer" />
+        </div>
+
+        <div className="ss-badge">Omega-3 5000mg erkannt</div>
+
+        <div className="ss-pillWrap" aria-hidden="true">
+          <div className="ss-pill" />
+        </div>
+
+        <section className="ss-card">
+          <div className="ss-cardHead">
+            <div className="ss-pillIcon" aria-hidden="true">💊</div>
+            <div className="ss-name">Omega-3 5000mg</div>
+          </div>
+
+          <div className="ss-sectionTitle">Herstellerangaben</div>
+          <div className="ss-text">
+            Dosierung: 1 Kapsel täglich<br />
+            EPA: 2500mg, DHA: 2000mg<br />
+            Mit einer Mahlzeit einnehmen
+          </div>
+
+          <div className="ss-divider" />
+
+          <div className="ss-sectionTitle">Wechselwirkungen</div>
+          <div className="ss-rowOk">
+            <span className="ss-check" aria-hidden="true">✓</span>
+            <span>Keine mit deinen aktuellen Supplements</span>
+          </div>
+
+          <div className="ss-divider" />
+
+          <div className="ss-sectionTitle">Optimal einnehmen</div>
+          <div className="ss-text">
+            Zu einer fetthaltigen Mahlzeit<br />
+            Timing: Morgens oder abends
+          </div>
+
+          <div className="ss-divider" />
+
+          <div className="ss-sectionTitle">Wirkung messbar ab</div>
+          <ul className="ss-bullets">
+            <li>2–3 Wochen: Erste Trends</li>
+            <li>4–6 Wochen: Volle Wirkung</li>
+          </ul>
+
+          <div className="ss-footer">
+            <button className="ss-primary" type="button" onClick={onTrack}>
+              Einnahme tracken
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+
 export default function Supplements({
   onBack,
   onBackToHome,
@@ -43,6 +138,8 @@ export default function Supplements({
     b12: { taken: true, time: "09:15" },
     zinc: { taken: false },
   });
+
+  const [addOpen, setAddOpen] = useState(false);
 
   const toggleTaken = (key: "b12" | "zinc") => {
     setTakenByKey((prev) => {
@@ -235,7 +332,7 @@ export default function Supplements({
           Alle Details <span className="sup-detailsArrow" aria-hidden="true">›</span>
         </button>
 
-        <button className="sup-primaryBtn" type="button">
+        <button className="sup-primaryBtn" type="button" onClick={() => setAddOpen(true)}>
           <AddIcon className="sup-primaryPlus" aria-hidden="true" />
           Präparat hinzufügen
         </button>
@@ -262,6 +359,11 @@ export default function Supplements({
           <span className="home-nav-label">Ordner</span>
         </button>
       </nav>
+      <SupplementAddSheet
+        open={addOpen}
+        onClose={() => setAddOpen(false)}
+        onTrack={() => setAddOpen(false)}
+      />
     </div>
   );
 }
