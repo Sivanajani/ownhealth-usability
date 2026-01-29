@@ -136,8 +136,8 @@
 
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.04) 100%
+    rgba(255, 255, 255, 0.589) 0%,
+    rgba(255, 255, 255, 0.521) 100%
   );
 
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -149,16 +149,6 @@
   overflow: hidden;
   padding: 18px 18px 16px;
   animation: ob7-floatDoc 4s ease-in-out infinite;
-}
-
-@keyframes ob7-floatDoc {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
 }
 
 .ob7-doccard::before {
@@ -197,6 +187,7 @@
 
 .ob7-doc-title {
   opacity: 0.95;
+  color: rgba(0, 0, 0, 0.452);
 }
 
 /* Doc Lines */
@@ -258,18 +249,6 @@
   animation: ob7-pulse 2s ease-in-out infinite;
 }
 
-@keyframes ob7-pulse {
-  0%,
-  100% {
-    transform: translateX(-50%) scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: translateX(-50%) scale(1.08);
-    opacity: 1;
-  }
-}
-
 .ob7-camera-bubble-icon {
   width: 22px;
   height: 22px;
@@ -291,8 +270,8 @@
   padding: 12px 12px;
   border-radius: 16px;
 
-  background: rgba(16, 185, 129, 0.16);
-  border: 1px solid rgba(16, 185, 129, 0.28);
+  background: rgba(10, 83, 59, 0.726);
+  border: 1px solid rgba(19, 90, 66, 0.377);
   backdrop-filter: blur(10px);
 
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
@@ -313,15 +292,14 @@
 }
 
 .ob7-anon-title {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 900;
   color: rgba(209, 250, 229, 0.95);
   line-height: 1.1;
 }
 
 .ob7-anon-sub {
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 12px;
   color: rgba(209, 250, 229, 0.85);
   line-height: 1.1;
 }

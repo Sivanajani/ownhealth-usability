@@ -48,20 +48,20 @@ export default function Onboarding0({ onNext }: Props) {
   const runningRef = useRef(false);
 
   // TIMINGS
-  const LOGO_IN_MS = 800;
-  const MOVE_MS = 900;
-  const LINE_MS = 900;
+  const LOGO_IN_MS = 600;
+  const MOVE_MS = 600;
+  const LINE_MS = 450;
 
   // 1s feel
-  const BETWEEN_ICONS_MS = 1000;
+  const BETWEEN_ICONS_MS = 450;
 
   // neues Hold
-  const HOLD_BEFORE_ABSORB_MS = 2000;
+  const HOLD_BEFORE_ABSORB_MS = 1000;
 
   // smoother absorb + transition
-  const ABSORB_MS = 1200;
-  const FINAL_GLOW_MS = 1200;
-  const FADE_OUT_MS = 450;
+  const ABSORB_MS = 800;
+  const FINAL_GLOW_MS = 700;
+  const FADE_OUT_MS = 300;
 
   const baseItems: BaseItem[] = useMemo(
     () => [
