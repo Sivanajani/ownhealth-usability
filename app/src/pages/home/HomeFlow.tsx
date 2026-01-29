@@ -9,6 +9,7 @@ import Documents from "./documents";
 import Medication from "./medikation";
 import Nutrition from "./nutrition";
 import Profile from "./profile";
+import Body from "./body";
 import RegisterFlow from "../registration/registerFlow";
 import type { FocusKey } from "../../types/focus";
 
@@ -22,6 +23,7 @@ type HomeStep =
   | "medication"
   | "nutrition"
   | "profile"
+  | "body"
   | "registerflow";
 
 type Props = {
@@ -89,6 +91,8 @@ export default function HomeFlow({
         onOpenDocuments={() => setStep("documents")}
         onOpenMedication={() => setStep("medication")}
         onOpenNutrition={() => setStep("nutrition")}
+        onOpenBody={() => setStep("body")}
+        //onOpenCheckups={() => setStep("checkups")}
       />
     );
 
@@ -137,6 +141,18 @@ export default function HomeFlow({
         onOpenFolder={() => setStep("folder")}
       />
     );
+
+  if (step === "body")
+    return (
+      <Body
+        focusKey={focusKey}
+        onBack={() => setStep("folder")}
+        onBackToHome={() => setStep("home")}
+        onBackToChat={() => setStep("chat")}
+        onOpenFolder={() => setStep("folder")}
+      />
+    );
+
 
   /* =========================
      SETTINGS / PROFILE
