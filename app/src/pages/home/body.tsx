@@ -187,7 +187,11 @@ export default function Body({
           <span className="home-nav-label">Assistent</span>
         </button>
 
-        <button className="home-nav-item" onClick={onOpenFolder} type="button">
+        <button
+          className="home-nav-item home-nav-item--active"
+          onClick={onOpenFolder}
+          type="button"
+        >
           <FolderIcon className="home-nav-icon" />
           <span className="home-nav-label">Ordner</span>
         </button>
