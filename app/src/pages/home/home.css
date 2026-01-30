@@ -953,3 +953,21 @@
   padding-left: 0;
 }
 
+.home2-circleValStack{
+  display: grid;
+  place-items: center;
+  line-height: 1.05;
+}
+
+.home2-circleValMain{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.home2-circleValSub{
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.75;
+}

@@ -55,6 +55,7 @@ function CircleStat({
   ok = false,
   showTotal = true,
   suffix,
+  compactTotal = false,
 }: {
   value: number;
   total: number;
@@ -63,6 +64,7 @@ function CircleStat({
   ok?: boolean;
   showTotal?: boolean;
   suffix?: string;
+  compactTotal?: boolean;
 }) {
   const clampedTotal = Math.max(1, total);
   const pctRaw = Math.max(0, Math.min(1, value / clampedTotal));
@@ -81,19 +83,24 @@ function CircleStat({
           <circle className="home2-circleFill" cx="50" cy="50" r="45" strokeDasharray={`${dash} 283`} />
         </svg>
 
-        <div className="home2-circleCenter">
-          <div className="home2-circleVal">
-            {showTotal ? (
+        <div className="home2-circleVal">
+          {showTotal ? (
+            compactTotal ? (
+              <div className="home2-circleValStack">
+                <div className="home2-circleValMain">{value}</div>
+                <div className="home2-circleValSub">/ {total}</div>
+              </div>
+            ) : (
               <>
                 {value}/{total}
               </>
-            ) : (
-              <>
-                {value}
-                {suffix ? suffix : null}
-              </>
-            )}
-          </div>
+            )
+          ) : (
+            <>
+              {value}
+              {suffix ? suffix : null}
+            </>
+          )}
         </div>
       </div>
 
@@ -152,7 +159,9 @@ export default function Home({
   // LONGEVITY: Mock
   const sleepPct = 88;
   const hrvPct = 65;
-  const regenPct = 78;
+  //const regenPct = 78;
+  const stepsValue = 7480;
+  const stepsGoal = 10000;
 
   useEffect(() => {
     const update = () => {
@@ -340,7 +349,15 @@ export default function Home({
               <>
                 <CircleStat value={sleepPct} total={100} label="Schlaf" tone="blue" showTotal={false} suffix="%" />
                 <CircleStat value={hrvPct} total={100} label="HRV" tone="hrv" showTotal={false} suffix="%" />
-                <CircleStat value={regenPct} total={100} label="Regeneration" tone="green" showTotal={false} suffix="%" />
+                <CircleStat
+  value={stepsValue}
+  total={stepsGoal}
+  label="Schritte"
+  tone="green"
+  showTotal
+  compactTotal
+/>
+
               </>
             )}
           </div>
