@@ -1,9 +1,7 @@
-// Onboarding2.tsx — Zukunfts-Karussell (Coming Soon) — FINAL (Mock-like, responsive, asset-icons)
 import { useMemo, useRef, useState } from "react";
 import "./onboardingStart.css";
 import "./onboarding2.css";
 
-// --- Your SVG assets ---
 import ShieldIcon from "../../assets/schild.svg?react";
 import Notification from "../../assets/notification.svg?react";
 import PeopleIcon from "../../assets/people.svg?react";
@@ -11,6 +9,10 @@ import ClockIcon from "../../assets/clock.svg?react";
 import UserIcon from "../../assets/user.svg?react";
 import WarningIcon from "../../assets/warning.svg?react";
 import OWN from "../../assets/O_Logo.svg?react";
+import StethoscopeIcon from "../../assets/stethoscope.svg?react";
+import DocumentIcon from "../../assets/document.svg?react";
+import ArrowIcon from "../../assets/arrow.svg?react";
+
 
 type Props = {
   onNext?: () => void;
@@ -22,8 +24,9 @@ type Slide = {
   kicker?: string;
   title: string;
   desc: string;
-  contentType: "accounts" | "chart" | "knowledge";
+  contentType: "accounts" | "chart" | "knowledge" | "paperless";
 };
+
 
 function SlideIcon({ name }: { name: Slide["icon"] }) {
   if (name === "shield") return <ShieldIcon className="ob02-iconSvg" aria-hidden="true" />;
@@ -56,6 +59,13 @@ export default function Onboarding2({ onNext }: Props) {
         desc: "Tausende in ähnlicher Situation haben bereits Wege gefunden.",
         contentType: "knowledge",
         kicker: "KOLLEKTIVES WISSEN",
+      },
+      {
+        id: "paperless",
+        icon: "shield",
+        title: "Kein Papier.\nKein Suchen.\nAlles automatisch.",
+        desc: "Ärzte & Labore senden Befunde direkt in dein Konto. Nichts geht verloren.",
+        contentType: "paperless",
       },
     ],
     []
@@ -114,18 +124,19 @@ export default function Onboarding2({ onNext }: Props) {
               {slides.map((sl) => (
                 <section className="ob02-slide" key={sl.id} aria-hidden={sl.id !== active.id}>
                   <div className="ob02-card">
-                    <div className="ob02-cardIcon">
-                      <SlideIcon name={sl.icon} />
-                    </div>
+                    <div className="ob02-headerRow">
+                      <div className="ob02-cardIcon">
+                        <SlideIcon name={sl.icon} />
+                      </div>
 
-                    <h2 className="ob02-cardTitle">
-                      {sl.title.split("\n").map((line, i) => (
-                        <span key={i}>
-                          {line}
-                          {i === 0 ? <br /> : null}
-                        </span>
-                      ))}
-                    </h2>
+                      <h2 className="ob02-cardTitle ob02-cardTitle--inline">
+                        {sl.title.split("\n").map((line, i) => (
+                          <span key={i} className="ob02-titleLine">
+                            {line}
+                          </span>
+                        ))}
+                      </h2>
+                    </div>
 
                     <p className="ob02-cardDesc">{sl.desc}</p>
 
@@ -325,6 +336,36 @@ export default function Onboarding2({ onNext }: Props) {
                         </div>
                       </>
                     )}
+
+                    {/* 4) PAPERLESS (Screenshot-Style) */}
+                    {sl.contentType === "paperless" && (
+                      <div className="ob02-paperless">
+                        {/* Left icon stack */}
+                        <div className="ob02-plLeft">
+                          <button type="button" className="ob02-plIconBtn" aria-label="Stethoskop">
+                            <StethoscopeIcon className="ob02-plIconSvg" aria-hidden="true" />
+                          </button>
+
+                          <button type="button" className="ob02-plIconBtn" aria-label="Dokument">
+                            <DocumentIcon className="ob02-plIconSvg" aria-hidden="true" />
+                          </button>
+                        </div>
+
+                        {/* Arrow (flip to point RIGHT) */}
+                        <div className="ob02-plArrow" aria-hidden="true">
+                          <ArrowIcon className="ob02-plArrowSvg" />
+                        </div>
+
+                        {/* Right glowing shield tile */}
+                        <div className="ob02-plRight" aria-hidden="true">
+                          <div className="ob02-plShieldTile">
+                            <ShieldIcon className="ob02-plShieldSvg" />
+                            <span className="ob02-plOwn">OWN</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                   </div>
                 </section>
               ))}

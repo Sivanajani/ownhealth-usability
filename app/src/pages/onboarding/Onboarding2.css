@@ -908,3 +908,110 @@
   line-height: 1.35;
   font-weight: 500;
 }
+
+/* --- PAPERLESS slide layout (like screenshot) --- */
+.ob02-paperless {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 68px 44px 1fr;
+  align-items: center;
+  gap: 14px;
+}
+
+/* left icon column */
+.ob02-plLeft {
+  display: grid;
+  gap: 14px;
+}
+
+.ob02-plIconBtn {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.ob02-plIconSvg {
+  width: 36px;
+  height: 36px;
+  opacity: 0.8;
+  color: #f0f8ff;
+}
+
+/* arrow (your asset points left -> flip horizontally) */
+.ob02-plArrow {
+  display: grid;
+  place-items: center;
+}
+
+.ob02-plArrowSvg {
+  width: 30px;
+  height: 30px;
+  opacity: 0.85;
+  transform: scaleX(-1); /* makes left-arrow point RIGHT */
+  color: aqua;
+}
+
+/* right tile */
+.ob02-plRight {
+  display: grid;
+  justify-items: start;
+}
+
+.ob02-plShieldTile {
+  width: 100px;
+  height: 100px;
+  border-radius: 28px;
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  /* glow like screenshot */
+  background: rgba(70, 220, 255, 0.10);
+  border: 1px solid rgba(70, 220, 255, 0.22);
+  box-shadow:
+    0 0 0 6px rgba(70, 220, 255, 0.06),
+    0 18px 60px rgba(70, 220, 255, 0.22),
+    0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.ob02-plShieldSvg {
+  width: 50px;
+  height: 50px;
+  opacity: 0.95;
+  margin-bottom: 15px;
+}
+
+.ob02-plOwn {
+  position: absolute;
+  margin-top: 65px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+.ob02-headerRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.ob02-cardTitle--inline {
+  margin: 0; /* wichtig, sonst rutscht es komisch */
+}
+
+.ob02-titleLine {
+  display: block; /* jede Zeile untereinander, aber insgesamt neben dem Icon */
+  line-height: 1.1;
+}
+
+.ob02-headerRow {
+  align-items: center;
+}
