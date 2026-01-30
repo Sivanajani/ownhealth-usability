@@ -84,7 +84,7 @@ const Onboarding5: React.FC<Onboarding5Props> = ({
 
       return {
         title: "Was möchtest du als erstes verstehen?",
-        subtitle: "Stelle OWN deine Gesundheitsfrage.",
+        subtitle: "Stelle OWN deine erste Gesundheitsfrage.",
         examples: ex,
       };
     }
