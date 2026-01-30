@@ -78,7 +78,7 @@ export default function Onboarding1({ onNext }: Props) {
               <div className="ob01-tab">
                 <span className="ob01-tabIcon">
                   {DrugIcon ? (
-                    <DrugIcon style={{ width: "24px", height: "24px", display: "block" }} />
+                    <DrugIcon  />
                   ) : (
                     <span style={{ fontSize: "20px" }}>💊</span>
                   )}
@@ -87,10 +87,10 @@ export default function Onboarding1({ onNext }: Props) {
                 <div className="ob01-tabGlow" />
               </div>
 
-              <div className="ob01-tab ob01-tab--active">
-                <span className="ob01-tabIcon ob01-tabIcon--active">
+              <div className="ob01-tab">
+                <span className="ob01-tabIcon">
                   {MoonIcon ? (
-                    <MoonIcon style={{ width: "24px", height: "24px", display: "block" }} />
+                    <MoonIcon  />
                   ) : (
                     <span style={{ fontSize: "20px" }}>🌙</span>
                   )}
@@ -102,7 +102,7 @@ export default function Onboarding1({ onNext }: Props) {
               <div className="ob01-tab">
                 <span className="ob01-tabIcon">
                   {DocuIcon ? (
-                    <DocuIcon style={{ width: "24px", height: "24px", display: "block" }} />
+                    <DocuIcon  />
                   ) : (
                     <span style={{ fontSize: "20px" }}>📋</span>
                   )}
