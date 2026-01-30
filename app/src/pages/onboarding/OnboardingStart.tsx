@@ -12,7 +12,7 @@ export default function OnboardingStart({ onStart }: Props) {
         <div className="ob-brand">
           <img className="ob-logo" src={ownLogo} alt="OWN Health" />
 
-          <h1 className="ob-title">YOUR HEALTH</h1>
+          <h1 className="ob1-title">YOUR HEALTH</h1>
 
           <p className="ob-subtitle">
             Dein intelligentes Gesundheitskonto.

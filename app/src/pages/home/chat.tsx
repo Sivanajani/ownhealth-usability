@@ -23,6 +23,7 @@ import SendIcon from "../../assets/arrow-up-right.svg?react";
 type Props = {
   onOpenHome: () => void;
   onOpenFolder: () => void;
+  onOpenProfile: () => void;
   initialQuestion?: string;
   userName: string;
 };
@@ -418,7 +419,7 @@ type SendOpts = { isAuto?: boolean };
 
 const WELCOME_KEY = "owni_welcome_done";
 
-export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userName }: Props) {
+export default function Chat({ onOpenHome, onOpenFolder, onOpenProfile, initialQuestion, userName }: Props) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Msg[]>([]);
   const [attachOpen, setAttachOpen] = useState(false);
@@ -538,7 +539,7 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
 
     const nudge =
       "Wenn du noch genauere Antworten willst, hilft mir mehr Kontext.\n" +
-      "Zum Beispiel: ein aktuelles Blutbild, ein Medikament (oder Dosierung), oder ein Dokument.\n\n" +
+      " Zum Beispiel: ein aktuelles Blutbild, Fotos von deinen Supplements oder ein Foto deiner letzten Mahlzeit.\n\n" +
       "Was möchtest du als Nächstes machen?";
 
     const dur = typeAssistantText(nudge);
@@ -679,13 +680,15 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
     const label = `${file.type.startsWith("image/") ? "Foto" : "Datei"}: ${file.name}`;
     send(`Anhang • ${label}`);
   };
-
+  
   const handleAction = (a?: Action) => {
     if (!a) return;
-    if (a.kind === "go_profile") {
-      typeAssistantText("Profil öffnen ist als nächstes dran (Hook wir bauen dann).", ["App"]);
+
+    if (a.kind === "go_profile") {      
+      onOpenProfile(); 
     }
   };
+
 
   return (
     <div className="oh-screen">

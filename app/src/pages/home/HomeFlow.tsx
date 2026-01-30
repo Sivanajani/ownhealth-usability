@@ -73,6 +73,7 @@ export default function HomeFlow({
   if (step === "chat")
     return (
       <Chat
+        onOpenProfile={() => setStep("profile")}
         onOpenHome={() => setStep("home")}
         onOpenFolder={() => setStep("folder")}        
         initialQuestion={firstQuestion}

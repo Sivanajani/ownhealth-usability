@@ -1,11 +1,5 @@
 /* settings.css */
 
-.settings-bg{
-  background:
-    radial-gradient(900px 700px at 45% -10%, rgba(88,146,198,0.55) 0%, rgba(14,39,70,0.0) 60%),
-    radial-gradient(1200px 900px at 50% 0%, rgba(32,76,118,0.55) 0%, rgba(9,22,40,0.92) 55%, rgba(7,14,28,1) 100%);
-}
-
 .settings-safe{
   min-height: 100vh;
   padding: 18px 16px 26px;

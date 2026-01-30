@@ -1,5 +1,5 @@
 // settings.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/appShell.css";
 import "./settings.css";
 
@@ -23,9 +23,10 @@ type Props = {
 type Mode = "basic" | "sport";
 
 export default function Settings({ userName, focus, onBack, onOpenProfile }: Props) {
-  const [mode, setMode] = useState<Mode>(
-    focus === "longevity" ? "sport" : "basic"
-  );
+  const [mode, setMode] = useState<Mode>("basic");
+  useEffect(() => {
+    setMode(focus === "longevity" ? "sport" : "basic");
+  }, [focus]);
 
   return (
     <div className="oh-screen settings-bg">
@@ -61,8 +62,8 @@ export default function Settings({ userName, focus, onBack, onOpenProfile }: Pro
             type="button"
             className={`modeBtn modeBtn--sport ${mode === "sport" ? "modeBtn--active" : ""}`}
             onClick={() => setMode("sport")}
+            aria-selected={mode === "sport"}
           >
-
             <HeartbeatIcon className="modeIcon" aria-hidden="true" />
             <span>Sport</span>
           </button>

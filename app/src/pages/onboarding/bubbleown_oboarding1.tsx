@@ -21,7 +21,7 @@ export default function Onboarding1({ onNext }: Props) {
     <div className="ob-root">
       <div className="ob-content">
         <div className="ob-brand">
-          <h1 className="ob-title">
+          <h1 className="ob1-title">
             Verbinde, was
             <br />
             zusammengehört

@@ -129,12 +129,12 @@ export default function Onboarding10({ focusKey, onContinue }: Props) {
 
           {isDone ? (
             <>
-              <h1 className="ob-title">Du bist startklar.</h1>
+              <h1 className="ob1-title">Du bist startklar.</h1>
               <p className="ob-subtitle">Dein Konto ist sicher eingerichtet.</p>
             </>
           ) : (
             <>
-              <h1 className="ob-title">Wir richten dein Gesundheitskonto ein.</h1>
+              <h1 className="ob1-title">Wir richten dein Gesundheitskonto ein.</h1>
               <p className="ob-subtitle">{getStatusText(phase, focusKey)}</p>
             </>
           )}
