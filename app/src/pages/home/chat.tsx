@@ -655,8 +655,9 @@ export default function Chat({ onOpenHome, onOpenFolder, initialQuestion, userNa
 
     const welcomeText =
       `Hallo ${userName}! Willkommen 👋\n\n` +
-      `Ich bin OWNI – dein persönlicher KI-Gesundheitsassistent.\n` +
-      `Ich beantworte deine Fragen auf Basis deiner Daten.\n\n` +
+      `Das ist dein Gesundheitskonto – alle Daten sicher an einem Ort, immer verfügbar.\n` +
+      `Genau wie beim Online-Banking hast du jetzt vollständige Kontrolle und Übersicht. \n\n` +
+      `Ich beantworte deine Fragen auf Basis all deiner geteilten Daten - damit du länger gesund und leistungsfähig bleibst. \n\n` +
       `Deine Frage aus dem Onboarding war:\n“${q}”\n\n` +
       `Willst du die Antwort jetzt sehen?`;
 
