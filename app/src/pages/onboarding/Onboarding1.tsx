@@ -21,13 +21,13 @@ type Insight = {
 const INSIGHTS: Insight[] = [
   {
     id: "sleep",
-    text: "Mein Schlaf verbessert sich\ndurch Magnesium",
+    text: "Mein Schlaf verbessert sich\ndurch Magnesium.",
     icon: "moon",
     accent: "blue",
   },
   {
     id: "diabetes",
-    text: "Hafermilch am Morgen\nverdoppelt mein Diabetes-Risiko",
+    text: "Hafermilch am Morgen lässt\ndeinen Blutzuckerspiegel\nstärker schwanken.",
     icon: "heartbeat",
     accent: "red",
   },
@@ -79,10 +79,10 @@ export default function Onboarding1({ onNext }: Props) {
       <div className="ob-content ob01-content ob01-v2">
         {/* TOP */}
         <div className={`ob01v2-top ${showTitle ? "show" : ""}`}>
-          <h1 className="ob01v2-title">Erkenntnisse, die dein Leben verändern</h1>
+          <h1 className="ob01v2-title">Endlich das Gesamtbild sehen</h1>
           <p className="ob01v2-subtitle">
             9 von 10 Usern entdecken versteckte <br />
-            Muster in ihrer Gesundheit
+            Muster in ihrer Gesundheit mit OWN
           </p>
         </div>
 
@@ -102,7 +102,7 @@ export default function Onboarding1({ onNext }: Props) {
                 </span>
               </div>
             </div>
-          ))}
+          ))}          
         </div>
 
         {/* BOTTOM */}
