@@ -1,353 +1,197 @@
-.ob01-content{
+.ob01-content {
   padding-top: calc(env(safe-area-inset-top) + 28px);
-  padding-bottom: calc(env(safe-area-inset-bottom) + 26px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 22px);
 }
 
-.ob01-top{
-  text-align: center;
-  align-items: center;
-  gap: 12px;
+/* ===== V2 Layout ===== */
+.ob01-v2 {
+  justify-content: space-between;
 }
 
-/* Title Animation */
-.ob01-title {
-  margin: 4px;
-  color: var(--white);
-  font-weight: 700;
-  font-size: 34px;
+.ob01v2-top {
   text-align: center;
+  padding: 0 14px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
-.ob01-title.show {
+.ob01v2-top.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-.ob01-intro {
-  margin-top: 4px;
-  margin-bottom: 100px;
-  color: rgba(144,161,185,0.85);
-  font-size: 16px;
-  line-height: 1.5;
+.ob01v2-title {
+  margin: 0;
+  color: var(--white);
+  font-weight: 800;
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+.ob01v2-subtitle {
+  margin: 14px 0 0;
+  color: rgba(144, 161, 185, 0.9);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* ===== Insight Cards ===== */
+.ob01v2-list {
+  margin-top: 26px;
+  padding: 0 14px;
+  display: grid;
+  gap: 14px;
+
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
-.ob01-intro.show {
+.ob01v2-list.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-.ob01-intro strong {
-  color: rgba(147,197,253,0.95);
-  font-weight: 700;
-}
-
-.ob01-middle{
-  align-items: center;
-  justify-content: center;
-}
-
-/* ===== Karte Animation ===== */
-.ob01-card{
-  position: relative;
-  border-radius: 20px;
-  padding: 18px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(147,197,253,0.15);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
-  transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
-              transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.5s ease;
-}
-
-.ob01-card.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Glow am Rand */
-.ob01-card--glow{
-  border: 1px solid rgba(56,189,248,0.55); 
-  box-shadow:
-    0 0 0 1px rgba(56,189,248,0.22) inset,  
-    0 0 18px rgba(56,189,248,0.28),         
-    0 0 48px rgba(56,189,248,0.18),         
-    0 12px 36px rgba(0,0,0,0.45);           
-}
-
-/* ===== Tabs ===== */
-.ob01-tabs{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 10px 0 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-/* Tabs sind rein dekorativ (nicht klickbar) */
-.ob01-tab{
+.ob01v2-card {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 8px;
-  border-radius: 12px;
+  justify-content: space-between;
+  gap: 14px;
 
-  cursor: default;        /* kein Hand-Cursor */
-  pointer-events: none;   /* wirklich nicht klickbar */
+  padding: 16px 16px;
+  border-radius: 16px;
 
-  transition: none;       /* kein "interaktiv"-Gefühl */
-  position: relative;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(147, 197, 253, 0.12);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: ob01v2CardIn 520ms ease forwards;
 }
 
-/* Hover neutralisieren (falls Browser trotzdem Styles cached) */
-.ob01-tab:hover{
-  background: rgba(255,255,255,0.02);
-  border-color: transparent;
-  transform: none;
+@keyframes ob01v2CardIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Optional: eine "aktive" Optik als Deko (z.B. Schlaf) */
-.ob01-tab--active {
-  background: rgba(59,130,246,0.08);
-  border: 1px solid rgba(59,130,246,0.3);
+.ob01v2-cardText {
+  white-space: pre-line;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14.5px;
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
-/* WICHTIG: Icon-Container */
-.ob01-tabIcon{
+/* Icon box */
+.ob01v2-iconBox {
   width: 48px;
   height: 48px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: white;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.ob01-tabIcon svg {
-  width: 24px;
-  height: 24px;
+.ob01v2-icon svg {
+  width: 22px;
+  height: 22px;
   display: block;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.92);
   fill: currentColor;
 }
 
-/* active look for icon */
-.ob01-tabIcon--active{
-  background: rgba(59,130,246,0.15);
-  border-color: rgba(59,130,246,0.4);
+/* Accents (Cards + Icons) */
+.ob01v2-card--blue {
+  border-color: rgba(56, 189, 248, 0.16);
 }
 
-.ob01-tabIcon--active svg{
-  color: rgba(147,197,253,0.95);
+.ob01v2-iconBox--blue {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.12) inset,
+    0 0 18px rgba(56, 189, 248, 0.18);
 }
 
-.ob01-tabLabel{
-  font-size: 14px;
-  color: rgba(144,161,185,0.9);
-  font-weight: 600;
-  text-align: center;
+.ob01v2-card--red {
+  border-color: rgba(239, 68, 68, 0.16);
 }
 
-.ob01-tab--active .ob01-tabLabel{
-  color: rgba(147,197,253,0.95);
-  font-weight: 700;
+.ob01v2-iconBox--red {
+  border-color: rgba(239, 68, 68, 0.35);
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.12) inset,
+    0 0 18px rgba(239, 68, 68, 0.16);
 }
 
-/* ===== Verbindungslinien mit Animation ===== */
-.ob01-connector {
-  position: absolute;
-  height: 2px;
-  z-index: 1;
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
-              opacity 0.5s ease;
+.ob01v2-card--green {
+  border-color: rgba(16, 185, 129, 0.16);
 }
 
-.connector-medikation {
-  top: 80px;
-  left: 32%;
-  width: 15px;
-  background: rgba(239,68,68,0.4);
-  transition-delay: 0.1s;
+.ob01v2-iconBox--green {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.12) inset,
+    0 0 18px rgba(16, 185, 129, 0.16);
 }
 
-.connector-schlaf {
-  top: 80px;
-  left: 50%;
-  width: 15px;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  background: rgba(59,130,246,0.4);
-  transition-delay: 0.3s;
-}
+/* ===== Bottom ===== */
+.ob01v2-bottom {
+  padding: 0 14px;
+  margin-top: 18px;
 
-.connector-labordaten {
-  top: 80px;
-  right: 32%;
-  width: 15px;  
-  background: rgba(16,185,129,0.4);
-  transform-origin: right center;
-  transition-delay: 0.5s;
-}
-
-/* Linien sichtbar machen */
-.ob01-card.show .ob01-connector {
-  opacity: 0.8;
-  transform: scaleX(1);
-}
-
-.ob01-card.show .connector-schlaf {
-  transform: translateX(-50%) scaleX(1);
-}
-
-/* ===== Body ===== */
-.ob01-body{
-  padding: 16px 8px 12px;
-}
-
-.ob01-kicker{
-  color: rgb(0, 212, 170);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
   opacity: 0;
   transform: translateY(10px);
-  animation: fadeInUp 0.6s ease forwards;
-  animation-delay: 0.4s;
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
-.ob01-metricRow{
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 8px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.7s ease forwards;
-  animation-delay: 0.5s;
+.ob01v2-bottom.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.ob01-metricValue{
-  font-size: 42px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  color: rgb(0, 212, 170);
-  text-shadow: 0 0 20px rgba(0, 212, 170, 0.37);
-}
-
-.ob01-metricLabel{
-  font-size: 18px;
-  font-weight: 800;
-  color: rgba(255,255,255,0.95);
-  flex: 1;
-}
-
-.ob01-subline{
-  margin-top: 4px;
+.ob01v2-button {
+  width: 100%;
+  height: 54px;
+  border-radius: 14px;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.85);
+  color: white;
+  font-weight: 700;
   font-size: 16px;
-  color: rgba(144,161,185,0.9);
-  font-weight: 500;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.6s ease forwards;
-  animation-delay: 0.6s;
+  letter-spacing: 0.2em;
+
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease, filter 0.18s ease;
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.ob01v2-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
 }
 
-/* ===== Footnote ===== */
-.ob01-foot{
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+.ob01v2-footnote {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12.5px;
+  color: rgba(144, 161, 185, 0.65);
 }
 
-.ob01-footnote{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.ob01-footnoteText{
-  font-size: 14px;
-  color: rgba(144,161,185,0.75);
-  font-weight: 500;
-}
-
-/* ===== Button ===== */
-.ob01-button{
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: buttonAppear 0.6s ease forwards;
-  animation-delay: 1.5s;
-}
-
-@keyframes buttonAppear {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.ob01-button:hover {
-  transform: translateY(-2px);
-}
-
-.ob01-buttonText{
-  margin-right: 8px;
-}
-
-/* Responsive */
+/* Small phones */
 @media (max-width: 380px) {
-  .ob01-card {
-    padding: 14px;
+  .ob01v2-title {
+    font-size: 30px;
   }
-  
-  .ob01-tabs {
-    gap: 6px;
-  }
-  
-  .ob01-tabIcon {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .ob01-tabIcon svg {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .ob01-metricValue {
-    font-size: 36px;
-  }
-  
-  .ob01-metricLabel {
+  .ob01v2-cardText {
     font-size: 14px;
+  }
+  .ob01v2-iconBox {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
   }
 }

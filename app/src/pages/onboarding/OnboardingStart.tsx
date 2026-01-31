@@ -19,7 +19,7 @@ export default function OnboardingStart({ onStart }: Props) {
             <br />
             Alle Daten sicher an einem Ort.
             <br />
-            <span className="ob-subtitle-strong">In deiner Hand.</span>
+            <span className="ob-subtitle-strong">In deiner Kontrolle.</span>
           </p>
         </div>
         

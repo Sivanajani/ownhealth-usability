@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import "./onboardingStart.css";
 import "./onboarding2.css";
 
@@ -71,7 +71,17 @@ export default function Onboarding2({ onNext }: Props) {
     []
   );
 
+  
+
   const [index, setIndex] = useState(0);
+  
+  const [showSwipeHint, setShowSwipeHint] = useState(true);
+  
+  useEffect(() => {
+    const t = setTimeout(() => setShowSwipeHint(false), 2500);
+    return () => clearTimeout(t);
+  }, []);
+
 
   const clamp = (n: number) => Math.max(0, Math.min(slides.length - 1, n));
   const go = (n: number) => setIndex(clamp(n));
@@ -120,7 +130,15 @@ export default function Onboarding2({ onNext }: Props) {
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerUp}
           >
-            <div className="ob02-track" style={{ transform: `translateX(${-index * 100}%)` }}>
+            {showSwipeHint && (
+              <div className="ob02-swipeHint" aria-hidden="true">
+                <span className="ob02-swipeHintText">Wischen</span>
+                <span className="ob02-swipeHintArrow">→</span>
+              </div>
+            )}
+
+            
+              <div className="ob02-track" style={{ transform: `translateX(${-index * 100}%)` }} >
               {slides.map((sl) => (
                 <section className="ob02-slide" key={sl.id} aria-hidden={sl.id !== active.id}>
                   <div className="ob02-card">

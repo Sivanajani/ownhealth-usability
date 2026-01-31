@@ -2,36 +2,63 @@ import { useEffect, useState } from "react";
 import "./onboardingStart.css";
 import "./onboarding1.css";
 
-// Icons - mit Fallbacks
-import DrugIcon from "../../assets/pills.svg?react";
-import DocuIcon from "../../assets/document.svg?react";
+// Icons
 import MoonIcon from "../../assets/moon.svg?react";
+import HeartbeatIcon from "../../assets/heartbeat.svg?react";
+import TrendIcon from "../../assets/trend.svg?react";
 
 type Props = {
   onNext?: () => void;
 };
 
-export default function Onboarding1({ onNext }: Props) {
-  const [isGlowing, setIsGlowing] = useState(false);
-  const [showConnection, setShowConnection] = useState(false);
-  const [showCard, setShowCard] = useState(false);
-  const [showTitle, setShowTitle] = useState(false);
-  const [, setShowIntro] = useState(false);
+type Insight = {
+  id: string;
+  text: string;
+  icon: "moon" | "heartbeat" | "trend";
+  accent: "blue" | "red" | "green";
+};
 
-  // Animation beim ersten Laden (ohne Tab-Pulse / ohne Klick-Logik)
+const INSIGHTS: Insight[] = [
+  {
+    id: "sleep",
+    text: "Mein Schlaf verbessert sich\ndurch Magnesium",
+    icon: "moon",
+    accent: "blue",
+  },
+  {
+    id: "diabetes",
+    text: "Hafermilch am Morgen\nverdoppelt mein Diabetes-Risiko",
+    icon: "heartbeat",
+    accent: "red",
+  },
+  {
+    id: "movement",
+    text: "Mehr Bewegung stabilisiert\nmeine Blutwerte",
+    icon: "trend",
+    accent: "green",
+  },
+];
+
+function IconByType({ type }: { type: Insight["icon"] }) {
+  if (type === "moon") return <MoonIcon />;
+  if (type === "heartbeat") return <HeartbeatIcon />;
+  return <TrendIcon />;
+}
+
+export default function Onboarding1({ onNext }: Props) {
+  const [showTitle, setShowTitle] = useState(false);
+  const [showCards, setShowCards] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+
   useEffect(() => {
-    const timer1 = setTimeout(() => setShowCard(true), 300);
-    const timer2 = setTimeout(() => setShowTitle(true), 500);
-    const timer3 = setTimeout(() => setShowIntro(true), 700);
-    const timer4 = setTimeout(() => setIsGlowing(true), 1000);
-    const timer5 = setTimeout(() => setShowConnection(true), 1200);
+    const t1 = setTimeout(() => setShowTitle(true), 250);
+    const t2 = setTimeout(() => setShowCards(true), 520);
+    const t3 = setTimeout(() => setShowButton(true), 900);
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
-      clearTimeout(timer5);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, []);
 
@@ -41,7 +68,7 @@ export default function Onboarding1({ onNext }: Props) {
     const root = document.querySelector(".ob-root");
     if (root) {
       root.classList.add("ob-fadeOut");
-      setTimeout(() => onNext(), 400);
+      setTimeout(() => onNext(), 350);
     } else {
       onNext();
     }
@@ -49,97 +76,42 @@ export default function Onboarding1({ onNext }: Props) {
 
   return (
     <div className="ob-root">
-      <div className="ob-content ob01-content">
+      <div className="ob-content ob01-content ob01-v2">
         {/* TOP */}
-        <div className="ob-top ob01-top">
-          <h1 className={`ob01-title ${showTitle ? "show" : ""}`}>
-            Zusammenhänge endlich verstehen
-          </h1>
+        <div className={`ob01v2-top ${showTitle ? "show" : ""}`}>
+          <h1 className="ob01v2-title">Erkenntnisse, die dein Leben verändern</h1>
+          <p className="ob01v2-subtitle">
+            9 von 10 Usern entdecken versteckte <br />
+            Muster in ihrer Gesundheit
+          </p>
         </div>
 
         {/* MIDDLE */}
-        <div className="ob-middle ob01-middle">
-          <div
-            className={`ob01-card ${showCard ? "show" : ""} ${
-              isGlowing ? "ob01-card--glow" : ""
-            }`}
-          >
-            {/* Verbindungslinien - erscheinen nacheinander */}
-            {showConnection && (
-              <>
-                <div className="ob01-connector connector-medikation" />
-                <div className="ob01-connector connector-schlaf" />
-                <div className="ob01-connector connector-labordaten" />
-              </>
-            )}
+        <div className={`ob01v2-list ${showCards ? "show" : ""}`}>
+          {INSIGHTS.map((item, idx) => (
+            <div
+              key={item.id}
+              className={`ob01v2-card ob01v2-card--${item.accent}`}
+              style={{ animationDelay: `${idx * 120}ms` }}
+            >
+              <div className="ob01v2-cardText">{item.text}</div>
 
-            {/* Icons/Labels sind nur Deko (keine Tabs mehr) */}
-            <div className="ob01-tabs">
-              <div className="ob01-tab">
-                <span className="ob01-tabIcon">
-                  {DrugIcon ? (
-                    <DrugIcon  />
-                  ) : (
-                    <span style={{ fontSize: "20px" }}>💊</span>
-                  )}
+              <div className={`ob01v2-iconBox ob01v2-iconBox--${item.accent}`}>
+                <span className="ob01v2-icon">
+                  <IconByType type={item.icon} />
                 </span>
-                <span className="ob01-tabLabel">Medikation</span>
-                <div className="ob01-tabGlow" />
-              </div>
-
-              <div className="ob01-tab">
-                <span className="ob01-tabIcon">
-                  {MoonIcon ? (
-                    <MoonIcon  />
-                  ) : (
-                    <span style={{ fontSize: "20px" }}>🌙</span>
-                  )}
-                </span>
-                <span className="ob01-tabLabel">Schlaf</span>
-                <div className="ob01-tabGlow" />
-              </div>
-
-              <div className="ob01-tab">
-                <span className="ob01-tabIcon">
-                  {DocuIcon ? (
-                    <DocuIcon  />
-                  ) : (
-                    <span style={{ fontSize: "20px" }}>📋</span>
-                  )}
-                </span>
-                <span className="ob01-tabLabel">Labordaten</span>
-                <div className="ob01-tabGlow" />
               </div>
             </div>
-
-            <div className="ob01-body">
-              <div className="ob01-kicker">Für dich erkannt</div>
-
-              <div className="ob01-metricRow">
-                <div className="ob01-metricValue">+22%</div>
-                <div className="ob01-metricLabel">mehr Tiefschlaf</div>
-              </div>
-
-              <div className="ob01-subline">seit deiner Magnesium-Einnahme</div>
-            </div>
-
-            <div className="ob01-foot">
-              <div className="ob01-footnote">
-                <span className="ob01-footnoteText">Zur ärztlichen Abstimmung</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* BOTTOM */}
-        <div className="ob-bottom">
-          <button
-            className="ob-button ob01-button"
-            onClick={handleNextClick}
-            onMouseEnter={() => setIsGlowing(true)}
-          >
-            <span className="ob01-buttonText">Meine Muster entdecken</span>
+        <div className={`ob-bottom obM-bottom ${showButton ? "show" : ""}`}>
+          <button className="ob-button" onClick={handleNextClick}>
+            Weiter
           </button>
+
+          <div className="ob01v2-footnote">Zur ärztlichen Abstimmung.</div>
         </div>
       </div>
     </div>

@@ -1015,3 +1015,23 @@
 .ob02-headerRow {
   align-items: center;
 }
+
+.ob02-carousel::before,
+.ob02-carousel::after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width: 28px;
+  pointer-events:none;
+  z-index: 2;
+}
+
+.ob02-carousel::before{
+  left:0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.35), transparent);
+}
+
+.ob02-carousel::after{
+  right:0;
+  background: linear-gradient(270deg, rgba(0,0,0,0.35), transparent);
+}
