@@ -1,4 +1,5 @@
 import "./onboardingStart.css";
+import "./onboarding00.css";
 import ownLogo from "../../assets/own.logo.svg";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 
 export default function OnboardingStart({ onStart }: Props) {
   return (
-    <div className="ob-root">
+    <div className="ob1-root">
       <div className="ob-content">
         <div className="ob-brand">
           <img className="ob-logo" src={ownLogo} alt="OWN Health" />
