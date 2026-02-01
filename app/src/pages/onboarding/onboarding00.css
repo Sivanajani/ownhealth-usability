@@ -29,3 +29,23 @@
   pointer-events:none;
   background: radial-gradient(900px 700px at 50% 35%, transparent 35%, rgba(0,0,0,0.35) 100%);
 }
+
+/* Screen enter (automatisch beim Mount) */
+.ob1-root{
+  animation: screenIn 320ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* Screen leave (beim Klick) */
+.ob1-root.is-leaving{
+  animation: screenOut 240ms ease both;
+}
+
+@keyframes screenIn{
+  from { opacity: 0; transform: translateY(10px) scale(.99); filter: blur(.6px); }
+  to   { opacity: 1; transform: translateY(0)  scale(1);   filter: blur(0); }
+}
+
+@keyframes screenOut{
+  from { opacity: 1; transform: translateY(0)  scale(1);   filter: blur(0); }
+  to   { opacity: 0; transform: translateY(-6px) scale(.995); filter: blur(.6px); }
+}
