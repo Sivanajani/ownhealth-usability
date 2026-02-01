@@ -106,7 +106,7 @@ export default function Onboarding1({ onNext }: Props) {
         </div>
 
         {/* BOTTOM */}
-        <div className={`ob-bottom obM-bottom ${showButton ? "show" : ""}`}>
+        <div className={`ob01v2-bottom ${showButton ? "show" : ""}`}>
           <button className="ob-button" onClick={handleNextClick}>
             Weiter
           </button>

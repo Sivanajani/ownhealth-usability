@@ -5,7 +5,8 @@
 
 /* ===== V2 Layout ===== */
 .ob01-v2 {
-  justify-content: space-between;
+  justify-content: flex-start;  
+  gap: 30px;
 }
 
 .ob01v2-top {
@@ -14,6 +15,7 @@
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.55s ease, transform 0.55s ease;
+  margin-bottom: 10px;
 }
 
 .ob01v2-top.show {
@@ -140,7 +142,8 @@
 /* ===== Bottom ===== */
 .ob01v2-bottom {
   padding: 0 14px;
-  margin-top: 18px;
+  margin-top: auto;
+  
 
   opacity: 0;
   transform: translateY(10px);
