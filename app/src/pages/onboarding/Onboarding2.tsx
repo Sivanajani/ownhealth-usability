@@ -4,14 +4,15 @@ import "./onboarding2.css";
 
 import ShieldIcon from "../../assets/schild.svg?react";
 import Notification from "../../assets/notification.svg?react";
-import PeopleIcon from "../../assets/people.svg?react";
+import PeopleIcon from "../../assets/friends.svg?react";
 import ClockIcon from "../../assets/clock.svg?react";
 import UserIcon from "../../assets/user.svg?react";
-import WarningIcon from "../../assets/warning.svg?react";
+import Question from "../../assets/question-sign.svg?react";
 import OWN from "../../assets/O_Logo.svg?react";
 import StethoscopeIcon from "../../assets/stethoscope.svg?react";
 import DocumentIcon from "../../assets/document.svg?react";
 import ArrowIcon from "../../assets/arrow.svg?react";
+import SwipeHintSvg from "../../assets/swipe.svg?react";
 
 
 type Props = {
@@ -40,14 +41,14 @@ export default function Onboarding2({ onNext }: Props) {
       {
         id: "family",
         icon: "shield",
-        title: "Ein Konto.\nDie ganze Familie.",
-        desc: "Verwalte die Gesundheit deiner Liebsten so sicher und einfach wie beim Online-Banking.",
+        title: "Im Ernstfall\nhandlungsfähig",
+        desc: "Behalte relevante Gesundheitsdaten deiner Liebsten – wenn sie es erlauben – sicher und übersichtlich im Blick.",
         contentType: "accounts",
       },
       {
         id: "forecast",
         icon: "trend",
-        title: "Wir warnen dich,\nbevor du krank wirst.",
+        title: "Wissen, bevor\n du krank wirst",
         desc: "Erkenne Risiken früh genug, um sie zu verhindern.",
         contentType: "chart",
         kicker: "FRÜHERKENNUNG",
@@ -55,7 +56,7 @@ export default function Onboarding2({ onNext }: Props) {
       {
         id: "together",
         icon: "people",
-        title: "Du bist nicht allein.",
+        title: "Du bist nicht allein",
         desc: "Tausende in ähnlicher Situation haben bereits Wege gefunden.",
         contentType: "knowledge",
         kicker: "KOLLEKTIVES WISSEN",
@@ -63,22 +64,21 @@ export default function Onboarding2({ onNext }: Props) {
       {
         id: "paperless",
         icon: "shield",
-        title: "Kein Papier.\nKein Suchen.\nAlles automatisch.",
-        desc: "Ärzte & Labore senden Befunde direkt in dein Konto. Nichts geht verloren.",
+        title: "Kein Papier.\nKein Suchen.",
+        desc: "Ärzte & Labore senden Befunde direkt in dein Konto. Nichts geht verloren. Alles automatisch.",
         contentType: "paperless",
       },
     ],
     []
   );
-
-  
+ 
 
   const [index, setIndex] = useState(0);
   
   const [showSwipeHint, setShowSwipeHint] = useState(true);
   
   useEffect(() => {
-    const t = setTimeout(() => setShowSwipeHint(false), 2500);
+    const t = setTimeout(() => setShowSwipeHint(false), 10000);
     return () => clearTimeout(t);
   }, []);
 
@@ -130,13 +130,20 @@ export default function Onboarding2({ onNext }: Props) {
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerUp}
           >
-            {showSwipeHint && (
-              <div className="ob02-swipeHint" aria-hidden="true">
-                <span className="ob02-swipeHintText">Wischen</span>
-                <span className="ob02-swipeHintArrow">→</span>
-              </div>
-            )}
+          {showSwipeHint && (
+            <div className="ob02-swipeOverlay" aria-hidden="true">
+              <div className="ob02-swipePopup">
+                <div className="ob02-swipeIcon">
+                  <SwipeHintSvg className="ob02-swipeSvg" />
+                </div>
 
+                <div className="ob02-swipeText">
+                  <div className="ob02-swipeTitle">Swipe</div>
+                  <div className="ob02-swipeSub">Wische, um weiterzusehen</div>
+                </div>
+              </div>
+            </div>
+          )}
             
               <div className="ob02-track" style={{ transform: `translateX(${-index * 100}%)` }} >
               {slides.map((sl) => (
@@ -190,6 +197,15 @@ export default function Onboarding2({ onNext }: Props) {
                             <div className="ob02-personRole">Unterkonto</div>
                           </div>
                         </div>
+                        <div className="ob02-personRow">
+                          <div className="ob02-avatar">
+                            <UserIcon className="ob02-avatarIcon" aria-hidden="true" />
+                          </div>
+                          <div className="ob02-personText">
+                            <div className="ob02-personName">Kind</div>
+                            <div className="ob02-personRole">Unterkonto</div>
+                          </div>
+                        </div>
                       </div>
                     )}
                                                     
@@ -202,7 +218,7 @@ export default function Onboarding2({ onNext }: Props) {
                             <div className="ob02-forecastAvatar is-red">
                               <UserIcon className="ob02-forecastAvatarIcon" aria-hidden="true" />
                               <span className="ob02-forecastBadge is-red" aria-hidden="true">
-                                <WarningIcon className="ob02-forecastBadgeIcon" />
+                                <Question className="ob02-forecastBadgeIcon" />
                               </span>
                             </div>
 
@@ -226,7 +242,7 @@ export default function Onboarding2({ onNext }: Props) {
                             <div className="ob02-forecastText">
                               <div className="ob02-forecastRowTitle">Mit OWN</div>
                               <div className="ob02-forecastRowSub is-blue">
-                                Du wirst früh gewarnt
+                                Du erkennst Risiken früher und kannst dich schützen
                               </div>
                             </div>
                           </div>
